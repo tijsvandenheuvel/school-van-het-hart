@@ -49,7 +49,7 @@
     .page {
       position: relative;
       min-height: 100vh;
-      padding: 36px 28px 48px;
+      padding: 28px 20px 40px;
       display: grid;
       place-items: center;
       isolation: isolate;
@@ -82,59 +82,108 @@
       background: rgba(210, 231, 219, 0.26);
     }
 
-    .composition {
-      position: relative;
-      width: min(1100px, 100%);
-      min-height: 940px;
-      display: grid;
-      place-items: center;
+    .version-note {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 20;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(90, 96, 110, 0.10);
+      background: rgba(255,255,255,0.68);
+      color: rgba(45,43,51,0.56);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 24px rgba(34, 36, 45, 0.06);
     }
 
-    .section-title {
+    .composition {
+      position: relative;
+      width: min(1180px, 100%);
+      height: min(960px, calc(100vh - 56px));
+      min-height: 660px;
+      display: grid;
+      place-items: center;
+      --orbit-radius: min(clamp(210px, 31vw, 338px), clamp(180px, 30vh, 286px));
+      --core-width: clamp(220px, 24vw, 310px);
+    }
+
+    .composition::before,
+    .composition::after {
+      content: "";
       position: absolute;
       left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 3;
-      width: min(90vw, 520px);
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
       pointer-events: none;
     }
 
-    .section-title.top {
-      top: 76px;
+    .composition::before {
+      width: calc(var(--orbit-radius) * 2 - 56px);
+      height: calc(var(--orbit-radius) * 2 - 56px);
+      border: 1.5px solid rgba(255, 255, 255, 0.42);
+      box-shadow:
+        inset 0 0 0 1px rgba(120, 142, 152, 0.08),
+        0 0 0 14px rgba(255,255,255,0.035);
+      z-index: 0;
     }
 
-    .section-title.bottom {
-      bottom: 70px;
+    .composition::after {
+      width: calc(var(--orbit-radius) * 2 + 92px);
+      height: calc(var(--orbit-radius) * 2 + 92px);
+      background: radial-gradient(circle, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.06) 48%, transparent 74%);
+      z-index: 0;
     }
 
-    .section-title h1 {
-      margin: 0;
+    .core-axis {
+      position: relative;
+      z-index: 4;
+      width: var(--core-width);
+      display: grid;
+      justify-items: center;
+      gap: 16px;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .core-label {
+      display: grid;
+      gap: 6px;
+      justify-items: center;
+      width: 100%;
+    }
+
+    .core-label strong {
       font-family: var(--font-display);
-      font-size: clamp(2.35rem, 4.1vw, 3.9rem);
-      letter-spacing: 0.14em;
+      font-size: clamp(1.55rem, 2.35vw, 2.3rem);
       font-weight: 600;
+      letter-spacing: 0.28em;
+      color: var(--text);
+      text-indent: 0.28em;
     }
 
-    .section-title p {
-      margin: 8px 0 0;
-      font-family: var(--font-display);
-      font-size: clamp(1rem, 1.35vw, 1.35rem);
+    .core-label span {
+      max-width: 220px;
+      font-size: 0.92rem;
+      line-height: 1.45;
       color: var(--soft-text);
-      opacity: 0.92;
     }
 
     .orbit {
       position: absolute;
       inset: 0;
       pointer-events: none;
+      z-index: 2;
     }
 
     .token {
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--radius) * -1)) rotate(calc(var(--angle) * -1));
+      transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--orbit-radius) * -1)) rotate(calc(var(--angle) * -1));
       pointer-events: auto;
       z-index: 2;
       background: transparent;
@@ -147,20 +196,22 @@
 
     .token:hover,
     .token:focus-visible {
-      transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--radius) * -1)) rotate(calc(var(--angle) * -1)) scale(1.045);
+      transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--orbit-radius) * -1)) rotate(calc(var(--angle) * -1)) scale(1.045);
       filter: drop-shadow(0 16px 28px rgba(22, 24, 30, 0.12));
       outline: none;
     }
 
     .token-card {
-      min-width: 128px;
-      max-width: 172px;
-      padding: 14px 16px;
+      width: clamp(106px, 11vw, 150px);
+      min-height: 66px;
+      padding: 12px 14px;
+      display: grid;
+      place-items: center;
       border-radius: 28px;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      font-size: 0.97rem;
-      line-height: 1.18;
+      font-size: 0.9rem;
+      line-height: 1.15;
       text-wrap: balance;
       letter-spacing: 0.01em;
       font-family: var(--font-body);
@@ -180,13 +231,9 @@
     }
 
     .heart-wrap {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: min(43vw, 350px);
+      position: relative;
+      width: min(21vw, 230px);
       aspect-ratio: 1 / 1;
-      z-index: 4;
       display: grid;
       place-items: center;
     }
@@ -204,15 +251,16 @@
     .heart-label {
       position: absolute;
       left: 50%;
-      top: calc(100% + 16px);
+      top: 62%;
       transform: translateX(-50%);
       font-family: var(--font-display);
-      font-size: clamp(1rem, 1.35vw, 1.45rem);
-      letter-spacing: 0.28em;
-      color: var(--soft-text);
+      font-size: clamp(0.74rem, 1.05vw, 0.95rem);
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.92);
+      text-shadow: 0 2px 14px rgba(121, 66, 80, 0.28);
       text-align: center;
       width: max-content;
-      max-width: 90vw;
+      max-width: 70%;
     }
 
     .heart-svg {
@@ -343,18 +391,6 @@
       color: var(--text);
     }
 
-    .footer-note {
-      position: absolute;
-      right: 18px;
-      top: 18px;
-      font-size: 0.82rem;
-      color: rgba(45,43,51,0.48);
-      background: rgba(255,255,255,0.35);
-      padding: 8px 12px;
-      border-radius: 999px;
-      backdrop-filter: blur(10px);
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -366,105 +402,173 @@
     }
 
     @media (max-width: 980px) {
-      .composition { min-height: 1080px; }
-      .heart-wrap { width: min(56vw, 320px); }
+      .composition {
+        height: min(820px, calc(100vh - 48px));
+        min-height: 620px;
+        --orbit-radius: min(clamp(180px, 32vw, 260px), clamp(150px, 28vh, 220px));
+        --core-width: clamp(210px, 30vw, 280px);
+      }
+      .heart-wrap { width: min(27vw, 220px); }
       .token-card {
-        min-width: 116px;
-        max-width: 148px;
-        font-size: 0.9rem;
-        padding: 12px 14px;
+        width: clamp(100px, 13vw, 134px);
+        min-height: 62px;
+        font-size: 0.84rem;
+        padding: 11px 12px;
       }
       .modal-body { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 760px) {
-      .page { padding: 24px 14px 24px; }
-      .composition { min-height: 1320px; }
-      .section-title.top { top: 58px; }
-      .section-title.bottom { bottom: 54px; }
+    @media (max-height: 760px) and (min-width: 761px) {
+      .composition {
+        min-height: 620px;
+        --orbit-radius: min(clamp(190px, 28vw, 260px), clamp(160px, 28vh, 210px));
+      }
+      .core-label strong {
+        font-size: clamp(1.32rem, 2.1vw, 1.9rem);
+      }
+      .core-label span {
+        font-size: 0.82rem;
+      }
       .heart-wrap {
-        top: 50%;
-        width: min(62vw, 280px);
+        width: min(18vw, 190px);
       }
       .heart-label {
-        letter-spacing: 0.18em;
-        font-size: 0.95rem;
+        font-size: 0.68rem;
+      }
+      .token-card {
+        width: clamp(92px, 9vw, 120px);
+        min-height: 56px;
+        font-size: 0.78rem;
+        padding: 10px 11px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page { padding: 20px 10px 26px; }
+      .version-note {
+        top: 10px;
+        right: 10px;
+        font-size: 0.68rem;
+        padding: 4px 8px;
+      }
+      .composition {
+        height: min(680px, calc(100vh - 36px));
+        min-height: 560px;
+        --orbit-radius: min(clamp(128px, 35vw, 176px), clamp(110px, 24vh, 148px));
+        --core-width: min(210px, 62vw);
+      }
+      .composition::before {
+        width: calc(var(--orbit-radius) * 2 - 28px);
+        height: calc(var(--orbit-radius) * 2 - 28px);
+      }
+      .composition::after {
+        width: calc(var(--orbit-radius) * 2 + 44px);
+        height: calc(var(--orbit-radius) * 2 + 44px);
+      }
+      .core-axis {
+        gap: 10px;
+      }
+      .core-label strong {
+        font-size: clamp(1.1rem, 4.8vw, 1.45rem);
+        letter-spacing: 0.22em;
+        text-indent: 0.22em;
+      }
+      .core-label span {
+        max-width: 170px;
+        font-size: 0.72rem;
+      }
+      .heart-wrap { width: min(42vw, 176px); }
+      .heart-label {
+        font-size: 0.62rem;
+        letter-spacing: 0.15em;
       }
       .token {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--radius-mobile) * -1)) rotate(calc(var(--angle) * -1));
+        transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--orbit-radius) * -1)) rotate(calc(var(--angle) * -1));
       }
       .token:hover,
       .token:focus-visible {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--radius-mobile) * -1)) rotate(calc(var(--angle) * -1)) scale(1.04);
+        transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--orbit-radius) * -1)) rotate(calc(var(--angle) * -1)) scale(1.04);
       }
       .token-card {
-        min-width: 104px;
-        max-width: 134px;
-        font-size: 0.82rem;
-        line-height: 1.14;
-        padding: 11px 12px;
-        border-radius: 24px;
+        width: clamp(72px, 20vw, 92px);
+        min-height: 50px;
+        font-size: 0.64rem;
+        line-height: 1.1;
+        padding: 8px 8px;
+        border-radius: 20px;
       }
       .modal { padding: 12px; }
       .modal-header { padding: 22px 18px 18px; }
       .modal-body { padding: 22px 18px 24px; }
-      .footer-note { display: none; }
+    }
+
+    @media (max-width: 420px) {
+      .composition {
+        min-height: 520px;
+        --orbit-radius: min(clamp(132px, 40vw, 158px), 30vh);
+      }
+      .token-card {
+        width: clamp(68px, 19vw, 78px);
+        min-height: 46px;
+        font-size: 0.6rem;
+      }
     }
   </style>
 </head>
 <body>
   <main class="page">
+    <div class="version-note">v0.1.4</div>
     <div class="composition">
-      <div class="footer-note">prototype v2 · plain html/css/js</div>
+      <section class="orbit" id="orbit" aria-label="Concepten rond de kern"></section>
 
-      <header class="section-title top">
-        <h1>WAT?</h1>
-        <p>De vormen van het hart</p>
-      </header>
+      <section class="core-axis" aria-label="WAT, School van het Hart en HOE in de centrale cirkel">
+        <div class="core-label">
+          <strong>WAT</strong>
+          <span>De vormen van het hart</span>
+        </div>
 
-      <section class="orbit" id="orbit"></section>
+        <section class="heart-wrap" aria-label="School van het Hart, centrale kern">
+          <svg class="heart-svg" viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="heartFill" cx="52%" cy="38%" r="66%">
+                <stop offset="0%" stop-color="#ca6876" />
+                <stop offset="68%" stop-color="#be5a69" />
+                <stop offset="100%" stop-color="#a84b59" />
+              </radialGradient>
+              <linearGradient id="heartStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ebb6c5" />
+                <stop offset="100%" stop-color="#d889a1" />
+              </linearGradient>
+              <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#8f6e78" flood-opacity="0.18" />
+              </filter>
+            </defs>
 
-      <section class="heart-wrap" aria-label="School van het Hart, centrale kern">
-        <svg class="heart-svg" viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <radialGradient id="heartFill" cx="52%" cy="38%" r="66%">
-              <stop offset="0%" stop-color="#ca6876" />
-              <stop offset="68%" stop-color="#be5a69" />
-              <stop offset="100%" stop-color="#a84b59" />
-            </radialGradient>
-            <linearGradient id="heartStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ebb6c5" />
-              <stop offset="100%" stop-color="#d889a1" />
-            </linearGradient>
-            <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
-              <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#8f6e78" flood-opacity="0.18" />
-            </filter>
-          </defs>
+            <path
+              d="M180 300C164 262 80 208 58 138C40 88 76 38 128 38C156 38 174 54 180 70C186 54 204 38 232 38C284 38 320 88 302 138C280 208 196 262 180 300Z"
+              fill="url(#heartFill)"
+              stroke="url(#heartStroke)"
+              stroke-width="10"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              filter="url(#softShadow)"
+            />
 
-          <path
-            d="M180 300C164 262 80 208 58 138C40 88 76 38 128 38C156 38 174 54 180 70C186 54 204 38 232 38C284 38 320 88 302 138C280 208 196 262 180 300Z"
-            fill="url(#heartFill)"
-            stroke="url(#heartStroke)"
-            stroke-width="10"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            filter="url(#softShadow)"
-          />
+            <path
+              d="M181 71C176 61 166 53 153 48C142 43 132 41 123 42"
+              stroke="rgba(255,255,255,0.24)"
+              stroke-width="7"
+              stroke-linecap="round"
+            />
+          </svg>
+          <div class="heart-label">SCHOOL VAN HET HART</div>
+        </section>
 
-          <path
-            d="M181 71C176 61 166 53 153 48C142 43 132 41 123 42"
-            stroke="rgba(255,255,255,0.24)"
-            stroke-width="7"
-            stroke-linecap="round"
-          />
-        </svg>
-        <div class="heart-label">SCHOOL VAN HET HART</div>
+        <div class="core-label">
+          <strong>HOE</strong>
+          <span>De praktijken rond de kern</span>
+        </div>
       </section>
-
-      <header class="section-title bottom">
-        <h1>HOE?</h1>
-        <p>De praktijken rond de kern</p>
-      </header>
     </div>
   </main>
 
@@ -498,18 +602,18 @@
 
   <script>
     const concepts = [
-      { group: 'wat', title: 'School van het Hart', short: 'Een centrum voor collectieve bewustwording.', body: 'Een School van het Hart is een leer- en ontmoetingsplek waar mensen in een veilige omgeving kunnen samenkomen om te groeien in bewustzijn, verbinding en verantwoordelijkheid. Niet als klassieke instelling, maar als levende ruimte waar het hart richting geeft aan het samenleven.', angle: -72, radius: '300px', radiusMobile: '250px' },
-      { group: 'wat', title: 'Leren samenleven', short: 'Samen oefenen in een nieuwe manier van leven.', body: 'Hier leren we niet alleen over de wereld, maar vooral met elkaar in de wereld te zijn. De School is een oefenplaats waar mensen kunnen leren luisteren, afstemmen, samenwerken en dragen, zodat samenleven opnieuw een vaardigheid en een kunst wordt.', angle: -42, radius: '350px', radiusMobile: '292px' },
-      { group: 'wat', title: 'Natuurverbinding', short: 'Een plek in en met de natuur.', body: 'De School wortelt in een levende omgeving. Buitenruimte, stilte, ritme, seizoenen en aarde zijn geen decor, maar mededragers van het project. De natuur helpt ons herinneren hoe harmonie, traagheid en wederkerigheid voelen.', angle: -12, radius: '312px', radiusMobile: '258px' },
-      { group: 'wat', title: 'Nieuwe wereld', short: 'Een tastbare oefenruimte voor wat wil ontstaan.', body: 'De School van het Hart wil de overgang helpen maken van een verdeelde wereld naar een cultuur van vrede, gezondheid, creativiteit en verbondenheid. Niet als abstract ideaal, maar als een concrete plek waar nieuwe vormen mogen worden uitgeprobeerd en belichaamd.', angle: 18, radius: '350px', radiusMobile: '292px' },
-      { group: 'wat', title: 'Collectieve heling', short: 'Ruimte om angst en collectief trauma te verzachten.', body: 'Waar angst heerst, sluit liefde zich op. Daarom is de School ook een plaats van heling: een materiële context waar mensen samen kunnen werken aan het losmaken van angst, verwarring en zelfdestructieve patronen. Genezing gebeurt hier niet los van gemeenschap, maar er middenin.', angle: 46, radius: '304px', radiusMobile: '252px' },
-      { group: 'wat', title: 'Liefde in de praktijk', short: 'Geen slogan, maar een dagelijkse oefening.', body: 'De kern van het project is eenvoudig en radicaal: liefde belichamen in hoe we spreken, beslissen, zorgen, bouwen en samenkomen. Liefde wordt hier iets dat we doen, niet alleen iets dat we voelen of benoemen.', angle: 74, radius: '345px', radiusMobile: '286px' },
-      { group: 'hoe', title: 'Taalbewustzijn', short: 'Helderheid in woorden, helderheid in de wereld.', body: 'Taal vormt mee de werkelijkheid waarin we leven. Door samen stil te staan bij betekenis, verwarring en misverstaan, bevrijden we woorden uit hun mist. Taalbewustzijn helpt om communicatie opnieuw scheppend, waarachtig en verbindend te maken.', angle: 108, radius: '338px', radiusMobile: '282px' },
-      { group: 'hoe', title: 'Rainbow', short: 'De geest van een tijdelijke stam, vertaald naar een plek.', body: 'De Rainbow-traditie toont dat mensen zonder commerciële logica kunnen samenleven, delen en verantwoordelijkheid opnemen. De School neemt die werkzame elementen mee: openheid, eenvoud, inclusiviteit, natuurverbinding en het vertrouwen dat gemeenschap gedragen kan worden door de mensen zelf.', angle: 136, radius: '302px', radiusMobile: '250px' },
-      { group: 'hoe', title: 'Cirkels', short: 'Spreken, luisteren en beslissen in een gedeeld midden.', body: 'De cirkel is een basisvorm van veiligheid. In cirkel oefenen we gedeelde verantwoordelijkheid voor communicatie, afstemming en waarheid. Niemand staat erboven, niemand valt erbuiten. De vorm zelf helpt het veld rustig, menselijk en aanwezig te houden.', angle: 168, radius: '346px', radiusMobile: '288px' },
-      { group: 'hoe', title: 'Zelfbestuur', short: 'De plek wordt gedragen door wie er aanwezig is.', body: 'De School werkt niet met vaste hiërarchieën, maar met betrokken aanwezigheid en tijdelijke verantwoordelijkheden. Wie er is, draagt mee. Zo ontstaat een cultuur van mede-eigenaarschap, praktische zorg en levend bestuur, zonder het oude theater van macht opnieuw te decoreren.', angle: 198, radius: '306px', radiusMobile: '254px' },
-      { group: 'hoe', title: 'Magic Hat', short: 'Vrije bijdrage als oefening in vertrouwen en overvloed.', body: 'Financiering gebeurt vanuit vrije gave. De magic hat is geen betaalmuur maar een gemeenschappelijke pot die gedragen wordt door ieders vermogen en goodwill. Het principe verschuift de logica van bezit naar zorg, van transactie naar gedeelde draagkracht.', angle: 228, radius: '350px', radiusMobile: '292px' },
-      { group: 'hoe', title: 'Spel & creativiteit', short: 'Ateliers, ambachten, kunst en zachte opbouw.', body: 'De School leeft niet alleen in gesprek, maar ook in maken. Tuinen, slaapplekken, ateliers, zang, theater, ambachten en gezamenlijke bouwpraktijken maken van de plek een speelse werkplaats. Verbeelding is hier geen bijzaak, maar een methode van wereldvorming.', angle: 256, radius: '310px', radiusMobile: '256px' }
+      { group: 'wat', title: 'School van het Hart', short: 'Een centrum voor collectieve bewustwording.', body: 'Een School van het Hart is een leer- en ontmoetingsplek waar mensen in een veilige omgeving kunnen samenkomen om te groeien in bewustzijn, verbinding en verantwoordelijkheid. Niet als klassieke instelling, maar als levende ruimte waar het hart richting geeft aan het samenleven.', angle: -80 },
+      { group: 'wat', title: 'Leren samenleven', short: 'Samen oefenen in een nieuwe manier van leven.', body: 'Hier leren we niet alleen over de wereld, maar vooral met elkaar in de wereld te zijn. De School is een oefenplaats waar mensen kunnen leren luisteren, afstemmen, samenwerken en dragen, zodat samenleven opnieuw een vaardigheid en een kunst wordt.', angle: -54 },
+      { group: 'wat', title: 'Natuurverbinding', short: 'Een plek in en met de natuur.', body: 'De School wortelt in een levende omgeving. Buitenruimte, stilte, ritme, seizoenen en aarde zijn geen decor, maar mededragers van het project. De natuur helpt ons herinneren hoe harmonie, traagheid en wederkerigheid voelen.', angle: -24 },
+      { group: 'wat', title: 'Nieuwe wereld', short: 'Een tastbare oefenruimte voor wat wil ontstaan.', body: 'De School van het Hart wil de overgang helpen maken van een verdeelde wereld naar een cultuur van vrede, gezondheid, creativiteit en verbondenheid. Niet als abstract ideaal, maar als een concrete plek waar nieuwe vormen mogen worden uitgeprobeerd en belichaamd.', angle: 24 },
+      { group: 'wat', title: 'Collectieve heling', short: 'Ruimte om angst en collectief trauma te verzachten.', body: 'Waar angst heerst, sluit liefde zich op. Daarom is de School ook een plaats van heling: een materiële context waar mensen samen kunnen werken aan het losmaken van angst, verwarring en zelfdestructieve patronen. Genezing gebeurt hier niet los van gemeenschap, maar er middenin.', angle: 54 },
+      { group: 'wat', title: 'Liefde in de praktijk', short: 'Geen slogan, maar een dagelijkse oefening.', body: 'De kern van het project is eenvoudig en radicaal: liefde belichamen in hoe we spreken, beslissen, zorgen, bouwen en samenkomen. Liefde wordt hier iets dat we doen, niet alleen iets dat we voelen of benoemen.', angle: 80 },
+      { group: 'hoe', title: 'Taalbewustzijn', short: 'Helderheid in woorden, helderheid in de wereld.', body: 'Taal vormt mee de werkelijkheid waarin we leven. Door samen stil te staan bij betekenis, verwarring en misverstaan, bevrijden we woorden uit hun mist. Taalbewustzijn helpt om communicatie opnieuw scheppend, waarachtig en verbindend te maken.', angle: 106 },
+      { group: 'hoe', title: 'Rainbow', short: 'De geest van een tijdelijke stam, vertaald naar een plek.', body: 'De Rainbow-traditie toont dat mensen zonder commerciële logica kunnen samenleven, delen en verantwoordelijkheid opnemen. De School neemt die werkzame elementen mee: openheid, eenvoud, inclusiviteit, natuurverbinding en het vertrouwen dat gemeenschap gedragen kan worden door de mensen zelf.', angle: 130 },
+      { group: 'hoe', title: 'Cirkels', short: 'Spreken, luisteren en beslissen in een gedeeld midden.', body: 'De cirkel is een basisvorm van veiligheid. In cirkel oefenen we gedeelde verantwoordelijkheid voor communicatie, afstemming en waarheid. Niemand staat erboven, niemand valt erbuiten. De vorm zelf helpt het veld rustig, menselijk en aanwezig te houden.', angle: 160 },
+      { group: 'hoe', title: 'Zelfbestuur', short: 'De plek wordt gedragen door wie er aanwezig is.', body: 'De School werkt niet met vaste hiërarchieën, maar met betrokken aanwezigheid en tijdelijke verantwoordelijkheden. Wie er is, draagt mee. Zo ontstaat een cultuur van mede-eigenaarschap, praktische zorg en levend bestuur, zonder het oude theater van macht opnieuw te decoreren.', angle: 208 },
+      { group: 'hoe', title: 'Magic Hat', short: 'Vrije bijdrage als oefening in vertrouwen en overvloed.', body: 'Financiering gebeurt vanuit vrije gave. De magic hat is geen betaalmuur maar een gemeenschappelijke pot die gedragen wordt door ieders vermogen en goodwill. Het principe verschuift de logica van bezit naar zorg, van transactie naar gedeelde draagkracht.', angle: 234 },
+      { group: 'hoe', title: 'Spel & creativiteit', short: 'Ateliers, ambachten, kunst en zachte opbouw.', body: 'De School leeft niet alleen in gesprek, maar ook in maken. Tuinen, slaapplekken, ateliers, zang, theater, ambachten en gezamenlijke bouwpraktijken maken van de plek een speelse werkplaats. Verbeelding is hier geen bijzaak, maar een methode van wereldvorming.', angle: 262 }
     ];
 
     const orbit = document.getElementById('orbit');
@@ -524,8 +628,6 @@
       const button = document.createElement('button');
       button.className = `token ${item.group}`;
       button.style.setProperty('--angle', `${item.angle}deg`);
-      button.style.setProperty('--radius', item.radius);
-      button.style.setProperty('--radius-mobile', item.radiusMobile);
       button.innerHTML = `<span class="token-card">${item.title}</span>`;
       button.setAttribute('aria-label', item.title);
       button.addEventListener('click', () => openModal(item));
