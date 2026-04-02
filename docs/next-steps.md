@@ -4,7 +4,7 @@
 
 - Beslissen of de homepage puur een visuele landingspagina blijft of ook al een korte introparagraaf boven of onder de cirkel krijgt.
 - Bepalen welke concepten later een eigen subpagina of langere contentsectie verdienen.
-- Kiezen of de modalteksten eindredactie nodig hebben voor toon en lengte.
+- Bepalen of er bij de langere conceptteksten later broncitaten, beelden of praktijkvoorbeelden moeten komen.
 
 ## Interactie
 

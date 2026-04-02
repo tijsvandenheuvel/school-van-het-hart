@@ -2,7 +2,7 @@
 
 Laatst bijgewerkt: 2026-04-02
 
-Huidige siteversie: `v0.1.6`
+Huidige siteversie: `v0.1.7`
 
 Actieve entrypoint: `index.html`
 
@@ -14,7 +14,7 @@ Domein: `schoolvanhethart.be`
   Korte samenvatting van doel, stack, repo-structuur en werkafspraken.
 
 - `concepts.md`
-  De canonieke inhoud van de 12 concepten die op de homepage rond het hart staan.
+  De canonieke inhoud van de 12 concepten die op de homepage rond het hart staan, inclusief de langere modalteksten.
 
 - `ui-guidelines.md`
   De huidige layoutregels, versie-afspraken en responsive aandachtspunten.

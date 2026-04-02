@@ -33,10 +33,10 @@ De homepage moet:
 
 - Werk verder op `index.html` tenzij er later echt meerdere pagina's komen.
 - Vermijd opnieuw een tweede losse HTML-variant als concurrerende bron van waarheid.
-- De 12 concepten in de `concepts` array zijn op dit moment de canonieke inhoud voor de homepage.
+- `docs/concepts.md` bewaart de canonieke inhoud van de 12 concepten; `index.html` moet die inhoud weerspiegelen.
 - De versiebadge rechtsboven volgt echte iteraties.
-- Huidige versie is `v0.1.6`.
-- De volgende inhoudelijke of visuele iteratie wordt `v0.1.7`.
+- Huidige versie is `v0.1.7`.
+- De volgende inhoudelijke of visuele iteratie wordt `v0.1.8`.
 
 ## Verificatie-afspraak
 
@@ -49,5 +49,6 @@ Na layoutwijzigingen minstens controleren op:
 
 - Elk concept is klikbaar.
 - Klik opent een modal met titel, korte samenvatting en langere bodytekst.
+- De modalbody ondersteunt meerdere secties met tussentitels en alinea's.
 - `Escape` sluit de modal.
 - Klik buiten de modal sluit ook.

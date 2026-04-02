@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.7
+
+- De 12 conceptteksten inhoudelijk herwerkt op basis van `docs/bronnen/svhh basisdoc.docx` en `docs/bronnen/svhh visietekst.docx`
+- De selectie van 6 `WAT`- en 6 `HOE`-concepten bevestigd en gedocumenteerd in `docs/concepts.md`
+- De modal uitgebreid zodat tussentitels en meerdere alinea's per concept renderen
+- Docs en versieverwijzingen gesynchroniseerd met de nieuwe inhoudspass
+
 ## v0.1.6
 
 - Titel kleiner gemaakt en iets lager geplaatst

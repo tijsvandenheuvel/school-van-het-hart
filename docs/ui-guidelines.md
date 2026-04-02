@@ -53,9 +53,10 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 - Responsive regels: `index.html`, media queries
 - Labelhoeken: `index.html`, `const concepts = [...]`
 - Compact mobile hoeken: `index.html`, `angleMobile` en `syncTokenAngles()`
+- Modalinhoud: `index.html`, `sections`, `renderModalBody()` en `.modal-copy`
 
 ## Versie-afspraak
 
-- Huidige versie: `v0.1.6`
-- Volgende iteratie: `v0.1.7`
+- Huidige versie: `v0.1.7`
+- Volgende iteratie: `v0.1.8`
 - Verhoog de versiebadge enkel bij echte inhoudelijke of visuele voortgang
