@@ -28,9 +28,7 @@
       --font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
@@ -103,27 +101,27 @@
     }
 
     .section-title.top {
-      top: 10px;
+      top: 76px;
     }
 
     .section-title.bottom {
-      bottom: 6px;
+      bottom: 70px;
     }
 
     .section-title h1 {
       margin: 0;
       font-family: var(--font-display);
-      font-size: clamp(3.1rem, 5.4vw, 4.9rem);
-      letter-spacing: 0.18em;
+      font-size: clamp(2.35rem, 4.1vw, 3.9rem);
+      letter-spacing: 0.14em;
       font-weight: 600;
     }
 
     .section-title p {
-      margin: 10px 0 0;
+      margin: 8px 0 0;
       font-family: var(--font-display);
-      font-size: clamp(1.15rem, 1.8vw, 1.9rem);
+      font-size: clamp(1rem, 1.35vw, 1.35rem);
       color: var(--soft-text);
-      opacity: 0.96;
+      opacity: 0.92;
     }
 
     .orbit {
@@ -368,62 +366,37 @@
     }
 
     @media (max-width: 980px) {
-      .composition {
-        min-height: 1080px;
-      }
-
-      .heart-wrap {
-        width: min(56vw, 320px);
-      }
-
+      .composition { min-height: 1080px; }
+      .heart-wrap { width: min(56vw, 320px); }
       .token-card {
         min-width: 116px;
         max-width: 148px;
         font-size: 0.9rem;
         padding: 12px 14px;
       }
-
-      .modal-body {
-        grid-template-columns: 1fr;
-      }
+      .modal-body { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 760px) {
-      .page {
-        padding: 24px 14px 24px;
-      }
-
-      .composition {
-        min-height: 1320px;
-      }
-
-      .section-title.top {
-        top: 8px;
-      }
-
-      .section-title.bottom {
-        bottom: 10px;
-      }
-
+      .page { padding: 24px 14px 24px; }
+      .composition { min-height: 1320px; }
+      .section-title.top { top: 58px; }
+      .section-title.bottom { bottom: 54px; }
       .heart-wrap {
         top: 50%;
         width: min(62vw, 280px);
       }
-
       .heart-label {
         letter-spacing: 0.18em;
         font-size: 0.95rem;
       }
-
       .token {
         transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--radius-mobile) * -1)) rotate(calc(var(--angle) * -1));
       }
-
       .token:hover,
       .token:focus-visible {
         transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--radius-mobile) * -1)) rotate(calc(var(--angle) * -1)) scale(1.04);
       }
-
       .token-card {
         min-width: 104px;
         max-width: 134px;
@@ -432,22 +405,10 @@
         padding: 11px 12px;
         border-radius: 24px;
       }
-
-      .modal {
-        padding: 12px;
-      }
-
-      .modal-header {
-        padding: 22px 18px 18px;
-      }
-
-      .modal-body {
-        padding: 22px 18px 24px;
-      }
-
-      .footer-note {
-        display: none;
-      }
+      .modal { padding: 12px; }
+      .modal-header { padding: 22px 18px 18px; }
+      .modal-body { padding: 22px 18px 24px; }
+      .footer-note { display: none; }
     }
   </style>
 </head>
@@ -492,14 +453,9 @@
 
           <path
             d="M181 71C176 61 166 53 153 48C142 43 132 41 123 42"
-            stroke="rgba(255,255,255,0.34)"
+            stroke="rgba(255,255,255,0.24)"
             stroke-width="7"
             stroke-linecap="round"
-          />
-
-          <path
-            d="M173 79C163 73 154 69 143 65C151 65 158 67 166 72C172 76 176 82 179 88C180 83 178 81 173 79Z"
-            fill="#161418"
           />
         </svg>
         <div class="heart-label">SCHOOL VAN HET HART</div>
@@ -542,114 +498,18 @@
 
   <script>
     const concepts = [
-      {
-        group: 'wat',
-        title: 'School van het Hart',
-        short: 'Een centrum voor collectieve bewustwording.',
-        body: 'Een School van het Hart is een leer- en ontmoetingsplek waar mensen in een veilige omgeving kunnen samenkomen om te groeien in bewustzijn, verbinding en verantwoordelijkheid. Niet als klassieke instelling, maar als levende ruimte waar het hart richting geeft aan het samenleven.',
-        angle: -63,
-        radius: '318px',
-        radiusMobile: '268px'
-      },
-      {
-        group: 'wat',
-        title: 'Leren samenleven',
-        short: 'Samen oefenen in een nieuwe manier van leven.',
-        body: 'Hier leren we niet alleen over de wereld, maar vooral met elkaar in de wereld te zijn. De School is een oefenplaats waar mensen kunnen leren luisteren, afstemmen, samenwerken en dragen, zodat samenleven opnieuw een vaardigheid en een kunst wordt.',
-        angle: -33,
-        radius: '365px',
-        radiusMobile: '305px'
-      },
-      {
-        group: 'wat',
-        title: 'Natuurverbinding',
-        short: 'Een plek in en met de natuur.',
-        body: 'De School wortelt in een levende omgeving. Buitenruimte, stilte, ritme, seizoenen en aarde zijn geen decor, maar mededragers van het project. De natuur helpt ons herinneren hoe harmonie, traagheid en wederkerigheid voelen.',
-        angle: -4,
-        radius: '320px',
-        radiusMobile: '264px'
-      },
-      {
-        group: 'wat',
-        title: 'Nieuwe wereld',
-        short: 'Een tastbare oefenruimte voor wat wil ontstaan.',
-        body: 'De School van het Hart wil de overgang helpen maken van een verdeelde wereld naar een cultuur van vrede, gezondheid, creativiteit en verbondenheid. Niet als abstract ideaal, maar als een concrete plek waar nieuwe vormen mogen worden uitgeprobeerd en belichaamd.',
-        angle: 28,
-        radius: '370px',
-        radiusMobile: '308px'
-      },
-      {
-        group: 'wat',
-        title: 'Collectieve heling',
-        short: 'Ruimte om angst en collectief trauma te verzachten.',
-        body: 'Waar angst heerst, sluit liefde zich op. Daarom is de School ook een plaats van heling: een materiële context waar mensen samen kunnen werken aan het losmaken van angst, verwarring en zelfdestructieve patronen. Genezing gebeurt hier niet los van gemeenschap, maar er middenin.',
-        angle: 56,
-        radius: '315px',
-        radiusMobile: '260px'
-      },
-      {
-        group: 'wat',
-        title: 'Liefde in de praktijk',
-        short: 'Geen slogan, maar een dagelijkse oefening.',
-        body: 'De kern van het project is eenvoudig en radicaal: liefde belichamen in hoe we spreken, beslissen, zorgen, bouwen en samenkomen. Liefde wordt hier iets dat we doen, niet alleen iets dat we voelen of benoemen.',
-        angle: 84,
-        radius: '360px',
-        radiusMobile: '302px'
-      },
-      {
-        group: 'hoe',
-        title: 'Taalbewustzijn',
-        short: 'Helderheid in woorden, helderheid in de wereld.',
-        body: 'Taal vormt mee de werkelijkheid waarin we leven. Door samen stil te staan bij betekenis, verwarring en misverstaan, bevrijden we woorden uit hun mist. Taalbewustzijn helpt om communicatie opnieuw scheppend, waarachtig en verbindend te maken.',
-        angle: 118,
-        radius: '350px',
-        radiusMobile: '294px'
-      },
-      {
-        group: 'hoe',
-        title: 'Rainbow',
-        short: 'De geest van een tijdelijke stam, vertaald naar een plek.',
-        body: 'De Rainbow-traditie toont dat mensen zonder commerciële logica kunnen samenleven, delen en verantwoordelijkheid opnemen. De School neemt die werkzame elementen mee: openheid, eenvoud, inclusiviteit, natuurverbinding en het vertrouwen dat gemeenschap gedragen kan worden door de mensen zelf.',
-        angle: 146,
-        radius: '312px',
-        radiusMobile: '258px'
-      },
-      {
-        group: 'hoe',
-        title: 'Cirkels',
-        short: 'Spreken, luisteren en beslissen in een gedeeld midden.',
-        body: 'De cirkel is een basisvorm van veiligheid. In cirkel oefenen we gedeelde verantwoordelijkheid voor communicatie, afstemming en waarheid. Niemand staat erboven, niemand valt erbuiten. De vorm zelf helpt het veld rustig, menselijk en aanwezig te houden.',
-        angle: 177,
-        radius: '360px',
-        radiusMobile: '302px'
-      },
-      {
-        group: 'hoe',
-        title: 'Zelfbestuur',
-        short: 'De plek wordt gedragen door wie er aanwezig is.',
-        body: 'De School werkt niet met vaste hiërarchieën, maar met betrokken aanwezigheid en tijdelijke verantwoordelijkheden. Wie er is, draagt mee. Zo ontstaat een cultuur van mede-eigenaarschap, praktische zorg en levend bestuur, zonder het oude theater van macht opnieuw te decoreren.',
-        angle: 206,
-        radius: '318px',
-        radiusMobile: '262px'
-      },
-      {
-        group: 'hoe',
-        title: 'Magic Hat',
-        short: 'Vrije bijdrage als oefening in vertrouwen en overvloed.',
-        body: 'Financiering gebeurt vanuit vrije gave. De magic hat is geen betaalmuur maar een gemeenschappelijke pot die gedragen wordt door ieders vermogen en goodwill. Het principe verschuift de logica van bezit naar zorg, van transactie naar gedeelde draagkracht.',
-        angle: 236,
-        radius: '365px',
-        radiusMobile: '305px'
-      },
-      {
-        group: 'hoe',
-        title: 'Spel & creativiteit',
-        short: 'Ateliers, ambachten, kunst en zachte opbouw.',
-        body: 'De School leeft niet alleen in gesprek, maar ook in maken. Tuinen, slaapplekken, ateliers, zang, theater, ambachten en gezamenlijke bouwpraktijken maken van de plek een speelse werkplaats. Verbeelding is hier geen bijzaak, maar een methode van wereldvorming.',
-        angle: 264,
-        radius: '320px',
-        radiusMobile: '266px'
-      }
+      { group: 'wat', title: 'School van het Hart', short: 'Een centrum voor collectieve bewustwording.', body: 'Een School van het Hart is een leer- en ontmoetingsplek waar mensen in een veilige omgeving kunnen samenkomen om te groeien in bewustzijn, verbinding en verantwoordelijkheid. Niet als klassieke instelling, maar als levende ruimte waar het hart richting geeft aan het samenleven.', angle: -72, radius: '300px', radiusMobile: '250px' },
+      { group: 'wat', title: 'Leren samenleven', short: 'Samen oefenen in een nieuwe manier van leven.', body: 'Hier leren we niet alleen over de wereld, maar vooral met elkaar in de wereld te zijn. De School is een oefenplaats waar mensen kunnen leren luisteren, afstemmen, samenwerken en dragen, zodat samenleven opnieuw een vaardigheid en een kunst wordt.', angle: -42, radius: '350px', radiusMobile: '292px' },
+      { group: 'wat', title: 'Natuurverbinding', short: 'Een plek in en met de natuur.', body: 'De School wortelt in een levende omgeving. Buitenruimte, stilte, ritme, seizoenen en aarde zijn geen decor, maar mededragers van het project. De natuur helpt ons herinneren hoe harmonie, traagheid en wederkerigheid voelen.', angle: -12, radius: '312px', radiusMobile: '258px' },
+      { group: 'wat', title: 'Nieuwe wereld', short: 'Een tastbare oefenruimte voor wat wil ontstaan.', body: 'De School van het Hart wil de overgang helpen maken van een verdeelde wereld naar een cultuur van vrede, gezondheid, creativiteit en verbondenheid. Niet als abstract ideaal, maar als een concrete plek waar nieuwe vormen mogen worden uitgeprobeerd en belichaamd.', angle: 18, radius: '350px', radiusMobile: '292px' },
+      { group: 'wat', title: 'Collectieve heling', short: 'Ruimte om angst en collectief trauma te verzachten.', body: 'Waar angst heerst, sluit liefde zich op. Daarom is de School ook een plaats van heling: een materiële context waar mensen samen kunnen werken aan het losmaken van angst, verwarring en zelfdestructieve patronen. Genezing gebeurt hier niet los van gemeenschap, maar er middenin.', angle: 46, radius: '304px', radiusMobile: '252px' },
+      { group: 'wat', title: 'Liefde in de praktijk', short: 'Geen slogan, maar een dagelijkse oefening.', body: 'De kern van het project is eenvoudig en radicaal: liefde belichamen in hoe we spreken, beslissen, zorgen, bouwen en samenkomen. Liefde wordt hier iets dat we doen, niet alleen iets dat we voelen of benoemen.', angle: 74, radius: '345px', radiusMobile: '286px' },
+      { group: 'hoe', title: 'Taalbewustzijn', short: 'Helderheid in woorden, helderheid in de wereld.', body: 'Taal vormt mee de werkelijkheid waarin we leven. Door samen stil te staan bij betekenis, verwarring en misverstaan, bevrijden we woorden uit hun mist. Taalbewustzijn helpt om communicatie opnieuw scheppend, waarachtig en verbindend te maken.', angle: 108, radius: '338px', radiusMobile: '282px' },
+      { group: 'hoe', title: 'Rainbow', short: 'De geest van een tijdelijke stam, vertaald naar een plek.', body: 'De Rainbow-traditie toont dat mensen zonder commerciële logica kunnen samenleven, delen en verantwoordelijkheid opnemen. De School neemt die werkzame elementen mee: openheid, eenvoud, inclusiviteit, natuurverbinding en het vertrouwen dat gemeenschap gedragen kan worden door de mensen zelf.', angle: 136, radius: '302px', radiusMobile: '250px' },
+      { group: 'hoe', title: 'Cirkels', short: 'Spreken, luisteren en beslissen in een gedeeld midden.', body: 'De cirkel is een basisvorm van veiligheid. In cirkel oefenen we gedeelde verantwoordelijkheid voor communicatie, afstemming en waarheid. Niemand staat erboven, niemand valt erbuiten. De vorm zelf helpt het veld rustig, menselijk en aanwezig te houden.', angle: 168, radius: '346px', radiusMobile: '288px' },
+      { group: 'hoe', title: 'Zelfbestuur', short: 'De plek wordt gedragen door wie er aanwezig is.', body: 'De School werkt niet met vaste hiërarchieën, maar met betrokken aanwezigheid en tijdelijke verantwoordelijkheden. Wie er is, draagt mee. Zo ontstaat een cultuur van mede-eigenaarschap, praktische zorg en levend bestuur, zonder het oude theater van macht opnieuw te decoreren.', angle: 198, radius: '306px', radiusMobile: '254px' },
+      { group: 'hoe', title: 'Magic Hat', short: 'Vrije bijdrage als oefening in vertrouwen en overvloed.', body: 'Financiering gebeurt vanuit vrije gave. De magic hat is geen betaalmuur maar een gemeenschappelijke pot die gedragen wordt door ieders vermogen en goodwill. Het principe verschuift de logica van bezit naar zorg, van transactie naar gedeelde draagkracht.', angle: 228, radius: '350px', radiusMobile: '292px' },
+      { group: 'hoe', title: 'Spel & creativiteit', short: 'Ateliers, ambachten, kunst en zachte opbouw.', body: 'De School leeft niet alleen in gesprek, maar ook in maken. Tuinen, slaapplekken, ateliers, zang, theater, ambachten en gezamenlijke bouwpraktijken maken van de plek een speelse werkplaats. Verbeelding is hier geen bijzaak, maar een methode van wereldvorming.', angle: 256, radius: '310px', radiusMobile: '256px' }
     ];
 
     const orbit = document.getElementById('orbit');
@@ -695,9 +555,7 @@
     });
 
     window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && modal.classList.contains('open')) {
-        closeModal();
-      }
+      if (event.key === 'Escape' && modal.classList.contains('open')) closeModal();
     });
   </script>
 </body>
