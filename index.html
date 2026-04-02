@@ -49,9 +49,13 @@
     .page {
       position: relative;
       min-height: 100vh;
-      padding: 28px 20px 40px;
+      width: 100%;
+      padding: 18px 18px 28px;
       display: grid;
-      place-items: center;
+      grid-template-rows: auto minmax(0, 1fr);
+      justify-items: center;
+      align-items: start;
+      gap: 10px;
       isolation: isolate;
     }
 
@@ -99,15 +103,35 @@
       box-shadow: 0 10px 24px rgba(34, 36, 45, 0.06);
     }
 
+    .page-header {
+      position: relative;
+      z-index: 5;
+      width: min(100%, 1120px);
+      padding-top: 4px;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .page-title {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(2.7rem, 4.8vw, 5.2rem);
+      line-height: 0.98;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      color: #22212a;
+      text-indent: 0.06em;
+    }
+
     .composition {
       position: relative;
-      width: min(1180px, 100%);
-      height: min(960px, calc(100vh - 56px));
-      min-height: 660px;
+      width: min(1400px, 100%);
+      height: min(1120px, calc(100vh - 96px));
+      min-height: 650px;
       display: grid;
       place-items: center;
-      --orbit-radius: min(clamp(210px, 31vw, 338px), clamp(180px, 30vh, 286px));
-      --core-width: clamp(220px, 24vw, 310px);
+      --orbit-radius: min(clamp(250px, 35vw, 430px), clamp(200px, 40vh, 320px));
+      --core-width: clamp(220px, 24vw, 320px);
     }
 
     .composition::before,
@@ -144,7 +168,7 @@
       width: var(--core-width);
       display: grid;
       justify-items: center;
-      gap: 16px;
+      gap: 18px;
       text-align: center;
       pointer-events: none;
     }
@@ -232,7 +256,7 @@
 
     .heart-wrap {
       position: relative;
-      width: min(21vw, 230px);
+      width: min(20vw, 236px);
       aspect-ratio: 1 / 1;
       display: grid;
       place-items: center;
@@ -246,21 +270,6 @@
       background: radial-gradient(circle, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.34) 34%, rgba(255,255,255,0.06) 62%, transparent 78%);
       z-index: -1;
       filter: blur(10px);
-    }
-
-    .heart-label {
-      position: absolute;
-      left: 50%;
-      top: 62%;
-      transform: translateX(-50%);
-      font-family: var(--font-display);
-      font-size: clamp(0.74rem, 1.05vw, 0.95rem);
-      letter-spacing: 0.18em;
-      color: rgba(255,255,255,0.92);
-      text-shadow: 0 2px 14px rgba(121, 66, 80, 0.28);
-      text-align: center;
-      width: max-content;
-      max-width: 70%;
     }
 
     .heart-svg {
@@ -402,10 +411,13 @@
     }
 
     @media (max-width: 980px) {
+      .page-title {
+        font-size: clamp(2.35rem, 6vw, 3.9rem);
+      }
       .composition {
-        height: min(820px, calc(100vh - 48px));
+        height: min(900px, calc(100vh - 108px));
         min-height: 620px;
-        --orbit-radius: min(clamp(180px, 32vw, 260px), clamp(150px, 28vh, 220px));
+        --orbit-radius: min(clamp(190px, 33vw, 290px), clamp(160px, 31vh, 240px));
         --core-width: clamp(210px, 30vw, 280px);
       }
       .heart-wrap { width: min(27vw, 220px); }
@@ -421,7 +433,7 @@
     @media (max-height: 760px) and (min-width: 761px) {
       .composition {
         min-height: 620px;
-        --orbit-radius: min(clamp(190px, 28vw, 260px), clamp(160px, 28vh, 210px));
+        --orbit-radius: min(clamp(220px, 29vw, 300px), clamp(160px, 33vh, 244px));
       }
       .core-label strong {
         font-size: clamp(1.32rem, 2.1vw, 1.9rem);
@@ -432,9 +444,6 @@
       .heart-wrap {
         width: min(18vw, 190px);
       }
-      .heart-label {
-        font-size: 0.68rem;
-      }
       .token-card {
         width: clamp(92px, 9vw, 120px);
         min-height: 56px;
@@ -444,18 +453,25 @@
     }
 
     @media (max-width: 760px) {
-      .page { padding: 20px 10px 26px; }
+      .page {
+        padding: 14px 10px 22px;
+        gap: 8px;
+      }
       .version-note {
         top: 10px;
         right: 10px;
         font-size: 0.68rem;
         padding: 4px 8px;
       }
+      .page-title {
+        font-size: clamp(2rem, 8.5vw, 2.9rem);
+        letter-spacing: 0.05em;
+      }
       .composition {
-        height: min(680px, calc(100vh - 36px));
+        height: min(700px, calc(100vh - 92px));
         min-height: 560px;
-        --orbit-radius: min(clamp(128px, 35vw, 176px), clamp(110px, 24vh, 148px));
-        --core-width: min(210px, 62vw);
+        --orbit-radius: min(clamp(130px, 34vw, 172px), clamp(108px, 24vh, 144px));
+        --core-width: min(186px, 56vw);
       }
       .composition::before {
         width: calc(var(--orbit-radius) * 2 - 28px);
@@ -466,7 +482,7 @@
         height: calc(var(--orbit-radius) * 2 + 44px);
       }
       .core-axis {
-        gap: 10px;
+        gap: 12px;
       }
       .core-label strong {
         font-size: clamp(1.1rem, 4.8vw, 1.45rem);
@@ -474,14 +490,10 @@
         text-indent: 0.22em;
       }
       .core-label span {
-        max-width: 170px;
-        font-size: 0.72rem;
+        max-width: 150px;
+        font-size: 0.66rem;
       }
-      .heart-wrap { width: min(42vw, 176px); }
-      .heart-label {
-        font-size: 0.62rem;
-        letter-spacing: 0.15em;
-      }
+      .heart-wrap { width: min(38vw, 164px); }
       .token {
         transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--orbit-radius) * -1)) rotate(calc(var(--angle) * -1));
       }
@@ -490,11 +502,11 @@
         transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--orbit-radius) * -1)) rotate(calc(var(--angle) * -1)) scale(1.04);
       }
       .token-card {
-        width: clamp(72px, 20vw, 92px);
-        min-height: 50px;
-        font-size: 0.64rem;
+        width: clamp(66px, 18vw, 84px);
+        min-height: 46px;
+        font-size: 0.6rem;
         line-height: 1.1;
-        padding: 8px 8px;
+        padding: 7px 7px;
         border-radius: 20px;
       }
       .modal { padding: 12px; }
@@ -505,12 +517,15 @@
     @media (max-width: 420px) {
       .composition {
         min-height: 520px;
-        --orbit-radius: min(clamp(132px, 40vw, 158px), 30vh);
+        --orbit-radius: min(clamp(126px, 37vw, 150px), 28vh);
+      }
+      .core-label span {
+        display: none;
       }
       .token-card {
-        width: clamp(68px, 19vw, 78px);
-        min-height: 46px;
-        font-size: 0.6rem;
+        width: clamp(62px, 17vw, 72px);
+        min-height: 42px;
+        font-size: 0.56rem;
       }
     }
   </style>
@@ -518,6 +533,9 @@
 <body>
   <main class="page">
     <div class="version-note">v0.1.4</div>
+    <header class="page-header">
+      <h1 class="page-title">School van het Hart</h1>
+    </header>
     <div class="composition">
       <section class="orbit" id="orbit" aria-label="Concepten rond de kern"></section>
 
@@ -539,29 +557,17 @@
                 <stop offset="0%" stop-color="#ebb6c5" />
                 <stop offset="100%" stop-color="#d889a1" />
               </linearGradient>
-              <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
-                <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#8f6e78" flood-opacity="0.18" />
-              </filter>
             </defs>
 
             <path
-              d="M180 300C164 262 80 208 58 138C40 88 76 38 128 38C156 38 174 54 180 70C186 54 204 38 232 38C284 38 320 88 302 138C280 208 196 262 180 300Z"
+              d="M180 300C164 262 80 208 58 138C40 88 76 38 128 38C156 38 174 54 180 56C186 54 204 38 232 38C284 38 320 88 302 138C280 208 196 262 180 300Z"
               fill="url(#heartFill)"
               stroke="url(#heartStroke)"
               stroke-width="10"
               stroke-linecap="round"
               stroke-linejoin="round"
-              filter="url(#softShadow)"
-            />
-
-            <path
-              d="M181 71C176 61 166 53 153 48C142 43 132 41 123 42"
-              stroke="rgba(255,255,255,0.24)"
-              stroke-width="7"
-              stroke-linecap="round"
             />
           </svg>
-          <div class="heart-label">SCHOOL VAN HET HART</div>
         </section>
 
         <div class="core-label">
