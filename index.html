@@ -200,54 +200,61 @@
       z-index: 2;
     }
 
+    .orbit-measure {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: calc(var(--orbit-radius) * 2);
+      height: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
     .token {
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--orbit-radius) * -1)) rotate(calc(var(--angle) * -1));
+      transform: translate(-50%, -50%) scale(var(--token-scale, 1));
       pointer-events: auto;
       z-index: 2;
-      background: transparent;
-      border: none;
-      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: clamp(106px, 11vw, 150px);
+      min-height: 66px;
+      padding: 12px 14px;
+      border-radius: 28px;
+      border: 1.5px solid transparent;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      box-shadow: var(--shadow-card);
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.15;
+      letter-spacing: 0.01em;
+      text-align: center;
+      text-wrap: balance;
       cursor: pointer;
-      transition: transform 240ms ease, filter 240ms ease;
-      filter: drop-shadow(0 10px 20px rgba(22, 24, 30, 0.08));
+      transition: transform 240ms ease, box-shadow 240ms ease, background 240ms ease, border-color 240ms ease;
     }
 
     .token:hover,
     .token:focus-visible {
-      transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--orbit-radius) * -1)) rotate(calc(var(--angle) * -1)) scale(1.045);
-      filter: drop-shadow(0 16px 28px rgba(22, 24, 30, 0.12));
+      --token-scale: 1.045;
+      box-shadow: 0 16px 28px rgba(22, 24, 30, 0.12);
       outline: none;
     }
 
-    .token-card {
-      width: clamp(106px, 11vw, 150px);
-      min-height: 66px;
-      padding: 12px 14px;
-      display: grid;
-      place-items: center;
-      border-radius: 28px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      font-size: 0.9rem;
-      line-height: 1.15;
-      text-wrap: balance;
-      letter-spacing: 0.01em;
-      font-family: var(--font-body);
-      text-align: center;
-      box-shadow: var(--shadow-card);
-      transition: border-color 240ms ease, background 240ms ease;
-    }
-
-    .token.wat .token-card {
-      border: 1.5px solid var(--what-stroke);
+    .token.wat {
+      border-color: var(--what-stroke);
       background: var(--what-fill);
     }
 
-    .token.hoe .token-card {
-      border: 1.5px solid var(--how-stroke);
+    .token.hoe {
+      border-color: var(--how-stroke);
       background: var(--how-fill);
     }
 
@@ -438,7 +445,7 @@
         --core-width: clamp(210px, 30vw, 280px);
       }
       .heart-wrap { width: min(27vw, 220px); }
-      .token-card {
+      .token {
         width: clamp(100px, 13vw, 134px);
         min-height: 62px;
         font-size: 0.84rem;
@@ -461,7 +468,7 @@
       .heart-wrap {
         width: min(18vw, 190px);
       }
-      .token-card {
+      .token {
         width: clamp(92px, 9vw, 120px);
         min-height: 56px;
         font-size: 0.78rem;
@@ -511,14 +518,11 @@
         font-size: 0.66rem;
       }
       .heart-wrap { width: min(38vw, 164px); }
-      .token {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--orbit-radius) * -1)) rotate(calc(var(--angle) * -1));
-      }
       .token:hover,
       .token:focus-visible {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--orbit-radius) * -1)) rotate(calc(var(--angle) * -1)) scale(1.04);
+        --token-scale: 1.04;
       }
-      .token-card {
+      .token {
         width: clamp(66px, 18vw, 84px);
         min-height: 46px;
         font-size: 0.6rem;
@@ -539,7 +543,7 @@
       .core-label span {
         display: none;
       }
-      .token-card {
+      .token {
         width: clamp(62px, 17vw, 72px);
         min-height: 42px;
         font-size: 0.56rem;
@@ -549,12 +553,13 @@
 </head>
 <body>
   <main class="page">
-    <div class="version-note">v0.1.7</div>
+    <div class="version-note">v0.1.8</div>
     <header class="page-header">
       <h1 class="page-title">School van het Hart</h1>
     </header>
     <div class="composition">
       <section class="orbit" id="orbit" aria-label="Concepten rond de kern"></section>
+      <div class="orbit-measure" id="orbitMeasure" aria-hidden="true"></div>
 
       <section class="core-axis" aria-label="WAT, School van het Hart en HOE in de centrale cirkel">
         <div class="core-label">
@@ -871,6 +876,8 @@
     ];
 
     const orbit = document.getElementById('orbit');
+    const orbitMeasure = document.getElementById('orbitMeasure');
+    const composition = document.querySelector('.composition');
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modal-title');
     const modalGroup = document.getElementById('modal-group');
@@ -880,23 +887,48 @@
 
     const compactOrbitQuery = window.matchMedia('(max-width: 420px)');
     const tokens = [];
+    let tokenLayoutFrame = 0;
 
     concepts.forEach((item) => {
       const button = document.createElement('button');
       button.className = `token ${item.group}`;
-      button.innerHTML = `<span class="token-card">${item.title}</span>`;
+      button.type = 'button';
+      button.textContent = item.title;
       button.setAttribute('aria-label', item.title);
       button.addEventListener('click', () => openModal(item));
       orbit.appendChild(button);
       tokens.push({ item, button });
     });
 
-    function syncTokenAngles() {
+    function getTokenAngle(item) {
       const useCompactAngles = compactOrbitQuery.matches;
+      return useCompactAngles && typeof item.angleMobile === 'number' ? item.angleMobile : item.angle;
+    }
+
+    function syncTokenLayout() {
+      tokenLayoutFrame = 0;
+      const orbitRect = orbit.getBoundingClientRect();
+      const measuredRadius = orbitMeasure.getBoundingClientRect().width / 2;
+      const radius = measuredRadius || Math.min(orbitRect.width, orbitRect.height) * 0.35;
+      const centerX = orbitRect.width / 2;
+      const centerY = orbitRect.height / 2;
+
+      if (!radius || !centerX || !centerY) return;
+
       tokens.forEach(({ item, button }) => {
-        const angle = useCompactAngles && typeof item.angleMobile === 'number' ? item.angleMobile : item.angle;
-        button.style.setProperty('--angle', `${angle}deg`);
+        const angle = getTokenAngle(item);
+        const radians = angle * Math.PI / 180;
+        const x = centerX + Math.sin(radians) * radius;
+        const y = centerY - Math.cos(radians) * radius;
+
+        button.style.left = `${x}px`;
+        button.style.top = `${y}px`;
       });
+    }
+
+    function scheduleTokenLayout() {
+      if (tokenLayoutFrame) cancelAnimationFrame(tokenLayoutFrame);
+      tokenLayoutFrame = requestAnimationFrame(syncTokenLayout);
     }
 
     function renderModalBody(item) {
@@ -921,12 +953,19 @@
       });
     }
 
-    syncTokenAngles();
+    scheduleTokenLayout();
 
     if (typeof compactOrbitQuery.addEventListener === 'function') {
-      compactOrbitQuery.addEventListener('change', syncTokenAngles);
+      compactOrbitQuery.addEventListener('change', scheduleTokenLayout);
     } else if (typeof compactOrbitQuery.addListener === 'function') {
-      compactOrbitQuery.addListener(syncTokenAngles);
+      compactOrbitQuery.addListener(scheduleTokenLayout);
+    }
+
+    window.addEventListener('resize', scheduleTokenLayout);
+
+    if (typeof ResizeObserver === 'function') {
+      const tokenLayoutObserver = new ResizeObserver(() => scheduleTokenLayout());
+      tokenLayoutObserver.observe(composition);
     }
 
     function openModal(item) {
