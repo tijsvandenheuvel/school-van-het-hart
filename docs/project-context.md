@@ -34,9 +34,10 @@ De homepage moet:
 - Werk verder op `index.html` tenzij er later echt meerdere pagina's komen.
 - Vermijd opnieuw een tweede losse HTML-variant als concurrerende bron van waarheid.
 - `docs/concepts.md` bewaart de canonieke inhoud van de 12 concepten; `index.html` moet die inhoud weerspiegelen.
-- De versiebadge rechtsboven volgt echte iteraties.
-- Huidige versie is `v0.1.7`.
-- De volgende inhoudelijke of visuele iteratie wordt `v0.1.8`.
+- `docs/changelog.md` bewaart de canonieke versiegeschiedenis; de bovenste entry bepaalt de actuele siteversie.
+- De versieknop rechtsboven en de changelog-modal in `index.html` lezen die changelog-inhoud in.
+- Huidige versie is `v0.1.9`.
+- Elke inhoudelijke, visuele of interactionele iteratie krijgt meteen een nieuwe changelog-entry.
 
 ## Verificatie-afspraak
 
@@ -50,5 +51,6 @@ Na layoutwijzigingen minstens controleren op:
 - Elk concept is klikbaar.
 - Klik opent een modal met titel, korte samenvatting en langere bodytekst.
 - De modalbody ondersteunt meerdere secties met tussentitels en alinea's.
+- Klik op de versieknop rechtsboven opent een changelog-modal met de recente wijzigingen.
 - `Escape` sluit de modal.
 - Klik buiten de modal sluit ook.

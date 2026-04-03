@@ -1,8 +1,8 @@
 # Docs
 
-Laatst bijgewerkt: 2026-04-02
+Laatst bijgewerkt: 2026-04-03
 
-Huidige siteversie: `v0.1.7`
+Huidige siteversie: `v0.1.9`
 
 Actieve entrypoint: `index.html`
 
@@ -20,7 +20,10 @@ Domein: `schoolvanhethart.be`
   De huidige layoutregels, versie-afspraken en responsive aandachtspunten.
 
 - `changelog.md`
-  Compacte versiegeschiedenis van de iteraties uit deze thread.
+  Canonieke versiegeschiedenis van de iteraties uit deze thread. De bovenste entry bepaalt ook de versieknop op de site.
+
+- `../AGENTS.md`
+  Verplichte werkwijze voor changelog-, versie- en documentatiesync bij elke wijziging.
 
 - `next-steps.md`
   Praktische punten voor de volgende werkfases.
@@ -29,5 +32,6 @@ Domein: `schoolvanhethart.be`
 
 - Bewerk de homepage verder in `index.html`.
 - Gebruik geen extra varianten zoals `index_V2.html` als aparte parallelle waarheid.
-- Houd de versiebadge synchroon met echte visuele of inhoudelijke iteraties.
+- Voeg bij elke wijziging eerst een nieuwe entry toe aan `docs/changelog.md`.
+- Houd expliciete versievermeldingen synchroon met echte visuele of inhoudelijke iteraties.
 - Controleer layoutwijzigingen minstens op desktop en mobiel.

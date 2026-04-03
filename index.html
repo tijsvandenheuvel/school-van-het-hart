@@ -91,6 +91,9 @@
       top: 12px;
       right: 12px;
       z-index: 20;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(90, 96, 110, 0.10);
@@ -98,9 +101,21 @@
       color: rgba(45,43,51,0.56);
       font-size: 0.76rem;
       letter-spacing: 0.08em;
+      font: inherit;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       box-shadow: 0 10px 24px rgba(34, 36, 45, 0.06);
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, color 180ms ease;
+    }
+
+    .version-note:hover,
+    .version-note:focus-visible {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.84);
+      color: rgba(45,43,51,0.82);
+      box-shadow: 0 12px 28px rgba(34, 36, 45, 0.10);
+      outline: none;
     }
 
     .page-header {
@@ -424,6 +439,59 @@
       color: var(--text);
     }
 
+    .changelog-modal .modal-card {
+      width: min(980px, 100%);
+    }
+
+    .changelog-modal .modal-header {
+      background: linear-gradient(135deg, rgba(232, 239, 243, 0.96), rgba(250, 252, 253, 0.96));
+    }
+
+    .changelog-modal .modal-body {
+      grid-template-columns: 1fr;
+    }
+
+    .changelog-copy {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .changelog-entry {
+      padding: 20px 22px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(85, 88, 100, 0.08);
+      box-shadow: 0 10px 30px rgba(34, 36, 45, 0.06);
+    }
+
+    .changelog-entry h3 {
+      margin: 0 0 12px;
+      font-size: 1.18rem;
+      line-height: 1.35;
+      color: #24232b;
+    }
+
+    .changelog-entry ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .changelog-entry li {
+      font-size: 0.98rem;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    .changelog-status {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.75;
+      color: var(--soft-text);
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -553,7 +621,7 @@
 </head>
 <body>
   <main class="page">
-    <div class="version-note">v0.1.8</div>
+    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.1.9" aria-haspopup="dialog" aria-controls="changelogModal">v0.1.9</button>
     <header class="page-header">
       <h1 class="page-title">School van het Hart</h1>
     </header>
@@ -626,7 +694,26 @@
     </article>
   </div>
 
+  <div class="modal changelog-modal" id="changelogModal" aria-hidden="true">
+    <article class="modal-card" role="dialog" aria-modal="true" aria-labelledby="changelog-title">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Ontwikkelingsproces</p>
+          <h2 id="changelog-title">Changelog</h2>
+          <p class="short" id="changelog-short">De laatste zichtbare veranderingen aan de site, rechtstreeks gelezen uit docs/changelog.md.</p>
+        </div>
+        <button class="close-btn" id="closeChangelogBtn" aria-label="Sluit changelog">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="changelog-copy" id="changelog-body">
+          <p class="changelog-status">Changelog wordt geladen...</p>
+        </div>
+      </div>
+    </article>
+  </div>
+
   <script>
+    const changelogPath = './docs/changelog.md';
     const concepts = [
       {
         group: "wat",
@@ -878,16 +965,26 @@
     const orbit = document.getElementById('orbit');
     const orbitMeasure = document.getElementById('orbitMeasure');
     const composition = document.querySelector('.composition');
+    const versionTrigger = document.getElementById('versionTrigger');
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modal-title');
     const modalGroup = document.getElementById('modal-group');
     const modalShort = document.getElementById('modal-short');
     const modalBody = document.getElementById('modal-body');
     const closeBtn = document.getElementById('closeBtn');
+    const changelogModal = document.getElementById('changelogModal');
+    const changelogBody = document.getElementById('changelog-body');
+    const closeChangelogBtn = document.getElementById('closeChangelogBtn');
+    const defaultVersion = versionTrigger.textContent.trim();
+    const changelogState = {
+      version: defaultVersion,
+      loaded: false
+    };
 
     const compactOrbitQuery = window.matchMedia('(max-width: 420px)');
     const tokens = [];
     let tokenLayoutFrame = 0;
+    let lastConceptTrigger = null;
 
     concepts.forEach((item) => {
       const button = document.createElement('button');
@@ -895,7 +992,7 @@
       button.type = 'button';
       button.textContent = item.title;
       button.setAttribute('aria-label', item.title);
-      button.addEventListener('click', () => openModal(item));
+      button.addEventListener('click', () => openModal(item, button));
       orbit.appendChild(button);
       tokens.push({ item, button });
     });
@@ -953,7 +1050,98 @@
       });
     }
 
+    function setBodyScrollLock(locked) {
+      document.body.style.overflow = locked ? 'hidden' : '';
+    }
+
+    function parseChangelogMarkdown(markdown) {
+      const lines = markdown.split(/\r?\n/);
+      const fragment = document.createDocumentFragment();
+      let currentEntry = null;
+      let currentList = null;
+      let currentVersion = '';
+
+      function ensureEntry(title) {
+        currentEntry = document.createElement('article');
+        currentEntry.className = 'changelog-entry';
+
+        const heading = document.createElement('h3');
+        heading.textContent = title;
+        currentEntry.appendChild(heading);
+        fragment.appendChild(currentEntry);
+        currentList = null;
+
+        if (!currentVersion) {
+          const versionMatch = title.match(/(v\d+\.\d+\.\d+)/i);
+          if (versionMatch) currentVersion = versionMatch[1];
+        }
+      }
+
+      lines.forEach((rawLine) => {
+        const line = rawLine.trim();
+
+        if (!line || line === '# Changelog') return;
+
+        if (line.startsWith('## ')) {
+          ensureEntry(line.slice(3).trim());
+          return;
+        }
+
+        if (line.startsWith('- ') && currentEntry) {
+          if (!currentList) {
+            currentList = document.createElement('ul');
+            currentEntry.appendChild(currentList);
+          }
+
+          const listItem = document.createElement('li');
+          listItem.textContent = line.slice(2).trim();
+          currentList.appendChild(listItem);
+          return;
+        }
+
+        if (currentEntry) {
+          const paragraph = document.createElement('p');
+          paragraph.className = 'changelog-status';
+          paragraph.textContent = line;
+          currentEntry.appendChild(paragraph);
+        }
+      });
+
+      return { fragment, version: currentVersion || defaultVersion };
+    }
+
+    function renderChangelogStatus(message) {
+      changelogBody.replaceChildren();
+      const status = document.createElement('p');
+      status.className = 'changelog-status';
+      status.textContent = message;
+      changelogBody.appendChild(status);
+    }
+
+    async function loadChangelog() {
+      try {
+        const response = await fetch(changelogPath, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const markdown = await response.text();
+        const parsed = parseChangelogMarkdown(markdown);
+
+        changelogBody.replaceChildren(parsed.fragment);
+        changelogState.version = parsed.version;
+        changelogState.loaded = true;
+        versionTrigger.textContent = parsed.version;
+        versionTrigger.setAttribute('aria-label', `Open changelog voor ${parsed.version}`);
+        versionTrigger.title = `Open changelog voor ${parsed.version}`;
+      } catch (error) {
+        changelogState.loaded = false;
+        renderChangelogStatus('De changelog kon niet automatisch geladen worden. Werk `docs/changelog.md` bij en herlaad de pagina.');
+        versionTrigger.setAttribute('aria-label', `Open changelog voor ${changelogState.version}`);
+        versionTrigger.title = `Open changelog voor ${changelogState.version}`;
+      }
+    }
+
     scheduleTokenLayout();
+    loadChangelog();
 
     if (typeof compactOrbitQuery.addEventListener === 'function') {
       compactOrbitQuery.addEventListener('change', scheduleTokenLayout);
@@ -968,7 +1156,9 @@
       tokenLayoutObserver.observe(composition);
     }
 
-    function openModal(item) {
+    function openModal(item, trigger = document.activeElement) {
+      closeChangelogModal();
+      lastConceptTrigger = trigger instanceof HTMLElement ? trigger : null;
       modal.classList.add('open', item.group);
       modal.classList.remove(item.group === 'wat' ? 'hoe' : 'wat');
       modal.setAttribute('aria-hidden', 'false');
@@ -976,22 +1166,53 @@
       modalGroup.textContent = item.group === 'wat' ? 'WAT' : 'HOE';
       modalShort.textContent = item.short;
       renderModalBody(item);
-      document.body.style.overflow = 'hidden';
+      setBodyScrollLock(true);
+      closeBtn.focus();
     }
 
     function closeModal() {
+      if (document.activeElement instanceof HTMLElement && modal.contains(document.activeElement)) {
+        (lastConceptTrigger || versionTrigger).focus();
+      }
       modal.classList.remove('open', 'wat', 'hoe');
       modal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      setBodyScrollLock(changelogModal.classList.contains('open'));
+    }
+
+    function openChangelogModal() {
+      closeModal();
+      changelogModal.classList.add('open');
+      changelogModal.setAttribute('aria-hidden', 'false');
+      setBodyScrollLock(true);
+      closeChangelogBtn.focus();
+    }
+
+    function closeChangelogModal() {
+      if (document.activeElement instanceof HTMLElement && changelogModal.contains(document.activeElement)) {
+        versionTrigger.focus();
+      }
+      changelogModal.classList.remove('open');
+      changelogModal.setAttribute('aria-hidden', 'true');
+      setBodyScrollLock(modal.classList.contains('open'));
     }
 
     closeBtn.addEventListener('click', closeModal);
+    closeChangelogBtn.addEventListener('click', closeChangelogModal);
+    versionTrigger.addEventListener('click', openChangelogModal);
     modal.addEventListener('click', (event) => {
       if (event.target === modal) closeModal();
     });
+    changelogModal.addEventListener('click', (event) => {
+      if (event.target === changelogModal) closeChangelogModal();
+    });
 
     window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      if (event.key !== 'Escape') return;
+      if (changelogModal.classList.contains('open')) {
+        closeChangelogModal();
+        return;
+      }
+      if (modal.classList.contains('open')) closeModal();
     });
   </script>
 </body>

@@ -5,7 +5,7 @@
 De homepage werkt nu volgens deze structuur:
 
 1. Grote titel bovenaan: `School van het Hart`
-2. Kleine versiebadge rechtsboven
+2. Kleine versieknop rechtsboven
 3. Cirkelcompositie met 12 labels rond een centraal hart
 4. In de kern staan alleen:
    - `WAT`
@@ -47,7 +47,7 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 
 ## Praktische editpunten in code
 
-- Versiebadge: `index.html`, element `.version-note`
+- Versieknop: `index.html`, element `.version-note`
 - Titellayout: `index.html`, `.page-header` en `.page-title`
 - Hoofdcompositie: `index.html`, `.composition`
 - Responsive regels: `index.html`, media queries
@@ -57,6 +57,7 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 
 ## Versie-afspraak
 
-- Huidige versie: `v0.1.7`
-- Volgende iteratie: `v0.1.8`
-- Verhoog de versiebadge enkel bij echte inhoudelijke of visuele voortgang
+- Huidige versie: `v0.1.9`
+- Canonieke versiebron: de bovenste entry in `docs/changelog.md`
+- De versieknop in `index.html` leest die actuele versie uit de changelog
+- Verhoog de versie bij elke echte inhoudelijke, visuele of interactionele voortgang
