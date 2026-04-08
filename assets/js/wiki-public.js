@@ -28,6 +28,7 @@
     currentSlug: null,
     activePanel: 'index',
     activeTab: 'description',
+    showAlphabetMenu: false,
     query: '',
     backStack: [],
     forwardStack: []
@@ -161,6 +162,7 @@
     state.currentSlug = null;
     state.activePanel = 'index';
     state.activeTab = 'description';
+    state.showAlphabetMenu = false;
     state.query = '';
     state.backStack = [];
     state.forwardStack = [];
@@ -185,6 +187,7 @@
     state.currentSlug = slug;
     state.activePanel = 'item';
     state.activeTab = settings.tab || 'description';
+    state.showAlphabetMenu = false;
     render();
     updateHash();
 
@@ -229,12 +232,105 @@
     }
   }
 
-  function makeChip(label) {
-    return `<span class="wiki-chip">${Core.escapeHtml(label)}</span>`;
+  function makeLinkCard(entry) {
+    const title = Core.escapeHtml(entry.title || entry.term || '');
+    const meta = entry.meta ? `<span class="wiki-link-card-meta">${Core.escapeHtml(entry.meta)}</span>` : '';
+
+    if (entry.slug) {
+      return `
+        <button type="button" class="wiki-link-card" data-item-slug="${Core.escapeHtml(entry.slug)}">
+          <span class="wiki-link-card-title">${title}</span>
+          ${meta}
+        </button>
+      `;
+    }
+
+    return `
+      <div class="wiki-link-card wiki-link-card-broken">
+        <span class="wiki-link-card-title">${title}</span>
+        ${meta}
+      </div>
+    `;
   }
 
-  function makeLinkButton(slug, label) {
-    return `<button type="button" class="wiki-link-pill" data-item-slug="${Core.escapeHtml(slug)}">${Core.escapeHtml(label)}</button>`;
+  function mergeConnection(map, key, seed) {
+    const current = map.get(key) || {
+      slug: seed.slug || '',
+      title: seed.title || seed.term || '',
+      term: seed.term || '',
+      metaParts: []
+    };
+
+    seed.metaParts.forEach((part) => {
+      if (part && !current.metaParts.includes(part)) {
+        current.metaParts.push(part);
+      }
+    });
+
+    if (!current.title && seed.title) current.title = seed.title;
+    if (!current.term && seed.term) current.term = seed.term;
+    if (!current.slug && seed.slug) current.slug = seed.slug;
+    map.set(key, current);
+  }
+
+  function buildIncomingConnections(item) {
+    const incomingMap = new Map();
+
+    item.backlinks.forEach((entry) => {
+      mergeConnection(incomingMap, entry.slug, {
+        slug: entry.slug,
+        title: entry.title,
+        metaParts: [`via ${entry.via}`]
+      });
+    });
+
+    item.mentions.forEach((entry) => {
+      mergeConnection(incomingMap, entry.slug, {
+        slug: entry.slug,
+        title: entry.title,
+        metaParts: ['vermelding']
+      });
+    });
+
+    return Array.from(incomingMap.values())
+      .sort((left, right) => left.title.localeCompare(right.title, 'nl'))
+      .map((entry) => ({
+        slug: entry.slug,
+        title: entry.title,
+        meta: entry.metaParts.join(' · ')
+      }));
+  }
+
+  function buildOutgoingConnections(item) {
+    const outgoingMap = new Map();
+
+    item.resolvedLinks.forEach((entry) => {
+      mergeConnection(outgoingMap, entry.slug, {
+        slug: entry.slug,
+        title: entry.title,
+        metaParts: [entry.label || entry.term]
+      });
+    });
+
+    item.brokenLinks.forEach((entry) => {
+      mergeConnection(outgoingMap, `broken:${entry.term}`, {
+        term: entry.term,
+        title: entry.label || entry.term,
+        metaParts: ['nog geen item']
+      });
+    });
+
+    return Array.from(outgoingMap.values())
+      .sort((left, right) => {
+        if (!!left.slug !== !!right.slug) return left.slug ? -1 : 1;
+        return left.title.localeCompare(right.title, 'nl');
+      })
+      .map((entry) => ({
+        slug: entry.slug,
+        title: entry.title,
+        term: entry.term,
+        meta: entry.metaParts.join(' · ')
+      }));
   }
 
   function groupItemsByLetter(items) {
@@ -309,12 +405,24 @@
 
     refs.indexView.innerHTML = `
       <div class="wiki-directory-shell">
-        <div class="wiki-letter-nav">
-          ${groups.map((group) => `
-            <button type="button" class="wiki-chip-btn wiki-letter-btn" data-letter-target="${Core.escapeHtml(group.letter)}">
-              ${group.letter}
-            </button>
-          `).join('')}
+        <div class="wiki-directory-tools">
+          <button
+            type="button"
+            class="wiki-chip-btn wiki-alphabet-toggle ${state.showAlphabetMenu ? 'active' : ''}"
+            data-toggle-alphabet
+            aria-expanded="${state.showAlphabetMenu ? 'true' : 'false'}"
+          >
+            ABC
+          </button>
+          ${state.showAlphabetMenu ? `
+            <div class="wiki-letter-popover">
+              ${groups.map((group) => `
+                <button type="button" class="wiki-chip-btn wiki-letter-btn" data-letter-target="${Core.escapeHtml(group.letter)}">
+                  ${group.letter}
+                </button>
+              `).join('')}
+            </div>
+          ` : ''}
         </div>
         <div class="wiki-directory-results">
           ${groups.map((group) => `
@@ -342,49 +450,25 @@
     return `<article class="wiki-item-copy wiki-article-copy">${articleHtml}</article>`;
   }
 
-  function renderLinksTab(item) {
-    const resolved = item.resolvedLinks.length
-      ? item.resolvedLinks.map((entry) => `<li>${makeLinkButton(entry.slug, entry.title)}<span class="wiki-link-list-label">${Core.escapeHtml(entry.term)}</span></li>`).join('')
-      : '<div class="wiki-empty">Nog geen opgeloste links vanuit dit item.</div>';
-
-    const broken = item.brokenLinks.length
-      ? `<ul class="wiki-link-list">${item.brokenLinks.map((entry) => `<li><span class="wiki-link-pill-broken">${Core.escapeHtml(entry.term)}</span></li>`).join('')}</ul>`
-      : '<div class="wiki-empty">Geen broken links.</div>';
-
-    return `
-      <div class="wiki-item-grid">
-        <section class="wiki-panel-card">
-          <h3>Outgoing links</h3>
-          ${typeof resolved === 'string' && resolved.startsWith('<div') ? resolved : `<ul class="wiki-link-list">${resolved}</ul>`}
-        </section>
-        <section class="wiki-panel-card">
-          <h3>Linktermen zonder item</h3>
-          ${broken}
-        </section>
-      </div>
-    `;
-  }
-
-  function renderMentionsTab(item) {
-    const backlinks = item.backlinks.length
-      ? item.backlinks.map((entry) => `<li>${makeLinkButton(entry.slug, entry.title)}<span class="wiki-link-list-label">${Core.escapeHtml(entry.via)}</span></li>`).join('')
-      : '';
-
-    const mentions = item.mentions
-      .filter((entry, index, collection) => collection.findIndex((candidate) => candidate.slug === entry.slug) === index)
-      .filter((entry) => entry.slug !== item.slug)
-      .map((entry) => `<li>${makeLinkButton(entry.slug, entry.title)}</li>`)
-      .join('');
+  function renderConnectionsTab(item) {
+    const incomingConnections = buildIncomingConnections(item);
+    const outgoingConnections = buildOutgoingConnections(item);
+    const incomingMarkup = incomingConnections.length
+      ? `<ul class="wiki-link-list">${incomingConnections.map((entry) => `<li>${makeLinkCard(entry)}</li>`).join('')}</ul>`
+      : '<div class="wiki-empty">Nog geen inkomende verbindingen.</div>';
+    const outgoingMarkup = outgoingConnections.length
+      ? `<ul class="wiki-link-list">${outgoingConnections.map((entry) => `<li>${makeLinkCard(entry)}</li>`).join('')}</ul>`
+      : '<div class="wiki-empty">Nog geen uitgaande verbindingen.</div>';
 
     return `
       <div class="wiki-item-grid">
         <section class="wiki-panel-card">
-          <h3>Backlinks</h3>
-          ${backlinks ? `<ul class="wiki-link-list">${backlinks}</ul>` : '<div class="wiki-empty">Nog geen backlinks naar dit item.</div>'}
+          <h3>In</h3>
+          ${incomingMarkup}
         </section>
         <section class="wiki-panel-card">
-          <h3>Mentions</h3>
-          ${mentions ? `<ul class="wiki-link-list">${mentions}</ul>` : '<div class="wiki-empty">Nog geen extra vermeldingen gevonden.</div>'}
+          <h3>Uit</h3>
+          ${outgoingMarkup}
         </section>
       </div>
     `;
@@ -398,17 +482,14 @@
     }
 
     const tabs = [
-      { value: 'description', label: 'Description' },
-      { value: 'links', label: 'Links' },
-      { value: 'mentions', label: 'Mentions' }
+      { value: 'description', label: 'Beschrijving' },
+      { value: 'connections', label: 'Verbindingen' }
     ];
 
     let panelMarkup = '';
 
-    if (state.activeTab === 'links') {
-      panelMarkup = renderLinksTab(item);
-    } else if (state.activeTab === 'mentions') {
-      panelMarkup = renderMentionsTab(item);
+    if (state.activeTab === 'connections') {
+      panelMarkup = renderConnectionsTab(item);
     } else {
       panelMarkup = renderDescriptionTab(item);
     }
@@ -498,10 +579,18 @@
   refs.forwardBtn.addEventListener('click', navigateForward);
   refs.searchInput.addEventListener('input', (event) => {
     state.query = event.target.value;
+    state.showAlphabetMenu = false;
     render();
   });
 
   refs.content.addEventListener('click', (event) => {
+    const alphabetToggle = event.target.closest('[data-toggle-alphabet]');
+    if (alphabetToggle) {
+      state.showAlphabetMenu = !state.showAlphabetMenu;
+      renderDirectory();
+      return;
+    }
+
     const itemButton = event.target.closest('[data-item-slug]');
     if (itemButton) {
       navigateTo(itemButton.getAttribute('data-item-slug'));
@@ -525,6 +614,8 @@
     const letterButton = event.target.closest('[data-letter-target]');
     if (letterButton) {
       const target = letterButton.getAttribute('data-letter-target');
+      state.showAlphabetMenu = false;
+      renderDirectory();
       const section = Array.from(refs.indexView.querySelectorAll('[data-letter-section]'))
         .find((entry) => entry.getAttribute('data-letter-section') === target);
       if (section) {

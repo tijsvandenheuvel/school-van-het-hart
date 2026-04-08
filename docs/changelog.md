@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.2.12 - Verbindingen en alfabet
+
+- De letterknoppen boven de woordenlijst vervangen door één `ABC`-knop die een compact alfabetmenu opent om naar letters in het woordenboek te springen
+- De itemtabs hernoemd en vereenvoudigd naar `Beschrijving` en `Verbindingen`, waarbij `Verbindingen` nu een lijst `In` en een lijst `Uit` toont
+- De verbindingen visueel herwerkt zodat elke link als één duidelijke kaderkaart rendert in plaats van als losse knop met los label
+
+## v0.2.11 - Beschrijving opgeschoond
+
+- De extra linklijst weer uit de beschrijvingstab verwijderd zodat de hoofdweergave proper blijft en volledig op het artikel focust
+- De tijdelijke hulplogica en bijhorende stijlen voor die lijst weggehaald zodat de publieke wiki-code weer eenvoudiger aansluit op de sobere UI
+- De detailweergave van een item teruggebracht tot een schone markdown-artikelpagina zonder overbodige zijmeta in de beschrijvingstab
+
 ## v0.2.10 - Relevante linklijst
 
 - De losse blokken `Linknamen / aliassen`, `Interne links` en `Gerelateerd` in de publieke itemweergave samengevoegd tot één top-10 lijst met relevante links
