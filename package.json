@@ -1,0 +1,9 @@
+{
+  "name": "school-van-het-hart",
+  "version": "0.2.8",
+  "private": true,
+  "scripts": {
+    "wiki:dev": "node server/wiki-server.js",
+    "image:corner": "node server/generate-corner-study.js"
+  }
+}

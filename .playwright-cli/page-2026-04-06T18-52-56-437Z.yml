@@ -1,0 +1,28 @@
+- main [ref=e2]:
+  - button "Open wiki" [ref=e3] [cursor=pointer]: Wiki
+  - button "Open changelog voor v0.2.3" [ref=e4] [cursor=pointer]: v0.2.3
+  - generic:
+    - heading "School van het Hart" [level=1]
+  - generic [ref=e5]:
+    - region "Concepten rond de kern":
+      - button "School van het Hart" [ref=e6] [cursor=pointer]
+      - button "Leren samenleven" [ref=e7] [cursor=pointer]
+      - button "Natuurverbinding" [ref=e8] [cursor=pointer]
+      - button "Nieuwe wereld" [ref=e9] [cursor=pointer]
+      - button "Collectieve heling" [ref=e10] [cursor=pointer]
+      - button "Liefde in de praktijk" [ref=e11] [cursor=pointer]
+      - button "Taalbewustzijn" [ref=e12] [cursor=pointer]
+      - button "Rainbow" [ref=e13] [cursor=pointer]
+      - button "Cirkels" [ref=e14] [cursor=pointer]
+      - button "Zelfbestuur" [ref=e15] [cursor=pointer]
+      - button "Magic Hat" [ref=e16] [cursor=pointer]
+      - button "Spel & creativiteit" [ref=e17] [cursor=pointer]
+    - region "WAT, School van het Hart en HOE in de centrale cirkel":
+      - generic:
+        - strong: WAT
+        - generic: De vormen van het hart
+      - region "School van het Hart, centrale kern":
+        - img
+      - generic:
+        - strong: HOE
+        - generic: De praktijken rond de kern

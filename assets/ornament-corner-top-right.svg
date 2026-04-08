@@ -1,0 +1,41 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldMain" x1="18" y1="18" x2="132" y2="156" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8A6026"/>
+      <stop offset="0.38" stop-color="#C99543"/>
+      <stop offset="0.68" stop-color="#F2E1B2"/>
+      <stop offset="1" stop-color="#A87430"/>
+    </linearGradient>
+    <linearGradient id="goldAccent" x1="32" y1="22" x2="120" y2="136" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F6E8C1"/>
+      <stop offset="1" stop-color="#C49341"/>
+    </linearGradient>
+    <radialGradient id="medallionBg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(147 33) rotate(90) scale(21)">
+      <stop offset="0" stop-color="#FFF8E8"/>
+      <stop offset="1" stop-color="#EFD7AA"/>
+    </radialGradient>
+    <radialGradient id="heartFill" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(147 29) rotate(90) scale(16)">
+      <stop offset="0" stop-color="#FFABC9"/>
+      <stop offset="1" stop-color="#E15B94"/>
+    </radialGradient>
+  </defs>
+
+  <g transform="translate(180 0) scale(-1 1)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 72V160" stroke="url(#goldMain)" stroke-width="3.1"/>
+    <path d="M72 21H160" stroke="url(#goldMain)" stroke-width="3.1"/>
+    <path d="M21 149C29 116 59 73 121 28" stroke="url(#goldMain)" stroke-width="3.1"/>
+    <path d="M34 149C45 121 69 89 105 60" stroke="url(#goldAccent)" stroke-width="1.45" opacity="0.94"/>
+    <path d="M56 21C73 21 86 33 86 46C86 59 78 67 68 67C58 67 50 60 50 50C50 43 54 38 60 38C66 38 70 42 71 47" stroke="url(#goldMain)" stroke-width="2"/>
+    <path d="M21 56C21 73 33 86 46 86C59 86 67 78 67 68C67 58 60 50 50 50C43 50 38 54 38 60C38 66 42 70 47 71" stroke="url(#goldMain)" stroke-width="2"/>
+    <path d="M92 28C99 22 110 22 117 28C110 34 99 34 92 28Z" stroke="url(#goldMain)" stroke-width="1.6"/>
+    <path d="M28 92C22 99 22 110 28 117C34 110 34 99 28 92Z" stroke="url(#goldMain)" stroke-width="1.6"/>
+    <path d="M87 21C102 21 116 25 129 33" stroke="url(#goldAccent)" stroke-width="1.35" opacity="0.92"/>
+    <path d="M21 87C21 102 25 116 33 129" stroke="url(#goldAccent)" stroke-width="1.35" opacity="0.92"/>
+  </g>
+
+  <g>
+    <circle cx="147" cy="33" r="20" fill="url(#medallionBg)" stroke="#BB8A3E" stroke-width="2.6"/>
+    <circle cx="147" cy="33" r="16.3" stroke="#F5E6BF" stroke-width="1.05" opacity="0.92"/>
+    <path d="M147 44C143 39 135 35 133 28C131 21 136 17 142 17C145 17 147 18 147 21C147 18 149 17 152 17C158 17 163 21 161 28C159 35 151 39 147 44Z" fill="url(#heartFill)" stroke="#D66095" stroke-width="1.65" stroke-linejoin="round"/>
+  </g>
+</svg>

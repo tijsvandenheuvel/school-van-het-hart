@@ -13,7 +13,7 @@ De homepage moet:
 
 ## Technische uitgangssituatie
 
-- Stack: plain `HTML`, `CSS` en `JavaScript`
+- Stack: plain `HTML`, `CSS` en `JavaScript`, plus een kleine lokale Node-server voor de wiki-admin
 - Geen buildstap
 - Actieve homepage: `index.html`
 - Custom domain via `CNAME`: `schoolvanhethart.be`
@@ -29,6 +29,15 @@ De homepage moet:
 - `docs/`
   Documentatie voor inhoud, layout en vervolgwerk.
 
+- `wiki/`
+  De canonieke markdown-bronnen voor de wiki-laag en de meta-bestanden voor index en ignore-lijst.
+
+- `admin/wiki.html`
+  Lokale adminmode voor wiki-items, preview en relationele curation.
+
+- `server/wiki-server.js`
+  Kleine lokale server voor statische serving en markdown-gebaseerde wiki-API's.
+
 ## Werkafspraken
 
 - Werk verder op `index.html` tenzij er later echt meerdere pagina's komen.
@@ -36,7 +45,7 @@ De homepage moet:
 - `docs/concepts.md` bewaart de canonieke inhoud van de 12 concepten; `index.html` moet die inhoud weerspiegelen.
 - `docs/changelog.md` bewaart de canonieke versiegeschiedenis; de bovenste entry bepaalt de actuele siteversie.
 - De versieknop rechtsboven en de changelog-modal in `index.html` lezen die changelog-inhoud in.
-- Huidige versie is `v0.1.9`.
+- Huidige versie is `v0.2.8`.
 - Elke inhoudelijke, visuele of interactionele iteratie krijgt meteen een nieuwe changelog-entry.
 
 ## Verificatie-afspraak
@@ -52,5 +61,6 @@ Na layoutwijzigingen minstens controleren op:
 - Klik opent een modal met titel, korte samenvatting en langere bodytekst.
 - De modalbody ondersteunt meerdere secties met tussentitels en alinea's.
 - Klik op de versieknop rechtsboven opent een changelog-modal met de recente wijzigingen.
+- Klik op de nieuwe `Wiki`-knop opent een publieke markdown-wiki-modal met index, itemviews en mini-historiek.
 - `Escape` sluit de modal.
 - Klik buiten de modal sluit ook.

@@ -1,5 +1,70 @@
 # Changelog
 
+## v0.2.8 - Wiki-header versoberd
+
+- De publieke wiki-header sterk vereenvoudigd tot terug, vooruit, zoekveld, compacte itemteller en een sluitknop met `×`
+- De grote introductietekst en publieke filterknoppen uit de wiki-modal verwijderd zodat de woordenboekindex veel minder verticale ruimte verliest
+- De indexkolom technisch aangescherpt met een vaste modalhoogte en eigen scrollcontainer zodat de A-Z lijst werkelijk door te scrollen is
+- De zoekbalk visueel beter geïntegreerd in de toolbar en de lege rechterkolom teruggebracht tot een eenvoudige keuzehint
+
+## v0.2.7 - Wiki als woordenboek
+
+- De publieke wiki-modal omgebouwd tot een echte wiki-shell met een blijvende indexkolom en een hoofdweergave voor gerenderde markdown-artikelen
+- De itempagina’s strakker als wiki-artikelen laten werken door leidende titelkoppen uit de markdownbody weg te halen en wikilinks binnen dezelfde modal te houden
+- De publieke wiki laten laden uit de volledige serverindex zodat alle items uit `wiki/items/` zichtbaar worden in het woordenboek en niet enkel de curated lijst
+- Een scrollbare A-Z woordenboekindex toegevoegd met letterjump, itemmeta en directe artikelopening vanuit de zijbalk
+- De admin-preview gelijkgetrokken met dezelfde artikelrendering zodat publieke weergave en lokale preview dichter op elkaar liggen
+
+## v0.2.6 - Markdown-wiki laag
+
+- Een file-based wiki toegevoegd met canonieke markdown-items in `wiki/items/` en markdown-meta in `wiki/meta/`
+- Een gedeelde wiki-kern gebouwd voor frontmatter parsing, markdown rendering, Obsidian-wikilinks, linkresolutie, indexering, backlinks en zoeklogica
+- Een publieke `Wiki`-modal geïntegreerd in `index.html` met index, zoeken, filters, itemviews, wikilink-navigatie en back/forward-traversal binnen dezelfde overlay
+- Een lokale adminroute `/admin/wiki` en een kleine Node-server toegevoegd voor itembeheer, live preview, directe markdown-save en kandidaat/relatiecuratie
+- De kandidaat-extractie aangescherpt tot een beperktere, bruikbare shortlist op basis van conceptdocs en bestaande wiki-items
+- Versieflow, docs en lokale verificatie geactualiseerd voor deze wiki-pass
+
+## v0.2.5 - Beeldtooling voor hoeken
+
+- Een lokale OpenAI image-module toegevoegd waarmee beeldstudies vanuit prompt en referentiebeelden als PNG naar de repo-output geschreven kunnen worden
+- Een projectgerichte corner-study generator toegevoegd die `assets/design-example.jpeg` gebruikt als stijlinspiratie voor nieuwe hoekverkenningen
+- De bestaande SVG-hoeken subtiel verder afgewerkt met rijkere goudtonen zodat de site al een nettere bron-geinspireerde hoekpass krijgt, ook zonder live image-run
+- De versieflow gesynchroniseerd tussen site, docs en `package.json` zodat de toolingpass als echte iteratie meetelt
+
+## v0.2.4 - Hoeken opgeschoond
+
+- De hoekornamenten opnieuw getekend met minder losse vormen en een duidelijkere hoofdlijn zodat de kader eleganter leest
+- Het hartmedaillon steviger in de hoekband ingebed zodat het minder als los icoontje en meer als onderdeel van de rand aanvoelt
+- De hoekmaat licht vergroot en de schaduw aangescherpt zodat de ornamenten op desktop en mobiel beter dragen zonder zwaarder te worden
+
+## v0.2.3 - Compacte mobiel verfijnd
+
+- De compacte mobiele orbit horizontaal opnieuw uitgebalanceerd zodat rechterlabels beter binnen de kader blijven
+- De onderste `HOE`-labels verder uit elkaar gezet zodat `Zelfbestuur` en `Cirkels` niet meer in elkaar schuiven
+- De versieflow en documentatie opnieuw gesynchroniseerd met deze finale v0.2.3-pass
+
+## v0.2.2 - Mobiele kaderpass
+
+- De compacte small-screen layout verbreed naar een robuustere breakpoint zodat de mobiele compositie ook echt op tijd omschakelt
+- De orbit op small screens strakker georkestreerd met bewustere compacte posities rond de kern
+- Titel, versieknop, hartmaat en verticale spacing op mobiel opnieuw afgestemd zodat de paginakader leesbaarder blijft
+
+## v0.2.1 - De paginakader verfijnd
+
+- De ornamentale kader herwerkt zodat ze nu de volledige pagina omsluit, inclusief titel en versieknop
+- De brede dubbele lijn vervangen door een smallere gouden band met subtiele tintverschillen in dezelfde band
+- De regenboogaccenten verwijderd en vier eenvoudiger, elegantere hoek-SVG's gemaakt met een rechtopstaand hart in elke hoek
+- De oude geroteerde hoekaanpak losgelaten zodat de hoekornamenten niet langer visueel fout meedraaien
+- Responsive spacing opnieuw afgestemd zodat de page chrome beter past binnen desktop en smalle schermen
+
+## v0.2.0 - De ornamentale kader
+
+- Een eerste ornamentale frame-laag toegevoegd rond de hoofdcompositie in `index.html`
+- Een herbruikbare SVG-hoekasset gemaakt met goudlijnwerk, hartmedaillon, zachte sparkles en regenbooglint
+- De vier hoeken opgebouwd vanuit die ene asset en de tussenliggende randstukken responsief in CSS getekend
+- De sierlaag technisch decoratief gehouden met `pointer-events: none`, zodat orbit en modals ongewijzigd klikbaar blijven
+- Vaste versievermeldingen in docs en de initiële versieknop gesynchroniseerd naar `v0.2.0`
+
 ## v0.1.9 - Changelog op de site
 
 - De versie-indicator rechtsboven omgebouwd tot een echte knop die de changelog opent

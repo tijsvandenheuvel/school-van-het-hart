@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School van het Hart · Wiki Admin</title>
+  <link rel="stylesheet" href="/assets/css/admin-wiki.css" />
+</head>
+<body>
+  <main class="admin-shell">
+    <header class="admin-header">
+      <div class="admin-header-copy">
+        <p class="admin-kicker">Local admin mode</p>
+        <h1>Wiki admin</h1>
+        <p>Beheer wiki-items rechtstreeks in markdown, met gedeelde previewlogica en een eenvoudige curationlaag.</p>
+      </div>
+      <div class="admin-header-actions">
+        <a class="admin-link-btn" href="/">Open publieke site</a>
+        <button class="admin-link-btn" id="adminReloadBtn" type="button">Reload data</button>
+      </div>
+    </header>
+
+    <section class="admin-toolbar">
+      <div class="admin-tab-row" id="adminTabRow">
+        <button type="button" class="admin-tab-btn active" data-screen="items">Items</button>
+        <button type="button" class="admin-tab-btn" data-screen="editor">Editor</button>
+        <button type="button" class="admin-tab-btn" data-screen="relations">Relations</button>
+      </div>
+      <p class="admin-status" id="adminStatus">Wiki-admin laadt…</p>
+    </section>
+
+    <section class="admin-screen" id="itemsScreen">
+      <div class="admin-grid">
+        <article class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <p class="admin-kicker">Items</p>
+              <h2>Alle markdown-items</h2>
+            </div>
+            <p id="itemsCount"></p>
+          </div>
+          <label class="admin-field">
+            <span>Zoek items</span>
+            <input id="itemsSearchInput" type="search" placeholder="Zoek op titel, samenvatting of linkterm" />
+          </label>
+          <div class="admin-item-list" id="itemsList"></div>
+        </article>
+
+        <article class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <p class="admin-kicker">Nieuw</p>
+              <h2>Maak een item aan</h2>
+            </div>
+          </div>
+          <label class="admin-field">
+            <span>Titel</span>
+            <input id="newItemTitleInput" type="text" placeholder="Bijvoorbeeld: Ritme van de plek" />
+          </label>
+          <button class="admin-primary-btn" id="newItemBtn" type="button">Nieuw item openen</button>
+          <p class="admin-help">De editor maakt meteen een nieuw markdown-item met frontmatter, body en live preview. Opslaan schrijft rechtstreeks naar <code>/wiki/items/</code>.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="admin-screen" id="editorScreen" hidden>
+      <div class="admin-grid admin-grid-wide">
+        <article class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <p class="admin-kicker">Editor</p>
+              <h2>Frontmatter en body</h2>
+            </div>
+            <button class="admin-primary-btn" id="saveItemBtn" type="button">Save markdown</button>
+          </div>
+
+          <div class="admin-form">
+            <label class="admin-field">
+              <span>Titel</span>
+              <input id="editorTitleInput" type="text" placeholder="Titel" />
+            </label>
+
+            <label class="admin-field">
+              <span>Samenvatting</span>
+              <textarea id="editorSummaryInput" rows="3" placeholder="Korte samenvatting voor index en item header"></textarea>
+            </label>
+
+            <label class="admin-field">
+              <span>Links</span>
+              <textarea id="editorLinksInput" rows="5" placeholder="Eén term per regel"></textarea>
+            </label>
+
+            <label class="admin-field admin-field-large">
+              <span>Markdown body</span>
+              <textarea id="editorBodyInput" rows="18" placeholder="# Titel"></textarea>
+            </label>
+          </div>
+        </article>
+
+        <article class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <p class="admin-kicker">Preview</p>
+              <h2>Gedeelde renderlogica</h2>
+            </div>
+          </div>
+          <div class="admin-preview" id="editorPreview"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="admin-screen" id="relationsScreen" hidden>
+      <div class="admin-grid admin-grid-wide">
+        <article class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <p class="admin-kicker">Candidates</p>
+              <h2>Automatisch geëxtraheerde termen</h2>
+            </div>
+          </div>
+          <div class="admin-candidate-list" id="candidateList"></div>
+        </article>
+
+        <div class="admin-stack">
+          <article class="admin-panel">
+            <div class="admin-panel-head">
+              <div>
+                <p class="admin-kicker">Broken links</p>
+                <h2>Niet-opgeloste referenties</h2>
+              </div>
+            </div>
+            <div class="admin-link-groups" id="brokenLinksList"></div>
+          </article>
+
+          <article class="admin-panel">
+            <div class="admin-panel-head">
+              <div>
+                <p class="admin-kicker">Backlinks</p>
+                <h2>Item-relaties</h2>
+              </div>
+            </div>
+            <div class="admin-link-groups" id="backlinksList"></div>
+          </article>
+
+          <article class="admin-panel">
+            <div class="admin-panel-head">
+              <div>
+                <p class="admin-kicker">Orphans</p>
+                <h2>Losse items</h2>
+              </div>
+            </div>
+            <div class="admin-link-groups" id="orphansList"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/js/wiki-core.js"></script>
+  <script src="/assets/js/admin-wiki.js"></script>
+</body>
+</html>
