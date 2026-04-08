@@ -337,36 +337,9 @@
   }
 
   function renderDescriptionTab(item) {
-    const aliases = item.links.length
-      ? item.links.map((term) => makeChip(term)).join('')
-      : '<div class="wiki-empty">Nog geen extra linktermen toegevoegd.</div>';
-    const internalLinks = item.resolvedLinks.length
-      ? item.resolvedLinks.map((entry) => makeLinkButton(entry.slug, entry.title)).join('')
-      : '<div class="wiki-empty">Dit item heeft nog geen interne links.</div>';
-    const relatedLinks = item.related.length
-      ? item.related.slice(0, 10).map((entry) => makeLinkButton(entry.slug, entry.title)).join('')
-      : '<div class="wiki-empty">Nog geen gerelateerde items berekend.</div>';
     const articleHtml = item.articleHtml || item.bodyHtml || '<p>Nog geen beschrijving toegevoegd.</p>';
 
-    return `
-      <div class="wiki-article-layout">
-        <article class="wiki-item-copy wiki-article-copy">${articleHtml}</article>
-        <aside class="wiki-item-side">
-          <section class="wiki-panel-card">
-            <h3>Linknamen</h3>
-            <div class="wiki-term-row">${aliases}</div>
-          </section>
-          <section class="wiki-panel-card">
-            <h3>Interne links</h3>
-            <div class="wiki-term-row">${internalLinks}</div>
-          </section>
-          <section class="wiki-panel-card">
-            <h3>Gerelateerd</h3>
-            <div class="wiki-term-row">${relatedLinks}</div>
-          </section>
-        </aside>
-      </div>
-    `;
+    return `<article class="wiki-item-copy wiki-article-copy">${articleHtml}</article>`;
   }
 
   function renderLinksTab(item) {

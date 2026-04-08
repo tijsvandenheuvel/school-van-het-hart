@@ -337,6 +337,11 @@
   line-height: 1.7;
 }
 
+.wiki-panel-note {
+  color: var(--soft-text);
+  font-size: 0.9rem;
+}
+
 .wiki-term-row {
   display: flex;
   flex-wrap: wrap;

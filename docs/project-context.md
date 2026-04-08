@@ -45,7 +45,7 @@ De homepage moet:
 - `docs/concepts.md` bewaart de canonieke inhoud van de 12 concepten; `index.html` moet die inhoud weerspiegelen.
 - `docs/changelog.md` bewaart de canonieke versiegeschiedenis; de bovenste entry bepaalt de actuele siteversie.
 - De versieknop rechtsboven en de changelog-modal in `index.html` lezen die changelog-inhoud in.
-- Huidige versie is `v0.2.8`.
+- Huidige versie is `v0.2.10`.
 - Elke inhoudelijke, visuele of interactionele iteratie krijgt meteen een nieuwe changelog-entry.
 
 ## Verificatie-afspraak

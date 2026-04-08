@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.2.10 - Relevante linklijst
+
+- De losse blokken `Linknamen / aliassen`, `Interne links` en `Gerelateerd` in de publieke itemweergave samengevoegd tot één top-10 lijst met relevante links
+- De relevante links gewogen op basis van aliassen, directe interne wikilinks en relationele nabijheid zodat de zijbalk compacter en nuttiger wordt
+- De beschrijvingstab vereenvoudigd met één duidelijk linkoverzicht in plaats van drie concurrerende metadata-panelen
+
+## v0.2.9 - Linknamen verduidelijkt
+
+- De `Linknamen / aliassen` in de publieke wiki-itemweergave klikbaar gemaakt zodra ze naar een bestaand item oplossen
+- Bij de linknamen kort verduidelijkt dat deze termen dienen als aliassen en zoek-/resolutietermen voor interne verwijzingen
+- De publieke itemweergave iets begrijpelijker gemaakt zonder extra complexiteit aan de wiki-shell toe te voegen
+
 ## v0.2.8 - Wiki-header versoberd
 
 - De publieke wiki-header sterk vereenvoudigd tot terug, vooruit, zoekveld, compacte itemteller en een sluitknop met `×`
