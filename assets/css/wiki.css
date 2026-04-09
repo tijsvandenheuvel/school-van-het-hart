@@ -511,21 +511,38 @@
 }
 
 .wiki-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 8px;
+  margin: 0 0.08em;
+  border-radius: 999px;
+  border: 1px solid rgba(111, 143, 121, 0.22);
+  background: rgba(236, 243, 239, 0.96);
   color: #365e4a;
   text-decoration: none;
-  border-bottom: 1px solid rgba(54, 94, 74, 0.22);
+  vertical-align: baseline;
+  transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
 }
 
 .wiki-link:hover,
 .wiki-link:focus-visible {
+  background: rgba(229, 239, 233, 0.98);
+  border-color: rgba(90, 125, 101, 0.34);
   color: #274336;
-  border-bottom-color: rgba(39, 67, 54, 0.42);
+  box-shadow: 0 6px 16px rgba(39, 67, 54, 0.08);
   outline: none;
 }
 
 .wiki-link-broken {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 8px;
+  margin: 0 0.08em;
+  border-radius: 999px;
+  border: 1px dashed rgba(139, 84, 77, 0.34);
+  background: rgba(246, 239, 236, 0.95);
   color: #8b544d;
-  border-bottom: 1px dashed rgba(139, 84, 77, 0.34);
+  vertical-align: baseline;
 }
 
 .wiki-tab-row {

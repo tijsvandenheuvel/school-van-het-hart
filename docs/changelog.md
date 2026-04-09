@@ -1,10 +1,17 @@
 # Changelog
 
+## v0.2.13 - Titel opent visietekst
+
+- De paginatitel `School van het Hart` klikbaar gemaakt zodat hij een eigen visietekst-modal opent
+- De volledige visietekst als markdownbron toegevoegd in `docs/visietekst.md` en rechtstreeks op de site laten renderen
+- De nieuwe visietekst-modal afgestemd op de bestaande modal-logica en de responsieve titelschaal gecorrigeerd zodat de klikbare titel ook op mobiel netjes schaalt
+
 ## v0.2.12 - Verbindingen en alfabet
 
 - De letterknoppen boven de woordenlijst vervangen door één `ABC`-knop die een compact alfabetmenu opent om naar letters in het woordenboek te springen
 - De itemtabs hernoemd en vereenvoudigd naar `Beschrijving` en `Verbindingen`, waarbij `Verbindingen` nu een lijst `In` en een lijst `Uit` toont
 - De verbindingen visueel herwerkt zodat elke link als één duidelijke kaderkaart rendert in plaats van als losse knop met los label
+- De inline wikilinks in artikelteksten ook visueel herwerkt naar kleine afgeronde wiki-labels zodat alle linkstijlen consistenter aanvoelen
 
 ## v0.2.11 - Beschrijving opgeschoond
 

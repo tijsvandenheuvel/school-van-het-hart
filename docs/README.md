@@ -1,8 +1,8 @@
 # Docs
 
-Laatst bijgewerkt: 2026-04-07
+Laatst bijgewerkt: 2026-04-08
 
-Huidige siteversie: `v0.2.12`
+Huidige siteversie: `v0.2.13`
 
 Actieve entrypoint: `index.html`
 
@@ -15,6 +15,9 @@ Domein: `schoolvanhethart.be`
 
 - `concepts.md`
   De canonieke inhoud van de 12 concepten die op de homepage rond het hart staan, inclusief de langere modalteksten.
+
+- `visietekst.md`
+  De volledige School van het Hart-visietekst als markdownbron voor de aparte titelmodal op de homepage.
 
 - `../wiki/`
   Canonieke markdown-bronnen voor de wiki-items en de ondersteunende meta-bestanden.

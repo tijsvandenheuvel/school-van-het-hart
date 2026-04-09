@@ -201,6 +201,16 @@
     .page-title {
       margin: 0;
       max-width: 100%;
+      pointer-events: auto;
+    }
+
+    .page-title-trigger {
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: none;
+      display: inline-block;
+      max-width: 100%;
       font-family: var(--font-display);
       font-size: clamp(2.2rem, 4vw, 4.25rem);
       line-height: 0.98;
@@ -209,6 +219,15 @@
       color: #22212a;
       text-indent: 0.05em;
       text-wrap: balance;
+      cursor: pointer;
+      transition: color 180ms ease, transform 180ms ease, text-shadow 180ms ease;
+    }
+
+    .page-title-trigger:hover,
+    .page-title-trigger:focus-visible {
+      color: #17161e;
+      text-shadow: 0 10px 24px rgba(34, 36, 45, 0.08);
+      outline: none;
     }
 
     .composition {
@@ -526,6 +545,77 @@
       grid-template-columns: 1fr;
     }
 
+    .vision-modal .modal-card {
+      width: min(1080px, 100%);
+    }
+
+    .vision-modal .modal-header {
+      background: linear-gradient(135deg, rgba(236, 239, 232, 0.96), rgba(250, 251, 247, 0.96));
+    }
+
+    .vision-modal .modal-body {
+      grid-template-columns: 1fr;
+    }
+
+    .vision-copy {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .vision-copy > :first-child {
+      margin-top: 0;
+    }
+
+    .vision-copy h2,
+    .vision-copy h3,
+    .vision-copy h4,
+    .vision-copy h5 {
+      margin: 0;
+      font-family: var(--font-display);
+      line-height: 1.14;
+      color: #24232b;
+    }
+
+    .vision-copy h2 {
+      font-size: 1.48rem;
+      margin-top: 8px;
+    }
+
+    .vision-copy h3 {
+      font-size: 1.18rem;
+      margin-top: 6px;
+    }
+
+    .vision-copy h4,
+    .vision-copy h5 {
+      font-size: 1rem;
+      color: var(--soft-text);
+    }
+
+    .vision-copy p,
+    .vision-copy li {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.86;
+      color: var(--text);
+    }
+
+    .vision-copy ul,
+    .vision-copy ol {
+      margin: 0;
+      padding-left: 22px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .vision-copy blockquote {
+      margin: 0;
+      padding-left: 16px;
+      border-left: 3px solid rgba(111, 143, 121, 0.24);
+      color: var(--soft-text);
+    }
+
     .changelog-copy {
       display: grid;
       gap: 18px;
@@ -581,7 +671,7 @@
       :root {
         --page-corner-size: clamp(88px, 14vw, 112px);
       }
-      .page-title {
+      .page-title-trigger {
         font-size: clamp(1.98rem, 5vw, 3.35rem);
       }
       .composition {
@@ -644,7 +734,7 @@
         font-size: 0.68rem;
         padding: 4px 8px;
       }
-      .page-title {
+      .page-title-trigger {
         font-size: clamp(1.72rem, 7vw, 2.35rem);
         letter-spacing: 0.04em;
       }
@@ -701,11 +791,10 @@
       .page {
         padding: 18px 10px 18px;
       }
-      .page-title {
+      .page-title-trigger {
         font-size: clamp(1.26rem, 5.5vw, 1.62rem);
         letter-spacing: 0.02em;
         max-width: 236px;
-        margin-inline: auto;
       }
       .page-header {
         padding-inline: calc(var(--page-corner-size) * 0.72);
@@ -758,9 +847,11 @@
       <span class="page-frame-corner bottom-right"></span>
     </div>
     <button class="wiki-note" id="wikiTrigger" type="button" aria-label="Open wiki" aria-haspopup="dialog" aria-controls="wikiModal">Wiki</button>
-    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.2.12" aria-haspopup="dialog" aria-controls="changelogModal">v0.2.12</button>
+    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.2.13" aria-haspopup="dialog" aria-controls="changelogModal">v0.2.13</button>
     <header class="page-header">
-      <h1 class="page-title">School van het Hart</h1>
+      <h1 class="page-title">
+        <button class="page-title-trigger" id="visionTrigger" type="button" aria-haspopup="dialog" aria-controls="visionModal">School van het Hart</button>
+      </h1>
     </header>
     <div class="composition">
       <section class="orbit" id="orbit" aria-label="Concepten rond de kern"></section>
@@ -874,8 +965,28 @@
     </article>
   </div>
 
+  <div class="modal vision-modal" id="visionModal" aria-hidden="true">
+    <article class="modal-card" role="dialog" aria-modal="true" aria-labelledby="vision-title">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Volledige visietekst</p>
+          <h2 id="vision-title">School van het Hart</h2>
+          <p class="short">De volledige visietekst, rechtstreeks leesbaar vanuit de titel bovenaan de homepage.</p>
+        </div>
+        <button class="close-btn" id="closeVisionBtn" aria-label="Sluit visietekst">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-copy vision-copy" id="vision-body">
+          <p class="changelog-status">Visietekst wordt geladen...</p>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <script src="./assets/js/wiki-core.js"></script>
   <script>
     const changelogPath = './docs/changelog.md';
+    const visionTextPath = './docs/visietekst.md';
     const concepts = [
       {
         group: "wat",
@@ -1152,10 +1263,21 @@
     const changelogModal = document.getElementById('changelogModal');
     const changelogBody = document.getElementById('changelog-body');
     const closeChangelogBtn = document.getElementById('closeChangelogBtn');
+    const visionTrigger = document.getElementById('visionTrigger');
+    const visionModal = document.getElementById('visionModal');
+    const visionBody = document.getElementById('vision-body');
+    const closeVisionBtn = document.getElementById('closeVisionBtn');
     const defaultVersion = versionTrigger.textContent.trim();
+    const Core = window.SVHHWikiCore;
     const changelogState = {
       version: defaultVersion,
       loaded: false
+    };
+    const visionState = {
+      loaded: false,
+      loading: false,
+      bodyHtml: '',
+      error: ''
     };
 
     const compactOrbitQuery = window.matchMedia('(max-width: 520px)');
@@ -1248,6 +1370,14 @@
       document.body.style.overflow = locked ? 'hidden' : '';
     }
 
+    function renderVisionStatus(message) {
+      visionBody.replaceChildren();
+      const status = document.createElement('p');
+      status.className = 'changelog-status';
+      status.textContent = message;
+      visionBody.appendChild(status);
+    }
+
     function parseChangelogMarkdown(markdown) {
       const lines = markdown.split(/\r?\n/);
       const fragment = document.createDocumentFragment();
@@ -1334,6 +1464,35 @@
       }
     }
 
+    async function loadVisionText() {
+      if (visionState.loaded || visionState.loading) return;
+      visionState.loading = true;
+      visionState.error = '';
+      renderVisionStatus('Visietekst wordt geladen...');
+
+      try {
+        const response = await fetch(visionTextPath, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const markdown = await response.text();
+        const bodyMarkdown = Core
+          ? Core.stripLeadingTitleHeading(markdown, 'School van het Hart')
+          : markdown;
+
+        visionState.bodyHtml = Core
+          ? Core.renderMarkdown(bodyMarkdown)
+          : bodyMarkdown;
+
+        visionBody.innerHTML = visionState.bodyHtml;
+        visionState.loaded = true;
+      } catch (error) {
+        visionState.error = 'De visietekst kon niet automatisch geladen worden.';
+        renderVisionStatus(`${visionState.error} Werk eventueel 'docs/visietekst.md' bij en herlaad de pagina.`);
+      } finally {
+        visionState.loading = false;
+      }
+    }
+
     scheduleTokenLayout();
     loadChangelog();
 
@@ -1352,6 +1511,7 @@
 
     function openModal(item, trigger = document.activeElement) {
       closeChangelogModal();
+      closeVisionModal();
       lastConceptTrigger = trigger instanceof HTMLElement ? trigger : null;
       modal.classList.add('open', item.group);
       modal.classList.remove(item.group === 'wat' ? 'hoe' : 'wat');
@@ -1370,11 +1530,12 @@
       }
       modal.classList.remove('open', 'wat', 'hoe');
       modal.setAttribute('aria-hidden', 'true');
-      setBodyScrollLock(changelogModal.classList.contains('open'));
+      setBodyScrollLock(changelogModal.classList.contains('open') || visionModal.classList.contains('open'));
     }
 
     function openChangelogModal() {
       closeModal();
+      closeVisionModal();
       changelogModal.classList.add('open');
       changelogModal.setAttribute('aria-hidden', 'false');
       setBodyScrollLock(true);
@@ -1387,30 +1548,60 @@
       }
       changelogModal.classList.remove('open');
       changelogModal.setAttribute('aria-hidden', 'true');
-      setBodyScrollLock(modal.classList.contains('open'));
+      setBodyScrollLock(modal.classList.contains('open') || visionModal.classList.contains('open'));
+    }
+
+    async function openVisionModal() {
+      closeModal();
+      closeChangelogModal();
+      visionModal.classList.add('open');
+      visionModal.setAttribute('aria-hidden', 'false');
+      setBodyScrollLock(true);
+      closeVisionBtn.focus();
+      await loadVisionText();
+    }
+
+    function closeVisionModal() {
+      if (document.activeElement instanceof HTMLElement && visionModal.contains(document.activeElement)) {
+        visionTrigger.focus();
+      }
+      visionModal.classList.remove('open');
+      visionModal.setAttribute('aria-hidden', 'true');
+      setBodyScrollLock(modal.classList.contains('open') || changelogModal.classList.contains('open'));
     }
 
     window.SVHHSiteModals = {
       closeConceptModal: closeModal,
       closeChangelogModal,
+      closeVisionModal,
       closeAll() {
         if (modal.classList.contains('open')) closeModal();
         if (changelogModal.classList.contains('open')) closeChangelogModal();
+        if (visionModal.classList.contains('open')) closeVisionModal();
       }
     };
 
     closeBtn.addEventListener('click', closeModal);
     closeChangelogBtn.addEventListener('click', closeChangelogModal);
+    closeVisionBtn.addEventListener('click', closeVisionModal);
     versionTrigger.addEventListener('click', openChangelogModal);
+    visionTrigger.addEventListener('click', openVisionModal);
     modal.addEventListener('click', (event) => {
       if (event.target === modal) closeModal();
     });
     changelogModal.addEventListener('click', (event) => {
       if (event.target === changelogModal) closeChangelogModal();
     });
+    visionModal.addEventListener('click', (event) => {
+      if (event.target === visionModal) closeVisionModal();
+    });
 
     window.addEventListener('keydown', (event) => {
       if (event.key !== 'Escape') return;
+      if (visionModal.classList.contains('open')) {
+        closeVisionModal();
+        return;
+      }
       if (changelogModal.classList.contains('open')) {
         closeChangelogModal();
         return;
@@ -1418,7 +1609,6 @@
       if (modal.classList.contains('open')) closeModal();
     });
   </script>
-  <script src="./assets/js/wiki-core.js"></script>
   <script src="./assets/js/wiki-public.js"></script>
 </body>
 </html>

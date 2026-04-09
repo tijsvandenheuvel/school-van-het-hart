@@ -1,6 +1,6 @@
 {
   "name": "school-van-het-hart",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "private": true,
   "scripts": {
     "wiki:dev": "node server/wiki-server.js",

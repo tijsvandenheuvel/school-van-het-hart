@@ -17,6 +17,7 @@ De homepage werkt nu volgens deze structuur:
 ## Belangrijke designbeslissingen
 
 - De titel staat buiten de cirkel, zodat hij niet interfereert met de kern.
+- De titel is tegelijk een rustige trigger voor de volledige visietekst-modal en moet dus leesbaar blijven als klikbaar element.
 - De paginakader omvat ook titel en versieknop, dus niet alleen de centrale compositie.
 - De hoekornamenten komen uit vier aparte SVG-assets zodat hart en lijnwerk niet fout hoeven mee te roteren.
 - De frameband leest als een smalle gouden strook met nuance in tint, niet als twee losse dominante lijnen.
@@ -62,7 +63,7 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 
 ## Versie-afspraak
 
-- Huidige versie: `v0.2.12`
+- Huidige versie: `v0.2.13`
 - Canonieke versiebron: de bovenste entry in `docs/changelog.md`
 - De versieknop in `index.html` leest die actuele versie uit de changelog
 - Verhoog de versie bij elke echte inhoudelijke, visuele of interactionele voortgang
