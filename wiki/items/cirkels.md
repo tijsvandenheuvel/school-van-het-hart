@@ -1,17 +1,17 @@
 ---
-title: "Cirkels"
-summary: "Samen verantwoordelijkheid dragen voor communicatie."
+title: Cirkels
+summary: De basisvorm van samenkomen waarin communicatie, informatie en verantwoordelijkheid gedeeld worden.
 links:
-  - "Leren samenleven"
-  - "Taalbewustzijn"
-  - "Zelfbestuur"
-  - "Collectieve heling"
+  - cirkel
+  - cirkels
+  - talking stick
+  - vision circles
+  - food circles
+  - main circle
 ---
 
 # Cirkels
 
-De cirkel is de basisvorm van samenkomen. Ze helpt een groep om te spreken, te luisteren en aanwezig te blijven in een gedeeld midden zonder dat iemand erbuiten hoeft te vallen. Zo wordt [[Cirkels]] een praktisch kruispunt tussen [[Leren samenleven]], [[Taalbewustzijn]] en [[Collectieve heling]].
+De cirkel is de basisvorm van het samenkomen in de School van het Hart. In de cirkel heeft niemand de hoogste plaats en hoeft niemand buiten te vallen; het is de vorm waarin [[Afstemming]], [[Instemming]] en [[Veiligheid]] tastbaar worden.
 
-## Waar afstemming kan groeien
-
-In de cirkel worden visie, informatie en spanning gedragen. Daardoor is de cirkel niet alleen een gesprekstechniek, maar ook een werkvorm die [[Zelfbestuur]] mogelijk maakt in het dagelijkse leven van de School.
+Door in cirkel te spreken leren mensen dat communicatie een gedeelde verantwoordelijkheid is. Daarom zijn [[Taalbewustzijn]], [[Leren samenleven]] en [[Zelfbestuur]] geen losse thema's, maar oefeningen die telkens weer in de cirkel landen.

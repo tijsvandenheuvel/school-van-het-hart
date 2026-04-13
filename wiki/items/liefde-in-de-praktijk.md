@@ -1,17 +1,15 @@
 ---
-title: "Liefde in de praktijk"
-summary: "Een liefdesschool in de materie."
+title: Liefde in de praktijk
+summary: Liefde niet als idee, maar als manier van spreken, beslissen, zorgen en bouwen.
 links:
-  - "School van het Hart"
-  - "Collectieve heling"
-  - "Leren samenleven"
-  - "Magic Hat"
+  - liefde in de praktijk
+  - liefde
+  - liefdesschool
+  - eendracht
 ---
 
 # Liefde in de praktijk
 
-Liefde is hier geen idee dat op afstand bewonderd wordt, maar iets wat zichtbaar moet worden in spreken, beslissen, delen en bouwen. Zodra angst zakt, ontstaat meer ruimte voor eendracht. Daardoor hangt [[Liefde in de praktijk]] samen met [[Collectieve heling]] en met de dagelijkse oefening van [[Leren samenleven]].
+Liefde in de praktijk betekent dat liefde zichtbaar wordt in gedrag, ritme en verantwoordelijkheid. Ze blijft niet zweven als ideaal, maar toont zich in hoe mensen spreken, ontvangen, delen, herstellen en ruimte maken voor elkaar.
 
-## Liefde als werkwoord
-
-Deze liefde krijgt vorm in concrete structuren. Zelfs financiële keuzes zoals [[Magic Hat|de magic hat]] moeten voelbaar maken dat zorg, vertrouwen en verantwoordelijkheid geen losse slogans zijn maar een gedragen praktijk binnen [[School van het Hart]].
+Omdat angst liefde blokkeert, hoort deze praktijk samen met [[Collectieve heling]], [[Veiligheid]] en [[Taalbewustzijn]]. Zo wordt liefde een werkwoord dat de [[Nieuwe wereld]] al laat verschijnen in het dagelijkse leven van de [[School van het Hart]].

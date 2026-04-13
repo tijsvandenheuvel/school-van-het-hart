@@ -94,11 +94,26 @@
       background: rgba(210, 231, 219, 0.26);
     }
 
+    .page-controls-start {
+      position: absolute;
+      top: calc(var(--page-frame-inset) + 10px);
+      left: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.72);
+      z-index: 6;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .page-frame {
       position: absolute;
       inset: var(--page-frame-inset);
       pointer-events: none;
       z-index: 1;
+      transition: opacity 180ms ease;
+    }
+
+    .page[data-frame-enabled="false"] .page-frame {
+      opacity: 0;
     }
 
     .page-frame-band {
@@ -186,6 +201,67 @@
       color: rgba(45,43,51,0.82);
       box-shadow: 0 12px 28px rgba(34, 36, 45, 0.10);
       outline: none;
+    }
+
+    .frame-toggle {
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border-radius: 999px;
+      border: 1px solid rgba(138, 103, 50, 0.1);
+      background: rgba(255,255,255,0.58);
+      box-shadow: 0 10px 24px rgba(34, 36, 45, 0.04);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease, opacity 180ms ease;
+    }
+
+    .frame-toggle:hover,
+    .frame-toggle:focus-visible {
+      background: rgba(255,255,255,0.74);
+      border-color: rgba(138, 103, 50, 0.18);
+      box-shadow: 0 12px 28px rgba(34, 36, 45, 0.08);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .frame-toggle:not(.active) {
+      opacity: 0.76;
+      background: rgba(255,255,255,0.44);
+      box-shadow: 0 8px 18px rgba(34, 36, 45, 0.03);
+    }
+
+    .frame-toggle-icon {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(120, 92, 46, 0.68);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.42);
+      transition: border-color 180ms ease, opacity 180ms ease, transform 180ms ease;
+    }
+
+    .frame-toggle-icon::before {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 7px;
+      border: 1px solid rgba(201, 162, 96, 0.52);
+      transition: border-color 180ms ease, opacity 180ms ease;
+    }
+
+    .frame-toggle:not(.active) .frame-toggle-icon {
+      border-color: rgba(120, 92, 46, 0.34);
+      opacity: 0.72;
+    }
+
+    .frame-toggle:not(.active) .frame-toggle-icon::before {
+      border-color: rgba(201, 162, 96, 0.26);
+      opacity: 0.72;
     }
 
     .page-header {
@@ -728,11 +804,24 @@
         padding-top: calc(var(--page-frame-inset) + 8px);
         padding-inline: calc(var(--page-corner-size) * 0.82);
       }
+      .page-controls-start {
+        top: calc(var(--page-frame-inset) + 6px);
+        left: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.76);
+        gap: 8px;
+      }
       .version-note {
         top: calc(var(--page-frame-inset) + 6px);
         right: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.76);
         font-size: 0.68rem;
         padding: 4px 8px;
+      }
+      .frame-toggle {
+        width: 31px;
+        height: 31px;
+      }
+      .frame-toggle-icon {
+        width: 12px;
+        height: 12px;
       }
       .page-title-trigger {
         font-size: clamp(1.72rem, 7vw, 2.35rem);
@@ -799,11 +888,24 @@
       .page-header {
         padding-inline: calc(var(--page-corner-size) * 0.72);
       }
+      .page-controls-start {
+        top: calc(var(--page-frame-inset) + 4px);
+        left: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.56);
+        gap: 6px;
+      }
       .version-note {
         top: calc(var(--page-frame-inset) + 4px);
         right: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.56);
         font-size: 0.62rem;
         padding: 4px 7px;
+      }
+      .frame-toggle {
+        width: 29px;
+        height: 29px;
+      }
+      .frame-toggle-icon {
+        width: 11px;
+        height: 11px;
       }
       .composition {
         height: min(640px, calc(100svh - 142px));
@@ -846,8 +948,13 @@
       <span class="page-frame-corner bottom-left"></span>
       <span class="page-frame-corner bottom-right"></span>
     </div>
-    <button class="wiki-note" id="wikiTrigger" type="button" aria-label="Open wiki" aria-haspopup="dialog" aria-controls="wikiModal">Wiki</button>
-    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.2.13" aria-haspopup="dialog" aria-controls="changelogModal">v0.2.13</button>
+    <div class="page-controls-start">
+      <button class="wiki-note" id="wikiTrigger" type="button" aria-label="Open wiki" aria-haspopup="dialog" aria-controls="wikiModal">Wiki</button>
+      <button class="frame-toggle active" id="frameToggle" type="button" aria-pressed="true" aria-label="Verberg ornamentale kader" title="Verberg ornamentale kader">
+        <span class="frame-toggle-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.2.16" aria-haspopup="dialog" aria-controls="changelogModal">v0.2.16</button>
     <header class="page-header">
       <h1 class="page-title">
         <button class="page-title-trigger" id="visionTrigger" type="button" aria-haspopup="dialog" aria-controls="visionModal">School van het Hart</button>
@@ -983,632 +1090,6 @@
     </article>
   </div>
 
-  <script src="./assets/js/wiki-core.js"></script>
-  <script>
-    const changelogPath = './docs/changelog.md';
-    const visionTextPath = './docs/visietekst.md';
-    const concepts = [
-      {
-        group: "wat",
-        title: "School van het Hart",
-        short: "Een centrum voor collectieve bewustwording.",
-        sections: [
-          {
-            title: "Een levende leerschool",
-            paragraphs: [
-              "De School van het Hart is een plek waar we als mensen kunnen samenkomen om bewust te worden, te leren en te oefenen in een andere manier van leven. Geen school in de klassieke zin, maar een levende plek waar theorie en praktijk, hoofd en hart, inzicht en ervaring weer samen mogen vallen."
-            ]
-          },
-          {
-            title: "Een plek waar alles samenkomt",
-            paragraphs: [
-              "Ze is tegelijk ontmoetingsplek, leerplek en verzamelplaats. Wat vandaag versnipperd leeft in mensen, inzichten en initiatieven, mag hier samenkomen, op elkaar afgestemd worden en vorm krijgen in het echte leven."
-            ]
-          }
-        ],
-        angle: -80
-      },
-      {
-        group: "wat",
-        title: "Leren samenleven",
-        short: "Aan en van mekaar leren samenleven.",
-        sections: [
-          {
-            title: "Samenleven als leerweg",
-            paragraphs: [
-              "We hebben lang geleerd hoe we apart kunnen functioneren, maar veel minder hoe we echt samen kunnen leven. In de School oefenen we opnieuw hoe het is om te luisteren, af te stemmen, verantwoordelijkheid te dragen, ruimte te geven en ruimte in te nemen."
-            ]
-          },
-          {
-            title: "De groep als leermeester",
-            paragraphs: [
-              "Dat leer je niet uit een boek. Je leert het door samen aanwezig te zijn, door fouten te mogen maken en te herstellen, en door te merken wat een groep van je vraagt en wat jij aan een groep te geven hebt. Zo wordt samenleven opnieuw een kunde en geen vaag ideaal."
-            ]
-          }
-        ],
-        angle: -54
-      },
-      {
-        group: "wat",
-        title: "Natuurverbinding",
-        short: "Verbinding met mekaar en de natuur.",
-        sections: [
-          {
-            title: "Thuiskomen in de natuur",
-            paragraphs: [
-              "De School hoort thuis in de natuur. Niet omdat groen mooi staat rond het project, maar omdat aarde, water, lucht en vuur ons helpen vertragen, landen en herinneren wat leven in verbondenheid betekent."
-            ]
-          },
-          {
-            title: "Gedeelde grond",
-            paragraphs: [
-              "In een verstedelijkte omgeving is gedeelde natuur een antwoord op een echte nood. Door samen zorg te dragen voor een plek, voor tuinen, water, voedsel en buitenruimte, wordt natuurverbinding iets tastbaars en dagelijks."
-            ]
-          }
-        ],
-        angle: -24
-      },
-      {
-        group: "wat",
-        title: "Nieuwe wereld",
-        short: "Een model in het klein voor wat wil ontstaan.",
-        sections: [
-          {
-            title: "Een plek voor de overgang",
-            paragraphs: [
-              "We voelen dat de oude wereld op haar grenzen botst. De School wil niet blijven praten over wat fout loopt, maar een plek openen waar een andere wereld al geoefend kan worden: een wereld van vrede, gezondheid, creativiteit en verbondenheid."
-            ]
-          },
-          {
-            title: "Van visie naar vorm",
-            paragraphs: [
-              "Die nieuwe wereld ontstaat niet in slogans maar in concrete vormen. Door hier oplossingen samen te brengen, uit te proberen en te dragen, wordt de School een klein model van wat later ook elders kan groeien."
-            ]
-          }
-        ],
-        angle: 24
-      },
-      {
-        group: "wat",
-        title: "Collectieve heling",
-        short: "Samen angst en collectief trauma helen.",
-        sections: [
-          {
-            title: "Heling gebeurt niet alleen",
-            paragraphs: [
-              "Veel mensen hebben al individueel werk gedaan, maar er is een grens aan wat je alleen kan helen. Angst, verwarring en oude pijn zitten niet alleen in personen, maar ook tussen mensen en in het grotere verhaal waarin we leven."
-            ]
-          },
-          {
-            title: "Een veilige bedding",
-            paragraphs: [
-              "Daarom is de School ook een plek van collectieve heling. In een veilige setting kunnen we mekaar helpen om patronen te zien, spanning te ontladen en stilaan los te komen uit angst en zelfdestructie."
-            ]
-          }
-        ],
-        angle: 54
-      },
-      {
-        group: "wat",
-        title: "Liefde in de praktijk",
-        short: "Een liefdesschool in de materie.",
-        sections: [
-          {
-            title: "Liefde als grondtoon",
-            paragraphs: [
-              "Liefde is hier geen woord om op afstand te bewonderen. Ze moet voelbaar worden in hoe we spreken, beslissen, ontvangen, delen, bouwen en zorg dragen voor elkaar en voor de plek."
-            ]
-          },
-          {
-            title: "Liefde als werkwoord",
-            paragraphs: [
-              "Als angst zakt, komt er ruimte voor eendracht. Dan wordt liefde weer een werkwoord: iets wat zich in daden toont en stap voor stap een andere werkelijkheid mogelijk maakt."
-            ]
-          }
-        ],
-        angle: 80
-      },
-      {
-        group: "hoe",
-        title: "Taalbewustzijn",
-        short: "De woorden bevrijden zodat communicatie weer helder wordt.",
-        sections: [
-          {
-            title: "Leven in verhalen",
-            paragraphs: [
-              "Veel verwarring in onze wereld ontstaat niet alleen door wat we meemaken, maar ook door de woorden waarmee we het benoemen. We leven in verhalen, en zolang die verhalen troebel blijven, blijft ook ons samenleven troebel."
-            ]
-          },
-          {
-            title: "Woorden bevrijden",
-            paragraphs: [
-              "Taalbewustzijn helpt ons vertragen in de taal. Door samen te onderzoeken wat woorden betekenen, waar misverstanden ontstaan en hoe we helderder kunnen spreken, bevrijden we communicatie uit de mist en maken we opnieuw ruimte voor waarheid en verbinding."
-            ]
-          }
-        ],
-        angle: 106
-      },
-      {
-        group: "hoe",
-        title: "Rainbow",
-        short: "Een levend model van people for the people.",
-        sections: [
-          {
-            title: "Een bewezen inspiratie",
-            paragraphs: [
-              "De School laat zich sterk inspireren door de Rainbow Gatherings: plekken waar mensen al decennialang zonder commerciele logica samenleven in de natuur, verantwoordelijkheid opnemen en een tijdelijke stam vormen."
-            ]
-          },
-          {
-            title: "Van tijdelijk naar blijvend",
-            paragraphs: [
-              "Wat daar tijdelijk mogelijk blijkt, willen we hier een duurzamere vorm geven. De openheid, de eenvoud, het samen dragen, het niet-commerciele en het diepe vertrouwen in 'the people for the people' vormen een belangrijke voedingsbodem voor dit project."
-            ]
-          }
-        ],
-        angle: 132,
-        angleMobile: 126
-      },
-      {
-        group: "hoe",
-        title: "Cirkels",
-        short: "Samen verantwoordelijkheid dragen voor communicatie.",
-        sections: [
-          {
-            title: "Het gedeelde midden",
-            paragraphs: [
-              "De cirkel is de basisvorm van het samenkomen. In de cirkel heeft niemand de hoogste plaats en hoeft niemand buiten te vallen; we oefenen er hoe je spreekt, luistert en aanwezig blijft in een gedeeld midden."
-            ]
-          },
-          {
-            title: "Waar afstemming kan groeien",
-            paragraphs: [
-              "Daar worden visie, afstemming, informatie en spanningen gedragen. De cirkel is dus niet alleen een gesprekstechniek, maar de plek waar veiligheid groeit en waar het gemeenschappelijke verhaal helder kan worden."
-            ]
-          }
-        ],
-        angle: 158,
-        angleMobile: 160
-      },
-      {
-        group: "hoe",
-        title: "Zelfbestuur",
-        short: "De plek wordt gedragen door wie er aanwezig is.",
-        sections: [
-          {
-            title: "Samen de plek dragen",
-            paragraphs: [
-              "De School is geen project dat door een kleine vaste kern voor anderen wordt gerund. Wie aanwezig is, draagt mee, en zo groeit een cultuur waarin verantwoordelijkheid niet uitbesteed wordt maar gedeeld wordt."
-            ]
-          },
-          {
-            title: "Beweeglijk en gedragen",
-            paragraphs: [
-              "Daarom is de School ook geen klassiek woonproject. Mensen komen, verblijven, nemen taken op en geven die weer door; tijdelijke focalisers houden voor een tijd de focus op een deel van het geheel, zodat de plek levend en beweeglijk kan blijven."
-            ]
-          }
-        ],
-        angle: 202,
-        angleMobile: 196
-      },
-      {
-        group: "hoe",
-        title: "Magic Hat",
-        short: "Vrije bijdrage, open boekhouding, gedeelde draagkracht.",
-        sections: [
-          {
-            title: "Vertrouwen in plaats van druk",
-            paragraphs: [
-              "De School wil financieel niet gebouwd zijn op druk, schuld of uitsluiting. Daarom werken we met het principe van de magic hat: vrije bijdrage naar vermogen, gedragen door vertrouwen, transparantie en het besef dat de plek van iedereen is."
-            ]
-          },
-          {
-            title: "Geld als gemeenschappelijk middel",
-            paragraphs: [
-              "Wie geeft, koopt geen macht. Wat in de hoed komt, wordt gemeenschappelijk, en de boekhouding blijft open. Zo verschuift geld van een instrument van scheiding naar een middel om samen ruimte mogelijk te maken."
-            ]
-          }
-        ],
-        angle: 228,
-        angleMobile: 230
-      },
-      {
-        group: "hoe",
-        title: "Spel & creativiteit",
-        short: "Een grote speeltuin om spelenderwijs te leren.",
-        sections: [
-          {
-            title: "Maken als leerweg",
-            paragraphs: [
-              "Een nieuwe wereld bouw je niet alleen in gesprekken. Je bouwt ze ook in tuinen, ateliers, zang, theater, ambacht, zachte verbouwingen en alles wat mensen samen kunnen maken met aandacht en verbeelding."
-            ]
-          },
-          {
-            title: "Een grote speeltuin",
-            paragraphs: [
-              "Daarom is de School ook een speeltuin. Niet in de zin van vrijblijvendheid, maar omdat spel, kunst en creativiteit mensen openen, verbinden en in beweging brengen. Door samen te maken, leren we samen leven."
-            ]
-          }
-        ],
-        angle: 254,
-        angleMobile: 258
-      }
-    ];
-
-    const compactTokenPositions = new Map([
-      ["Natuurverbinding", { x: 0.36, y: 0.17 }],
-      ["Nieuwe wereld", { x: 0.58, y: 0.17 }],
-      ["Leren samenleven", { x: 0.22, y: 0.30 }],
-      ["Collectieve heling", { x: 0.72, y: 0.30 }],
-      ["School van het Hart", { x: 0.18, y: 0.43 }],
-      ["Liefde in de praktijk", { x: 0.76, y: 0.43 }],
-      ["Spel & creativiteit", { x: 0.22, y: 0.63 }],
-      ["Taalbewustzijn", { x: 0.72, y: 0.63 }],
-      ["Magic Hat", { x: 0.34, y: 0.79 }],
-      ["Rainbow", { x: 0.60, y: 0.79 }],
-      ["Zelfbestuur", { x: 0.40, y: 0.92 }],
-      ["Cirkels", { x: 0.60, y: 0.92 }]
-    ]);
-
-    const orbit = document.getElementById('orbit');
-    const orbitMeasure = document.getElementById('orbitMeasure');
-    const composition = document.querySelector('.composition');
-    const versionTrigger = document.getElementById('versionTrigger');
-    const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalGroup = document.getElementById('modal-group');
-    const modalShort = document.getElementById('modal-short');
-    const modalBody = document.getElementById('modal-body');
-    const closeBtn = document.getElementById('closeBtn');
-    const changelogModal = document.getElementById('changelogModal');
-    const changelogBody = document.getElementById('changelog-body');
-    const closeChangelogBtn = document.getElementById('closeChangelogBtn');
-    const visionTrigger = document.getElementById('visionTrigger');
-    const visionModal = document.getElementById('visionModal');
-    const visionBody = document.getElementById('vision-body');
-    const closeVisionBtn = document.getElementById('closeVisionBtn');
-    const defaultVersion = versionTrigger.textContent.trim();
-    const Core = window.SVHHWikiCore;
-    const changelogState = {
-      version: defaultVersion,
-      loaded: false
-    };
-    const visionState = {
-      loaded: false,
-      loading: false,
-      bodyHtml: '',
-      error: ''
-    };
-
-    const compactOrbitQuery = window.matchMedia('(max-width: 520px)');
-    const tokens = [];
-    let tokenLayoutFrame = 0;
-    let lastConceptTrigger = null;
-
-    concepts.forEach((item) => {
-      const button = document.createElement('button');
-      button.className = `token ${item.group}`;
-      button.type = 'button';
-      button.textContent = item.title;
-      button.setAttribute('aria-label', item.title);
-      button.addEventListener('click', () => openModal(item, button));
-      orbit.appendChild(button);
-      tokens.push({ item, button });
-    });
-
-    function getTokenAngle(item) {
-      const useCompactAngles = compactOrbitQuery.matches;
-      return useCompactAngles && typeof item.angleMobile === 'number' ? item.angleMobile : item.angle;
-    }
-
-    function syncTokenLayout() {
-      tokenLayoutFrame = 0;
-      const orbitRect = orbit.getBoundingClientRect();
-      const measuredRadius = orbitMeasure.getBoundingClientRect().width / 2;
-      const radius = measuredRadius || Math.min(orbitRect.width, orbitRect.height) * 0.35;
-      const centerX = orbitRect.width / 2;
-      const useCompactLayout = compactOrbitQuery.matches;
-      const centerY = orbitRect.height / 2 + (useCompactLayout ? 8 : 0);
-      const horizontalScale = useCompactLayout ? 0.74 : 1;
-      const verticalScale = useCompactLayout ? 1.12 : 1;
-
-      if (!radius || !centerX || !centerY) return;
-
-      tokens.forEach(({ item, button }) => {
-        const compactPosition = useCompactLayout ? compactTokenPositions.get(item.title) : null;
-        let x;
-        let y;
-
-        if (compactPosition) {
-          const compactWidth = Math.min(
-            orbitRect.width - 48,
-            Math.max(240, window.innerWidth - 56)
-          );
-          const compactLeft = (orbitRect.width - compactWidth) / 2;
-          x = compactLeft + compactWidth * compactPosition.x;
-          y = orbitRect.height * compactPosition.y;
-        } else {
-          const angle = getTokenAngle(item);
-          const radians = angle * Math.PI / 180;
-          x = centerX + Math.sin(radians) * radius * horizontalScale;
-          y = centerY - Math.cos(radians) * radius * verticalScale;
-        }
-
-        button.style.left = `${x}px`;
-        button.style.top = `${y}px`;
-      });
-    }
-
-    function scheduleTokenLayout() {
-      if (tokenLayoutFrame) cancelAnimationFrame(tokenLayoutFrame);
-      tokenLayoutFrame = requestAnimationFrame(syncTokenLayout);
-    }
-
-    function renderModalBody(item) {
-      modalBody.replaceChildren();
-
-      item.sections.forEach((section) => {
-        const sectionElement = document.createElement('section');
-
-        if (section.title) {
-          const heading = document.createElement('h3');
-          heading.textContent = section.title;
-          sectionElement.appendChild(heading);
-        }
-
-        section.paragraphs.forEach((paragraph) => {
-          const text = document.createElement('p');
-          text.textContent = paragraph;
-          sectionElement.appendChild(text);
-        });
-
-        modalBody.appendChild(sectionElement);
-      });
-    }
-
-    function setBodyScrollLock(locked) {
-      document.body.style.overflow = locked ? 'hidden' : '';
-    }
-
-    function renderVisionStatus(message) {
-      visionBody.replaceChildren();
-      const status = document.createElement('p');
-      status.className = 'changelog-status';
-      status.textContent = message;
-      visionBody.appendChild(status);
-    }
-
-    function parseChangelogMarkdown(markdown) {
-      const lines = markdown.split(/\r?\n/);
-      const fragment = document.createDocumentFragment();
-      let currentEntry = null;
-      let currentList = null;
-      let currentVersion = '';
-
-      function ensureEntry(title) {
-        currentEntry = document.createElement('article');
-        currentEntry.className = 'changelog-entry';
-
-        const heading = document.createElement('h3');
-        heading.textContent = title;
-        currentEntry.appendChild(heading);
-        fragment.appendChild(currentEntry);
-        currentList = null;
-
-        if (!currentVersion) {
-          const versionMatch = title.match(/(v\d+\.\d+\.\d+)/i);
-          if (versionMatch) currentVersion = versionMatch[1];
-        }
-      }
-
-      lines.forEach((rawLine) => {
-        const line = rawLine.trim();
-
-        if (!line || line === '# Changelog') return;
-
-        if (line.startsWith('## ')) {
-          ensureEntry(line.slice(3).trim());
-          return;
-        }
-
-        if (line.startsWith('- ') && currentEntry) {
-          if (!currentList) {
-            currentList = document.createElement('ul');
-            currentEntry.appendChild(currentList);
-          }
-
-          const listItem = document.createElement('li');
-          listItem.textContent = line.slice(2).trim();
-          currentList.appendChild(listItem);
-          return;
-        }
-
-        if (currentEntry) {
-          const paragraph = document.createElement('p');
-          paragraph.className = 'changelog-status';
-          paragraph.textContent = line;
-          currentEntry.appendChild(paragraph);
-        }
-      });
-
-      return { fragment, version: currentVersion || defaultVersion };
-    }
-
-    function renderChangelogStatus(message) {
-      changelogBody.replaceChildren();
-      const status = document.createElement('p');
-      status.className = 'changelog-status';
-      status.textContent = message;
-      changelogBody.appendChild(status);
-    }
-
-    async function loadChangelog() {
-      try {
-        const response = await fetch(changelogPath, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-        const markdown = await response.text();
-        const parsed = parseChangelogMarkdown(markdown);
-
-        changelogBody.replaceChildren(parsed.fragment);
-        changelogState.version = parsed.version;
-        changelogState.loaded = true;
-        versionTrigger.textContent = parsed.version;
-        versionTrigger.setAttribute('aria-label', `Open changelog voor ${parsed.version}`);
-        versionTrigger.title = `Open changelog voor ${parsed.version}`;
-      } catch (error) {
-        changelogState.loaded = false;
-        renderChangelogStatus('De changelog kon niet automatisch geladen worden. Werk `docs/changelog.md` bij en herlaad de pagina.');
-        versionTrigger.setAttribute('aria-label', `Open changelog voor ${changelogState.version}`);
-        versionTrigger.title = `Open changelog voor ${changelogState.version}`;
-      }
-    }
-
-    async function loadVisionText() {
-      if (visionState.loaded || visionState.loading) return;
-      visionState.loading = true;
-      visionState.error = '';
-      renderVisionStatus('Visietekst wordt geladen...');
-
-      try {
-        const response = await fetch(visionTextPath, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-        const markdown = await response.text();
-        const bodyMarkdown = Core
-          ? Core.stripLeadingTitleHeading(markdown, 'School van het Hart')
-          : markdown;
-
-        visionState.bodyHtml = Core
-          ? Core.renderMarkdown(bodyMarkdown)
-          : bodyMarkdown;
-
-        visionBody.innerHTML = visionState.bodyHtml;
-        visionState.loaded = true;
-      } catch (error) {
-        visionState.error = 'De visietekst kon niet automatisch geladen worden.';
-        renderVisionStatus(`${visionState.error} Werk eventueel 'docs/visietekst.md' bij en herlaad de pagina.`);
-      } finally {
-        visionState.loading = false;
-      }
-    }
-
-    scheduleTokenLayout();
-    loadChangelog();
-
-    if (typeof compactOrbitQuery.addEventListener === 'function') {
-      compactOrbitQuery.addEventListener('change', scheduleTokenLayout);
-    } else if (typeof compactOrbitQuery.addListener === 'function') {
-      compactOrbitQuery.addListener(scheduleTokenLayout);
-    }
-
-    window.addEventListener('resize', scheduleTokenLayout);
-
-    if (typeof ResizeObserver === 'function') {
-      const tokenLayoutObserver = new ResizeObserver(() => scheduleTokenLayout());
-      tokenLayoutObserver.observe(composition);
-    }
-
-    function openModal(item, trigger = document.activeElement) {
-      closeChangelogModal();
-      closeVisionModal();
-      lastConceptTrigger = trigger instanceof HTMLElement ? trigger : null;
-      modal.classList.add('open', item.group);
-      modal.classList.remove(item.group === 'wat' ? 'hoe' : 'wat');
-      modal.setAttribute('aria-hidden', 'false');
-      modalTitle.textContent = item.title;
-      modalGroup.textContent = item.group === 'wat' ? 'WAT' : 'HOE';
-      modalShort.textContent = item.short;
-      renderModalBody(item);
-      setBodyScrollLock(true);
-      closeBtn.focus();
-    }
-
-    function closeModal() {
-      if (document.activeElement instanceof HTMLElement && modal.contains(document.activeElement)) {
-        (lastConceptTrigger || versionTrigger).focus();
-      }
-      modal.classList.remove('open', 'wat', 'hoe');
-      modal.setAttribute('aria-hidden', 'true');
-      setBodyScrollLock(changelogModal.classList.contains('open') || visionModal.classList.contains('open'));
-    }
-
-    function openChangelogModal() {
-      closeModal();
-      closeVisionModal();
-      changelogModal.classList.add('open');
-      changelogModal.setAttribute('aria-hidden', 'false');
-      setBodyScrollLock(true);
-      closeChangelogBtn.focus();
-    }
-
-    function closeChangelogModal() {
-      if (document.activeElement instanceof HTMLElement && changelogModal.contains(document.activeElement)) {
-        versionTrigger.focus();
-      }
-      changelogModal.classList.remove('open');
-      changelogModal.setAttribute('aria-hidden', 'true');
-      setBodyScrollLock(modal.classList.contains('open') || visionModal.classList.contains('open'));
-    }
-
-    async function openVisionModal() {
-      closeModal();
-      closeChangelogModal();
-      visionModal.classList.add('open');
-      visionModal.setAttribute('aria-hidden', 'false');
-      setBodyScrollLock(true);
-      closeVisionBtn.focus();
-      await loadVisionText();
-    }
-
-    function closeVisionModal() {
-      if (document.activeElement instanceof HTMLElement && visionModal.contains(document.activeElement)) {
-        visionTrigger.focus();
-      }
-      visionModal.classList.remove('open');
-      visionModal.setAttribute('aria-hidden', 'true');
-      setBodyScrollLock(modal.classList.contains('open') || changelogModal.classList.contains('open'));
-    }
-
-    window.SVHHSiteModals = {
-      closeConceptModal: closeModal,
-      closeChangelogModal,
-      closeVisionModal,
-      closeAll() {
-        if (modal.classList.contains('open')) closeModal();
-        if (changelogModal.classList.contains('open')) closeChangelogModal();
-        if (visionModal.classList.contains('open')) closeVisionModal();
-      }
-    };
-
-    closeBtn.addEventListener('click', closeModal);
-    closeChangelogBtn.addEventListener('click', closeChangelogModal);
-    closeVisionBtn.addEventListener('click', closeVisionModal);
-    versionTrigger.addEventListener('click', openChangelogModal);
-    visionTrigger.addEventListener('click', openVisionModal);
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) closeModal();
-    });
-    changelogModal.addEventListener('click', (event) => {
-      if (event.target === changelogModal) closeChangelogModal();
-    });
-    visionModal.addEventListener('click', (event) => {
-      if (event.target === visionModal) closeVisionModal();
-    });
-
-    window.addEventListener('keydown', (event) => {
-      if (event.key !== 'Escape') return;
-      if (visionModal.classList.contains('open')) {
-        closeVisionModal();
-        return;
-      }
-      if (changelogModal.classList.contains('open')) {
-        closeChangelogModal();
-        return;
-      }
-      if (modal.classList.contains('open')) closeModal();
-    });
-  </script>
-  <script src="./assets/js/wiki-public.js"></script>
+  <script src="./assets/js/site.js"></script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 # Docs
 
-Laatst bijgewerkt: 2026-04-08
+Laatst bijgewerkt: 2026-04-13
 
-Huidige siteversie: `v0.2.13`
+Huidige siteversie: `v0.2.16`
 
 Actieve entrypoint: `index.html`
 
@@ -19,14 +19,17 @@ Domein: `schoolvanhethart.be`
 - `visietekst.md`
   De volledige School van het Hart-visietekst als markdownbron voor de aparte titelmodal op de homepage.
 
-- `../wiki/`
-  Canonieke markdown-bronnen voor de wiki-items en de ondersteunende meta-bestanden.
+- `../wiki/items/`
+  Canonieke markdown-wiki-items met frontmatter, beschrijving en interne wikilinks.
 
-- `../admin/wiki.html`
-  De lokale admininterface voor items, editor/preview en relationele curation.
+- `../wiki/meta/curated-index.md`
+  De markdown-index van de canonieke wiki-items; de publieke woordenboekindex verrijkt die lijst verder met alle aliassen uit frontmatter.
 
-- `../server/wiki-server.js`
-  Kleine Node-server die de site en `/admin/wiki` lokaal serveert en markdown direct leest/schrijft.
+- `../assets/js/site.js`
+  De huidige client-side runtime voor orbit, changelog, visietekst-modal, wiki-index, autolinks en backlinks.
+
+- `../assets/css/wiki.css`
+  De aanvullende stijlen voor de wiki-modal, rustige tekstlinks en visietekstweergave.
 
 - `ui-guidelines.md`
   De huidige layoutregels, versie-afspraken en responsive aandachtspunten.

@@ -1,5 +1,24 @@
 # Changelog
 
+## v0.2.16 - Subtielere kader- en linkstijl
+
+- De kaderschakelaar linksboven teruggebracht tot één subtiele icoonknop zonder zichtbare labels, terwijl de voorkeur nog altijd lokaal bewaard blijft
+- De wiki- en begrippenlinks in conceptteksten, visietekst en wiki-artikelen herwerkt naar rustige blauwe tekstlinks met onderlijning zodat de leesflow minder onderbroken wordt
+- De zichtbare UI- en documentatieverwijzingen gesynchroniseerd naar `v0.2.16`
+
+## v0.2.15 - Begrippenwiki uit alle teksten
+
+- Een echte client-side wiki pass toegevoegd op basis van markdownbronnen in `wiki/items/`, inclusief `wiki/meta/curated-index.md` en de volledige visietekst in `docs/visietekst.md`
+- De homepage uitgebreid met een publieke wiki-modal, een woordenboekindex over 24 canonieke wiki-items en 111 geïndexeerde termen, plus backlinks en uitgaande links per item
+- De conceptmodals en de visietekst-modal laten nu dezelfde begrippenset autolinken zodat termen uit alle hoofdteksten rechtstreeks naar de juiste wiki-itemweergave openen
+- De bestaande titeltrigger, wiki-knop en kaderschakelaar technisch samengebracht onder één nieuwe runtime in `assets/js/site.js` en `assets/css/wiki.css`
+
+## v0.2.14 - Kaderschakelaar
+
+- Een eenvoudige `Aan`/`Uit`-segmentschakelaar toegevoegd naast de `Wiki`-knop om de ornamentale kader live te tonen of te verbergen
+- De gekozen stand lokaal onthouden zodat de kader na herladen in dezelfde toestand blijft
+- De linksboven controls herschikt tot een gedeelde control group en de versieflow gesynchroniseerd naar `v0.2.14`
+
 ## v0.2.13 - Titel opent visietekst
 
 - De paginatitel `School van het Hart` klikbaar gemaakt zodat hij een eigen visietekst-modal opent

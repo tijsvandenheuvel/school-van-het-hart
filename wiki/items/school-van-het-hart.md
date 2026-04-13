@@ -1,19 +1,15 @@
 ---
-title: "School van het Hart"
-summary: "Een centrum voor collectieve bewustwording."
+title: School van het Hart
+summary: Een centrum voor collectieve bewustwording waar mensen in vrijheid, veiligheid en natuur kunnen leren samenleven.
 links:
-  - "Leren samenleven"
-  - "Natuurverbinding"
-  - "Nieuwe wereld"
-  - "Collectieve heling"
-  - "Liefde in de praktijk"
-  - "Cirkels"
+  - school van het hart
+  - svhh
+  - centrum voor collectieve bewustwording
+  - school
 ---
 
 # School van het Hart
 
-De School van het Hart is een levende leerschool waar hoofd en hart, inzicht en ervaring, visie en praktijk opnieuw op elkaar afgestemd mogen raken. Ze is geen klassieke instelling, maar een plek waar [[Leren samenleven]], [[Collectieve heling]] en [[Liefde in de praktijk]] in het echte leven geoefend kunnen worden.
+De School van het Hart is een materiële leerplek waar mensen samen kunnen komen om te groeien in [[Collectieve bewustwording]], [[Leren samenleven]] en [[Liefde in de praktijk]]. Het is tegelijk een verzamelplaats, een levensschool en een werkplaats voor de [[Nieuwe wereld]].
 
-## Een plek waar alles samenkomt
-
-Wat vandaag versnipperd leeft in mensen, inzichten en initiatieven, mag hier samenkomen en vorm krijgen. Daarom raakt dit item vanzelf aan [[Natuurverbinding]], [[Nieuwe wereld]] en [[Cirkels]]: de School is de bedding waarin die verschillende bewegingen elkaar ontmoeten.
+De School verbindt de werkzame elementen van [[Rainbow Gatherings]] met een duurzamere vorm. Daarom horen [[Cirkels]], [[Zelfbestuur]], [[Magic Hat]], [[Taalbewustzijn]], [[Natuurverbinding]] en [[Collectieve heling]] allemaal tot dezelfde kern.

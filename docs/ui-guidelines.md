@@ -5,20 +5,22 @@
 De homepage werkt nu volgens deze structuur:
 
 1. Grote titel bovenaan: `School van het Hart`
-2. Kleine versieknop rechtsboven, binnen de paginakader
-3. Ornamentale sierkader rond de volledige pagina
-4. Cirkelcompositie met 12 labels rond een centraal hart
-5. In de kern staan alleen:
+2. Kleine control group linksboven binnen de paginakader: `Wiki` plus een subtiele frame-toggle zonder zichtbaar label
+3. Kleine versieknop rechtsboven, binnen de paginakader
+4. Ornamentale sierkader rond de volledige pagina
+5. Cirkelcompositie met 12 labels rond een centraal hart
+6. In de kern staan alleen:
    - `WAT`
    - het hart
    - `HOE`
-6. Klik op een label opent de inhoudelijke modal
+7. Klik op een label opent de inhoudelijke modal
 
 ## Belangrijke designbeslissingen
 
 - De titel staat buiten de cirkel, zodat hij niet interfereert met de kern.
 - De titel is tegelijk een rustige trigger voor de volledige visietekst-modal en moet dus leesbaar blijven als klikbaar element.
 - De paginakader omvat ook titel en versieknop, dus niet alleen de centrale compositie.
+- De paginakader blijft visueel optioneel via een subtiele toggle en mag geen layoutverschuiving veroorzaken wanneer ze uit staat.
 - De hoekornamenten komen uit vier aparte SVG-assets zodat hart en lijnwerk niet fout hoeven mee te roteren.
 - De frameband leest als een smalle gouden strook met nuance in tint, niet als twee losse dominante lijnen.
 - Er staat geen tekst in of over het hart.
@@ -53,6 +55,7 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 ## Praktische editpunten in code
 
 - Versieknop: `index.html`, element `.version-note`
+- Bovenste controls: `index.html`, `.page-controls-start`, `.wiki-note` en `.frame-toggle`
 - Titellayout: `index.html`, `.page-header` en `.page-title`
 - Hoofdcompositie: `index.html`, `.composition`
 - Ornamentale frame: `index.html`, `.page-frame`, `.page-frame-band`, `.page-frame-corner` en `assets/ornament-corner-*.svg`
@@ -63,7 +66,7 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 
 ## Versie-afspraak
 
-- Huidige versie: `v0.2.13`
+- Huidige versie: `v0.2.16`
 - Canonieke versiebron: de bovenste entry in `docs/changelog.md`
 - De versieknop in `index.html` leest die actuele versie uit de changelog
 - Verhoog de versie bij elke echte inhoudelijke, visuele of interactionele voortgang

@@ -1,17 +1,16 @@
 ---
-title: "Zelfbestuur"
-summary: "De plek wordt gedragen door wie er aanwezig is."
+title: Zelfbestuur
+summary: Het samen dragen van een plek zonder vaste machtskern, vanuit gedeelde verantwoordelijkheid.
 links:
-  - "Cirkels"
-  - "Magic Hat"
-  - "Rainbow"
-  - "School van het Hart"
+  - zelfbestuur
+  - samen runnen
+  - mede verantwoordelijk
+  - bestuurders
+  - verantwoordelijken
 ---
 
 # Zelfbestuur
 
-De School is geen project dat door een kleine vaste kern voor anderen wordt bestuurd. Wie aanwezig is, draagt mee, en verantwoordelijkheid wordt niet uitbesteed maar gedeeld. Daardoor vraagt [[Zelfbestuur]] tegelijk om duidelijke afstemming in [[Cirkels]] en om vertrouwen in de cultuur van [[Rainbow]].
+Zelfbestuur betekent dat de plek niet bestuurd wordt door een kleine vaste kern boven de rest, maar gedragen wordt door wie er aanwezig is. Daardoor wordt verantwoordelijkheid niet uitbesteed, maar geoefend als een gedeelde praktijk.
 
-## Beweeglijk en gedragen
-
-Omdat mensen komen en gaan, moet de plek beweeglijk kunnen blijven zonder haar bedding te verliezen. Ook financiële afspraken zoals [[Magic Hat]] zijn dus onderdeel van zelfbestuur, net als de dagelijkse praktijk van [[School van het Hart]] zelf.
+Om dat mogelijk te maken zijn [[Cirkels]], [[Afstemming]], [[Instemming]] en [[Focalisers]] nodig. Zelfbestuur hoort ook samen met [[Vrijheid]] en met de niet-hiërarchische geest van [[Rainbow Gatherings]].

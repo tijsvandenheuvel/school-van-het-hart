@@ -1,17 +1,17 @@
 ---
-title: "Natuurverbinding"
-summary: "Verbinding met mekaar en de natuur."
+title: Natuurverbinding
+summary: Het opnieuw leven en leren in relatie met aarde, water, lucht, vuur en gedeelde grond.
 links:
-  - "School van het Hart"
-  - "Nieuwe wereld"
-  - "Spel & creativiteit"
-  - "Collectieve heling"
+  - natuurverbinding
+  - natuur
+  - aarde water lucht vuur
+  - natuurdomein
+  - permacultuur
+  - food forests
 ---
 
 # Natuurverbinding
 
-De School hoort thuis in de natuur, niet als decor maar als leermeester. Aarde, water, lucht en vuur helpen vertragen en herinneren wat leven in verbondenheid betekent. Daardoor raakt [[Natuurverbinding]] niet alleen aan buitenruimte, maar ook aan [[Collectieve heling]] en aan een andere omgang met het dagelijkse leven.
+Natuurverbinding betekent dat de School van het Hart niet los staat van aarde, water, lucht en vuur, maar er middenin leert leven. De natuur is geen decor rond het project, maar een actieve leermeester in vertragen, zorgen, bouwen en samenleven.
 
-## Gedeelde grond
-
-Door samen zorg te dragen voor tuin, voedsel en buitenplek wordt verbondenheid tastbaar. Zo krijgt [[Nieuwe wereld]] een concrete bodem, en wordt ook [[Spel & creativiteit]] iets lichamelijks en dagelijks in plaats van een abstract ideaal.
+Daarom verbindt natuurverbinding praktische keuzes zoals permacultuur, tuinen en gedeelde grond met diepere thema's als [[Vrijheid]], [[Spel & creativiteit]] en [[Nieuwe wereld]]. In die zin ondersteunt natuurverbinding ook [[Collectieve heling]] en [[Wereldvrede]].

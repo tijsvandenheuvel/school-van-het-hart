@@ -45,7 +45,7 @@ De homepage moet:
 - `docs/concepts.md` bewaart de canonieke inhoud van de 12 concepten; `index.html` moet die inhoud weerspiegelen.
 - `docs/changelog.md` bewaart de canonieke versiegeschiedenis; de bovenste entry bepaalt de actuele siteversie.
 - De versieknop rechtsboven en de changelog-modal in `index.html` lezen die changelog-inhoud in.
-- Huidige versie is `v0.2.13`.
+- Huidige versie is `v0.2.16`.
 - Elke inhoudelijke, visuele of interactionele iteratie krijgt meteen een nieuwe changelog-entry.
 
 ## Verificatie-afspraak
@@ -62,6 +62,8 @@ Na layoutwijzigingen minstens controleren op:
 - De modalbody ondersteunt meerdere secties met tussentitels en alinea's.
 - Klik op de paginatitel `School van het Hart` opent een aparte modal met de volledige visietekst uit `docs/visietekst.md`.
 - Klik op de versieknop rechtsboven opent een changelog-modal met de recente wijzigingen.
-- Klik op de nieuwe `Wiki`-knop opent een publieke markdown-wiki-modal met index, itemviews en mini-historiek.
+- Klik op de `Wiki`-knop opent een publieke markdown-wiki-modal met een A-Z woordenboekindex, zoekveld, backlinks en uitgaande links.
+- Begrippen in conceptteksten, visietekst en wiki-artikelen linken door naar dezelfde wiki-itemweergave.
+- De subtiele frame-toggle naast `Wiki` zet de ornamentale rand lokaal aan of uit en bewaart die voorkeur in de browser.
 - `Escape` sluit de modal.
 - Klik buiten de modal sluit ook.

@@ -1,17 +1,17 @@
 ---
-title: "Leren samenleven"
-summary: "Aan en van mekaar leren samenleven."
+title: Leren samenleven
+summary: De oefening om opnieuw te leren luisteren, dragen, delen en samen aanwezig te zijn.
 links:
-  - "School van het Hart"
-  - "Cirkels"
-  - "Zelfbestuur"
-  - "Liefde in de praktijk"
+  - leren samenleven
+  - samenleven
+  - samenwerken
+  - gemeenschap
+  - tribe
+  - family
 ---
 
 # Leren samenleven
 
-Samenleven is geen theorie maar een kunde die groeit door aanwezigheid, afstemming en herstel. In de School oefenen we hoe het is om te luisteren, verantwoordelijkheid te dragen en tegelijk ruimte te geven aan anderen. Dat maakt [[Cirkels]] en [[Zelfbestuur]] tot praktische bondgenoten van dit thema.
+Leren samenleven is de kernopgave achter veel andere begrippen in dit project. Mensen hebben lang geleerd hoe ze apart kunnen functioneren, maar veel minder hoe ze werkelijk samen kunnen leven, spreken en werken zonder terug te vallen in strijd of onduidelijkheid.
 
-## De groep als leermeester
-
-Je leert samenleven niet uit een boek maar in een levende groep. Daarom is [[School van het Hart]] geen verzameling losse ideeën, maar een oefenplek waarin ook [[Liefde in de praktijk]] tastbaar moet worden in concrete relaties.
+Die leerweg gebeurt niet uit een boek, maar in relatie. Daarom zijn [[Cirkels]], [[Afstemming]], [[Instemming]], [[Verbinding]] en [[Zelfbestuur]] allemaal concrete oefeningen in leren samenleven binnen de [[School van het Hart]].

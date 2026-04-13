@@ -1,17 +1,16 @@
 ---
-title: "Collectieve heling"
-summary: "Samen angst en collectief trauma helen."
+title: Collectieve heling
+summary: Het gezamenlijk helen van angst, spanning en oude patronen in een veilige bedding.
 links:
-  - "School van het Hart"
-  - "Liefde in de praktijk"
-  - "Taalbewustzijn"
-  - "Cirkels"
+  - collectieve heling
+  - heling
+  - healing
+  - genezing
+  - holistisch gezondheidscentrum
 ---
 
 # Collectieve heling
 
-Veel pijn en verwarring zitten niet alleen in individuele verhalen, maar ook tussen mensen en in grotere patronen. Daarom is heling in deze context iets wat samen gedragen moet worden. [[Cirkels]] bieden daar een vorm voor, terwijl [[Taalbewustzijn]] helpt om verwarring te ontwarren.
+Collectieve heling vertrekt vanuit het inzicht dat veel angst en pijn niet alleen in afzonderlijke personen zit, maar ook tussen mensen. Daarom volstaat individueel werk niet altijd; er is ook een gedeelde bedding nodig waar [[Collectief trauma]], verdriet en spanning gedragen kunnen worden.
 
-## Een veilige bedding
-
-In een veilige setting kunnen spanning, angst en oude reflexen zichtbaar worden zonder dat ze opnieuw moeten verharden. Zo wordt [[Liefde in de praktijk]] geen mooi woord op afstand, maar een noodzakelijke kwaliteit binnen [[School van het Hart]].
+In de School van het Hart gebeurt die heling in relatie, via [[Cirkels]], [[Veiligheid]], [[Taalbewustzijn]] en [[Liefde in de praktijk]]. Vanuit die bedding kan ook een holistisch gezondheidscentrum ontstaan waarin allerlei vormen van herstel samenkomen.

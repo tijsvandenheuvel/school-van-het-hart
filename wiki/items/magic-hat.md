@@ -1,17 +1,16 @@
 ---
-title: "Magic Hat"
-summary: "Vrije bijdrage, open boekhouding, gedeelde draagkracht."
+title: Magic Hat
+summary: Een vrije en transparante geldpraktijk waarin bijdragen gemeenschappelijk worden en macht niet gekocht kan worden.
 links:
-  - "Zelfbestuur"
-  - "Liefde in de praktijk"
-  - "Rainbow"
-  - "Nieuwe wereld"
+  - magic hat
+  - vrije bijdrage
+  - open boekhouding
+  - gemeenschappelijke pot
+  - financiële overvloed
 ---
 
 # Magic Hat
 
-De magic hat vertrekt vanuit vrije bijdrage naar vermogen, gedragen door vertrouwen en transparantie. Geld wordt daarmee geen instrument van macht maar een gemeenschappelijk middel om ruimte mogelijk te maken. Dat vraagt niet alleen om [[Zelfbestuur]], maar ook om [[Liefde in de praktijk]].
+De magic hat is de financiële praktijk waarbij iedereen vrij kan bijdragen naar vermogen, zonder druk en zonder dat geld recht geeft op meer macht. Wat in de hoed komt, wordt gemeenschappelijk en wordt beheerd in openheid.
 
-## Geld als gemeenschappelijk middel
-
-Wie geeft, koopt geen macht. Wat in de hoed komt, wordt gemeenschappelijk gedragen. Daardoor sluit [[Magic Hat]] aan bij de cultuur van [[Rainbow]] en bij de meer tastbare systeemkeuzes van [[Nieuwe wereld]].
+Zo doorbreekt de magic hat de logica van [[Babylon]] en maakt ze een andere vorm van draagkracht mogelijk. In de School van het Hart hoort dit samen met [[Zelfbestuur]], [[Vrijheid]] en [[Verbinding]].
