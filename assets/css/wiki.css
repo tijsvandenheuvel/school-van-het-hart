@@ -266,6 +266,35 @@
   align-content: start;
 }
 
+.wiki-index-section {
+  display: grid;
+  gap: 12px;
+}
+
+.wiki-index-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(90, 96, 110, 0.08);
+}
+
+.wiki-index-section-title {
+  margin: 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #3f434f;
+}
+
+.wiki-index-section-count {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--soft-text);
+}
+
 .wiki-index-group {
   display: grid;
   gap: 10px;

@@ -28,6 +28,7 @@ De homepage werkt nu volgens deze structuur:
 - `WAT`-labels hebben een groene tint.
 - `HOE`-labels hebben een paarse tint.
 - De hartvorm is een zachte rode kern, zonder extra opening of zwart gat.
+- De wiki gebruikt de term `Woordenschat` als overkoepelende noemer boven letters, woorden, begrippen, passages, teksten en runtime-afgeleide bronlemma's.
 
 ## Responsive regels
 
@@ -66,7 +67,7 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 
 ## Versie-afspraak
 
-- Huidige versie: `v0.2.16`
+- Huidige versie: `v0.2.19`
 - Canonieke versiebron: de bovenste entry in `docs/changelog.md`
 - De versieknop in `index.html` leest die actuele versie uit de changelog
 - Verhoog de versie bij elke echte inhoudelijke, visuele of interactionele voortgang

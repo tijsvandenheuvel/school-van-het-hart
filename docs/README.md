@@ -2,7 +2,7 @@
 
 Laatst bijgewerkt: 2026-04-13
 
-Huidige siteversie: `v0.2.16`
+Huidige siteversie: `v0.2.19`
 
 Actieve entrypoint: `index.html`
 
@@ -19,17 +19,29 @@ Domein: `schoolvanhethart.be`
 - `visietekst.md`
   De volledige School van het Hart-visietekst als markdownbron voor de aparte titelmodal op de homepage.
 
+- `taalbewustzijn.md`
+  De projectbrede taalafspraken voor helder Nederlands, brontrouw en de assimilatie van letters, woorden, begrippen en passages.
+
 - `../wiki/items/`
   Canonieke markdown-wiki-items met frontmatter, beschrijving en interne wikilinks.
+
+- `../wiki/sources/`
+  Door de bronpipeline afgeleide markdownversies van bronbestanden die rechtstreeks leesbaar en doorzoekbaar blijven op de site.
 
 - `../wiki/meta/curated-index.md`
   De markdown-index van de canonieke wiki-items; de publieke woordenboekindex verrijkt die lijst verder met alle aliassen uit frontmatter.
 
+- `../wiki/meta/source-catalog.json`
+  De gegenereerde broncatalogus met letters, passages en bronteksten voor de multi-index woordenschat in de wiki-modal, waaruit de site ook extra bronlemma's afleidt.
+
 - `../assets/js/site.js`
-  De huidige client-side runtime voor orbit, changelog, visietekst-modal, wiki-index, autolinks en backlinks.
+  De huidige client-side runtime voor orbit, changelog, visietekst-modal, multi-index woordenschat, autolinks, backlinks en runtime-afgeleide bronlemma's.
 
 - `../assets/css/wiki.css`
   De aanvullende stijlen voor de wiki-modal, rustige tekstlinks en visietekstweergave.
+
+- `../scripts/assimilate_sources.py`
+  De bronpipeline voor docx- en scanbronnen: renderen, roteren, OCR'en, structureren en uitschrijven naar wiki-bronnen en broncatalogus.
 
 - `ui-guidelines.md`
   De huidige layoutregels, versie-afspraken en responsive aandachtspunten.

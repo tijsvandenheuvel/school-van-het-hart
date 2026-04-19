@@ -6,6 +6,8 @@ links:
   - heling
   - healing
   - genezing
+  - gezondheid
+  - herstel
   - holistisch gezondheidscentrum
 ---
 

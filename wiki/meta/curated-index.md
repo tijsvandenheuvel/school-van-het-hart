@@ -1,16 +1,20 @@
 # Wiki-index
 
+- Aarde
+- Aarde, water, lucht & vuur
 - Afstemming
 - Babylon
 - Cirkels
 - Collectief trauma
 - Collectieve bewustwording
 - Collectieve heling
+- Elementen
 - Focalisers
 - Instemming
 - Levensschool
 - Leren samenleven
 - Liefde in de praktijk
+- Lucht
 - Magic Hat
 - Natuurverbinding
 - Nieuwe wereld
@@ -22,5 +26,7 @@
 - Verbinding
 - Vereniging
 - Vrijheid
+- Vuur
+- Water
 - Wereldvrede
 - Zelfbestuur

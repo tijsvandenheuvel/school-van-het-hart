@@ -30,7 +30,7 @@ De homepage moet:
   Documentatie voor inhoud, layout en vervolgwerk.
 
 - `wiki/`
-  De canonieke markdown-bronnen voor de wiki-laag en de meta-bestanden voor index en ignore-lijst.
+  De canonieke markdown-bronnen voor de wiki-laag, de afgeleide bronbestanden en de meta-bestanden voor index en broncatalogus.
 
 - `admin/wiki.html`
   Lokale adminmode voor wiki-items, preview en relationele curation.
@@ -38,14 +38,18 @@ De homepage moet:
 - `server/wiki-server.js`
   Kleine lokale server voor statische serving en markdown-gebaseerde wiki-API's.
 
+- `scripts/assimilate_sources.py`
+  De lokale bronpipeline voor OCR, bronstructurering en de woordenschat-assimilatie van docx- en PDF-bronnen.
+
 ## Werkafspraken
 
 - Werk verder op `index.html` tenzij er later echt meerdere pagina's komen.
 - Vermijd opnieuw een tweede losse HTML-variant als concurrerende bron van waarheid.
 - `docs/concepts.md` bewaart de canonieke inhoud van de 12 concepten; `index.html` moet die inhoud weerspiegelen.
 - `docs/changelog.md` bewaart de canonieke versiegeschiedenis; de bovenste entry bepaalt de actuele siteversie.
+- `docs/taalbewustzijn.md` bewaart de taalafspraken voor helder Nederlands, brontrouw en woordenschatassimilatie.
 - De versieknop rechtsboven en de changelog-modal in `index.html` lezen die changelog-inhoud in.
-- Huidige versie is `v0.2.16`.
+- Huidige versie is `v0.2.19`.
 - Elke inhoudelijke, visuele of interactionele iteratie krijgt meteen een nieuwe changelog-entry.
 
 ## Verificatie-afspraak
@@ -63,7 +67,8 @@ Na layoutwijzigingen minstens controleren op:
 - Klik op de paginatitel `School van het Hart` opent een aparte modal met de volledige visietekst uit `docs/visietekst.md`.
 - Klik op de versieknop rechtsboven opent een changelog-modal met de recente wijzigingen.
 - Klik op de `Wiki`-knop opent een publieke markdown-wiki-modal met een A-Z woordenboekindex, zoekveld, backlinks en uitgaande links.
-- Begrippen in conceptteksten, visietekst en wiki-artikelen linken door naar dezelfde wiki-itemweergave.
+- Begrippen in conceptteksten, visietekst en wiki-artikelen linken door naar letterlijke woordenboekingangen, die waar nodig doorverwijzen naar een hoofdlemma.
+- De woordenschat wordt uitgebreid met letters, woorden, begrippen, bronpassages, bronteksten en extra bronlemma's uit de ingest-pipeline.
 - De subtiele frame-toggle naast `Wiki` zet de ornamentale rand lokaal aan of uit en bewaart die voorkeur in de browser.
 - `Escape` sluit de modal.
 - Klik buiten de modal sluit ook.

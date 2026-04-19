@@ -1,5 +1,26 @@
 # Changelog
 
+## v0.2.19 - Bronlemma's en rijkere bronindex
+
+- De publieke woordenschat uitgebreid met runtime-gegenereerde bronlemma's uit de geassimileerde passages, zodat meer woorden en meerwoordbegrippen uit de bronteksten als eigen ingangen doorzoekbaar en aanklikbaar worden
+- De interne wiki-relaties verbeterd zodat expliciete `[[wikilinks]]` ook in de verbindingenlogica meetellen, inclusief verwijzingen naar bronteksten en bronpassages
+- `wiki/meta/source-index.md` inhoudelijk verrijkt met overzicht, passageaantallen en bronbestandsverwijzingen per tekst, zodat de bronnenlaag zelf ook leesbaarder gedocumenteerd blijft
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.19`
+
+## v0.2.18 - Taalbewuste bronassimilatie
+
+- Een bronpipeline toegevoegd in `scripts/assimilate_sources.py` die docx- en scanbronnen rendert, roteert, OCR't en uitschrijft naar `wiki/sources/` en `wiki/meta/source-catalog.json`
+- De publieke wiki-modal uitgebreid tot een bredere `Woordenschat` met aparte indexsecties voor letters, woorden, begrippen, zinnen/paragrafen en bronteksten
+- Nieuwe bronteksten `Excalibur` en `Het boek der geruststelling` geïntegreerd naast de bestaande SvHH-bronnen, inclusief 4 bronteksten, 510 passages en een alfabetindex van 26 letterpagina's
+- `Taalbewustzijn` expliciet verankerd als projectprincipe in `docs/taalbewustzijn.md`, de documentatie en de wiki-inhoud
+
+## v0.2.17 - Woordenboekingangen en bronbegrippen
+
+- De wiki omgevormd van alias-doorgangen naar een echte woordenboeklaag waarin brontermen als eigen woordenboekingangen renderen, ook wanneer ze intern uit markdown-links worden afgeleid
+- Nieuwe canonieke lemma's toegevoegd voor `Aarde`, `Water`, `Lucht`, `Vuur`, `Elementen` en `Aarde, water, lucht & vuur`, zodat natuurtermen niet langer onterecht direct op `Natuurverbinding` landen
+- De bestaande wiki-items inhoudelijk uitgebreid met extra brontermen zoals `school`, `woorden`, `communicatie`, `bewustzijn`, `materie`, `seedcamp`, `vision circle` en `food circle`
+- De woordenboeklaag telt nu 160 letterlijke ingangen uit de bronpass, met 30 canonieke markdownpagina's en 0 onopgeloste wikilinks
+
 ## v0.2.16 - Subtielere kader- en linkstijl
 
 - De kaderschakelaar linksboven teruggebracht tot één subtiele icoonknop zonder zichtbare labels, terwijl de voorkeur nog altijd lokaal bewaard blijft
