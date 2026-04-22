@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.2.39 - Wiki-toggle logisch gespiegeld
+
+- De wiki-sidebar-toggle leest nu visueel consistenter: wanneer de woordenlijst verborgen is staat de smalle balk links in het icoon, en wanneer de lijst open is schuift die naar rechts
+- Alleen de icoonstate is omgedraaid; de bestaande collapse-logica en automatische opening via zoekveld en lijstchips blijven ongewijzigd
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.39`
+
+## v0.2.38 - Cleanere conceptmodals
+
+- De homepage-itemmodals tonen nu enkel nog de effectieve concepttekst; de vaste zijsecties `Beeldtaal` en `Uitbreiding` zijn uit de modal verwijderd
+- De conceptmodal gebruikt nu weer een echte éénkoloms body, zodat er geen lege rechterkolom meer overblijft nadat de extra panelen weg zijn
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.38`
+
 ## v0.2.37 - Rustiger wiki-toggle
 
 - De wiki-sidebar start nu opnieuw standaard ingeklapt met een verfijndere toggle-icoon zonder middenlijn, zodat de artikelweergave rustiger opent

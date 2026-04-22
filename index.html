@@ -556,6 +556,10 @@
       padding: 28px 30px 32px;
     }
 
+    .concept-modal-body {
+      grid-template-columns: 1fr;
+    }
+
     .modal-copy {
       display: grid;
       gap: 22px;
@@ -580,34 +584,6 @@
       margin: 0;
       font-size: 1.04rem;
       line-height: 1.9;
-    }
-
-    .side-stack {
-      display: grid;
-      gap: 16px;
-      align-content: start;
-    }
-
-    .side-note {
-      padding: 18px 18px 16px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.66);
-      border: 1px solid rgba(85, 88, 100, 0.08);
-    }
-
-    .side-note h3 {
-      margin: 0 0 8px;
-      font-size: 0.82rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--soft-text);
-      font-weight: 600;
-    }
-
-    .side-note p {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: var(--text);
     }
 
     .changelog-modal .modal-card {
@@ -956,7 +932,7 @@
         <span class="frame-toggle-icon" aria-hidden="true"></span>
       </button>
     </div>
-    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.2.37" aria-haspopup="dialog" aria-controls="changelogModal">v0.2.37</button>
+    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.2.39" aria-haspopup="dialog" aria-controls="changelogModal">v0.2.39</button>
     <header class="page-header">
       <h1 class="page-title">
         <button class="page-title-trigger" id="visionTrigger" type="button" aria-haspopup="dialog" aria-controls="visionModal">School van het Hart</button>
@@ -1015,18 +991,8 @@
         </div>
         <button class="close-btn" id="closeBtn" aria-label="Sluit venster">×</button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body concept-modal-body">
         <div class="modal-copy" id="modal-body"></div>
-        <aside class="side-stack">
-          <div class="side-note">
-            <h3>Beeldtaal</h3>
-            <p>Organische squircles, luchtige ruimte, zachte schaduwen en een kern die alles samenhoudt. Elk onderdeel voelt als een uitgroei van hetzelfde levende midden.</p>
-          </div>
-          <div class="side-note">
-            <h3>Uitbreiding</h3>
-            <p>Deze panelen kunnen later groeien naar langere teksten, foto's, citaten, audio, praktijkvoorbeelden of kleine rituelen op de pagina zelf.</p>
-          </div>
-        </aside>
       </div>
     </article>
   </div>

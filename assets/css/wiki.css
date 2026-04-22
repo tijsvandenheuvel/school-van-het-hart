@@ -246,10 +246,11 @@
   border-radius: 2px;
   transition: transform 180ms ease, opacity 180ms ease, background 180ms ease;
   background: rgba(86, 93, 108, 0.72);
+  transform: translateX(7px);
 }
 
 .wiki-directory-toggle.is-collapsed .wiki-directory-toggle-icon::after {
-  transform: translateX(7px);
+  transform: none;
 }
 
 .wiki-search-input {

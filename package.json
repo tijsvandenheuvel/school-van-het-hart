@@ -1,6 +1,6 @@
 {
   "name": "school-van-het-hart",
-  "version": "0.2.37",
+  "version": "0.2.39",
   "private": true,
   "scripts": {
     "sources:assimilate": "python3 scripts/assimilate_sources.py",
