@@ -1,0 +1,42 @@
+{
+  "slug": "letter-r",
+  "title": "R",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:36.442Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de r, de achttiende letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "R",
+      "url": "https://nl.wiktionary.org/wiki/R"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter R is de achttiende letter in het moderne Latijnse alfabet.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "R (letter)",
+      "url": "https://nl.wikipedia.org/wiki/R_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "R",
+      "url": "https://nl.wiktionary.org/wiki/R"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "R (letter)",
+      "url": "https://nl.wikipedia.org/wiki/R_(letter)"
+    }
+  ]
+}

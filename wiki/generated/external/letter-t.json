@@ -1,0 +1,42 @@
+{
+  "slug": "letter-t",
+  "title": "T",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:37.064Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de t, de twintigste letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "T",
+      "url": "https://nl.wiktionary.org/wiki/T"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter T is de twintigste letter in het moderne Latijnse alfabet.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "T (letter)",
+      "url": "https://nl.wikipedia.org/wiki/T_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "T",
+      "url": "https://nl.wiktionary.org/wiki/T"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "T (letter)",
+      "url": "https://nl.wikipedia.org/wiki/T_(letter)"
+    }
+  ]
+}

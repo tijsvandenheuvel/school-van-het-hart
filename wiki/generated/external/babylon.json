@@ -1,0 +1,33 @@
+{
+  "slug": "babylon",
+  "title": "Babylon",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:06.072Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "een plek of situatie waar iedereen door elkaar praat, wat verwarring schept",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "babylon",
+      "url": "https://nl.wiktionary.org/wiki/babylon"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "babylon",
+      "url": "https://nl.wiktionary.org/wiki/babylon"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Babylon (stad)",
+      "url": "https://nl.wikipedia.org/wiki/Babylon_(stad)"
+    }
+  ]
+}

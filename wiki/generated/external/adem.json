@@ -1,0 +1,36 @@
+{
+  "slug": "adem",
+  "title": "adem",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:05:31.514Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "de lucht die levende wezens in zich opnemen en weer uitdrijven",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "adem",
+      "url": "https://nl.wiktionary.org/wiki/adem"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘ingeademde lucht’ voor het eerst aangetroffen in 1240 afgeleid van asem",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "adem",
+      "url": "https://nl.wiktionary.org/wiki/adem"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "adem",
+      "url": "https://nl.wiktionary.org/wiki/adem"
+    }
+  ]
+}

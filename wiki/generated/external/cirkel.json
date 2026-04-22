@@ -1,0 +1,36 @@
+{
+  "slug": "cirkel",
+  "title": "cirkel",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:02:38.997Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "een reeks van punten in een tweedimensionaal vlak die alle even ver van het middelpunt verwijderd zijn",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "cirkel",
+      "url": "https://nl.wiktionary.org/wiki/cirkel"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "via van , in de betekenis van ‘kring’ aangetroffen vanaf 1220",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "cirkel",
+      "url": "https://nl.wiktionary.org/wiki/cirkel"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "cirkel",
+      "url": "https://nl.wiktionary.org/wiki/cirkel"
+    }
+  ]
+}

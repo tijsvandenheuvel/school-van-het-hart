@@ -1,0 +1,27 @@
+{
+  "slug": "buitenruimte",
+  "title": "buitenruimte",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:06:23.414Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "ruimte in de openlucht",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "buitenruimte",
+      "url": "https://nl.wiktionary.org/wiki/buitenruimte"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "buitenruimte",
+      "url": "https://nl.wiktionary.org/wiki/buitenruimte"
+    }
+  ]
+}

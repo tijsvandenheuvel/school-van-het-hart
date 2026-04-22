@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.2.41 - Externe context voor alle woorden
+
+- De externe contextlaag werd uitgebreid van alleen canonieke begrippen en letters naar de volledige publieke woordenlijst: canonieke lemma's, letterlijke alias-ingangen, bronafgeleide woorden en letters
+- `server/wiki-external.js` reconstrueert nu dezelfde publieke woordenlaag als de wiki zelf, `scripts/generate_wiki_external.js` draait cache-eerst en de generator kreeg per-ingang timeouts zodat lange Wikimedia-verzoeken de volledige run niet meer blokkeren
+- De externe cache is nu vooraf aangelegd voor alle 375 publieke woordenschatingangen in `wiki/generated/external/`, goed voor 97 ingangen met effectieve externe duiding en 278 voorlopige onopgeloste placeholders
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.41`
+
+## v0.2.40 - Externe duiding in de woordenschat
+
+- De publieke wiki-itemweergave toont nu onder de handmatige markdowntekst een aparte squircle-kaart voor `Internetverklaring` en `Etymologie`, geladen uit een nieuwe externe bronlaag
+- Een nieuwe Wikimedia-pijplijn toegevoegd via `server/wiki-external.js`, `scripts/generate_wiki_external.js` en `npm run wiki:external`, met cachebestanden in `wiki/generated/external/` en een server-fallback op `/api/wiki/external`
+- De externe context vooraf gegenereerd voor alle canonieke begrippen en alle 26 letters: 56 ingangen totaal, waarvan 47 met effectieve externe duiding en 9 voorlopig bewust onopgelost
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.40`
+
 ## v0.2.39 - Wiki-toggle logisch gespiegeld
 
 - De wiki-sidebar-toggle leest nu visueel consistenter: wanneer de woordenlijst verborgen is staat de smalle balk links in het icoon, en wanneer de lijst open is schuift die naar rechts

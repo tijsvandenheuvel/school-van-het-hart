@@ -1,0 +1,42 @@
+{
+  "slug": "letter-i",
+  "title": "I",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:32.909Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de i, de negende letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "I",
+      "url": "https://nl.wiktionary.org/wiki/I"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter is afgeleid van de Griekse letter jota (Ι, ι), die gebruikt werd voor /i/, dezelfde als die de Etrusken in hun alfabet gebruikten. De eerdere Semitische letter Yôdh was waarschijnlijk oorspronkelijk een pictogram van een arm met een hand, afgeleid van een vergelijkbare Egyptische hiëroglief die echter anders werd uitgesproken.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "I (letter)",
+      "url": "https://nl.wikipedia.org/wiki/I_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "I",
+      "url": "https://nl.wiktionary.org/wiki/I"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "I (letter)",
+      "url": "https://nl.wikipedia.org/wiki/I_(letter)"
+    }
+  ]
+}

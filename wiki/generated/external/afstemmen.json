@@ -1,0 +1,27 @@
+{
+  "slug": "afstemmen",
+  "title": "afstemmen",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:02:28.783Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": ", op de juiste toonhoogte brengen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "afstemmen",
+      "url": "https://nl.wiktionary.org/wiki/afstemmen"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "afstemmen",
+      "url": "https://nl.wiktionary.org/wiki/afstemmen"
+    }
+  ]
+}

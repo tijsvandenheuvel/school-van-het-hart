@@ -1,0 +1,42 @@
+{
+  "slug": "letter-a",
+  "title": "A",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:30.135Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de a, de eerste letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "A",
+      "url": "https://nl.wiktionary.org/wiki/A"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter is afgeleid van de Griekse letter alfa (α), die evenals in het Latijn de klankwaarden /a/ en /a:/ had. De oorsprong van de letter gaat via het Grieks en Etruskisch terug op het Semitische 'âlep (os).",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "A (letter)",
+      "url": "https://nl.wikipedia.org/wiki/A_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "A",
+      "url": "https://nl.wiktionary.org/wiki/A"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "A (letter)",
+      "url": "https://nl.wikipedia.org/wiki/A_(letter)"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "instemmen",
+  "title": "instemmen",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:04:17.412Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "het eens zijn",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "instemmen",
+      "url": "https://nl.wiktionary.org/wiki/instemmen"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Leenwoord uit het Duits, in de betekenis van ‘zijn stem met andere verenigen’ voor het eerst aangetroffen in 1766",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "instemmen",
+      "url": "https://nl.wiktionary.org/wiki/instemmen"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "instemmen",
+      "url": "https://nl.wiktionary.org/wiki/instemmen"
+    }
+  ]
+}

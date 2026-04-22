@@ -1,0 +1,27 @@
+{
+  "slug": "gathering",
+  "title": "gathering",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:06:54.728Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "DOORVERWIJZINGThe Gathering",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Gathering",
+      "url": "https://nl.wikipedia.org/wiki/Gathering"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Gathering",
+      "url": "https://nl.wikipedia.org/wiki/Gathering"
+    }
+  ]
+}

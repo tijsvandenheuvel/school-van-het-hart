@@ -1,0 +1,27 @@
+{
+  "slug": "vier-elementen",
+  "title": "vier elementen",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:03:59.572Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "De Vier Elementen (Pali: dhatu) vormen een beschrijving van de materiële wereld door Gautama Boeddha.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Vier Elementen (boeddhisme)",
+      "url": "https://nl.wikipedia.org/wiki/Vier_Elementen_(boeddhisme)"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Vier Elementen (boeddhisme)",
+      "url": "https://nl.wikipedia.org/wiki/Vier_Elementen_(boeddhisme)"
+    }
+  ]
+}

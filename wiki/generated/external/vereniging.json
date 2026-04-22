@@ -1,0 +1,36 @@
+{
+  "slug": "vereniging",
+  "title": "Vereniging",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:26.748Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": ", vrijwillige groepering van personen (leden), met of zonder rechtspersoonlijkheid, die gericht is op een bepaald doel en met een bestuur aan het hoofd",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "vereniging",
+      "url": "https://nl.wiktionary.org/wiki/vereniging"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Naamwoord van handeling van verenigen .",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "vereniging",
+      "url": "https://nl.wiktionary.org/wiki/vereniging"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "vereniging",
+      "url": "https://nl.wiktionary.org/wiki/vereniging"
+    }
+  ]
+}

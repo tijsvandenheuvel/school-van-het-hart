@@ -1,0 +1,36 @@
+{
+  "slug": "grond",
+  "title": "grond",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:02:22.857Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "een bepaald stuk van het aardoppervlak",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "grond",
+      "url": "https://nl.wiktionary.org/wiki/grond"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘bodem’ voor het eerst aangetroffen in het jaar 1220",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "grond",
+      "url": "https://nl.wiktionary.org/wiki/grond"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "grond",
+      "url": "https://nl.wiktionary.org/wiki/grond"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "healing",
+  "title": "healing",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:03:35.724Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "geheel van therapeutische en paranormale handelingen die men onder behandeling van een alternatief therapeut ondergaat of als zelftherapie uitvoert",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "healing",
+      "url": "https://nl.wiktionary.org/wiki/healing"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "uit het Engels, vanaf 1985 (zie vindplaats hieronder) ook aangetroffen als Nederlands woord; als (onderdeel van een) Engels woord komt het al vanaf het eind van de 19e eeuw in Nederlandse teksten voor",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "healing",
+      "url": "https://nl.wiktionary.org/wiki/healing"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "healing",
+      "url": "https://nl.wiktionary.org/wiki/healing"
+    }
+  ]
+}

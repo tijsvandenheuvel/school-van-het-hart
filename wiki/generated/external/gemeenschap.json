@@ -1,0 +1,36 @@
+{
+  "slug": "gemeenschap",
+  "title": "gemeenschap",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:04:36.950Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "het met één of meer anderen deel hebben aan iets",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "gemeenschap",
+      "url": "https://nl.wiktionary.org/wiki/gemeenschap"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Afgeleid van gemeen .",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "gemeenschap",
+      "url": "https://nl.wiktionary.org/wiki/gemeenschap"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "gemeenschap",
+      "url": "https://nl.wiktionary.org/wiki/gemeenschap"
+    }
+  ]
+}

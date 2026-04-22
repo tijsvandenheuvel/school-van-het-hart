@@ -1,0 +1,42 @@
+{
+  "slug": "letter-y",
+  "title": "Y",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:38.639Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de y, de vijfentwintigste letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Y",
+      "url": "https://nl.wiktionary.org/wiki/Y"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De Romeinen ontleenden de Y direct aan de Griekse letter ypsilon, die evenals de F, U, V en W is voortgekomen uit de Semitische letter wâw.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Y (letter)",
+      "url": "https://nl.wikipedia.org/wiki/Y_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Y",
+      "url": "https://nl.wiktionary.org/wiki/Y"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Y (letter)",
+      "url": "https://nl.wikipedia.org/wiki/Y_(letter)"
+    }
+  ]
+}

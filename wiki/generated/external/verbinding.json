@@ -1,0 +1,36 @@
+{
+  "slug": "verbinding",
+  "title": "Verbinding",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:26.217Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "iets verbinden of samenvoegen; iets dat twee of meer afzonderlijke delen verbindt",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "verbinding",
+      "url": "https://nl.wiktionary.org/wiki/verbinding"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Naamwoord van handeling van verbinden .",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "verbinding",
+      "url": "https://nl.wiktionary.org/wiki/verbinding"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "verbinding",
+      "url": "https://nl.wiktionary.org/wiki/verbinding"
+    }
+  ]
+}

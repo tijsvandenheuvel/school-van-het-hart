@@ -1,0 +1,36 @@
+{
+  "slug": "angst",
+  "title": "angst",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:02:48.231Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "gevoel dat er onheil of gevaar dreigt",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "angst",
+      "url": "https://nl.wiktionary.org/wiki/angst"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘vrees’ voor het eerst aangetroffen in 901 Van het Oudnederlandse angust.",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "angst",
+      "url": "https://nl.wiktionary.org/wiki/angst"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "angst",
+      "url": "https://nl.wiktionary.org/wiki/angst"
+    }
+  ]
+}

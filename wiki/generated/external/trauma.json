@@ -1,0 +1,36 @@
+{
+  "slug": "trauma",
+  "title": "trauma",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:02:45.154Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "psychische stoornis, ontstaan door een schokkende ervaring",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "trauma",
+      "url": "https://nl.wiktionary.org/wiki/trauma"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Leenwoord uit het Grieks, in de betekenis van ‘psychische stoornis’ voor het eerst aangetroffen in 1924 van het Griekse 'traũma' (wond)",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "trauma",
+      "url": "https://nl.wiktionary.org/wiki/trauma"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "trauma",
+      "url": "https://nl.wiktionary.org/wiki/trauma"
+    }
+  ]
+}

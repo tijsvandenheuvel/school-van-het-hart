@@ -1,0 +1,27 @@
+{
+  "slug": "mind-control",
+  "title": "mind control",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:02:38.314Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "Mind control may refer to:",
+    "source": {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Mind control",
+      "url": "https://en.wikipedia.org/wiki/Mind_control"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Mind control",
+      "url": "https://en.wikipedia.org/wiki/Mind_control"
+    }
+  ]
+}

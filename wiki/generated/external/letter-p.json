@@ -1,0 +1,42 @@
+{
+  "slug": "letter-p",
+  "title": "P",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:35.812Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de p, de zestiende letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "P",
+      "url": "https://nl.wiktionary.org/wiki/P"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter P is de zestiende letter van het moderne Latijnse alfabet. De Semitische letter Pê (mond) zowel als de Griekse letter pi (Π, π) en de Etruskische en Latijnse letters die zich uit de Griekse letter ontwikkelden, symboliseren alle de klank /p/, een stemloze tweelippige plosief.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "P (letter)",
+      "url": "https://nl.wikipedia.org/wiki/P_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "P",
+      "url": "https://nl.wiktionary.org/wiki/P"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "P (letter)",
+      "url": "https://nl.wikipedia.org/wiki/P_(letter)"
+    }
+  ]
+}

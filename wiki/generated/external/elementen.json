@@ -1,0 +1,27 @@
+{
+  "slug": "elementen",
+  "title": "Elementen",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:10.445Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "De Elementen (Grieks: Στοιχεῖα - Stoicheia) is een meetkundig en rekenkundig verzamelwerk, bestaande uit dertien boeken, geschreven door de Hellenistische wiskundige Euclides te Alexandrië, in het begin van de derde eeuw voor Christus. Hierin verzamelde en formaliseerde hij 468 wiskundige bewijzen die in de eeuwen daarvoor reeds door andere wiskundigen waren bewezen. Elk boek bestaat uit twee delen: (I) definities (138 in totaal). (II) theorema's (468 in totaal) en de bewijzen voor die theorema's met behulp van definities en eerdere bewezen theorema's.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Elementen (Euclides)",
+      "url": "https://nl.wikipedia.org/wiki/Elementen_(Euclides)"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Elementen (Euclides)",
+      "url": "https://nl.wikipedia.org/wiki/Elementen_(Euclides)"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "slug": "taalbewustzijn",
+  "title": "Taalbewustzijn",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:24.985Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "het belang van (de eigen) taal inzien",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "taalbewustzijn",
+      "url": "https://nl.wiktionary.org/wiki/taalbewustzijn"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "taalbewustzijn",
+      "url": "https://nl.wiktionary.org/wiki/taalbewustzijn"
+    }
+  ]
+}

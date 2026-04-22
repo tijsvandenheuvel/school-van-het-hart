@@ -1,0 +1,33 @@
+{
+  "slug": "aarde",
+  "title": "Aarde",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:04.427Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "de verpersoonlijking van de thuiswereld van de mensheid",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Aarde",
+      "url": "https://nl.wiktionary.org/wiki/Aarde"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Aarde",
+      "url": "https://nl.wiktionary.org/wiki/Aarde"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Aarde (planeet)",
+      "url": "https://nl.wikipedia.org/wiki/Aarde_(planeet)"
+    }
+  ]
+}

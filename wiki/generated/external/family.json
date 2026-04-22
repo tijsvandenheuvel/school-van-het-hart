@@ -1,0 +1,27 @@
+{
+  "slug": "family",
+  "title": "family",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:04:49.284Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "Family (from ) is a group of people related either by consanguinity (by recognized birth) or affinity (by marriage or other relationship). It forms the basis for social order. Ideally, families offer predictability, structure, and safety as members mature and learn to participate in the community. Historically, most human societies use family as the primary purpose of attachment, nurturance, and socialization.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Family",
+      "url": "https://en.wikipedia.org/wiki/Family"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Family",
+      "url": "https://en.wikipedia.org/wiki/Family"
+    }
+  ]
+}

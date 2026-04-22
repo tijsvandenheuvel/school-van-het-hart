@@ -1,0 +1,42 @@
+{
+  "slug": "letter-s",
+  "title": "S",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:36.752Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de s, de negentiende letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "S",
+      "url": "https://nl.wiktionary.org/wiki/S"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Oorspronkelijk kwam de letter uit het Fenicische alfabet.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "S (letter)",
+      "url": "https://nl.wikipedia.org/wiki/S_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "S",
+      "url": "https://nl.wiktionary.org/wiki/S"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "S (letter)",
+      "url": "https://nl.wikipedia.org/wiki/S_(letter)"
+    }
+  ]
+}

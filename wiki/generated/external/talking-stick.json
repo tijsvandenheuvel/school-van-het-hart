@@ -1,0 +1,27 @@
+{
+  "slug": "talking-stick",
+  "title": "talking stick",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:02:40.544Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "A talking stick, also called a '''speaker's staff''', is an instrument of Indigenous democracy used by a number of Indigenous communities, especially those in the Pacific Northwest nations of North America. The talking stick may be passed around a group, as multiple people speak in turn, or used only by leaders as a symbol of their authority and right to speak in public.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Talking stick",
+      "url": "https://en.wikipedia.org/wiki/Talking_stick"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Talking stick",
+      "url": "https://en.wikipedia.org/wiki/Talking_stick"
+    }
+  ]
+}

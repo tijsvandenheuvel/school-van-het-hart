@@ -1,0 +1,27 @@
+{
+  "slug": "rainbow-gatherings",
+  "title": "Rainbow Gatherings",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:19.388Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "Rainbow Gatherings are temporary, loosely knit communities of people, who congregate in outdoor locales around the world for one or more weeks at a time with the stated intention of living a shared ideology of peace, harmony, freedom, and respect. In the original invitation, spread throughout the United States in 1971, the \"Rainbow Family Tribe\" referred to themselves as \"brothers & sisters, children of God\", \"Families of life on Earth\", \"Friends of Nature & of all People\" and \"Children of Humankind\". All races, nations, politicians, etc. were invited with the aspiration that there could be peace among all people. The goal was to create what they believed was a more satisfying culture — free from consumerism, capitalism, and mass media — one that would be non-hierarchical, that would further world peace, and serve as a model for reforms to mainstream society. However, the values actually exhibited by the group have at times varied quite a bit from this ideal, with recent decades showing increasing levels of crime at the events, and some organizers stating that the core principles have been modified, and become more mainstream, in an effort to attract more attendees.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Rainbow Gathering",
+      "url": "https://en.wikipedia.org/wiki/Rainbow_Gathering"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Rainbow Gathering",
+      "url": "https://en.wikipedia.org/wiki/Rainbow_Gathering"
+    }
+  ]
+}

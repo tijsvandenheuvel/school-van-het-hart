@@ -1,0 +1,36 @@
+{
+  "slug": "instemming",
+  "title": "Instemming",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:12.349Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "adhesie, toestemming",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "instemming",
+      "url": "https://nl.wiktionary.org/wiki/instemming"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "van instemmen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "instemming",
+      "url": "https://nl.wiktionary.org/wiki/instemming"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "instemming",
+      "url": "https://nl.wiktionary.org/wiki/instemming"
+    }
+  ]
+}

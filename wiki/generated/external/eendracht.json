@@ -1,0 +1,36 @@
+{
+  "slug": "eendracht",
+  "title": "eendracht",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:05:19.334Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "het samenwerken of samenleven zonder geschillen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "eendracht",
+      "url": "https://nl.wiktionary.org/wiki/eendracht"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘eensgezindheid’ voor het eerst aangetroffen in 1367",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "eendracht",
+      "url": "https://nl.wiktionary.org/wiki/eendracht"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "eendracht",
+      "url": "https://nl.wiktionary.org/wiki/eendracht"
+    }
+  ]
+}

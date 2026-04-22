@@ -1,0 +1,42 @@
+{
+  "slug": "letter-o",
+  "title": "O",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:35.503Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de o, de vijftiende letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "O",
+      "url": "https://nl.wiktionary.org/wiki/O"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter O is de vijftiende letter en de vierde klinker in het moderne Latijnse alfabet. De letter heeft de klankwaarden /ɔ/ (als in bol) en /o:/ (als in rook).",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "O (letter)",
+      "url": "https://nl.wikipedia.org/wiki/O_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "O",
+      "url": "https://nl.wiktionary.org/wiki/O"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "O (letter)",
+      "url": "https://nl.wikipedia.org/wiki/O_(letter)"
+    }
+  ]
+}

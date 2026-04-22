@@ -1,0 +1,33 @@
+{
+  "slug": "zelfbestuur",
+  "title": "Zelfbestuur",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:29.663Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "systeem waarin men zelf het beleid bepaalt en zelf de eigen wet- en regelgeving maakt",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "zelfbestuur",
+      "url": "https://nl.wiktionary.org/wiki/zelfbestuur"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "zelfbestuur",
+      "url": "https://nl.wiktionary.org/wiki/zelfbestuur"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Zelfbestuur",
+      "url": "https://nl.wikipedia.org/wiki/Zelfbestuur"
+    }
+  ]
+}

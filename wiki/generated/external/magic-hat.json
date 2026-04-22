@@ -1,0 +1,27 @@
+{
+  "slug": "magic-hat",
+  "title": "Magic Hat",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:16.562Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "Magic hat may refer to: Magic Hat Brewing Company, an American brewery",
+    "source": {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Magic hat",
+      "url": "https://en.wikipedia.org/wiki/Magic_hat"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Magic hat",
+      "url": "https://en.wikipedia.org/wiki/Magic_hat"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "slug": "hemel-op-aarde",
+  "title": "hemel op aarde",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:06:30.119Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "Hemel op aarde is een Nederlandse dramafilm uit 2013 onder regie van Pieter Kuijpers. De productie ging op 19 december 2013 in première in de Limburgse bioscopen en op 9 januari 2014 in de rest van Nederland.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Hemel op aarde (film)",
+      "url": "https://nl.wikipedia.org/wiki/Hemel_op_aarde_(film)"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Hemel op aarde (film)",
+      "url": "https://nl.wikipedia.org/wiki/Hemel_op_aarde_(film)"
+    }
+  ]
+}

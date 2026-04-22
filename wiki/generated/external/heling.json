@@ -1,0 +1,36 @@
+{
+  "slug": "heling",
+  "title": "heling",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:03:31.397Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "het gezond worden of maken van iemand",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "heling",
+      "url": "https://nl.wiktionary.org/wiki/heling"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "van helen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "heling",
+      "url": "https://nl.wiktionary.org/wiki/heling"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "heling",
+      "url": "https://nl.wiktionary.org/wiki/heling"
+    }
+  ]
+}

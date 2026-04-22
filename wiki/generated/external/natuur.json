@@ -1,0 +1,36 @@
+{
+  "slug": "natuur",
+  "title": "natuur",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:06:00.240Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "oorspronkelijke, onaangeroerde verschijningsvorm van alles wat zich op, in en rond de Aarde bevindt; min of meer synoniem aan \"schepping\" of \"wildernis\", als tegenstelling tot cultuur, technologie of beschaving",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "natuur",
+      "url": "https://nl.wiktionary.org/wiki/natuur"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "via van of direct van , het deelwoord van de toekomende tijd van nasci, hetgeen zoveel betekent als \"dat wat geboren zal worden\", \"tot leven zal komen\" [2] in de betekenis van ‘het (schijnbaar) niet door de mens gewijzigde landschap om ons heen' aangetroffen vanaf 1697 [4] in de betekenis van 'aangeboren neiging' aangetroffen vanaf 1201, later ook 'natuurlijke wetmatigheid, natuurlijke loop der dingen, schepping, scheppende kracht'",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "natuur",
+      "url": "https://nl.wiktionary.org/wiki/natuur"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "natuur",
+      "url": "https://nl.wiktionary.org/wiki/natuur"
+    }
+  ]
+}

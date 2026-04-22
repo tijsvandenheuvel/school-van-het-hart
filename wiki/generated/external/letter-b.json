@@ -1,0 +1,36 @@
+{
+  "slug": "letter-b",
+  "title": "B",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:30.517Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de b, de tweede letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "B",
+      "url": "https://nl.wiktionary.org/wiki/B"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "verkorting van bachelor, binnen de Europese Unie gestandaardiseerd",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "B",
+      "url": "https://nl.wiktionary.org/wiki/B"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "B",
+      "url": "https://nl.wiktionary.org/wiki/B"
+    }
+  ]
+}

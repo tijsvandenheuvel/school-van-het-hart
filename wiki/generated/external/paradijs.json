@@ -1,0 +1,36 @@
+{
+  "slug": "paradijs",
+  "title": "paradijs",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:06:25.267Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "in de volksmond een oord waar het leven heerlijk is, een zalig klimaat, mooie omgeving en overvloed aan lekkers",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "paradijs",
+      "url": "https://nl.wiktionary.org/wiki/paradijs"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Leenwoord uit het Latijn, in de betekenis van ‘lusthof’ voor het eerst aangetroffen in 1240 Van Grieks 'peri' (rondom) + daeza (muur). De betekenis is dus \"omheind gebied\"",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "paradijs",
+      "url": "https://nl.wiktionary.org/wiki/paradijs"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "paradijs",
+      "url": "https://nl.wiktionary.org/wiki/paradijs"
+    }
+  ]
+}

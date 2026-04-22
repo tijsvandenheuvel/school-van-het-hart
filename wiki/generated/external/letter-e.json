@@ -1,0 +1,42 @@
+{
+  "slug": "letter-e",
+  "title": "E",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:31.526Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de e, de vijfde letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "E",
+      "url": "https://nl.wiktionary.org/wiki/E"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter E is in ons alfabet terechtgekomen via de Griekse letter epsilon, die vrijwel dezelfde vorm en functie heeft. De Semitische letter hê stelde vermoedelijk oorspronkelijk een roepende of biddende menselijke figuur voor en werd waarschijnlijk overgenomen van een Egyptische hiëroglief, die evenwel een andere betekenis en uitspraak had.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "E (letter)",
+      "url": "https://nl.wikipedia.org/wiki/E_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "E",
+      "url": "https://nl.wiktionary.org/wiki/E"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "E (letter)",
+      "url": "https://nl.wikipedia.org/wiki/E_(letter)"
+    }
+  ]
+}

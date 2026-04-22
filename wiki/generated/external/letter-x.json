@@ -1,0 +1,42 @@
+{
+  "slug": "letter-x",
+  "title": "X",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:38.327Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de x, de vierentwintigste letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "X",
+      "url": "https://nl.wiktionary.org/wiki/X"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter X is de 24e letter in het moderne Latijnse alfabet.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "X (letter)",
+      "url": "https://nl.wikipedia.org/wiki/X_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "X",
+      "url": "https://nl.wiktionary.org/wiki/X"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "X (letter)",
+      "url": "https://nl.wikipedia.org/wiki/X_(letter)"
+    }
+  ]
+}

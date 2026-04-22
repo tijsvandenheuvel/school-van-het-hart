@@ -1,0 +1,27 @@
+{
+  "slug": "tribe",
+  "title": "tribe",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:04:43.070Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "The term tribe is used in many different contexts to refer to a category of human social group. The predominant worldwide use of the term in English is in the discipline of anthropology. The definition is contested, in part due to conflicting theoretical understandings of social and kinship structures, and also reflecting the problematic application of this concept to extremely diverse human societies. Its concept is often contrasted by anthropologists with other social and kinship groups, being hierarchically larger than a lineage or clan, but smaller than a chiefdom, ethnicity, nation or state. These terms are similarly disputed. In some cases tribes have legal recognition and some degree of political autonomy from national or federal government, but this legalistic usage of the term may conflict with anthropological definitions.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Tribe",
+      "url": "https://en.wikipedia.org/wiki/Tribe"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Tribe",
+      "url": "https://en.wikipedia.org/wiki/Tribe"
+    }
+  ]
+}

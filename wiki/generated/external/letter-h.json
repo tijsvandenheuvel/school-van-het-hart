@@ -1,0 +1,42 @@
+{
+  "slug": "letter-h",
+  "title": "H",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:32.459Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de h, de achtste letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "H",
+      "url": "https://nl.wiktionary.org/wiki/H"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter H is de achtste letter van het moderne Latijnse alfabet. De Semitische letter ח (Ħêt) (IPA [ħ]) stelde waarschijnlijk een hek voor.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "H (letter)",
+      "url": "https://nl.wikipedia.org/wiki/H_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "H",
+      "url": "https://nl.wiktionary.org/wiki/H"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "H (letter)",
+      "url": "https://nl.wikipedia.org/wiki/H_(letter)"
+    }
+  ]
+}

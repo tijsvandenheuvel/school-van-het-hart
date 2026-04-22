@@ -1,0 +1,36 @@
+{
+  "slug": "lucht",
+  "title": "Lucht",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:15.643Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "mengsel van gassen waaruit de atmosfeer bestaat",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "lucht",
+      "url": "https://nl.wiktionary.org/wiki/lucht"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘gasmengsel van zuurstof en stikstof’ voor het eerst aangetroffen in het jaar 1240",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "lucht",
+      "url": "https://nl.wiktionary.org/wiki/lucht"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "lucht",
+      "url": "https://nl.wiktionary.org/wiki/lucht"
+    }
+  ]
+}

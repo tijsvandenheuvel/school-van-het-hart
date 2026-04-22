@@ -2,6 +2,7 @@
   const changelogPath = './docs/changelog.md';
   const visionTextPath = './docs/visietekst.md';
   const wikiIndexPath = './wiki/meta/curated-index.md';
+  const wikiExternalBasePath = './wiki/generated/external';
   const sourceCatalogPath = './wiki/meta/source-catalog.json';
   const ignoredTermsPath = './wiki/meta/ignored-terms.md';
   const collator = new Intl.Collator('nl', { sensitivity: 'base' });
@@ -425,6 +426,8 @@
     indexEntries: [],
     outgoingBySlug: new Map(),
     incomingBySlug: new Map(),
+    externalBySlug: new Map(),
+    externalLoadingBySlug: new Map(),
     currentSlug: '',
     backStack: [],
     forwardStack: [],
@@ -1599,6 +1602,159 @@
     renderWikiStatus();
   }
 
+  function shouldRenderWikiExternalContext(item) {
+    return Boolean(item) && (item.indexType === 'word' || item.indexType === 'letter');
+  }
+
+  async function loadWikiExternalContext(item) {
+    if (!shouldRenderWikiExternalContext(item)) return null;
+    if (wikiState.externalBySlug.has(item.slug)) return wikiState.externalBySlug.get(item.slug);
+    if (wikiState.externalLoadingBySlug.has(item.slug)) return wikiState.externalLoadingBySlug.get(item.slug);
+
+    const request = (async () => {
+      let context = null;
+
+      try {
+        const staticResponse = await fetch(`${wikiExternalBasePath}/${encodeURIComponent(item.slug)}.json`, { cache: 'no-store' });
+        if (staticResponse.ok) {
+          context = await staticResponse.json();
+        }
+      } catch (error) {
+        context = null;
+      }
+
+      if (!context) {
+        const apiResponse = await fetch(
+          `/api/wiki/external?slug=${encodeURIComponent(item.slug)}&title=${encodeURIComponent(item.title)}&indexType=${encodeURIComponent(item.indexType || 'word')}`,
+          { cache: 'no-store' }
+        );
+        if (!apiResponse.ok) throw new Error(`HTTP ${apiResponse.status}`);
+        context = await apiResponse.json();
+      }
+
+      wikiState.externalBySlug.set(item.slug, context);
+      return context;
+    })()
+      .catch(() => {
+        const fallback = {
+          slug: item.slug,
+          title: item.title,
+          indexType: item.indexType || 'word',
+          status: 'unresolved',
+          intro: null,
+          etymology: null,
+          fallbackNote: 'Voor deze ingang is nog geen externe duiding beschikbaar.',
+          sources: []
+        };
+        wikiState.externalBySlug.set(item.slug, fallback);
+        return fallback;
+      })
+      .finally(() => {
+        wikiState.externalLoadingBySlug.delete(item.slug);
+      });
+
+    wikiState.externalLoadingBySlug.set(item.slug, request);
+    return request;
+  }
+
+  function createWikiExternalSource(source) {
+    if (!source || !source.url) return null;
+
+    const paragraph = document.createElement('p');
+    paragraph.className = 'wiki-external-source';
+    paragraph.appendChild(document.createTextNode('Bron: '));
+
+    const link = document.createElement('a');
+    link.href = source.url;
+    link.target = '_blank';
+    link.rel = 'noreferrer';
+    link.textContent = [source.project, source.language ? source.language.toUpperCase() : '', source.title].filter(Boolean).join(' · ');
+    paragraph.appendChild(link);
+
+    return paragraph;
+  }
+
+  function renderWikiExternalSection(item) {
+    if (!shouldRenderWikiExternalContext(item)) return null;
+
+    const card = document.createElement('section');
+    card.className = 'wiki-external-card';
+
+    const header = document.createElement('header');
+    header.className = 'wiki-external-card-header';
+
+    const kicker = document.createElement('p');
+    kicker.className = 'wiki-external-kicker';
+    kicker.textContent = 'Externe duiding';
+    header.appendChild(kicker);
+
+    const title = document.createElement('h3');
+    title.className = 'wiki-external-title';
+    title.textContent = 'Internetverklaring en etymologie';
+    header.appendChild(title);
+
+    card.appendChild(header);
+
+    const context = wikiState.externalBySlug.get(item.slug);
+
+    if (!context) {
+      const loading = document.createElement('p');
+      loading.className = 'wiki-external-note';
+      loading.textContent = 'Externe duiding wordt geladen...';
+      card.appendChild(loading);
+      return card;
+    }
+
+    if (context.intro) {
+      const intro = document.createElement('section');
+      intro.className = 'wiki-external-section';
+
+      const label = document.createElement('h4');
+      label.className = 'wiki-external-label';
+      label.textContent = context.intro.label || 'Internetverklaring';
+      intro.appendChild(label);
+
+      const copy = document.createElement('p');
+      copy.className = 'wiki-external-copy';
+      copy.textContent = context.intro.text;
+      intro.appendChild(copy);
+
+      const source = createWikiExternalSource(context.intro.source);
+      if (source) intro.appendChild(source);
+
+      card.appendChild(intro);
+    }
+
+    if (context.etymology) {
+      const etymology = document.createElement('section');
+      etymology.className = 'wiki-external-section';
+
+      const label = document.createElement('h4');
+      label.className = 'wiki-external-label';
+      label.textContent = context.etymology.label || 'Etymologie';
+      etymology.appendChild(label);
+
+      const copy = document.createElement('p');
+      copy.className = 'wiki-external-copy';
+      copy.textContent = context.etymology.text;
+      etymology.appendChild(copy);
+
+      const source = createWikiExternalSource(context.etymology.source);
+      if (source) etymology.appendChild(source);
+
+      card.appendChild(etymology);
+    }
+
+    if (!context.intro && !context.etymology) {
+      const note = document.createElement('p');
+      note.className = 'wiki-external-note';
+      note.textContent = context.fallbackNote || 'Voor deze ingang is nog geen externe duiding beschikbaar.';
+      card.appendChild(note);
+    }
+
+    return card;
+  }
+
   function renderWikiReader() {
     wikiItemView.replaceChildren();
 
@@ -1646,7 +1802,23 @@
     article.className = 'wiki-article';
     article.appendChild(renderMarkdown(item.body, { excludeSlug: item.slug }));
 
+    const external = renderWikiExternalSection(item);
     wikiItemView.append(header, article);
+    if (external) {
+      wikiItemView.appendChild(external);
+    }
+
+    if (
+      shouldRenderWikiExternalContext(item) &&
+      !wikiState.externalBySlug.has(item.slug) &&
+      !wikiState.externalLoadingBySlug.has(item.slug)
+    ) {
+      loadWikiExternalContext(item).then(() => {
+        if (wikiState.currentSlug === item.slug) {
+          renderWikiReader();
+        }
+      });
+    }
   }
 
   function updateWikiHistoryButtons() {

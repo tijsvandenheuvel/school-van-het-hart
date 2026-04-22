@@ -1,0 +1,36 @@
+{
+  "slug": "herstel",
+  "title": "herstel",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:03:47.376Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "een terugkeer naar een vorige toestand",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "herstel",
+      "url": "https://nl.wiktionary.org/wiki/herstel"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "hier komt de etymologie van het woord-->",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "herstel",
+      "url": "https://nl.wiktionary.org/wiki/herstel"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "herstel",
+      "url": "https://nl.wiktionary.org/wiki/herstel"
+    }
+  ]
+}

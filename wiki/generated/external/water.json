@@ -1,0 +1,36 @@
+{
+  "slug": "water",
+  "title": "Water",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:28.615Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "vloeistof die zelf helder is, zonder geur of smaak, maar waar veel andere stoffen gemakkelijk in opgaan",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "water",
+      "url": "https://nl.wiktionary.org/wiki/water"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘vloeistof’ voor het eerst aangetroffen in het jaar 901 via van dat teruggaat op de e r/n-stam *wator van de -stam *wódr- Verwant in Germaans:",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "water",
+      "url": "https://nl.wiktionary.org/wiki/water"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "water",
+      "url": "https://nl.wiktionary.org/wiki/water"
+    }
+  ]
+}

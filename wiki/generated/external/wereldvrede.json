@@ -1,0 +1,33 @@
+{
+  "slug": "wereldvrede",
+  "title": "Wereldvrede",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:29.210Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "in positieve termen gedefinieerd als een heilzame toestand van rust en harmonie, of in negatieve toestand als afwezigheid van stoornis, twist of strijd over de hele wereld",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "wereldvrede",
+      "url": "https://nl.wiktionary.org/wiki/wereldvrede"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "wereldvrede",
+      "url": "https://nl.wiktionary.org/wiki/wereldvrede"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Wereldvrede",
+      "url": "https://nl.wikipedia.org/wiki/Wereldvrede"
+    }
+  ]
+}

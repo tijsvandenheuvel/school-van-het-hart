@@ -1,0 +1,42 @@
+{
+  "slug": "letter-v",
+  "title": "V",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:37.687Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de v, de tweeëntwintigste letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "V",
+      "url": "https://nl.wiktionary.org/wiki/V"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter V is de 22ste letter van het moderne Latijnse alfabet.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "V (letter)",
+      "url": "https://nl.wikipedia.org/wiki/V_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "V",
+      "url": "https://nl.wiktionary.org/wiki/V"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "V (letter)",
+      "url": "https://nl.wikipedia.org/wiki/V_(letter)"
+    }
+  ]
+}

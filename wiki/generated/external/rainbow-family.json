@@ -1,0 +1,27 @@
+{
+  "slug": "rainbow-family",
+  "title": "rainbow family",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:06:59.869Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "The Rainbow Family of Living Light is a Counterculture movement, in existence since approximately 1970. It is a loose affiliation of individuals, some nomadic, generally asserting that it has no leader. They put on yearly, primitive camping events on public land known as Rainbow Gatherings.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Rainbow Family",
+      "url": "https://en.wikipedia.org/wiki/Rainbow_Family"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Rainbow Family",
+      "url": "https://en.wikipedia.org/wiki/Rainbow_Family"
+    }
+  ]
+}

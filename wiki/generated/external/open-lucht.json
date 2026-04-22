@@ -1,0 +1,27 @@
+{
+  "slug": "open-lucht",
+  "title": "open lucht",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:05:34.634Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "De open lucht of openlucht is de ruimte buitenshuis, op straat, in het park of buiten de stad. De term onderstreept het onbegrensde en vaak ook natuurlijke karakter van de locatie. De buitenlucht is hetzelfde, maar die term legt de nadruk meestal op de gezondheid van de frisse lucht en minder op de vrije natuur in het landschap. De meeste openbare ruimte bevindt zich in de open lucht.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Open lucht",
+      "url": "https://nl.wikipedia.org/wiki/Open_lucht"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Open lucht",
+      "url": "https://nl.wikipedia.org/wiki/Open_lucht"
+    }
+  ]
+}

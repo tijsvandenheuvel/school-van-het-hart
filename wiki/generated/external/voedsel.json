@@ -1,0 +1,36 @@
+{
+  "slug": "voedsel",
+  "title": "voedsel",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:06:18.325Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "alles wat een levend wezen tot zich neemt om aan bouwstof en energie te komen. Dit kan zowel een vaste of vloeibare substantie zijn.",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "voedsel",
+      "url": "https://nl.wiktionary.org/wiki/voedsel"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘spijs’ voor het eerst aangetroffen in 1287 van voeden",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "voedsel",
+      "url": "https://nl.wiktionary.org/wiki/voedsel"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "voedsel",
+      "url": "https://nl.wiktionary.org/wiki/voedsel"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "materie",
+  "title": "materie",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:05:22.376Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "de bouwsteen waaruit de (waarneembare) wereld is opgebouwd",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "materie",
+      "url": "https://nl.wiktionary.org/wiki/materie"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Leenwoord uit het Latijn, in de betekenis van ‘stof’ voor het eerst aangetroffen in 1240",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "materie",
+      "url": "https://nl.wiktionary.org/wiki/materie"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "materie",
+      "url": "https://nl.wiktionary.org/wiki/materie"
+    }
+  ]
+}

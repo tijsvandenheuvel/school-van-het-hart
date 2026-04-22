@@ -1,0 +1,42 @@
+{
+  "slug": "letter-c",
+  "title": "C",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:30.833Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de c, de derde letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "C",
+      "url": "https://nl.wiktionary.org/wiki/C"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Oorspronkelijk gebruikten de Romeinen de letter C voor zowel Later voegden ze een horizontaal streepje toe en ontstond de letter G.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "C (letter)",
+      "url": "https://nl.wikipedia.org/wiki/C_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "C",
+      "url": "https://nl.wiktionary.org/wiki/C"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "C (letter)",
+      "url": "https://nl.wikipedia.org/wiki/C_(letter)"
+    }
+  ]
+}

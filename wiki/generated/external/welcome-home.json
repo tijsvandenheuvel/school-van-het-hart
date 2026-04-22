@@ -1,0 +1,27 @@
+{
+  "slug": "welcome-home",
+  "title": "welcome home",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:07:26.944Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "Welcome Home is een Nederlands televisieprogramma van RTL 4, gepresenteerd door Natasja Froger. De eerste aflevering werd uitgezonden op 10 mei 2011.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Welcome Home (televisieprogramma)",
+      "url": "https://nl.wikipedia.org/wiki/Welcome_Home_(televisieprogramma)"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Welcome Home (televisieprogramma)",
+      "url": "https://nl.wikipedia.org/wiki/Welcome_Home_(televisieprogramma)"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "slug": "rainbow",
+  "title": "rainbow",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:06:45.191Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "Rainbow is een Brits-Amerikaanse rockgroep die in 1975 ontstond uit een samenwerkingsverband tussen Ritchie Blackmore en de Amerikaanse groep Elf.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Rainbow (band)",
+      "url": "https://nl.wikipedia.org/wiki/Rainbow_(band)"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Rainbow (band)",
+      "url": "https://nl.wikipedia.org/wiki/Rainbow_(band)"
+    }
+  ]
+}

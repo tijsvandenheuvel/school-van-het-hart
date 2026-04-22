@@ -1,0 +1,36 @@
+{
+  "slug": "genezing",
+  "title": "genezing",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:03:38.645Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "het proces van het weer gezond worden",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "genezing",
+      "url": "https://nl.wiktionary.org/wiki/genezing"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "van genezen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "genezing",
+      "url": "https://nl.wiktionary.org/wiki/genezing"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "genezing",
+      "url": "https://nl.wiktionary.org/wiki/genezing"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "permacultuur",
+  "title": "permacultuur",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:06:06.318Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "agrarische methode waarbij rendabele productie stelselmatig vorm krijgt als onderdeel van duurzame natuurlijke kringlopen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "permacultuur",
+      "url": "https://nl.wiktionary.org/wiki/permacultuur"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "van , in de betekenis ‘vorm van duurzame landbouw’ aangetroffen vanaf 1985 (zie vindplaats hieronder)",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "permacultuur",
+      "url": "https://nl.wiktionary.org/wiki/permacultuur"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "permacultuur",
+      "url": "https://nl.wiktionary.org/wiki/permacultuur"
+    }
+  ]
+}

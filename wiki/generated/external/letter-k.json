@@ -1,0 +1,42 @@
+{
+  "slug": "letter-k",
+  "title": "K",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:33.800Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de k, de elfde letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "K",
+      "url": "https://nl.wiktionary.org/wiki/K"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter K is de elfde letter in het moderne Latijnse alfabet. De letter K komt voort uit de Griekse Kappa (Κ, κ), ontstaan uit de Semitische letter Kaf (of Kap) met het pictogram van een open hand.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "K (letter)",
+      "url": "https://nl.wikipedia.org/wiki/K_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "K",
+      "url": "https://nl.wiktionary.org/wiki/K"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "K (letter)",
+      "url": "https://nl.wikipedia.org/wiki/K_(letter)"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "slug": "letter-n",
+  "title": "N",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:35.153Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de n, de veertiende letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "N",
+      "url": "https://nl.wiktionary.org/wiki/N"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter N is de veertiende letter in het moderne Latijnse alfabet. De Semitische Nûn was waarschijnlijk het plaatje van een slang, de klank was /n/ evenals in het Grieks, Etruskisch, Latijn en alle moderne talen.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "N (letter)",
+      "url": "https://nl.wikipedia.org/wiki/N_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "N",
+      "url": "https://nl.wiktionary.org/wiki/N"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "N (letter)",
+      "url": "https://nl.wikipedia.org/wiki/N_(letter)"
+    }
+  ]
+}

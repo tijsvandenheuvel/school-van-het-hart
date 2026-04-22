@@ -1,0 +1,27 @@
+{
+  "slug": "ademruimte",
+  "title": "ademruimte",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:05:38.917Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "ruimte die iemand de gelegenheid geeft om te kunnen ademhalen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "ademruimte",
+      "url": "https://nl.wiktionary.org/wiki/ademruimte"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "ademruimte",
+      "url": "https://nl.wiktionary.org/wiki/ademruimte"
+    }
+  ]
+}

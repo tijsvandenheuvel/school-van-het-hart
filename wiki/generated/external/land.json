@@ -1,0 +1,36 @@
+{
+  "slug": "land",
+  "title": "land",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:02:25.073Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "gedeelte van het aardoppervlak dat boven water (rivieren, zeeën, oceanen e.d.) uitsteekt",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "land",
+      "url": "https://nl.wiktionary.org/wiki/land"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘grond, bouwland’ voor het eerst aangetroffen in 801 afkomstig van: lant",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "land",
+      "url": "https://nl.wiktionary.org/wiki/land"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "land",
+      "url": "https://nl.wiktionary.org/wiki/land"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "samenleven",
+  "title": "samenleven",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:04:28.016Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "In één huis wonen zonder getrouwd te zijn, hokken, samenhokken, samenwonen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "samenleven",
+      "url": "https://nl.wiktionary.org/wiki/samenleven"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "samenstelling van het bijwoord samen en leven",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "samenleven",
+      "url": "https://nl.wiktionary.org/wiki/samenleven"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "samenleven",
+      "url": "https://nl.wiktionary.org/wiki/samenleven"
+    }
+  ]
+}

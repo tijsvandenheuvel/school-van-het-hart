@@ -1,0 +1,36 @@
+{
+  "slug": "veiligheid",
+  "title": "Veiligheid",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:25.472Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "een situatie waarin een bepaald gevaar niets kan aanrichten",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "veiligheid",
+      "url": "https://nl.wiktionary.org/wiki/veiligheid"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Afgeleid van veilig .",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "veiligheid",
+      "url": "https://nl.wiktionary.org/wiki/veiligheid"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "veiligheid",
+      "url": "https://nl.wiktionary.org/wiki/veiligheid"
+    }
+  ]
+}

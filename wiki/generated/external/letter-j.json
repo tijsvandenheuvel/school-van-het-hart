@@ -1,0 +1,42 @@
+{
+  "slug": "letter-j",
+  "title": "J",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:33.407Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de j, de tiende letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "J",
+      "url": "https://nl.wiktionary.org/wiki/J"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter J was oorspronkelijk alleen de hoofdlettervorm van de i.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "J (letter)",
+      "url": "https://nl.wikipedia.org/wiki/J_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "J",
+      "url": "https://nl.wiktionary.org/wiki/J"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "J (letter)",
+      "url": "https://nl.wikipedia.org/wiki/J_(letter)"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "slug": "bodem",
+  "title": "bodem",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:02:23.562Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "een onderkant",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "bodem",
+      "url": "https://nl.wiktionary.org/wiki/bodem"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘grond’ voor het eerst aangetroffen in het jaar 1260",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "bodem",
+      "url": "https://nl.wiktionary.org/wiki/bodem"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "bodem",
+      "url": "https://nl.wiktionary.org/wiki/bodem"
+    }
+  ]
+}

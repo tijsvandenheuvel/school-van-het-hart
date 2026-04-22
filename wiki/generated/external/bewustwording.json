@@ -1,0 +1,27 @@
+{
+  "slug": "bewustwording",
+  "title": "bewustwording",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:03:00.229Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "het bewust worden van iets",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "bewustwording",
+      "url": "https://nl.wiktionary.org/wiki/bewustwording"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "bewustwording",
+      "url": "https://nl.wiktionary.org/wiki/bewustwording"
+    }
+  ]
+}

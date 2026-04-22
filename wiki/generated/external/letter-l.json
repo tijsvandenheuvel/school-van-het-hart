@@ -1,0 +1,42 @@
+{
+  "slug": "letter-l",
+  "title": "L",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:34.320Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de l, de twaalfde letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "L",
+      "url": "https://nl.wiktionary.org/wiki/L"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter L gaat terug op de Semitische letter Lamed die de fonetische klank /l/ weergaf, zoals ook de Griekse letter Lambda Λ (hoofdletter) of λ (kleine letter), en de Etruskische en Latijnse letters.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "L (letter)",
+      "url": "https://nl.wikipedia.org/wiki/L_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "L",
+      "url": "https://nl.wiktionary.org/wiki/L"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "L (letter)",
+      "url": "https://nl.wikipedia.org/wiki/L_(letter)"
+    }
+  ]
+}

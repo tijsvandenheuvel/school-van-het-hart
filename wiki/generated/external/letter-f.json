@@ -1,0 +1,42 @@
+{
+  "slug": "letter-f",
+  "title": "F",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:31.832Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de f, de zesde letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "F",
+      "url": "https://nl.wiktionary.org/wiki/F"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter F is de zesde letter van het moderne Latijnse alfabet.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "F (letter)",
+      "url": "https://nl.wikipedia.org/wiki/F_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "F",
+      "url": "https://nl.wiktionary.org/wiki/F"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "F (letter)",
+      "url": "https://nl.wikipedia.org/wiki/F_(letter)"
+    }
+  ]
+}

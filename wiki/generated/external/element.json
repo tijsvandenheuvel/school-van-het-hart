@@ -1,0 +1,36 @@
+{
+  "slug": "element",
+  "title": "element",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:03:55.136Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "de naam voor een stof die via de scheikunde niet meer in verschillende substanties te splitsen is, zo'n stof bestaat louter uit één type van atomen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "element",
+      "url": "https://nl.wiktionary.org/wiki/element"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Van '' of elementum''. In de betekenis van ‘hoofdstof, eenheid’ voor het eerst aangetroffen in 1265 Afgeleid van de eerste drie letters van het Romeinse alfabet: L-M-N.",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "element",
+      "url": "https://nl.wiktionary.org/wiki/element"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "element",
+      "url": "https://nl.wiktionary.org/wiki/element"
+    }
+  ]
+}

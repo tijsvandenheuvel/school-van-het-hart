@@ -1,0 +1,36 @@
+{
+  "slug": "synchronisatie",
+  "title": "synchronisatie",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:02:29.446Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "het aanbrengen van correlatie naar tijd",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "synchronisatie",
+      "url": "https://nl.wiktionary.org/wiki/synchronisatie"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "van synchroniseren",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "synchronisatie",
+      "url": "https://nl.wiktionary.org/wiki/synchronisatie"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "synchronisatie",
+      "url": "https://nl.wiktionary.org/wiki/synchronisatie"
+    }
+  ]
+}

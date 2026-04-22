@@ -1,0 +1,36 @@
+{
+  "slug": "liefde",
+  "title": "liefde",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:05:09.105Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "uiting of gevoel van grote genegenheid en/of het zich aangetrokken voelen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "liefde",
+      "url": "https://nl.wiktionary.org/wiki/liefde"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘genegenheid’ voor het eerst aangetroffen in 1291",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "liefde",
+      "url": "https://nl.wiktionary.org/wiki/liefde"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "liefde",
+      "url": "https://nl.wiktionary.org/wiki/liefde"
+    }
+  ]
+}

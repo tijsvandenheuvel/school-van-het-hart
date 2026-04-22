@@ -1,0 +1,36 @@
+{
+  "slug": "gezondheid",
+  "title": "gezondheid",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:03:41.613Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "welbevinden, in goede staat zijn",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "gezondheid",
+      "url": "https://nl.wiktionary.org/wiki/gezondheid"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Afgeleid van gezond .",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "gezondheid",
+      "url": "https://nl.wiktionary.org/wiki/gezondheid"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "gezondheid",
+      "url": "https://nl.wiktionary.org/wiki/gezondheid"
+    }
+  ]
+}

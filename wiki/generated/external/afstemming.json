@@ -1,0 +1,36 @@
+{
+  "slug": "afstemming",
+  "title": "Afstemming",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:05.212Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "het afstemmen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "afstemming",
+      "url": "https://nl.wiktionary.org/wiki/afstemming"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "van afstemmen",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "afstemming",
+      "url": "https://nl.wiktionary.org/wiki/afstemming"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "afstemming",
+      "url": "https://nl.wiktionary.org/wiki/afstemming"
+    }
+  ]
+}

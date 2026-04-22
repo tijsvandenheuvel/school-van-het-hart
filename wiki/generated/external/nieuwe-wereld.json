@@ -1,0 +1,42 @@
+{
+  "slug": "nieuwe-wereld",
+  "title": "Nieuwe wereld",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:18.322Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "drie continenten die in Europa NOG NIET bekend waren voor de Europese ontdekkingen van 1492. Dit zijn Noord-Amerika, Zuid-Amerika en Oceanië",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Nieuwe Wereld",
+      "url": "https://nl.wiktionary.org/wiki/Nieuwe_Wereld"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De woorden Mundus Novus werden door ontdekkingsreiziger Amerigo Vespucci in brieven gebruikt om aan te duiden dat zijn voorganger Christoffel Columbus, in tegenstelling tot wat die zelf dacht, niet Azië had bereikt via de westelijke route, maar een geheel nieuw deel van de wereld.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Nieuwe Wereld",
+      "url": "https://nl.wikipedia.org/wiki/Nieuwe_Wereld"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Nieuwe Wereld",
+      "url": "https://nl.wiktionary.org/wiki/Nieuwe_Wereld"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Nieuwe Wereld",
+      "url": "https://nl.wikipedia.org/wiki/Nieuwe_Wereld"
+    }
+  ]
+}

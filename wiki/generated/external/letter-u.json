@@ -1,0 +1,42 @@
+{
+  "slug": "letter-u",
+  "title": "U",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:37.373Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de u, de eenentwintigste letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "U",
+      "url": "https://nl.wiktionary.org/wiki/U"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter U is de 21ste letter in het moderne Latijnse alfabet en de vijfde klinker.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "U (letter)",
+      "url": "https://nl.wikipedia.org/wiki/U_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "U",
+      "url": "https://nl.wiktionary.org/wiki/U"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "U (letter)",
+      "url": "https://nl.wikipedia.org/wiki/U_(letter)"
+    }
+  ]
+}

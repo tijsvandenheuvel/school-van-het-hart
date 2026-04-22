@@ -1,0 +1,42 @@
+{
+  "slug": "letter-q",
+  "title": "Q",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:36.130Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de q, de zeventiende letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Q",
+      "url": "https://nl.wiktionary.org/wiki/Q"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter Q is de zeventiende letter van het moderne Latijnse alfabet.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Q (letter)",
+      "url": "https://nl.wikipedia.org/wiki/Q_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Q",
+      "url": "https://nl.wiktionary.org/wiki/Q"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Q (letter)",
+      "url": "https://nl.wikipedia.org/wiki/Q_(letter)"
+    }
+  ]
+}

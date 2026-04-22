@@ -1,0 +1,27 @@
+{
+  "slug": "cirkels",
+  "title": "Cirkels",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:06.774Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "DOORVERWIJZING Cirkel (doorverwijspagina)",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Cirkels",
+      "url": "https://nl.wikipedia.org/wiki/Cirkels"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Cirkels",
+      "url": "https://nl.wikipedia.org/wiki/Cirkels"
+    }
+  ]
+}

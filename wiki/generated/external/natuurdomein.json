@@ -1,0 +1,27 @@
+{
+  "slug": "natuurdomein",
+  "title": "natuurdomein",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:06:03.307Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "DOORVERWIJZINGNatuurpark",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Natuurdomein",
+      "url": "https://nl.wikipedia.org/wiki/Natuurdomein"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Natuurdomein",
+      "url": "https://nl.wikipedia.org/wiki/Natuurdomein"
+    }
+  ]
+}

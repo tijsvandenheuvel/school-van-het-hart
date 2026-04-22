@@ -1,0 +1,27 @@
+{
+  "slug": "seedcamp",
+  "title": "seedcamp",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:07:18.843Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "Seedcamp is a European seed-stage venture capital fund, headquartered in London, launched in May 2007 by a group of 30 European investors. The fund's Managing Partners are Reshma Sohoni and Carlos Espinal.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Seedcamp",
+      "url": "https://en.wikipedia.org/wiki/Seedcamp"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "en",
+      "title": "Seedcamp",
+      "url": "https://en.wikipedia.org/wiki/Seedcamp"
+    }
+  ]
+}

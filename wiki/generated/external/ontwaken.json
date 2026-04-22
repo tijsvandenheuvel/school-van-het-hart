@@ -1,0 +1,36 @@
+{
+  "slug": "ontwaken",
+  "title": "ontwaken",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:03:07.096Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "uit de slaap weer tot vol bewustzijn terugkeren",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "ontwaken",
+      "url": "https://nl.wiktionary.org/wiki/ontwaken"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘wakker worden’ voor het eerst aangetroffen in 1265 Afgeleid van waken",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "ontwaken",
+      "url": "https://nl.wiktionary.org/wiki/ontwaken"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "ontwaken",
+      "url": "https://nl.wiktionary.org/wiki/ontwaken"
+    }
+  ]
+}

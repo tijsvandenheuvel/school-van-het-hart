@@ -1,0 +1,42 @@
+{
+  "slug": "letter-g",
+  "title": "G",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:32.149Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de g, de zevende letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "G",
+      "url": "https://nl.wiktionary.org/wiki/G"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter G is de zevende letter van het moderne Latijnse alfabet.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "G (letter)",
+      "url": "https://nl.wikipedia.org/wiki/G_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "G",
+      "url": "https://nl.wiktionary.org/wiki/G"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "G (letter)",
+      "url": "https://nl.wikipedia.org/wiki/G_(letter)"
+    }
+  ]
+}

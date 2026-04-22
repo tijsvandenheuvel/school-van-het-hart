@@ -1,0 +1,27 @@
+{
+  "slug": "leerschool",
+  "title": "leerschool",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:04:57.161Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "plaats waar of omstandigheden waarin men zich in iets bekwaamt",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "leerschool",
+      "url": "https://nl.wiktionary.org/wiki/leerschool"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "leerschool",
+      "url": "https://nl.wiktionary.org/wiki/leerschool"
+    }
+  ]
+}

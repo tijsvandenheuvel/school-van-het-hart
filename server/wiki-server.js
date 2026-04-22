@@ -5,6 +5,7 @@ const path = require('node:path');
 require(path.join(__dirname, '..', 'assets/js/wiki-core.js'));
 
 const Core = globalThis.SVHHWikiCore;
+const External = require(path.join(__dirname, 'wiki-external.js'));
 const ROOT_DIR = path.resolve(__dirname, '..');
 const ITEMS_DIR = path.join(ROOT_DIR, 'wiki', 'items');
 const CURATED_INDEX_PATH = path.join(ROOT_DIR, 'wiki', 'meta', 'curated-index.md');
@@ -301,6 +302,32 @@ const server = http.createServer(async (request, response) => {
   try {
     if (request.method === 'GET' && url.pathname === '/api/wiki/index') {
       sendJson(response, 200, await buildWikiState());
+      return;
+    }
+
+    if (request.method === 'GET' && url.pathname === '/api/wiki/external') {
+      const slug = String(url.searchParams.get('slug') || '').trim();
+      const title = String(url.searchParams.get('title') || '').trim();
+      const indexType = String(url.searchParams.get('indexType') || '').trim();
+      const knownEntries = await External.readVisibleExternalEntries();
+      let entry = knownEntries.find((candidate) => candidate.slug === slug);
+
+      if (!entry && title) {
+        entry = {
+          slug: slug || Core.slugify(title),
+          title,
+          indexType: indexType || (/^[A-Za-z]$/.test(title) ? 'letter' : 'word')
+        };
+      }
+
+      if (!entry) {
+        sendJson(response, 400, {
+          error: 'Geef minstens een bekende slug of een title mee.'
+        });
+        return;
+      }
+
+      sendJson(response, 200, await External.generateAndPersistExternalContext(entry));
       return;
     }
 

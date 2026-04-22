@@ -1,0 +1,36 @@
+{
+  "slug": "consensus",
+  "title": "consensus",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:04:19.215Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "overeenstemming binnen een gemeenschap, een groepering",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "consensus",
+      "url": "https://nl.wiktionary.org/wiki/consensus"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Leenwoord uit het Latijn, in de betekenis van ‘eenstemmigheid’ voor het eerst aangetroffen in het jaar 1847",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "consensus",
+      "url": "https://nl.wiktionary.org/wiki/consensus"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "consensus",
+      "url": "https://nl.wiktionary.org/wiki/consensus"
+    }
+  ]
+}

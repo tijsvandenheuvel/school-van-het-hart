@@ -1,0 +1,36 @@
+{
+  "slug": "vrijheid",
+  "title": "Vrijheid",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:27.268Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "het vrij zijn",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "vrijheid",
+      "url": "https://nl.wiktionary.org/wiki/vrijheid"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Afgeleid van vrij",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "vrijheid",
+      "url": "https://nl.wiktionary.org/wiki/vrijheid"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "vrijheid",
+      "url": "https://nl.wiktionary.org/wiki/vrijheid"
+    }
+  ]
+}

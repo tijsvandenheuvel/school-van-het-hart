@@ -1,0 +1,42 @@
+{
+  "slug": "letter-d",
+  "title": "D",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:31.218Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de d, de vierde letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "D",
+      "url": "https://nl.wiktionary.org/wiki/D"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter D is de vierde letter van het moderne Latijnse alfabet. De semitische letter Dâlet stamt vermoedelijk af van het logogram van een vis of een deur.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "D (letter)",
+      "url": "https://nl.wikipedia.org/wiki/D_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "D",
+      "url": "https://nl.wiktionary.org/wiki/D"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "D (letter)",
+      "url": "https://nl.wikipedia.org/wiki/D_(letter)"
+    }
+  ]
+}

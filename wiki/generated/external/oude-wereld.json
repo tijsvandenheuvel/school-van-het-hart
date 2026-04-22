@@ -1,0 +1,27 @@
+{
+  "slug": "oude-wereld",
+  "title": "oude wereld",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:02:34.384Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "de continenten die in Europa bekend waren voor de Europese ontdekkingen vanaf 1492. Dit zijn Europa, Afrika en Azië",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Oude Wereld",
+      "url": "https://nl.wiktionary.org/wiki/Oude_Wereld"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Oude Wereld",
+      "url": "https://nl.wiktionary.org/wiki/Oude_Wereld"
+    }
+  ]
+}

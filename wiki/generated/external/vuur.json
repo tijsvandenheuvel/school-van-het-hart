@@ -1,0 +1,36 @@
+{
+  "slug": "vuur",
+  "title": "Vuur",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:27.942Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "het geheel van de licht- en warmteverschijnselen die zich voordoen wanneer iets verbrandt, d.w.z. een oxidatiereactie ondergaat",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "vuur",
+      "url": "https://nl.wiktionary.org/wiki/vuur"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘lichtverschijnsel bij brand’ voor het eerst aangetroffen in 901. Middelnederlands vuur, vier, uit Oudnederlands fūir, ontwikkeld uit Oergermaans *fōr (genitief *funiz), bij Indo-Europees *péh₂ur̥ (gen. ph₂un-ós), een r/n-stam waartoe ook Tochaars A por̄, B pūwar, Umbrisch pir, Oudgrieks pûr (πῦρ), Armeens hur ‘fakkel’, Tsjechisch vero. pýř ‘gloeiende as’ en Hittitisch paḫḫur (gen. paḫḫuenaš) behoren. Evenals Nederduits Füür, Duits Feuer en Fries fjoer.",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "vuur",
+      "url": "https://nl.wiktionary.org/wiki/vuur"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "vuur",
+      "url": "https://nl.wiktionary.org/wiki/vuur"
+    }
+  ]
+}

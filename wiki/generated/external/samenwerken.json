@@ -1,0 +1,27 @@
+{
+  "slug": "samenwerken",
+  "title": "samenwerken",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:04:31.298Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "~ met met een of meer aan hetzelfde werken",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "samenwerken",
+      "url": "https://nl.wiktionary.org/wiki/samenwerken"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "samenwerken",
+      "url": "https://nl.wiktionary.org/wiki/samenwerken"
+    }
+  ]
+}

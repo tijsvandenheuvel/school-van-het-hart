@@ -1,0 +1,36 @@
+{
+  "slug": "paradigmashift",
+  "title": "paradigmashift",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T19:06:40.552Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "ingrijpende verandering in de heersende theorie op een vakgebied",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "paradigmashift",
+      "url": "https://nl.wiktionary.org/wiki/paradigmashift"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "gedeeltelijke leenvertaling van , op te vatten als",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "paradigmashift",
+      "url": "https://nl.wiktionary.org/wiki/paradigmashift"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "paradigmashift",
+      "url": "https://nl.wiktionary.org/wiki/paradigmashift"
+    }
+  ]
+}

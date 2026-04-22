@@ -1,0 +1,27 @@
+{
+  "slug": "levensschool",
+  "title": "Levensschool",
+  "indexType": "word",
+  "generatedAt": "2026-04-22T18:48:14.021Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "DOORVERWIJZINGBeroepsbegeleidende leerweg",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Levensschool",
+      "url": "https://nl.wikipedia.org/wiki/Levensschool"
+    }
+  },
+  "etymology": null,
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Levensschool",
+      "url": "https://nl.wikipedia.org/wiki/Levensschool"
+    }
+  ]
+}

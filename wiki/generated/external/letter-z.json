@@ -1,0 +1,42 @@
+{
+  "slug": "letter-z",
+  "title": "Z",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:38.958Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de z, de zesentwintigste letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Z",
+      "url": "https://nl.wiktionary.org/wiki/Z"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De letter Z is de 26e en laatste letter in het moderne Latijnse alfabet. In het vroege Latijn ontwikkelde de /z/-klank zich tot een /r/-klank, waardoor de Z overbodig werd.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Z (letter)",
+      "url": "https://nl.wikipedia.org/wiki/Z_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "Z",
+      "url": "https://nl.wiktionary.org/wiki/Z"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "Z (letter)",
+      "url": "https://nl.wikipedia.org/wiki/Z_(letter)"
+    }
+  ]
+}

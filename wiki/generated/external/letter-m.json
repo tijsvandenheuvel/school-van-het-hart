@@ -1,0 +1,42 @@
+{
+  "slug": "letter-m",
+  "title": "M",
+  "indexType": "letter",
+  "generatedAt": "2026-04-22T18:48:34.774Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hoofdletter van de m, de dertiende letter van het alfabet",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "M",
+      "url": "https://nl.wiktionary.org/wiki/M"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "De vorm is afkomstig van de Griekse letter Mu (Grieks) (Μ, μ) die zelf is gebaseerd op de Semitische letter Mem.",
+    "source": {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "M (letter)",
+      "url": "https://nl.wikipedia.org/wiki/M_(letter)"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "M",
+      "url": "https://nl.wiktionary.org/wiki/M"
+    },
+    {
+      "project": "Wikipedia",
+      "language": "nl",
+      "title": "M (letter)",
+      "url": "https://nl.wikipedia.org/wiki/M_(letter)"
+    }
+  ]
+}
