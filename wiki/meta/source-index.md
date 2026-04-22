@@ -3,7 +3,7 @@
 ## Overzicht
 
 - 4 bronteksten
-- 510 doorzoekbare passages
+- 692 doorzoekbare passages
 - 26 letterpagina's
 
 ## SvHH basisdoc
@@ -24,12 +24,12 @@
 
 - Bronbestand: `docs/bronnen/Excalibur scan A4.pdf`
 - Doorzoekbare tekstingang: [[Excalibur]]
-- Passages in de broncatalogus: 214
+- Passages in de broncatalogus: 407
 - Samenvatting: De gescande bron over het ontkende woord, karmische ontketening, taalgebruik en letter- of alfabetische orde.
 
 ## Het boek der geruststelling
 
 - Bronbestand: `docs/bronnen/Het boek der geruststelling A4.pdf`
 - Doorzoekbare tekstingang: [[Het boek der geruststelling]]
-- Passages in de broncatalogus: 106
+- Passages in de broncatalogus: 95
 - Samenvatting: De gescande bron over bevrijdingsgeschrift, hartstaal, woordenschat, spraakkunst en holistisch geometrisch taalgebruik.

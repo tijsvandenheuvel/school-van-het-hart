@@ -4,13 +4,14 @@ from __future__ import annotations
 
 import json
 import re
-import shutil
 import string
 import subprocess
 import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
+
+import cv2
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +31,11 @@ class SourceConfig:
     path: Path
     kind: str
     rotation: int = 0
+    ocr_rotations: tuple[int, ...] = ()
+    ocr_psms: tuple[str, ...] = ("4", "11")
+    passage_min_length: int = 80
+    scan_paragraph_target: int = 0
+    scan_max_parts: int = 0
     links: tuple[str, ...] = ()
 
 
@@ -56,6 +62,10 @@ SOURCE_CONFIGS = (
         summary="De gescande bron over het ontkende woord, karmische ontketening, taalgebruik en letter- of alfabetische orde.",
         path=ROOT / "docs" / "bronnen" / "Excalibur scan A4.pdf",
         kind="pdf",
+        ocr_rotations=(0, 90),
+        passage_min_length=120,
+        scan_paragraph_target=700,
+        scan_max_parts=24,
         links=("excalibur", "ex cal i bur", "het ontkende woord"),
     ),
     SourceConfig(
@@ -65,6 +75,10 @@ SOURCE_CONFIGS = (
         path=ROOT / "docs" / "bronnen" / "Het boek der geruststelling A4.pdf",
         kind="pdf",
         rotation=90,
+        ocr_rotations=(90, 0),
+        passage_min_length=120,
+        scan_paragraph_target=650,
+        scan_max_parts=20,
         links=("boek der geruststelling", "het boek der geruststelling", "geruststelling"),
     ),
 )
@@ -147,18 +161,41 @@ def render_pdf_pages(config: SourceConfig) -> list[Path]:
     return sorted(render_dir.glob("page-*.png"))
 
 
-def rotate_image(source: Path, rotation: int) -> Path:
-    if rotation == 0:
-        return source
+def get_rotation_candidates(config: SourceConfig) -> tuple[int, ...]:
+    rotations = config.ocr_rotations or ((config.rotation,) if config.rotation else (0,))
+    unique: list[int] = []
+    for rotation in rotations:
+        normalized = rotation % 360
+        if normalized not in unique:
+            unique.append(normalized)
+    return tuple(unique)
 
-    rotated_dir = TMP_DIR / f"{source.parent.name}-rot"
-    rotated_dir.mkdir(parents=True, exist_ok=True)
-    target = rotated_dir / f"{source.stem}-r{rotation}.png"
-    if target.exists():
-        return target
 
-    run_command("sips", "-r", str(rotation), str(source), "--out", str(target))
-    return target
+def rotate_grayscale_image(image, rotation: int):
+    normalized = rotation % 360
+    if normalized == 0:
+        return image
+    if normalized == 90:
+        return cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+    if normalized == 180:
+        return cv2.rotate(image, cv2.ROTATE_180)
+    if normalized == 270:
+        return cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    raise RuntimeError(f"Niet-ondersteunde OCR-rotatie: {rotation}")
+
+
+def prepare_ocr_variants(image_path: Path, rotation: int) -> dict[str, object]:
+    image = cv2.imread(str(image_path), cv2.IMREAD_GRAYSCALE)
+    if image is None:
+        raise RuntimeError(f"Kon pagina-afbeelding niet lezen: {image_path}")
+
+    rotated = rotate_grayscale_image(image, rotation)
+    normalized = cv2.normalize(rotated, None, 0, 255, cv2.NORM_MINMAX)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8)).apply(normalized)
+    return {
+        "gray": normalized,
+        "clahe": clahe,
+    }
 
 
 def clean_ocr_text(text: str) -> str:
@@ -191,19 +228,147 @@ def clean_ocr_text(text: str) -> str:
     return "\n".join(compact).strip()
 
 
-def ocr_image(image_path: Path) -> str:
-    output = run_command(
-        "tesseract",
-        "--tessdata-dir",
-        str(TESSDATA_DIR),
-        str(image_path),
-        "stdout",
-        "-l",
-        "nld+eng",
-        "--psm",
-        "6",
+def normalize_ocr_word(value: str) -> str:
+    lowered = value.lower().replace("’", "").replace("'", "")
+    lowered = re.sub(r"[^a-z0-9]+", "", lowered)
+    return lowered.strip()
+
+
+def parse_tesseract_tsv(tsv_text: str) -> tuple[str, list[str], float, int]:
+    grouped_lines: dict[tuple[str, str, str, str], list[str]] = {}
+    ordered_keys: list[tuple[str, str, str, str]] = []
+    words: list[str] = []
+    confidences: list[float] = []
+
+    for raw_line in tsv_text.splitlines()[1:]:
+        parts = raw_line.split("\t")
+        if len(parts) < 12:
+            continue
+
+        text = parts[11].strip()
+        if not text:
+            continue
+
+        key = (parts[2], parts[3], parts[4], parts[5])
+        if key not in grouped_lines:
+            grouped_lines[key] = []
+            ordered_keys.append(key)
+        grouped_lines[key].append(text)
+        words.append(text)
+
+        try:
+            confidence = float(parts[10])
+        except ValueError:
+            confidence = -1
+        if confidence >= 0:
+            confidences.append(confidence)
+
+    line_text = "\n".join(" ".join(grouped_lines[key]) for key in ordered_keys)
+    average_confidence = sum(confidences) / len(confidences) if confidences else -1.0
+    return clean_ocr_text(line_text), words, average_confidence, len(ordered_keys)
+
+
+def score_ocr_candidate(words: list[str], average_confidence: float, line_count: int) -> float:
+    if not words:
+        return -1000.0
+
+    normalized_words = [normalize_ocr_word(word) for word in words]
+    normalized_words = [word for word in normalized_words if word]
+    if not normalized_words:
+        return -1000.0
+
+    readable_words = [word for word in normalized_words if len(word) >= 3]
+    readable_with_vowels = [word for word in readable_words if re.search(r"[aeiouy]", word)]
+    readable_ratio = len(readable_with_vowels) / len(readable_words) if readable_words else 0.0
+    unique_ratio = len(set(readable_words)) / len(readable_words) if readable_words else 0.0
+    short_ratio = sum(1 for word in normalized_words if len(word) <= 1) / len(normalized_words)
+    average_words_per_line = len(words) / max(line_count, 1)
+    line_density_bonus = min(average_words_per_line, 8.0) * 3.5
+    fragmentation_penalty = 0.0
+    if average_words_per_line < 1.75:
+        fragmentation_penalty = (1.75 - average_words_per_line) * 26.0
+
+    return (
+        (average_confidence * 1.15)
+        + (readable_ratio * 24.0)
+        + (unique_ratio * 8.0)
+        + (min(len(words), 180) * 0.08)
+        - (short_ratio * 18.0)
+        + line_density_bonus
+        - fragmentation_penalty
     )
-    return clean_ocr_text(output)
+
+
+def read_tesseract_tsv(image_path: Path, psm: str) -> str:
+    result = subprocess.run(
+        [
+            "tesseract",
+            "--tessdata-dir",
+            str(TESSDATA_DIR),
+            str(image_path),
+            "stdout",
+            "-l",
+            "nld+eng",
+            "--psm",
+            psm,
+            "-c",
+            "tessedit_create_tsv=1",
+        ],
+        check=True,
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout
+
+
+def read_tesseract_text(image_path: Path, psm: str) -> str:
+    result = subprocess.run(
+        [
+            "tesseract",
+            "--tessdata-dir",
+            str(TESSDATA_DIR),
+            str(image_path),
+            "stdout",
+            "-l",
+            "nld+eng",
+            "--psm",
+            psm,
+        ],
+        check=True,
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    return clean_ocr_text(result.stdout)
+
+
+def ocr_image(image_path: Path, config: SourceConfig) -> str:
+    candidate_dir = TMP_DIR / f"{config.slug}-ocr"
+    candidate_dir.mkdir(parents=True, exist_ok=True)
+
+    best_score = -1000.0
+    best_variant_path: Path | None = None
+    best_psm = ""
+
+    for rotation in get_rotation_candidates(config):
+        variants = prepare_ocr_variants(image_path, rotation)
+        for variant_name, variant_image in variants.items():
+            variant_path = candidate_dir / f"{image_path.stem}-r{rotation}-{variant_name}.png"
+            cv2.imwrite(str(variant_path), variant_image)
+
+            for psm in config.ocr_psms:
+                tsv_output = read_tesseract_tsv(variant_path, psm)
+                text, words, average_confidence, line_count = parse_tesseract_tsv(tsv_output)
+                score = score_ocr_candidate(words, average_confidence, line_count)
+                if score > best_score:
+                    best_score = score
+                    best_variant_path = variant_path
+                    best_psm = psm
+
+    if not best_variant_path or not best_psm:
+        return ""
+    return read_tesseract_text(best_variant_path, best_psm)
 
 
 def extract_docx_text(path: Path) -> str:
@@ -241,6 +406,83 @@ def text_to_paragraphs(text: str) -> list[str]:
 
     flush()
     return [paragraph for paragraph in paragraphs if paragraph]
+
+
+def text_block_metrics(text: str) -> dict[str, float]:
+    words = re.findall(r"[A-Za-zÀ-ÿ0-9'’-]+", text)
+    nonempty_lines = [line.strip() for line in text.splitlines() if line.strip()]
+    char_count = len(text)
+    alpha_chars = sum(1 for char in text if char.isalpha())
+    long_words = [word for word in words if len(word) >= 3]
+
+    return {
+        "word_count": float(len(words)),
+        "line_count": float(len(nonempty_lines)),
+        "alpha_ratio": alpha_chars / char_count if char_count else 0.0,
+        "avg_word_length": (sum(len(word) for word in words) / len(words)) if words else 0.0,
+        "long_word_ratio": (len(long_words) / len(words)) if words else 0.0,
+    }
+
+
+def is_visual_scan_page(text: str) -> bool:
+    metrics = text_block_metrics(text)
+    return bool(
+        metrics["line_count"] >= 160
+        and metrics["avg_word_length"] < 3.35
+        and metrics["long_word_ratio"] < 0.55
+    )
+
+
+def coalesce_scan_paragraphs(paragraphs: list[str], target_length: int, max_parts: int) -> list[str]:
+    if not paragraphs or target_length <= 0 or max_parts <= 0:
+        return paragraphs
+
+    merged: list[str] = []
+    buffer: list[str] = []
+    buffer_length = 0
+
+    def flush() -> None:
+        nonlocal buffer_length
+        if not buffer:
+            return
+        paragraph = " ".join(buffer)
+        paragraph = re.sub(r"\s+", " ", paragraph).strip()
+        if paragraph:
+            merged.append(paragraph)
+        buffer.clear()
+        buffer_length = 0
+
+    for paragraph in paragraphs:
+        part = paragraph.strip()
+        if not part:
+            flush()
+            continue
+
+        heading_like = len(part) < 42 and part.upper() == part and len(part.split()) <= 5
+        if heading_like and buffer_length >= target_length * 0.55:
+            flush()
+
+        buffer.append(part)
+        buffer_length += len(part) + (1 if buffer_length else 0)
+
+        boundary = part.endswith((".", "!", "?", ":")) or part.endswith("…")
+        should_flush = (
+            (buffer_length >= target_length and not heading_like)
+            or len(buffer) >= max_parts
+            or (boundary and buffer_length >= target_length * 0.6)
+        )
+        if should_flush:
+            flush()
+
+    flush()
+    return merged
+
+
+def visual_scan_page_note(config: SourceConfig, page_number: int) -> list[str]:
+    return [
+        f"Visuele pagina uit {config.title}. Deze scan bevat vooral kaart-, schema- of beeldinformatie en leverde geen betrouwbare doorlopende OCR-tekst op.",
+        f"Handmatige annotatie van pagina {page_number} blijft wenselijk als deze beeldlaag later inhoudelijk ontsloten moet worden.",
+    ]
 
 
 def paragraph_title(text: str, fallback: str) -> str:
@@ -403,7 +645,7 @@ def process_docx(config: SourceConfig) -> tuple[str, list[dict], dict[str, list[
     letter_refs: dict[str, list[dict]] = {}
 
     for index, paragraph in enumerate(paragraphs, start=1):
-        if len(paragraph) < 80:
+        if len(paragraph) < config.passage_min_length:
             continue
         entry = passage_entry(config, "sectie", index, paragraph)
         entries.append(entry)
@@ -429,13 +671,23 @@ def process_pdf(config: SourceConfig) -> tuple[str, list[dict], dict[str, list[d
     letter_refs: dict[str, list[dict]] = {}
 
     for page_number, image in enumerate(images, start=1):
-        rotated = rotate_image(image, config.rotation)
-        text = ocr_image(rotated)
+        text = ocr_image(image, config)
         paragraphs = text_to_paragraphs(text)
+        visual_page = is_visual_scan_page(text)
+        if visual_page:
+            paragraphs = visual_scan_page_note(config, page_number)
+        else:
+            paragraphs = coalesce_scan_paragraphs(
+                paragraphs,
+                config.scan_paragraph_target,
+                config.scan_max_parts,
+            )
         if paragraphs:
             page_sections.append((f"Pagina {page_number}", paragraphs))
+        if visual_page:
+            continue
         for index, paragraph in enumerate(paragraphs, start=1):
-            if len(paragraph) < 70:
+            if len(paragraph) < config.passage_min_length:
                 continue
             entry = passage_entry(config, f"p. {page_number}", index, paragraph)
             entries.append(entry)
@@ -516,8 +768,23 @@ def main() -> None:
     all_entries.extend(build_letter_entries(letter_refs))
     all_entries.sort(key=lambda entry: (entry["indexType"], entry["title"].lower()))
 
+    type_counts: dict[str, int] = {}
+    source_passage_counts: dict[str, int] = {}
+    for entry in all_entries:
+        index_type = entry["indexType"]
+        type_counts[index_type] = type_counts.get(index_type, 0) + 1
+        if index_type == "passage":
+            source_slug = entry.get("sourceSlug")
+            if source_slug:
+                source_passage_counts[source_slug] = source_passage_counts.get(source_slug, 0) + 1
+
     payload = {
         "generatedAt": datetime.now(timezone.utc).isoformat(),
+        "stats": {
+            "entryCount": len(all_entries),
+            "typeCounts": type_counts,
+            "sourcePassageCounts": source_passage_counts,
+        },
         "entries": all_entries,
     }
     SOURCE_CATALOG_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

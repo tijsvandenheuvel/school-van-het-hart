@@ -1,5 +1,119 @@
 # Changelog
 
+## v0.2.37 - Rustiger wiki-toggle
+
+- De wiki-sidebar start nu opnieuw standaard ingeklapt met een verfijndere toggle-icoon zonder middenlijn, zodat de artikelweergave rustiger opent
+- Interactie met `Zoek in de Woordenschat` of met de lijstchips `Alles`, `letters`, `woorden` en `teksten` opent de verborgen woordenlijst automatisch zodra die nodig is
+- De voorkeursopslag voor de woordenlijst ververst naar een nieuwe sleutel, zodat bestaande open-states uit de vorige iteratie de nieuwe standaard niet blokkeren
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.37`
+
+## v0.2.36 - Inklapbare wiki-zijbalk
+
+- De publieke wiki-modal kreeg een inklapbare woordenlijstkolom met een subtiele outline-toggle in de toolbar, zodat de sidebar nu verborgen of teruggehaald kan worden zonder de modal te verlaten
+- De collapse-state wordt in `localStorage` onthouden en klapt de directory zowel op desktop als mobiel echt uit de layout, zodat de artikelkolom maximaal ruimte krijgt
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.36`
+
+## v0.2.35 - Wiki laadfout hersteld
+
+- De publieke wiki laadde niet meer omdat `wiki/meta/curated-index.md` nog verwees naar `Spel & creativiteit`, terwijl het canonieke itembestand per ongeluk was verplaatst naar een niet-overeenkomende bestandsnaam
+- Het canonieke bestand voor `Spel & creativiteit` hersteld naar `wiki/items/spel-en-creativiteit.md`, zodat `loadWikiData()` opnieuw volledig doorloopt en de wiki plus automatische tekstlinks weer werken
+- `scripts/audit_wiki_dictionary.py` uitgebreid met een controle op ontbrekende canonieke itembestanden op basis van de curated index, zodat dit type breuk voortaan direct zichtbaar wordt
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.35`
+
+## v0.2.34 - Woordenboek vereenvoudigd
+
+- De publieke woordenschatlaag in `assets/js/site.js` vereenvoudigd naar drie indexsoorten: `letters`, `woorden` en `teksten`, waarbij meerwoordige lemma's nu gewoon in dezelfde woordenlijst landen en bronpassages niet langer als aparte publieke ingangen getoond worden
+- De bronafgeleide woordenboekingangen opgeschoond: enkel termen die aan bestaande wiki-termen raken blijven over, bronpagina's verwijzen niet meer expliciet naar losse passagepagina's en enkelvoud/meervoud-varianten worden strakker samengevoegd
+- De canonieke wiki-inhoud opgeschoond door dubbele itembestanden te verwijderen, relevante aliassen in `links` te bewaren en een onderhoudslaag toe te voegen via `wiki/meta/woordenboek-richtlijnen.md` en `scripts/audit_wiki_dictionary.py`
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.34`
+
+## v0.2.33 - Onderhoeken gecorrigeerd
+
+- De onderste ornamentale hoeken opnieuw lokaal gecorrigeerd: linksonder en rechtsonder kregen een juist gedraaide onderste spiraal, en de grote boog van de rechteronderhoek volgt nu weer de juiste binnenwaartse sweep
+- De vaste paginakader nog ongeveer `2px` verder naar buiten geschoven zodat de band strakker uitlijnt met de hoeken zonder hun huidige positie te verschuiven
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.33`
+
+## v0.2.32 - Kaderband verder naar buiten
+
+- De vaste paginakader een kleine CSS-outset gegeven zodat de gouden band enkele pixels verder naar buiten valt en netter uitlijnt met de ornamentale hoeklijnen
+- De hoek-SVG's zelf ongemoeid gelaten zodat hun huidige positie, krulrichting en medaillonplaatsing behouden blijven
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.32`
+
+## v0.2.31 - OCR-cache genegeerd
+
+- De OCR-tooling laat haar render- en Tesseract-cache in `tmp/` achter, daarom wordt die map nu expliciet genegeerd in `.gitignore` zodat de werkboom proper blijft na een bronassimilatie
+- De eerder verfijnde scanassimilatie en de opnieuw opgebouwde brondata uit `wiki/sources/` en `wiki/meta/source-catalog.json` blijven de actuele staat van de OCR-rebuild
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.31`
+
+## v0.2.30 - OCR-passages opgeschoond
+
+- De scanassimilatie in `scripts/assimilate_sources.py` verfijnd met bron-specifieke passagecoalescing voor OCR-pagina's, zodat Excalibur en `Het boek der geruststelling` niet meer als duizenden losse scanregels in de dataset vallen
+- Visuele scanpagina's zoals kaart- en schemapagina's nu expliciet als beeldlaag gemarkeerd in `wiki/sources/` in plaats van als corrupte pseudo-tekst in de bronmarkdown te belanden
+- De broncatalogus opnieuw gegenereerd met datasetstatistiek in `wiki/meta/source-catalog.json`, goed voor 692 passages in totaal, waarvan 407 uit `Excalibur` en 95 uit `Het boek der geruststelling`
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.30`
+
+## v0.2.29 - Krullen naar binnen
+
+- De vier ornamentale hoek-SVG's opnieuw individueel uitgetekend zodat elke krul nu consequent aan de binnenzijde van de paginakader valt in plaats van bij sommige hoeken naar buiten te lezen
+- De rechte kaderlijnen, hoofdboog en goudtoonfamilie behouden zodat alleen de handigheid van de kleine spiralen werd gecorrigeerd zonder opnieuw kleur- of uitlijningsruis te introduceren
+- De zichtbare versieverwijzingen gesynchroniseerd naar `v0.2.29`
+
+## v0.2.28 - Hoektoon en krulrichting
+
+- De ornamentale hoek-SVG's opnieuw opgebouwd met dezelfde goudtoonfamilie als de vaste paginakader, zodat hoeklijnen en frameband niet langer als twee verschillende metalen lezen
+- Het lijnwerk van alle vier de hoeken nu vanuit één basisornament intern geroteerd in plaats van gespiegeld, zodat de krullen hun richting behouden en niet meer verkeerd om aanvoelen
+- De medaillonranden en zichtbare versieverwijzingen gesynchroniseerd naar `v0.2.28`
+
+## v0.2.27 - Hoeken op de frameband
+
+- De hoek-SVG's opnieuw naar de buitenrand van hun viewBox verschoven zodat hun rechte stam- en basislijnen beter op de vaste paginakader uitkomen in plaats van zichtbaar binnen de band te landen
+- De vaste frameband en de rechte hoeklijnen nog iets verdikt zodat kader en hoekornamenten als éénzelfde gouden systeem lezen
+- De krullen op alle vier de hoeken opnieuw georiënteerd vanuit de kaderlijn zelf en de zichtbare versieverwijzingen gesynchroniseerd naar `v0.2.27`
+
+## v0.2.26 - Excalibur OCR hersteld
+
+- De bronassimilatie uitgebreid met betere OCR-tooling voor scans: automatische rotatiekeuze per pagina, meerdere OCR-layoutmodi en OpenCV-preprocessing vóór Tesseract
+- De uiteindelijke tekstextractie losgekoppeld van de TSV-scorelaag, zodat de gekozen pagina-instelling nu ook als leesbare platte tekst in `wiki/sources/` terechtkomt
+- De Excalibur- en scanbron-ingest opnieuw opgebouwd en de wiki-dataset opnieuw gegenereerd vanuit de verbeterde OCR-pass
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.26`
+
+## v0.2.25 - Hoeken uitgelijnd
+
+- De ornamentale hoeken opnieuw individueel uitgetekend zodat de krullen op de rechter- en onderhoeken niet langer als loutere spiegelkopieën lezen
+- De lijnvoering van de hoek-SVG's en de vaste paginakader verdikt zodat de ornamenten beter aansluiten op de gouden frameband
+- De hoeklijnen opnieuw afgestemd op de vaste kader en de zichtbare versieverwijzingen gesynchroniseerd naar `v0.2.25`
+
+## v0.2.24 - Hoeken naar schets
+
+- De ornamentale hoek-SVG's opnieuw opgebouwd op basis van de schets: een grotere medailloncirkel met hart, een rechte kader die tot aan de cirkel loopt en één grote boog die de hoek naar binnen afrondt
+- De overlappende binnenlijnen verwijderd en vervangen door precies twee kleine krulspiralen in de open ruimte tussen kader en boog
+- De hartjes opnieuw gecentreerd binnen de grotere cirkels en de zichtbare versieverwijzingen gesynchroniseerd naar `v0.2.24`
+
+## v0.2.23 - Hoeken met spiraal
+
+- De vier ornamentale hoek-SVG's opnieuw vereenvoudigd zodat de overlappende binnenlijnen verdwijnen en elke hoek nu vooral leest als een hoofdboog met een losse sierlijke spiraalkrul
+- De medaillons rond de hartjes vergroot zodat ze royaler aanvoelen binnen de hoekcompositie
+- De hartjes opnieuw gecentreerd binnen de grotere cirkels en de zichtbare versieverwijzingen gesynchroniseerd naar `v0.2.23`
+
+## v0.2.22 - Alles-filter verduidelijkt
+
+- De `Alles`-chip in de wiki-header omgevormd tot een echte gecombineerde alfabetische lijst over alle types heen, zodat die niet meer aanvoelt als een verkapte letterindex
+- De gecombineerde `Alles`-weergave verduidelijkt met een subtiele typevermelding per ingang, zoals `Letter`, `Woord`, `Begrip`, `Passage` of `Tekst`
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.22`
+
+## v0.2.21 - Hoeken verfijnd
+
+- De vier ornamentale hoek-SVG's opnieuw getekend met minder kleine lusjes en een soberder lijnritme zodat de kader properder en verfijnder leest
+- De hoekmedaillons vereenvoudigd tot strakkere concentrische ringen met een rustigere goudopbouw die beter aansluit op de smalle frameband
+- De roze hartjes in alle vier de medaillons opnieuw symmetrisch uitgelijnd en optisch gecentreerd binnen hun cirkel
+
+## v0.2.20 - Rustigere wiki-modal
+
+- De header van de publieke wiki-modal vereenvoudigd met klikbare sectiechips voor `letters`, `woorden`, `begrippen`, `passages` en `teksten`, zodat de index rechtstreeks per laag gefilterd kan worden
+- De itemdetailweergave opgeschoond door de meta-eyebrow zoals `Woordenboekingang` en de aparte `In`/`Uit`-kaders weg te laten, zodat de focus terug volledig op de effectieve tekst ligt
+- De inline wikilinks in artikels verder verfijnd naar rustige blauwe tekstlinks met onderlijning en zonder knopgevoel
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.20`
+
 ## v0.2.19 - Bronlemma's en rijkere bronindex
 
 - De publieke woordenschat uitgebreid met runtime-gegenereerde bronlemma's uit de geassimileerde passages, zodat meer woorden en meerwoordbegrippen uit de bronteksten als eigen ingangen doorzoekbaar en aanklikbaar worden

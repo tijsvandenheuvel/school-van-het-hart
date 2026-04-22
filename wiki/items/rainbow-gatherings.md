@@ -3,6 +3,7 @@ title: Rainbow Gatherings
 summary: Het levende voorbeeld van tijdelijke gemeenschap, gedeelde verantwoordelijkheid en people for the people.
 links:
   - rainbow
+  - rainbow gathering
   - rainbow gatherings
   - gathering
   - rainbow family

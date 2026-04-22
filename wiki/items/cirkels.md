@@ -5,8 +5,6 @@ links:
   - cirkel
   - cirkels
   - talking stick
-  - vision circles
-  - food circles
   - main circle
 ---
 

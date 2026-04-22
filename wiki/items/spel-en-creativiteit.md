@@ -1,17 +1,20 @@
 ---
-title: "Spel & creativiteit"
-summary: "Een grote speeltuin om spelenderwijs te leren."
+title: Spel & creativiteit
+summary: De ruimte waar mensen al makend, zingend, bouwend en spelend leren samenleven.
 links:
-  - "Nieuwe wereld"
-  - "Natuurverbinding"
-  - "School van het Hart"
-  - "Liefde in de praktijk"
+  - spel en creativiteit
+  - spel
+  - creativiteit
+  - grote speeltuin
+  - ateliers
+  - workshops
+  - atelier
+  - makerschap
+  - expressie
 ---
 
 # Spel & creativiteit
 
-Een nieuwe wereld bouw je niet alleen in gesprekken maar ook in tuinen, ateliers, zang, theater, ambacht en alles wat mensen samen kunnen maken. Spel en creativiteit openen mensen, brengen beweging en maken leren lichamelijk. Daarom raakt dit thema zowel aan [[Nieuwe wereld]] als aan [[Natuurverbinding]].
+Spel en creativiteit zijn geen bijzaak maar een leerweg. Door samen te zingen, bouwen, tuinieren, creeren, improviseren en [[Expressie]] te geven oefenen mensen een lichtere en meer levende vorm van [[Leren samenleven]].
 
-## Een grote speeltuin
-
-De School wil ook een plek zijn waar verbeelding en makerschap volwaardig mogen meedoen. In die zin is [[Spel & creativiteit]] geen bijzaak, maar een manier waarop [[School van het Hart]] en [[Liefde in de praktijk]] concreet en voelbaar worden.
+De School van het Hart beschrijft zichzelf daarom ook als een grote speeltuin. In die sfeer raken [[Natuurverbinding]], [[Vrijheid]], [[Liefde in de praktijk]] en de concrete vorm van de [[Nieuwe wereld]] elkaar voortdurend.

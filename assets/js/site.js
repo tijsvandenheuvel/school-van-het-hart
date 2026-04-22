@@ -5,13 +5,16 @@
   const sourceCatalogPath = './wiki/meta/source-catalog.json';
   const ignoredTermsPath = './wiki/meta/ignored-terms.md';
   const collator = new Intl.Collator('nl', { sensitivity: 'base' });
-  const INDEX_SECTION_ORDER = ['letter', 'word', 'concept', 'passage', 'text'];
+  const INDEX_SECTION_ORDER = ['letter', 'word', 'text'];
   const INDEX_SECTION_LABELS = {
     letter: 'Letters',
     word: 'Woorden',
-    concept: 'Begrippen',
-    passage: 'Zinnen en paragrafen',
     text: 'Teksten'
+  };
+  const INDEX_ENTRY_LABELS = {
+    letter: 'Letter',
+    word: 'Woord',
+    text: 'Tekst'
   };
   const ENTRY_KIND_LABELS = {
     canonical: 'Wiki-item',
@@ -65,6 +68,45 @@
       .replace(/[^a-z0-9]+/g, ' ')
       .trim()
       .replace(/\s+/g, ' ');
+  }
+
+  function formatLemmaTitle(value) {
+    const cleaned = String(value || '').replace(/\s+/g, ' ').trim();
+    if (!cleaned) return '';
+    const lower = cleaned.toLowerCase();
+    return `${lower.charAt(0).toUpperCase()}${lower.slice(1)}`;
+  }
+
+  function buildTermVariantKeys(normalized) {
+    const cleaned = normalizeTerm(normalized);
+    if (!cleaned) return [];
+
+    const variants = new Set([cleaned]);
+    const parts = cleaned.split(' ');
+    const last = parts[parts.length - 1];
+
+    function addLastVariant(nextLast) {
+      if (!nextLast || nextLast === last) return;
+      variants.add([...parts.slice(0, -1), nextLast].join(' '));
+    }
+
+    if (last.length > 4 && last.endsWith('s') && !last.endsWith('ss')) {
+      addLastVariant(last.slice(0, -1));
+    }
+    if (last.length > 5 && last.endsWith('en')) {
+      addLastVariant(last.slice(0, -2));
+    }
+    if (last.length > 5 && last.endsWith('ies')) {
+      addLastVariant(`${last.slice(0, -3)}ie`);
+    }
+    if (last.length > 3 && !last.endsWith('s')) {
+      addLastVariant(`${last}s`);
+    }
+    if (last.length > 3 && !last.endsWith('en')) {
+      addLastVariant(`${last}en`);
+    }
+
+    return [...variants];
   }
 
   function escapeRegExp(value) {
@@ -340,8 +382,12 @@
   const visionBody = document.getElementById('vision-body');
   const closeVisionBtn = document.getElementById('closeVisionBtn');
   const wikiModal = document.getElementById('wikiModal');
+  const wikiShell = wikiModal?.querySelector('.wiki-shell');
+  const wikiContent = document.getElementById('wikiContent');
+  const wikiDirectoryPane = document.getElementById('wikiDirectoryPane');
   const wikiBackBtn = document.getElementById('wikiBackBtn');
   const wikiForwardBtn = document.getElementById('wikiForwardBtn');
+  const wikiDirectoryToggleBtn = document.getElementById('wikiDirectoryToggleBtn');
   const wikiSearchInput = document.getElementById('wikiSearchInput');
   const wikiStatus = document.getElementById('wikiStatus');
   const wikiIndexView = document.getElementById('wikiIndexView');
@@ -382,7 +428,9 @@
     currentSlug: '',
     backStack: [],
     forwardStack: [],
-    query: ''
+    query: '',
+    activeSection: 'all',
+    directoryCollapsed: false
   };
 
   concepts.forEach((item) => {
@@ -614,15 +662,14 @@
     if (item.indexType) return item.indexType;
     const normalized = normalizeTerm(item.title);
     if (/^[a-z]$/.test(normalized)) return 'letter';
-    if (normalized.split(' ').length <= 1) return 'word';
-    return 'concept';
+    if (item.kind === 'source') return 'text';
+    return 'word';
   }
 
   function getEntryKindLabel(item) {
     if (item.kind && ENTRY_KIND_LABELS[item.kind]) return ENTRY_KIND_LABELS[item.kind];
     const indexType = deriveIndexType(item);
     if (indexType === 'word') return 'Woord';
-    if (indexType === 'concept') return 'Begrip';
     return 'Wiki-item';
   }
 
@@ -680,7 +727,7 @@
           body: buildSyntheticTermBody(alias.trim(), item, relatedTitles),
           kind: 'term',
           sourceSlug: item.slug,
-          indexType: normalizeTerm(alias).split(' ').length <= 1 ? 'word' : 'concept'
+          indexType: 'word'
         });
       });
     });
@@ -712,7 +759,11 @@
 
     function registerCandidate(parts, passage, passageText, passageTokens, startIndex, relatedSlugs, seenInPassage) {
       const normalizedParts = parts.map((part) => normalizeTerm(part)).filter(Boolean);
-      const normalized = normalizedParts.join(' ');
+      const rawNormalized = normalizedParts.join(' ');
+      if (!rawNormalized || ignored.has(rawNormalized) || SOURCE_TERM_STOPWORDS.has(rawNormalized)) return;
+
+      const mergedKey = buildTermVariantKeys(rawNormalized).find((variant) => existingTerms.has(variant) || candidateMap.has(variant)) || rawNormalized;
+      const normalized = normalizeTerm(mergedKey);
       if (!normalized || existingTerms.has(normalized) || ignored.has(normalized) || SOURCE_TERM_STOPWORDS.has(normalized)) return;
       if (seenInPassage.has(normalized)) return;
 
@@ -725,7 +776,7 @@
       const snippet = snippetTokens.map((token) => token.value).join(' ').trim() || passageText.slice(0, 220).trim();
       const candidate = candidateMap.get(normalized) || {
         normalized,
-        title: normalized,
+        title: formatLemmaTitle(normalized),
         frequency: 0,
         passages: new Map(),
         sources: new Map(),
@@ -794,6 +845,7 @@
         return wordCount > 1 &&
           candidate.frequency >= 2 &&
           candidate.sources.size >= 2 &&
+          candidate.relatedSlugs.size >= 1 &&
           candidate.normalized.split(' ').some((part) => part.length >= 7);
       })
       .sort((left, right) => {
@@ -805,39 +857,35 @@
       .map((candidate) => {
         const relatedTitles = [...candidate.relatedSlugs.values()].slice(0, 8);
         const sourceTitles = [...candidate.sources.values()];
-        const passageRefs = [...candidate.passages.values()].slice(0, 8);
         const bodyLines = [
           `# ${candidate.title}`,
           '',
-          `${candidate.title} is een bronafgeleide ${candidate.title.includes(' ') ? 'begripsingang' : 'woordenboekingang'} in de woordenschat van de School van het Hart.`,
+          `${candidate.title} is een bronafgeleide woordenboekingang in de woordenschat van de School van het Hart.`,
           '',
-          `Deze ingang werd automatisch afgeleid uit ${candidate.frequency} passage${candidate.frequency === 1 ? '' : 's'} in ${sourceTitles.length} bron${sourceTitles.length === 1 ? '' : 'nen'}: ${formatWikiLinkSeries(sourceTitles)}.`,
-          '',
-          '## Bronpassages',
-          ...passageRefs.map((ref) => `- [[${ref.title}]] (${ref.sourceTitle}, ${ref.sourcePage})`)
+          `Deze ingang werd automatisch afgeleid uit terugkerend gebruik in ${sourceTitles.length} bron${sourceTitles.length === 1 ? '' : 'nen'}: ${formatWikiLinkSeries(sourceTitles)}.`
         ];
 
         if (relatedTitles.length) {
-          bodyLines.push('', '## Gerelateerde begrippen', '', ...relatedTitles.map((title) => `- [[${title}]]`));
+          bodyLines.push('', '## Gerelateerde woorden', '', ...relatedTitles.map((title) => `- [[${title}]]`));
         } else {
-          bodyLines.push('', '## Gerelateerde begrippen', '', '- [[Taalbewustzijn]]');
+          bodyLines.push('', '## Gerelateerde woorden', '', '- [[Taalbewustzijn]]');
         }
 
         return {
-          slug: `${candidate.title.includes(' ') ? 'begrip' : 'woord'}-${slugify(candidate.title)}`,
+          slug: `woord-${slugify(candidate.title)}`,
           title: candidate.title,
-          summary: `Bronafgeleide ${candidate.title.includes(' ') ? 'begripsingang' : 'woordenboekingang'} uit ${sourceTitles.join(', ')}.`,
+          summary: `Bronafgeleide woordenboekingang uit ${sourceTitles.join(', ')}.`,
           links: [],
           body: bodyLines.join('\n'),
           kind: 'source-term',
-          sourceSlug: passageRefs[0]?.sourceSlug || '',
-          indexType: candidate.title.includes(' ') ? 'concept' : 'word',
+          sourceSlug: [...candidate.sources.keys()][0] || '',
+          indexType: 'word',
           resolveAsTerm: true,
           searchText: [
             candidate.title,
             ...sourceTitles,
             ...relatedTitles,
-            ...passageRefs.map((ref) => ref.snippet)
+            ...[...candidate.passages.values()].slice(0, 8).map((ref) => ref.snippet)
           ].join('\n')
         };
       });
@@ -1221,7 +1269,7 @@
               links: Array.isArray(parsed.data.links) ? uniqueTerms(parsed.data.links) : [],
               body: stripLeadingTitleHeading(parsed.body.trim(), parsed.data.title || title),
               kind: 'canonical',
-              indexType: normalizeTerm(parsed.data.title || title).split(' ').length <= 1 ? 'word' : 'concept',
+              indexType: 'word',
               resolveAsTerm: true
             };
           })
@@ -1264,8 +1312,9 @@
           [...fetchedItems, ...syntheticItems],
           ignoredTerms
         );
+        const visibleSourceEntries = sourceEntries.filter((entry) => entry.indexType === 'letter' || entry.indexType === 'text');
 
-        const allItems = [...fetchedItems, ...syntheticItems, ...sourceEntries, ...sourceVocabularyItems]
+        const allItems = [...fetchedItems, ...syntheticItems, ...visibleSourceEntries, ...sourceVocabularyItems]
           .map((item) => ({
             ...item,
             links: Array.isArray(item.links) ? uniqueTerms(item.links) : [],
@@ -1325,7 +1374,7 @@
     const sections = new Map();
 
     entries.forEach((entry) => {
-      const sectionKey = entry.indexType || 'concept';
+      const sectionKey = entry.indexType || 'word';
       if (!sections.has(sectionKey)) sections.set(sectionKey, []);
       sections.get(sectionKey).push(entry);
     });
@@ -1334,19 +1383,32 @@
       .map((sectionKey) => [sectionKey, sections.get(sectionKey) || []])
       .filter(([, sectionEntries]) => sectionEntries.length)
       .map(([sectionKey, sectionEntries]) => {
-        const alphaGroups = new Map();
-        sectionEntries.forEach((entry) => {
-          const letter = normalizeTerm(entry.term).charAt(0).toUpperCase() || '#';
-          if (!alphaGroups.has(letter)) alphaGroups.set(letter, []);
-          alphaGroups.get(letter).push(entry);
-        });
-
-        const orderedGroups = [...alphaGroups.entries()]
-          .sort((left, right) => collator.compare(left[0], right[0]))
-          .map(([letter, letterEntries]) => [letter, letterEntries.sort((left, right) => collator.compare(left.term, right.term))]);
-
-        return [sectionKey, orderedGroups, sectionEntries.length];
+        return [sectionKey, groupEntriesAlphabetically(sectionEntries), sectionEntries.length];
       });
+  }
+
+  function groupEntriesAlphabetically(entries) {
+    const alphaGroups = new Map();
+    entries.forEach((entry) => {
+      const letter = normalizeTerm(entry.term).charAt(0).toUpperCase() || '#';
+      if (!alphaGroups.has(letter)) alphaGroups.set(letter, []);
+      alphaGroups.get(letter).push(entry);
+    });
+
+    return [...alphaGroups.entries()]
+      .sort((left, right) => collator.compare(left[0], right[0]))
+      .map(([letter, letterEntries]) => [letter, letterEntries.sort((left, right) => collator.compare(left.term, right.term))]);
+  }
+
+  function getQueryFilteredEntries() {
+    const query = wikiState.query.trim().toLowerCase();
+    return wikiState.indexEntries.filter((entry) => !query || entry.searchText.toLowerCase().includes(query));
+  }
+
+  function getVisibleIndexEntries() {
+    const filtered = getQueryFilteredEntries();
+    if (wikiState.activeSection === 'all') return filtered;
+    return filtered.filter((entry) => entry.indexType === wikiState.activeSection);
   }
 
   function renderWikiStatus() {
@@ -1355,25 +1417,41 @@
       return;
     }
 
-    const query = wikiState.query.trim().toLowerCase();
-    const filtered = wikiState.indexEntries.filter((entry) => !query || entry.searchText.toLowerCase().includes(query));
-
-    if (query) {
-      wikiStatus.textContent = `${filtered.length} resultaten in de woordenschat`;
-      return;
-    }
+    wikiStatus.replaceChildren();
+    const filtered = getQueryFilteredEntries();
 
     const counts = {
       letter: 0,
       word: 0,
-      concept: 0,
-      passage: 0,
       text: 0
     };
     filtered.forEach((entry) => {
       counts[entry.indexType] += 1;
     });
-    wikiStatus.textContent = `${counts.letter} letters · ${counts.word} woorden · ${counts.concept} begrippen · ${counts.passage} passages · ${counts.text} teksten`;
+
+    const filters = [
+      { key: 'all', label: 'Alles', count: filtered.length },
+      { key: 'letter', label: 'letters', count: counts.letter },
+      { key: 'word', label: 'woorden', count: counts.word },
+      { key: 'text', label: 'teksten', count: counts.text }
+    ];
+
+    filters.forEach((filter) => {
+      if (filter.key !== 'all' && filter.count === 0) return;
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `wiki-status-btn${wikiState.activeSection === filter.key ? ' is-active' : ''}`;
+      button.setAttribute('aria-pressed', wikiState.activeSection === filter.key ? 'true' : 'false');
+      button.textContent = filter.key === 'all' ? `Alles ${filter.count}` : `${filter.count} ${filter.label}`;
+      button.disabled = filter.count === 0 && filter.key !== 'all';
+      button.addEventListener('click', () => {
+        ensureWikiDirectoryOpen();
+        wikiState.activeSection = filter.key;
+        renderWikiIndex();
+      });
+      wikiStatus.appendChild(button);
+    });
   }
 
   function renderWikiIndex() {
@@ -1388,14 +1466,75 @@
       return;
     }
 
-    const query = wikiState.query.trim().toLowerCase();
-    const filtered = wikiState.indexEntries.filter((entry) => !query || entry.searchText.toLowerCase().includes(query));
+    const filtered = getVisibleIndexEntries();
 
     if (!filtered.length) {
       const empty = document.createElement('p');
       empty.className = 'wiki-empty';
-      empty.textContent = 'Geen ingangen gevonden voor deze zoekopdracht.';
+      empty.textContent = wikiState.query ? 'Geen ingangen gevonden voor deze zoekopdracht.' : 'Geen ingangen gevonden in deze selectie.';
       wikiIndexView.appendChild(empty);
+      renderWikiStatus();
+      return;
+    }
+
+    const isAllView = wikiState.activeSection === 'all';
+
+    if (isAllView) {
+      const section = document.createElement('section');
+      section.className = 'wiki-index-section';
+
+      const sectionHeader = document.createElement('div');
+      sectionHeader.className = 'wiki-index-section-header';
+
+      const sectionTitle = document.createElement('h2');
+      sectionTitle.className = 'wiki-index-section-title';
+      sectionTitle.textContent = 'Alles';
+      sectionHeader.appendChild(sectionTitle);
+
+      const sectionCount = document.createElement('p');
+      sectionCount.className = 'wiki-index-section-count';
+      sectionCount.textContent = `${filtered.length}`;
+      sectionHeader.appendChild(sectionCount);
+
+      section.appendChild(sectionHeader);
+
+      groupEntriesAlphabetically(filtered).forEach(([letter, entries]) => {
+        const group = document.createElement('section');
+        group.className = 'wiki-index-group';
+
+        const heading = document.createElement('h3');
+        heading.className = 'wiki-index-letter';
+        heading.textContent = letter;
+        group.appendChild(heading);
+
+        const list = document.createElement('div');
+        list.className = 'wiki-index-items';
+
+        entries.forEach((entry) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = `wiki-index-entry${entry.isCanonical ? ' is-canonical' : ''}${wikiState.currentSlug === entry.slug ? ' is-active' : ''}`;
+          button.addEventListener('click', () => navigateToWikiItem(entry.slug, { pushHistory: true, trigger: button }));
+
+          const term = document.createElement('span');
+          term.className = 'wiki-entry-term';
+          term.textContent = entry.term;
+          button.appendChild(term);
+
+          const target = document.createElement('span');
+          target.className = 'wiki-entry-target';
+          const label = INDEX_ENTRY_LABELS[entry.indexType] || 'Item';
+          target.textContent = entry.summary ? `${label} · ${entry.summary}` : label;
+          button.appendChild(target);
+
+          list.appendChild(button);
+        });
+
+        group.appendChild(list);
+        section.appendChild(group);
+      });
+
+      wikiIndexView.appendChild(section);
       renderWikiStatus();
       return;
     }
@@ -1460,88 +1599,6 @@
     renderWikiStatus();
   }
 
-  function createWikiConnectionCard(item) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'wiki-connection-card';
-    button.addEventListener('click', () => navigateToWikiItem(item.slug, { pushHistory: true, trigger: button }));
-
-    const meta = document.createElement('span');
-    meta.className = 'wiki-connection-meta';
-    meta.textContent = getEntryKindLabel(item);
-    button.appendChild(meta);
-
-    const title = document.createElement('span');
-    title.className = 'wiki-connection-title';
-    title.textContent = item.title;
-    button.appendChild(title);
-
-    const snippet = document.createElement('span');
-    snippet.className = 'wiki-connection-snippet';
-    snippet.textContent = item.summary;
-    button.appendChild(snippet);
-
-    return button;
-  }
-
-  function createSourceConnectionCard(reference) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'wiki-connection-card';
-    button.addEventListener('click', () => {
-      closeWikiModal({ restoreFocus: false });
-      if (reference.kind === 'concept') {
-        const concept = conceptsBySlug.get(reference.sourceSlug);
-        if (concept) openConceptModal(concept, wikiTrigger);
-      } else if (reference.kind === 'vision') {
-        openVisionModal(wikiTrigger);
-      }
-    });
-
-    const meta = document.createElement('span');
-    meta.className = 'wiki-connection-meta';
-    meta.textContent = reference.kind === 'concept' ? 'Homepage-concept' : 'Visietekst';
-    button.appendChild(meta);
-
-    const title = document.createElement('span');
-    title.className = 'wiki-connection-title';
-    title.textContent = reference.label;
-    button.appendChild(title);
-
-    if (reference.snippet) {
-      const snippet = document.createElement('span');
-      snippet.className = 'wiki-connection-snippet';
-      snippet.textContent = reference.snippet;
-      button.appendChild(snippet);
-    }
-
-    return button;
-  }
-
-  function appendConnections(container, headingText, cards) {
-    const section = document.createElement('section');
-    section.className = 'wiki-relations';
-
-    const heading = document.createElement('h3');
-    heading.textContent = headingText;
-    section.appendChild(heading);
-
-    if (!cards.length) {
-      const empty = document.createElement('p');
-      empty.className = 'wiki-empty';
-      empty.textContent = 'Geen verbindingen gevonden.';
-      section.appendChild(empty);
-      container.appendChild(section);
-      return;
-    }
-
-    const list = document.createElement('div');
-    list.className = 'wiki-relations-list';
-    cards.forEach((card) => list.appendChild(card));
-    section.appendChild(list);
-    container.appendChild(section);
-  }
-
   function renderWikiReader() {
     wikiItemView.replaceChildren();
 
@@ -1562,7 +1619,7 @@
       empty.appendChild(heading);
 
       const paragraph = document.createElement('p');
-      paragraph.textContent = 'Blader links door letters, woorden, begrippen, passages en bronteksten. De zoeklaag bovenaan doorzoekt de volledige woordenschat van de School van het Hart.';
+      paragraph.textContent = 'Blader links door letters, woorden en bronteksten. Meerwoordige begrippen zitten in dezelfde woordenlijst. De zoeklaag bovenaan doorzoekt de volledige woordenschat van de School van het Hart.';
       empty.appendChild(paragraph);
 
       wikiItemView.appendChild(empty);
@@ -1574,11 +1631,6 @@
 
     const header = document.createElement('header');
     header.className = 'wiki-item-header';
-
-    const eyebrow = document.createElement('p');
-    eyebrow.className = 'wiki-item-eyebrow';
-    eyebrow.textContent = getEntryKindLabel(item);
-    header.appendChild(eyebrow);
 
     const title = document.createElement('h2');
     title.className = 'wiki-item-title';
@@ -1594,28 +1646,7 @@
     article.className = 'wiki-article';
     article.appendChild(renderMarkdown(item.body, { excludeSlug: item.slug }));
 
-    const relations = document.createElement('div');
-    relations.className = 'wiki-relations-grid';
-
-    const outgoingCards = (wikiState.outgoingBySlug.get(item.slug) || [])
-      .map((targetSlug) => wikiState.itemsBySlug.get(targetSlug))
-      .filter(Boolean)
-      .map((linkedItem) => createWikiConnectionCard(linkedItem));
-
-    const incomingCards = (wikiState.incomingBySlug.get(item.slug) || [])
-      .map((entry) => {
-        if (entry.kind === 'wiki') {
-          const linkedItem = wikiState.itemsBySlug.get(entry.slug);
-          return linkedItem ? createWikiConnectionCard(linkedItem) : null;
-        }
-        return createSourceConnectionCard(entry);
-      })
-      .filter(Boolean);
-
-    appendConnections(relations, 'Uit', outgoingCards);
-    appendConnections(relations, 'In', incomingCards);
-
-    wikiItemView.append(header, article, relations);
+    wikiItemView.append(header, article);
   }
 
   function updateWikiHistoryButtons() {
@@ -1664,6 +1695,51 @@
     status.className = 'changelog-status';
     status.textContent = message;
     visionBody.appendChild(status);
+  }
+
+  function setWikiDirectoryCollapsed(collapsed, options = {}) {
+    wikiState.directoryCollapsed = Boolean(collapsed);
+    wikiContent.classList.toggle('is-directory-collapsed', wikiState.directoryCollapsed);
+    if (wikiShell) {
+      wikiShell.classList.toggle('is-directory-collapsed', wikiState.directoryCollapsed);
+    }
+
+    if (wikiDirectoryPane) {
+      wikiDirectoryPane.setAttribute('aria-hidden', wikiState.directoryCollapsed ? 'true' : 'false');
+      if ('inert' in wikiDirectoryPane) {
+        wikiDirectoryPane.inert = wikiState.directoryCollapsed;
+      }
+    }
+
+    if (wikiDirectoryToggleBtn) {
+      const label = wikiState.directoryCollapsed ? 'Toon woordenlijst' : 'Verberg woordenlijst';
+      wikiDirectoryToggleBtn.classList.toggle('is-collapsed', wikiState.directoryCollapsed);
+      wikiDirectoryToggleBtn.setAttribute('aria-expanded', wikiState.directoryCollapsed ? 'false' : 'true');
+      wikiDirectoryToggleBtn.setAttribute('aria-label', label);
+      wikiDirectoryToggleBtn.setAttribute('title', label);
+    }
+
+    if (
+      wikiState.directoryCollapsed &&
+      document.activeElement instanceof HTMLElement &&
+      wikiDirectoryPane &&
+      wikiDirectoryPane.contains(document.activeElement)
+    ) {
+      wikiDirectoryToggleBtn?.focus();
+    }
+
+    if (options.persist !== false) {
+      try {
+        window.localStorage.setItem('svhh-wiki-directory-collapsed-v2', wikiState.directoryCollapsed ? 'true' : 'false');
+      } catch (error) {
+        // Ignore storage issues and keep the in-memory preference.
+      }
+    }
+  }
+
+  function ensureWikiDirectoryOpen(options = {}) {
+    if (!wikiState.directoryCollapsed) return;
+    setWikiDirectoryCollapsed(false, options);
   }
 
   async function renderVisionBody() {
@@ -1833,6 +1909,13 @@
     setFrameEnabled(true);
   }
 
+  try {
+    const storedDirectoryPreference = window.localStorage.getItem('svhh-wiki-directory-collapsed-v2');
+    setWikiDirectoryCollapsed(storedDirectoryPreference == null ? true : storedDirectoryPreference === 'true', { persist: false });
+  } catch (error) {
+    setWikiDirectoryCollapsed(true, { persist: false });
+  }
+
   if (typeof compactOrbitQuery.addEventListener === 'function') {
     compactOrbitQuery.addEventListener('change', scheduleTokenLayout);
   } else if (typeof compactOrbitQuery.addListener === 'function') {
@@ -1858,7 +1941,15 @@
   }
   wikiBackBtn.addEventListener('click', goBackInWiki);
   wikiForwardBtn.addEventListener('click', goForwardInWiki);
+  wikiDirectoryToggleBtn.addEventListener('click', () => setWikiDirectoryCollapsed(!wikiState.directoryCollapsed));
+  wikiSearchInput.addEventListener('pointerdown', () => ensureWikiDirectoryOpen());
+  wikiSearchInput.addEventListener('click', () => ensureWikiDirectoryOpen());
+  wikiSearchInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Tab' || event.key === 'Shift' || event.key === 'Escape') return;
+    ensureWikiDirectoryOpen();
+  });
   wikiSearchInput.addEventListener('input', (event) => {
+    ensureWikiDirectoryOpen();
     wikiState.query = event.target.value;
     renderWikiIndex();
   });

@@ -1,9 +1,10 @@
 {
   "name": "school-van-het-hart",
-  "version": "0.2.19",
+  "version": "0.2.37",
   "private": true,
   "scripts": {
     "sources:assimilate": "python3 scripts/assimilate_sources.py",
+    "wiki:audit": "python3 scripts/audit_wiki_dictionary.py",
     "wiki:dev": "node server/wiki-server.js",
     "image:corner": "node server/generate-corner-study.js"
   }

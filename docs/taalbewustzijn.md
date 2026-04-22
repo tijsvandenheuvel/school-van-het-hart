@@ -36,8 +36,7 @@ Daarom onderscheiden we:
 - bronpassages
 - letters
 - woorden
-- begrippen
-- zinnen en paragrafen
+- woordenboekingangen met één of meer woorden
 
 ## Assimilatie van nieuwe bronnen
 
@@ -50,6 +49,19 @@ De pijplijn hoort daarom minstens te doen:
 3. passages en betekenisdragende segmenten afleiden
 4. letters, woorden en begrippen koppelen aan bestaande wiki-ingangen of nieuwe lemma's
 5. gerelateerde termen, bronnen en passages onderling verbinden
+
+## Woordenboekbeheer
+
+Voor de praktische wiki-opbouw geldt nu:
+
+- de publieke woordenschat toont alleen `letters`, `woorden` en `teksten`
+- meerwoordige lemma's horen ook gewoon thuis in de woordenlijst
+- elke betekenis krijgt bij voorkeur maar één canonieke pagina
+- varianten zoals komma's, ampersands, enkelvoud/meervoud en alternatieve schrijfwijzen horen in `links` van die canonieke pagina
+- dubbele pagina's worden niet naast elkaar behouden: inhoud samenbrengen, beste titel kiezen, oude variant schrappen en als alias bewaren
+- bronafgeleide OCR-termen mogen alleen blijven staan als ze inhoudelijk bruikbaar zijn en aan bestaande wiki-termen raken
+
+De operationele richtlijnen voor dit onderhoud staan in `wiki/meta/woordenboek-richtlijnen.md`.
 
 ## Redactionele voorkeur
 

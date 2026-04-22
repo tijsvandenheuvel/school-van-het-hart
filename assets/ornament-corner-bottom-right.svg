@@ -1,41 +1,34 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="goldMain" x1="18" y1="18" x2="132" y2="156" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#8A6026"/>
-      <stop offset="0.38" stop-color="#C99543"/>
-      <stop offset="0.68" stop-color="#F2E1B2"/>
-      <stop offset="1" stop-color="#A87430"/>
-    </linearGradient>
-    <linearGradient id="goldAccent" x1="32" y1="22" x2="120" y2="136" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#F6E8C1"/>
-      <stop offset="1" stop-color="#C49341"/>
-    </linearGradient>
-    <radialGradient id="medallionBg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(147 147) rotate(90) scale(21)">
-      <stop offset="0" stop-color="#FFF8E8"/>
-      <stop offset="1" stop-color="#EFD7AA"/>
-    </radialGradient>
-    <radialGradient id="heartFill" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(147 143) rotate(90) scale(16)">
-      <stop offset="0" stop-color="#FFABC9"/>
-      <stop offset="1" stop-color="#E15B94"/>
-    </radialGradient>
+    <g id="cornerLines" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 172H124" stroke-width="4.35"/>
+      <path d="M172 0V124" stroke-width="4.35"/>
+      <path d="M162 8C156 48 141 85 118 111C98 134 72 160 39 172" stroke-width="4.35"/>
+    </g>
+    <g id="cornerCurls" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M172 72C172 82.2 168.8 90.5 163 95.8C158 100.4 150.5 101 145.6 96.9C140.6 92.7 139.5 85.2 143 79.9C146 75.3 152.5 73.3 157.7 76C162.1 78.3 164.6 83.4 163.3 88.1C162.3 92 159.2 94.8 155.4 94.6" stroke-width="2.55"/>
+      <path d="M72 172C82.2 172 90.5 168.8 95.8 163C100.4 158 101 150.5 96.9 145.6C92.7 140.6 85.2 139.5 79.9 143C75.3 146 73.3 152.5 76 157.7C78.3 162.1 83.4 164.6 88.1 163.3C92 162.3 94.8 159.2 94.6 155.4" stroke-width="2.55"/>
+    </g>
   </defs>
 
-  <g transform="translate(180 180) scale(-1 -1)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M21 72V160" stroke="url(#goldMain)" stroke-width="3.1"/>
-    <path d="M72 21H160" stroke="url(#goldMain)" stroke-width="3.1"/>
-    <path d="M21 149C29 116 59 73 121 28" stroke="url(#goldMain)" stroke-width="3.1"/>
-    <path d="M34 149C45 121 69 89 105 60" stroke="url(#goldAccent)" stroke-width="1.45" opacity="0.94"/>
-    <path d="M56 21C73 21 86 33 86 46C86 59 78 67 68 67C58 67 50 60 50 50C50 43 54 38 60 38C66 38 70 42 71 47" stroke="url(#goldMain)" stroke-width="2"/>
-    <path d="M21 56C21 73 33 86 46 86C59 86 67 78 67 68C67 58 60 50 50 50C43 50 38 54 38 60C38 66 42 70 47 71" stroke="url(#goldMain)" stroke-width="2"/>
-    <path d="M92 28C99 22 110 22 117 28C110 34 99 34 92 28Z" stroke="url(#goldMain)" stroke-width="1.6"/>
-    <path d="M28 92C22 99 22 110 28 117C34 110 34 99 28 92Z" stroke="url(#goldMain)" stroke-width="1.6"/>
-    <path d="M87 21C102 21 116 25 129 33" stroke="url(#goldAccent)" stroke-width="1.35" opacity="0.92"/>
-    <path d="M21 87C21 102 25 116 33 129" stroke="url(#goldAccent)" stroke-width="1.35" opacity="0.92"/>
+  <g transform="translate(0.65 0.65)" opacity="0.32" stroke="#8A6732">
+    <use href="#cornerLines"/>
+    <use href="#cornerCurls"/>
+  </g>
+  <g stroke="#C79B55">
+    <use href="#cornerLines"/>
+    <use href="#cornerCurls"/>
+  </g>
+  <g opacity="0.28" stroke="#F1DDB0">
+    <use href="#cornerLines"/>
+    <use href="#cornerCurls"/>
   </g>
 
-  <g>
-    <circle cx="147" cy="147" r="20" fill="url(#medallionBg)" stroke="#BB8A3E" stroke-width="2.6"/>
-    <circle cx="147" cy="147" r="16.3" stroke="#F5E6BF" stroke-width="1.05" opacity="0.92"/>
-    <path d="M147 158C143 153 135 149 133 142C131 135 136 131 142 131C145 131 147 132 147 135C147 132 149 131 152 131C158 131 163 135 161 142C159 149 151 153 147 158Z" fill="url(#heartFill)" stroke="#D66095" stroke-width="1.65" stroke-linejoin="round"/>
+  <g transform="translate(144 144)">
+    <circle r="22.8" fill="#FEF6E6"/>
+    <circle r="22.8" fill="none" stroke="#8A6732" stroke-width="3.5" opacity="0.34"/>
+    <circle r="22.8" fill="none" stroke="#C79B55" stroke-width="2.8"/>
+    <circle r="18.4" fill="none" stroke="#F1DDB0" stroke-width="1.2" opacity="0.92"/>
+    <path d="M0 13.8C-4.7 9.3 -13.3 4.8 -13.3 -2.6C-13.3 -8 -9.5 -11.9 -4.9 -11.9C-2 -11.9 0 -10.2 0 -7.5C0 -10.2 2 -11.9 4.9 -11.9C9.5 -11.9 13.3 -8 13.3 -2.6C13.3 4.8 4.7 9.3 0 13.8Z" transform="translate(0 -0.7)" fill="#F28EB4" stroke="#D15E95" stroke-width="1.5" stroke-linejoin="round"/>
   </g>
 </svg>
