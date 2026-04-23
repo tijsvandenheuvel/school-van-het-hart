@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.44 - Robuustere publieke wiki
+
+- De publieke wiki laadt canonieke items nu via een robuustere volgorde: eerst `/api/wiki/index`, dan een gegenereerde statische dataset in `wiki/generated/public-wiki-items.json`, en pas daarna losse markdownbestanden als fallback
+- Een nieuwe generator `scripts/generate_wiki_public_data.js` en npm-script `wiki:public-data` toegevoegd zodat de publieke woordenboekdata uit de echte markdownbestanden kan worden opgebouwd zonder runtime-404's per item
+- De markdown-fallback maakt de wiki niet meer volledig onbruikbaar wanneer een individueel `.md`-bestand ontbreekt; ontbrekende items worden nu gelogd en de rest van de woordenlijst blijft werken
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.44`
+
 ## v0.2.43 - Versieknop nog losser
 
 - De versieknop rechtsboven nog eens 5px verder naar links geschoven zodat die nog meer afstand houdt van de ornamentale kader

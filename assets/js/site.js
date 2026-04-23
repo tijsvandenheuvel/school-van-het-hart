@@ -2,6 +2,7 @@
   const changelogPath = './docs/changelog.md';
   const visionTextPath = './docs/visietekst.md';
   const wikiIndexPath = './wiki/meta/curated-index.md';
+  const wikiPublicDataPath = './wiki/generated/public-wiki-items.json';
   const wikiExternalBasePath = './wiki/generated/external';
   const sourceCatalogPath = './wiki/meta/source-catalog.json';
   const ignoredTermsPath = './wiki/meta/ignored-terms.md';
@@ -569,6 +570,87 @@
       .filter((line) => line.startsWith('- '))
       .map((line) => line.slice(2).trim())
       .filter(Boolean);
+  }
+
+  function normalizeCanonicalItem(item, fallbackTitle = '') {
+    const title = String(item && item.title ? item.title : fallbackTitle).trim();
+    const slug = String(item && item.slug ? item.slug : slugify(title)).trim();
+
+    return {
+      slug,
+      title,
+      summary: String(item && item.summary ? item.summary : '').trim(),
+      links: Array.isArray(item && item.links) ? uniqueTerms(item.links) : [],
+      body: stripLeadingTitleHeading(String(item && item.body ? item.body : ''), title),
+      kind: 'canonical',
+      indexType: 'word',
+      resolveAsTerm: true
+    };
+  }
+
+  async function loadCanonicalItemsFromPublicData() {
+    const apiResponse = await fetch('./api/wiki/index', { cache: 'no-store' });
+    if (apiResponse.ok) {
+      const payload = await apiResponse.json();
+      if (Array.isArray(payload.items) && payload.items.length) {
+        return payload.items.map((item) => normalizeCanonicalItem(item));
+      }
+    }
+
+    const publicDataResponse = await fetch(wikiPublicDataPath, { cache: 'no-store' });
+    if (!publicDataResponse.ok) {
+      throw new Error(`HTTP ${publicDataResponse.status} for public wiki data`);
+    }
+
+    const payload = await publicDataResponse.json();
+    if (!Array.isArray(payload.items) || !payload.items.length) {
+      throw new Error('Public wiki data bevat geen canonieke items.');
+    }
+
+    return payload.items.map((item) => normalizeCanonicalItem(item));
+  }
+
+  async function loadCanonicalItemsFromMarkdown() {
+    const indexResponse = await fetch(wikiIndexPath, { cache: 'no-store' });
+    if (!indexResponse.ok) throw new Error(`HTTP ${indexResponse.status}`);
+    const titleMarkdown = await indexResponse.text();
+    const titles = parseCuratedIndex(titleMarkdown);
+
+    const settled = await Promise.allSettled(
+      titles.map(async (title) => {
+        const slug = slugify(title);
+        const response = await fetch(`./wiki/items/${slug}.md`, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status} for ${slug}`);
+        const markdown = await response.text();
+        const parsed = parseFrontmatter(markdown);
+        return normalizeCanonicalItem({
+          slug,
+          title: parsed.data.title || title,
+          summary: parsed.data.summary || '',
+          links: Array.isArray(parsed.data.links) ? parsed.data.links : [],
+          body: parsed.body.trim()
+        }, title);
+      })
+    );
+
+    const items = settled
+      .filter((result) => result.status === 'fulfilled')
+      .map((result) => result.value);
+
+    if (!items.length) {
+      const firstError = settled.find((result) => result.status === 'rejected');
+      throw firstError && firstError.reason ? firstError.reason : new Error('Geen wiki-items konden geladen worden.');
+    }
+
+    const failures = settled.filter((result) => result.status === 'rejected');
+    if (failures.length) {
+      console.warn(
+        `Wiki fallback skipped ${failures.length} missing canonical markdown files.`,
+        failures.map((result) => (result.reason && result.reason.message ? result.reason.message : String(result.reason)))
+      );
+    }
+
+    return items;
   }
 
   function stripMarkdownForExtraction(markdown, title = '') {
@@ -1252,31 +1334,13 @@
     wikiState.loading = (async () => {
       try {
         await loadVisionText();
-
-        const indexResponse = await fetch(wikiIndexPath, { cache: 'no-store' });
-        if (!indexResponse.ok) throw new Error(`HTTP ${indexResponse.status}`);
-        const titleMarkdown = await indexResponse.text();
-        const titles = parseCuratedIndex(titleMarkdown);
-
-        const fetchedItems = await Promise.all(
-          titles.map(async (title) => {
-            const slug = slugify(title);
-            const response = await fetch(`./wiki/items/${slug}.md`, { cache: 'no-store' });
-            if (!response.ok) throw new Error(`HTTP ${response.status} for ${slug}`);
-            const markdown = await response.text();
-            const parsed = parseFrontmatter(markdown);
-            return {
-              slug,
-              title: parsed.data.title || title,
-              summary: parsed.data.summary || '',
-              links: Array.isArray(parsed.data.links) ? uniqueTerms(parsed.data.links) : [],
-              body: stripLeadingTitleHeading(parsed.body.trim(), parsed.data.title || title),
-              kind: 'canonical',
-              indexType: 'word',
-              resolveAsTerm: true
-            };
-          })
-        );
+        let fetchedItems = [];
+        try {
+          fetchedItems = await loadCanonicalItemsFromPublicData();
+        } catch (primaryError) {
+          console.warn('Falling back to direct markdown loading for canonical wiki items.', primaryError);
+          fetchedItems = await loadCanonicalItemsFromMarkdown();
+        }
 
         fetchedItems.sort((left, right) => collator.compare(left.title, right.title));
 

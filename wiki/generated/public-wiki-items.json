@@ -1,0 +1,545 @@
+{
+  "generatedAt": "2026-04-23T05:16:09.321Z",
+  "curatedTargets": [],
+  "stats": {
+    "itemCount": 30,
+    "orphanCount": 0,
+    "brokenLinkCount": 0
+  },
+  "items": [
+    {
+      "slug": "aarde",
+      "title": "Aarde",
+      "summary": "De grondende laag van plaats, lichaam, voedsel en concrete materie waarop samenleven rust.",
+      "links": [
+        "aarde",
+        "grond",
+        "bodem",
+        "land"
+      ],
+      "body": "# Aarde\n\nAarde staat in de bronteksten voor grond, plek en belichaming. Zonder aarde blijft het project zweven; met aarde wordt [[Natuurverbinding]] tastbaar in tuinen, voedsel, bouwen en zorg voor een gedeelde plek.\n\nIn de School van het Hart hoort aarde daarom samen met [[Water]], [[Lucht]] en [[Vuur]], met [[Elementen]] en met het geheel van [[Aarde, water, lucht & vuur]]. Zo raakt aarde ook aan [[Materie]] en aan de concrete oefenplek van de [[School van het Hart]].",
+      "filePath": "wiki/items/aarde.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "aarde-water-lucht-en-vuur",
+      "title": "Aarde, water, lucht & vuur",
+      "summary": "De vier natuurkrachten die in de bronteksten samen verschijnen als leeromgeving, ordenend veld en gedeelde basis.",
+      "links": [
+        "aarde water lucht vuur",
+        "aarde, water, lucht en vuur",
+        "vier natuurkrachten"
+      ],
+      "body": "# Aarde, water, lucht & vuur\n\nAarde, water, lucht en vuur worden in de bronteksten samen genoemd om duidelijk te maken dat de School van het Hart niet los staat van de levende werkelijkheid. Het geheel verwijst naar [[Elementen]] en tegelijk naar de concrete oefening van [[Natuurverbinding]].\n\nAls woordenboekingang brengt deze uitdrukking daarom minstens [[Aarde]], [[Water]], [[Lucht]] en [[Vuur]] samen. In die samenhang wordt ook zichtbaar hoe de [[School van het Hart]] een materiële plek wil zijn waarin natuur, lichaam, ritme en gemeenschap opnieuw op elkaar betrokken raken.",
+      "filePath": "wiki/items/aarde-water-lucht-en-vuur.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "afstemming",
+      "title": "Afstemming",
+      "summary": "Het proces waarin stemmen, informatie en ritme op elkaar afgestemd raken rond een gedeeld midden.",
+      "links": [
+        "afstemming",
+        "afstemmen",
+        "synchronisatie",
+        "informatie doorstroming"
+      ],
+      "body": "# Afstemming\n\nAfstemming is het trage werk waarin een groep zoekt naar wat klopt in het midden, nog voor er beslist of gehandeld wordt. In de School van het Hart groeit afstemming in [[Cirkels]], via [[Taalbewustzijn]] en vanuit zorg voor [[Veiligheid]].\n\nWanneer afstemming voldoende diep wordt, ontstaat [[Instemming]]: geen geforceerd akkoord, maar een voelbare ja van de groep. Zo wordt afstemming ook een basis voor [[Zelfbestuur]], [[Verbinding]] en de concrete vorm van de [[Nieuwe wereld]].",
+      "filePath": "wiki/items/afstemming.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "babylon",
+      "title": "Babylon",
+      "summary": "De naam voor het oude systeem van verwarring, geldslavernij en afgescheiden leven waaruit de School wil loskomen.",
+      "links": [
+        "babylon",
+        "kapitalistisch systeem",
+        "geld en geweld",
+        "oude wereld",
+        "geldslavernij",
+        "verdeel en heers",
+        "mind control"
+      ],
+      "body": "# Babylon\n\nBabylon is in deze teksten de naam voor de wereld van verdeeldheid, dwang, verwarring en het primaat van geld. Het verwijst niet alleen naar instituties, maar ook naar de mentale patronen waarin mensen meedraaien zolang [[Taalbewustzijn]], [[Vrijheid]], [[Verbinding]] en helderheid over [[Babylonische spraakverwarring]] niet opnieuw gegrond worden.\n\nDe School van het Hart wil geen vlucht uit Babylon zijn, maar een plek waar de logica ervan onwerkzaam wordt. Daarom zijn [[Rainbow Gatherings]], [[Magic Hat]], [[Zelfbestuur]] en [[Collectieve bewustwording]] zo belangrijk in het geheel.",
+      "filePath": "wiki/items/babylon.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "cirkels",
+      "title": "Cirkels",
+      "summary": "De basisvorm van samenkomen waarin communicatie, informatie en verantwoordelijkheid gedeeld worden.",
+      "links": [
+        "cirkel",
+        "cirkels",
+        "talking stick",
+        "main circle"
+      ],
+      "body": "# Cirkels\n\nDe cirkel is de basisvorm van het samenkomen in de School van het Hart. In de cirkel heeft niemand de hoogste plaats en hoeft niemand buiten te vallen; het is de vorm waarin [[Afstemming]], [[Instemming]] en [[Veiligheid]] tastbaar worden.\n\nDoor in cirkel te spreken leren mensen dat communicatie een gedeelde verantwoordelijkheid is. Daarom zijn [[Taalbewustzijn]], [[Leren samenleven]] en [[Zelfbestuur]] geen losse thema's, maar oefeningen die telkens weer in de cirkel landen.",
+      "filePath": "wiki/items/cirkels.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "collectief-trauma",
+      "title": "Collectief trauma",
+      "summary": "De gedeelde last van angst, pijn en afgescheiden patronen die niet alleen individueel maar ook samen geheeld moet worden.",
+      "links": [
+        "collectief trauma",
+        "trauma",
+        "angst",
+        "mentale gevangenis",
+        "zelfdestructieve gedachtenpatronen"
+      ],
+      "body": "# Collectief trauma\n\nCollectief trauma verwijst naar de laag van angst, pijn en vervorming die niet enkel in afzonderlijke personen zit, maar tussen mensen en in het grotere verhaal van de samenleving. Daardoor kan heling niet louter individueel blijven; ze vraagt [[Leren samenleven|gemeenschap]], [[Veiligheid]] en [[Collectieve heling]].\n\nDe School van het Hart wil een plek zijn waar dit trauma niet meer weggeduwd wordt, maar gedragen kan worden. In [[Cirkels]], met [[Taalbewustzijn]] en vanuit [[Liefde in de praktijk]] kan de greep van het trauma stilaan loskomen.",
+      "filePath": "wiki/items/collectief-trauma.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "collectieve-bewustwording",
+      "title": "Collectieve bewustwording",
+      "summary": "Het moment waarop individueel ontwaken overgaat in gemeenschappelijk leren, afstemmen en handelen.",
+      "links": [
+        "collectieve bewustwording",
+        "bewustwording",
+        "bewustzijn",
+        "ontwaken",
+        "collectieve fase",
+        "individuele fase",
+        "collectieve ontwikkeling",
+        "individuele ontwikkeling",
+        "paradigmaverschuiving"
+      ],
+      "body": "# Collectieve bewustwording\n\nCollectieve bewustwording is de fase waarin [[Bewustzijn]] en ontwaken niet langer enkel een individuele weg blijven, maar een gemeenschappelijke beweging worden. Wat mensen afzonderlijk al begonnen te zien, moet dan gedragen worden in [[Leren samenleven|gemeenschap]], in [[Cirkels]] en op een concrete plek zoals de [[School van het Hart]].\n\nDaarom is collectieve bewustwording meer dan inzicht. Ze vraagt [[Afstemming]], [[Instemming]], [[Collectieve heling]] en het beoefenen van een andere manier van samen leven in de richting van de [[Nieuwe wereld]].",
+      "filePath": "wiki/items/collectieve-bewustwording.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "collectieve-heling",
+      "title": "Collectieve heling",
+      "summary": "Het gezamenlijk helen van angst, spanning en oude patronen in een veilige bedding.",
+      "links": [
+        "collectieve heling",
+        "heling",
+        "healing",
+        "genezing",
+        "gezondheid",
+        "herstel",
+        "holistisch gezondheidscentrum"
+      ],
+      "body": "# Collectieve heling\n\nCollectieve heling vertrekt vanuit het inzicht dat veel angst en pijn niet alleen in afzonderlijke personen zit, maar ook tussen mensen. Daarom volstaat individueel werk niet altijd; er is ook een gedeelde bedding nodig waar [[Collectief trauma]], verdriet en spanning gedragen kunnen worden.\n\nIn de School van het Hart gebeurt die heling in relatie, via [[Cirkels]], [[Veiligheid]], [[Taalbewustzijn]] en [[Liefde in de praktijk]]. Vanuit die bedding kan ook een holistisch gezondheidscentrum ontstaan waarin allerlei vormen van herstel samenkomen.",
+      "filePath": "wiki/items/collectieve-heling.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "elementen",
+      "title": "Elementen",
+      "summary": "De vier elementen als samenhangend veld van gronding, stroming, ademruimte en transformatie.",
+      "links": [
+        "element",
+        "elementen",
+        "vier elementen"
+      ],
+      "body": "# Elementen\n\nMet de elementen bedoelen de bronteksten het levende samenspel van [[Aarde]], [[Water]], [[Lucht]] en [[Vuur]]. Ze vormen samen geen decor, maar een ordenend veld waarin mensen kunnen vertragen, bouwen, voelen, voeden en samenleven.\n\nDaarom staan de elementen in directe relatie met [[Aarde, water, lucht & vuur]], met [[Natuurverbinding]] en met de materiële leersituatie van de [[School van het Hart]]. Wie de elementen ernstig neemt, begrijpt ook beter waarom gedeelde grond, voedsel, vuurplaatsen en open lucht zo'n centrale rol spelen.",
+      "filePath": "wiki/items/elementen.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "focalisers",
+      "title": "Focalisers",
+      "summary": "Mensen die tijdelijk de focus houden op een verantwoordelijkheid zonder zich boven de groep te plaatsen.",
+      "links": [
+        "focaliser",
+        "focalisers",
+        "focus houden",
+        "lead by example"
+      ],
+      "body": "# Focalisers\n\nFocalisers zijn mensen die voor een bepaalde tijd de focus houden op een taak of verantwoordelijkheid. Ze functioneren niet als leiders boven de groep, maar als dienende dragers binnen [[Zelfbestuur]] en binnen de praktijk van [[Rainbow Gatherings]].\n\nOmdat die verantwoordelijkheid doorgegeven kan worden, blijft de structuur beweeglijk. Zo worden [[Afstemming]], [[Instemming]] en [[Vrijheid]] gecombineerd met de nood aan continuïteit en zorg voor het geheel.",
+      "filePath": "wiki/items/focalisers.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "instemming",
+      "title": "Instemming",
+      "summary": "Het punt waarop een groep niet alleen iets begrijpt, maar er ook werkelijk innerlijk ja op kan zeggen.",
+      "links": [
+        "instemming",
+        "instemmen",
+        "consensus",
+        "gezamenlijke ja"
+      ],
+      "body": "# Instemming\n\nInstemming ontstaat wanneer een groep na voldoende [[Afstemming]] kan voelen dat een voorstel klopt voor het geheel. Het gaat dus dieper dan een praktische afspraak; het is een manier om besluiten te laten dragen door relatie en aanwezigheid.\n\nIn de School van het Hart is instemming nauw verbonden met [[Cirkels]], [[Taalbewustzijn]] en [[Veiligheid]]. Zonder die bedding blijft consensus oppervlakkig en verdwijnt de kans op werkelijk [[Zelfbestuur]].",
+      "filePath": "wiki/items/instemming.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "leren-samenleven",
+      "title": "Leren samenleven",
+      "summary": "De oefening om opnieuw te leren luisteren, dragen, delen en samen aanwezig te zijn.",
+      "links": [
+        "leren samenleven",
+        "samenleven",
+        "samenwerken",
+        "gemeenschap",
+        "tribe",
+        "family"
+      ],
+      "body": "# Leren samenleven\n\nLeren samenleven is de kernopgave achter veel andere begrippen in dit project. Mensen hebben lang geleerd hoe ze apart kunnen functioneren, maar veel minder hoe ze werkelijk samen kunnen leven, spreken en werken zonder terug te vallen in strijd of onduidelijkheid.\n\nDie leerweg gebeurt niet uit een boek, maar in relatie. Daarom zijn [[Cirkels]], [[Afstemming]], [[Instemming]], [[Verbinding]] en [[Zelfbestuur]] allemaal concrete oefeningen in leren samenleven binnen de [[School van het Hart]].",
+      "filePath": "wiki/items/leren-samenleven.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "levensschool",
+      "title": "Levensschool",
+      "summary": "Een concrete leerplek waar hoofd, hart, materie en gemeenschap opnieuw samenvallen.",
+      "links": [
+        "levensschool",
+        "permanente levensschool",
+        "leerschool",
+        "mysterieschool",
+        "universiteit van de ziel"
+      ],
+      "body": "# Levensschool\n\nEen levensschool is geen klassieke [[School]], maar een plek waar leven zelf de leerweg wordt. In de School van het Hart betekent dat: leren door samen aanwezig te zijn, samen te bouwen, te koken, te spreken, te helen en verantwoordelijkheid te dragen.\n\nDe levensschool verbindt [[Collectieve bewustwording]] met de materie. Daarom raken hier [[Leren samenleven]], [[Cirkels]], [[Spel & creativiteit]] en [[Natuurverbinding]] allemaal aan dezelfde oefening.",
+      "filePath": "wiki/items/levensschool.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "liefde-in-de-praktijk",
+      "title": "Liefde in de praktijk",
+      "summary": "Liefde niet als idee, maar als manier van spreken, beslissen, zorgen en bouwen.",
+      "links": [
+        "liefde in de praktijk",
+        "liefde",
+        "liefdesschool",
+        "eendracht",
+        "materie",
+        "expressie van liefde"
+      ],
+      "body": "# Liefde in de praktijk\n\nLiefde in de praktijk betekent dat liefde zichtbaar wordt in gedrag, ritme, [[Materie]] en verantwoordelijkheid. Ze blijft niet zweven als ideaal, maar toont zich in hoe mensen spreken, ontvangen, delen, herstellen en ruimte maken voor elkaar.\n\nOmdat angst liefde blokkeert, hoort deze praktijk samen met [[Collectieve heling]], [[Veiligheid]] en [[Taalbewustzijn]]. Zo wordt liefde een werkwoord dat de [[Nieuwe wereld]] al laat verschijnen in het dagelijkse leven van de [[School van het Hart]].",
+      "filePath": "wiki/items/liefde-in-de-praktijk.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "lucht",
+      "title": "Lucht",
+      "summary": "De sfeer van adem, openheid en ruimte die het samenleven letterlijk en figuurlijk draaglijk maakt.",
+      "links": [
+        "lucht",
+        "adem",
+        "open lucht",
+        "ademruimte"
+      ],
+      "body": "# Lucht\n\nLucht verwijst in deze teksten naar adem, ruimte en openheid. Zonder lucht verstikt een plek; met lucht ontstaat bewegingsruimte voor lichaam, gesprek, zang en aanwezigheid.\n\nLucht hoort daarom samen met [[Aarde]], [[Water]] en [[Vuur]], met het geheel van [[Elementen]] en met [[Natuurverbinding]]. Als een School van het Hart in open lucht kan ademen, wordt ook [[Vrijheid]] concreter voelbaar.",
+      "filePath": "wiki/items/lucht.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "magic-hat",
+      "title": "Magic Hat",
+      "summary": "Een vrije en transparante geldpraktijk waarin bijdragen gemeenschappelijk worden en macht niet gekocht kan worden.",
+      "links": [
+        "magic hat",
+        "vrije bijdrage",
+        "open boekhouding",
+        "gemeenschappelijke pot",
+        "financiële overvloed"
+      ],
+      "body": "# Magic Hat\n\nDe magic hat is de financiële praktijk waarbij iedereen vrij kan bijdragen naar vermogen, zonder druk en zonder dat geld recht geeft op meer macht. Wat in de hoed komt, wordt gemeenschappelijk en wordt beheerd in openheid.\n\nZo doorbreekt de magic hat de logica van [[Babylon]] en maakt ze een andere vorm van draagkracht mogelijk. In de School van het Hart hoort dit samen met [[Zelfbestuur]], [[Vrijheid]] en [[Verbinding]].",
+      "filePath": "wiki/items/magic-hat.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "natuurverbinding",
+      "title": "Natuurverbinding",
+      "summary": "Het opnieuw leven en leren in relatie met aarde, water, lucht, vuur en gedeelde grond.",
+      "links": [
+        "natuurverbinding",
+        "natuur",
+        "natuurdomein",
+        "permacultuur",
+        "food forests",
+        "gedeelde grond",
+        "voedsel",
+        "buitenruimte"
+      ],
+      "body": "# Natuurverbinding\n\nNatuurverbinding betekent dat de School van het Hart niet los staat van [[Elementen]], van [[Aarde]], [[Water]], [[Lucht]] en [[Vuur]], maar er middenin leert leven. De natuur is geen decor rond het project, maar een actieve leermeester in vertragen, zorgen, bouwen en samenleven.\n\nDaarom verbindt natuurverbinding praktische keuzes zoals permacultuur, tuinen, voedsel en gedeelde grond met diepere thema's als [[Vrijheid]], [[Spel & creativiteit]], [[Aarde, water, lucht & vuur]] en [[Nieuwe wereld]]. In die zin ondersteunt natuurverbinding ook [[Collectieve heling]] en [[Wereldvrede]].",
+      "filePath": "wiki/items/natuurverbinding.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "nieuwe-wereld",
+      "title": "Nieuwe wereld",
+      "summary": "De wereld van vrede, gezondheid en verbondenheid die niet gepredikt maar geoefend moet worden.",
+      "links": [
+        "nieuwe wereld",
+        "paradijs",
+        "hemel op aarde",
+        "wereld van het hart",
+        "paradigmashift"
+      ],
+      "body": "# Nieuwe wereld\n\nDe nieuwe wereld is de naam voor een manier van leven waarin scheiding, angst en dwang niet langer de grondtoon vormen. Ze staat voor een wereld van [[Wereldvrede]], gezondheid, creativiteit en [[Verbinding]], maar bestaat alleen als ze ook in de materie geoefend wordt.\n\nDe School van het Hart wil een model in het klein zijn van die nieuwe wereld. Daarom komen [[Leren samenleven]], [[Collectieve bewustwording]], [[Zelfbestuur]] en [[Liefde in de praktijk]] hier samen als dagelijkse praktijk.",
+      "filePath": "wiki/items/nieuwe-wereld.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "rainbow-gatherings",
+      "title": "Rainbow Gatherings",
+      "summary": "Het levende voorbeeld van tijdelijke gemeenschap, gedeelde verantwoordelijkheid en people for the people.",
+      "links": [
+        "rainbow",
+        "rainbow gathering",
+        "rainbow gatherings",
+        "gathering",
+        "rainbow family",
+        "rainbow family of living light",
+        "the people for the people",
+        "love light unity",
+        "seedcamp",
+        "shanti senna",
+        "welcome home",
+        "food circle",
+        "vision circle"
+      ],
+      "body": "# Rainbow Gatherings\n\nRainbow Gatherings zijn natuurkampen waarin mensen tijdelijk samenleven als een open familie in de natuur. Ze vormen voor de School van het Hart een belangrijk model omdat er al decennialang geoefend wordt met [[Zelfbestuur]], [[Cirkels]], [[Focalisers]], de [[Magic Hat]] en ritmes zoals de [[Vision circle]] en de [[Food circle]].\n\nWat in de Rainbow tijdelijk gebeurt, wil de School van het Hart duurzamer vormgeven. De geest van eenvoud, openheid en people for the people voedt daarom ook [[Vrijheid]], [[Natuurverbinding]] en [[Leren samenleven]].",
+      "filePath": "wiki/items/rainbow-gatherings.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "school-van-het-hart",
+      "title": "School van het Hart",
+      "summary": "Een centrum voor collectieve bewustwording waar mensen in vrijheid, veiligheid en natuur kunnen leren samenleven.",
+      "links": [
+        "school van het hart",
+        "svhh",
+        "centrum voor collectieve bewustwording",
+        "school",
+        "centrum",
+        "verzamelplaats",
+        "materiële plek",
+        "werkplaats",
+        "hoofdkwartier"
+      ],
+      "body": "# School van het Hart\n\nDe School van het Hart is een materiële [[School]] en [[Levensschool]] waar mensen samen kunnen komen om te groeien in [[Collectieve bewustwording]], [[Leren samenleven]] en [[Liefde in de praktijk]]. Het is tegelijk een verzamelplaats, een werkplaats en een oefenplek voor de [[Nieuwe wereld]].\n\nDe School verbindt de werkzame elementen van [[Rainbow Gatherings]] met een duurzamere vorm. Daarom horen [[Cirkels]], [[Zelfbestuur]], [[Magic Hat]], [[Taalbewustzijn]], [[Natuurverbinding]] en [[Collectieve heling]] allemaal tot dezelfde kern van dit levende centrum.",
+      "filePath": "wiki/items/school-van-het-hart.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "spel-en-creativiteit",
+      "title": "Spel & creativiteit",
+      "summary": "De ruimte waar mensen al makend, zingend, bouwend en spelend leren samenleven.",
+      "links": [
+        "spel en creativiteit",
+        "spel",
+        "creativiteit",
+        "grote speeltuin",
+        "ateliers",
+        "workshops",
+        "atelier",
+        "makerschap",
+        "expressie"
+      ],
+      "body": "# Spel & creativiteit\n\nSpel en creativiteit zijn geen bijzaak maar een leerweg. Door samen te zingen, bouwen, tuinieren, creeren, improviseren en [[Expressie]] te geven oefenen mensen een lichtere en meer levende vorm van [[Leren samenleven]].\n\nDe School van het Hart beschrijft zichzelf daarom ook als een grote speeltuin. In die sfeer raken [[Natuurverbinding]], [[Vrijheid]], [[Liefde in de praktijk]] en de concrete vorm van de [[Nieuwe wereld]] elkaar voortdurend.",
+      "filePath": "wiki/items/spel-en-creativiteit.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "taalbewustzijn",
+      "title": "Taalbewustzijn",
+      "summary": "Het bevrijden van de woorden zodat communicatie en betekenis weer helder kunnen worden.",
+      "links": [
+        "taalbewustzijn",
+        "woorden bevrijden",
+        "taal",
+        "woorden",
+        "communicatie",
+        "spraakverwarring",
+        "babylonische spraakverwarring",
+        "helend communiceren",
+        "hartsdialoog",
+        "heldere communicatie",
+        "hartstaal",
+        "woordenschat",
+        "spraakkunst",
+        "taalelementen",
+        "archetypisch taalgebruik",
+        "geometrisch taalgebruik",
+        "taalbewust nederlands"
+      ],
+      "body": "# Taalbewustzijn\n\nTaalbewustzijn vertrekt van het inzicht dat mensen leven in de [[Woorden]] en verhalen die ze zichzelf en elkaar vertellen. Wanneer die woorden troebel worden, wordt ook [[Communicatie]] en samenleven troebel. Daarom wil taalbewustzijn helderheid brengen in betekenis, misverstand en verhaal.\n\nIn de School van het Hart is taalbewustzijn geen theoretische hobby maar een sleutelpraktijk. Het ondersteunt [[Afstemming]], [[Instemming]], [[Collectieve heling]] en helpt om uit de [[Babylonische spraakverwarring]] van [[Babylon]] te bewegen.\n\nDe website, de wiki en de bronassimilatie horen daarom ook zelf taalbewust te zijn. Dat betekent: helder Nederlands waar het systeem uitlegt, zorgvuldige brongetrouwheid waar bijzondere woorden of beelden uit teksten zoals Excalibur en Het boek der geruststelling bewaard moeten blijven, en een actieve [[Woordenschat]] waarin letters, woorden, begrippen en passages met elkaar verbonden worden.",
+      "filePath": "wiki/items/taalbewustzijn.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "veiligheid",
+      "title": "Veiligheid",
+      "summary": "De beschermende bedding die nodig is opdat mensen echt kunnen spreken, voelen, leren en helen.",
+      "links": [
+        "veiligheid",
+        "veilige bedding",
+        "veilige context",
+        "safe space"
+      ],
+      "body": "# Veiligheid\n\nVeiligheid is de bedding waarbinnen mensen niet voortdurend op hun hoede hoeven te blijven. Zonder veiligheid blijft spreken strategisch, wordt leren oppervlakkig en geraakt heling niet tot in de diepte.\n\nIn de School van het Hart groeit veiligheid niet door controle, maar door [[Cirkels]], [[Afstemming]], [[Instemming]] en [[Liefde in de praktijk]]. Precies daardoor wordt veiligheid ook de grond voor echte [[Vrijheid]].",
+      "filePath": "wiki/items/veiligheid.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "verbinding",
+      "title": "Verbinding",
+      "summary": "De levende ervaring dat mensen, natuur en betekenis niet los van elkaar staan maar in relatie bestaan.",
+      "links": [
+        "verbinding",
+        "verbondenheid",
+        "verbinding met mekaar",
+        "verbinding met de natuur"
+      ],
+      "body": "# Verbinding\n\nVerbinding is een van de meest centrale woorden in deze teksten. Ze verwijst naar de ervaring dat mensen niet bedoeld zijn om afgesneden van elkaar, van de natuur of van hun eigen innerlijk te leven.\n\nOmdat verbinding tegelijk gevoeld en georganiseerd moet worden, raakt ze aan bijna alles: [[Natuurverbinding]], [[Leren samenleven]], [[Vereniging]], [[Wereldvrede]] en het concrete midden van de [[School van het Hart]]. Zonder verbinding valt ook [[Afstemming]] uiteen.",
+      "filePath": "wiki/items/verbinding.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "vereniging",
+      "title": "Vereniging",
+      "summary": "Het proces waarin versnipperde stemmen, initiatieven en mensen opnieuw in een gezamenlijk veld komen.",
+      "links": [
+        "vereniging",
+        "verenigen",
+        "inclusiviteit",
+        "eenheidsbewustzijn"
+      ],
+      "body": "# Vereniging\n\nVereniging betekent dat wat versnipperd leeft opnieuw samengebracht wordt. In de context van de School van het Hart gaat het zowel over mensen, initiatieven en kennis als over de diepe ervaring van samen horend leven.\n\nDaardoor is vereniging nauw verwant met [[Verbinding]], maar legt het woord sterker de nadruk op samenkomen en organiseren. Het hoort bij [[Afstemming]], [[Instemming]] en de beweging richting [[Wereldvrede]] en [[Nieuwe wereld]].",
+      "filePath": "wiki/items/vereniging.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "vrijheid",
+      "title": "Vrijheid",
+      "summary": "De ruimte waarin mensen zonder dwang kunnen deelnemen, bijdragen, spreken en ademen.",
+      "links": [
+        "vrijheid",
+        "vrije ruimte",
+        "vrij zijn",
+        "niet commercieel"
+      ],
+      "body": "# Vrijheid\n\nVrijheid betekent in deze visie niet dat iedereen zomaar doet wat hij wil, maar dat mensen niet gevangen blijven in dwang, angst of geldlogica. Vrijheid vraagt dus een omgeving waarin mensen zich kunnen bewegen zonder voortdurend gemanaged of gekocht te worden.\n\nDie ruimte ontstaat juist door [[Veiligheid]], [[Magic Hat]], [[Zelfbestuur]] en de geest van [[Rainbow Gatherings]]. Zo wordt vrijheid geen individualistisch losstaand ideaal, maar een relationele praktijk binnen de [[School van het Hart]].",
+      "filePath": "wiki/items/vrijheid.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "vuur",
+      "title": "Vuur",
+      "summary": "De kracht van warmte, concentratie en transformatie rond het gedeelde midden van een plek.",
+      "links": [
+        "vuur",
+        "main fire",
+        "centrale vuur",
+        "vuurplaats"
+      ],
+      "body": "# Vuur\n\nVuur is in deze bronnen zowel letterlijk als symbolisch een centrum. Rond het vuur wordt gekookt, gezongen, verzameld en gevierd; tegelijk staat vuur voor concentratie, warmte en transformatie.\n\nDaarom hoort vuur samen met [[Aarde]], [[Water]], [[Lucht]] en het geheel van [[Elementen]]. In de praktijk raakt vuur aan [[Rainbow Gatherings]], aan [[Natuurverbinding]] en aan het gedeelde ritme van de [[School van het Hart]].",
+      "filePath": "wiki/items/vuur.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "water",
+      "title": "Water",
+      "summary": "De stroom van leven, verzorging en reiniging die een plek bewoonbaar en relationeel levend maakt.",
+      "links": [
+        "water",
+        "drinkwater",
+        "bron",
+        "rivier",
+        "meertje"
+      ],
+      "body": "# Water\n\nWater staat in de bronteksten voor stroming, verzorging en levensonderhoud. Een plek met water kan voeden, wassen, afkoelen en mensen laten ervaren dat samenleven ook praktische zorg voor de basis vraagt.\n\nWater hoort daarom samen met [[Aarde]], [[Lucht]] en [[Vuur]], met [[Elementen]] en met het geheel van [[Aarde, water, lucht & vuur]]. Het is ook een sleutelwoord binnen [[Natuurverbinding]] en binnen de concrete organisatie van [[Rainbow Gatherings]].",
+      "filePath": "wiki/items/water.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "wereldvrede",
+      "title": "Wereldvrede",
+      "summary": "De richting waarin de teksten de menselijke ontwikkeling zien bewegen wanneer verbinding en bewustwording werkelijk vorm krijgen.",
+      "links": [
+        "wereldvrede",
+        "vrede",
+        "warriors of the rainbow"
+      ],
+      "body": "# Wereldvrede\n\nWereldvrede verschijnt in deze teksten niet als diplomatieke slogan, maar als gevolg van een diepere verschuiving in hoe mensen samenleven. Wanneer [[Collectieve bewustwording]], [[Vereniging]] en [[Verbinding]] concreet worden, verandert ook de manier waarop conflicten, grenzen en macht beleefd worden.\n\nDe School van het Hart wil daarom een bijdrage zijn aan wereldvrede door in het klein te oefenen wat op grotere schaal nodig is. In die zin horen [[Nieuwe wereld]], [[Liefde in de praktijk]] en [[Natuurverbinding]] allemaal bij hetzelfde werk.",
+      "filePath": "wiki/items/wereldvrede.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    },
+    {
+      "slug": "zelfbestuur",
+      "title": "Zelfbestuur",
+      "summary": "Het samen dragen van een plek zonder vaste machtskern, vanuit gedeelde verantwoordelijkheid.",
+      "links": [
+        "zelfbestuur",
+        "samen runnen",
+        "mede verantwoordelijk",
+        "bestuurders",
+        "verantwoordelijken"
+      ],
+      "body": "# Zelfbestuur\n\nZelfbestuur betekent dat de plek niet bestuurd wordt door een kleine vaste kern boven de rest, maar gedragen wordt door wie er aanwezig is. Daardoor wordt verantwoordelijkheid niet uitbesteed, maar geoefend als een gedeelde praktijk.\n\nOm dat mogelijk te maken zijn [[Cirkels]], [[Afstemming]], [[Instemming]] en [[Focalisers]] nodig. Zelfbestuur hoort ook samen met [[Vrijheid]] en met de niet-hiërarchische geest van [[Rainbow Gatherings]].",
+      "filePath": "wiki/items/zelfbestuur.md",
+      "kind": "canonical",
+      "indexType": "word",
+      "resolveAsTerm": true
+    }
+  ]
+}
