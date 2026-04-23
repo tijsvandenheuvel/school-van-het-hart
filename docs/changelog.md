@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.2.43 - Versieknop nog losser
+
+- De versieknop rechtsboven nog eens 5px verder naar links geschoven zodat die nog meer afstand houdt van de ornamentale kader
+- De extra marge opnieuw doorgetrokken in de responsieve layout zodat desktop en mobiel dezelfde ruimere offset houden
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.43`
+
+## v0.2.42 - Versieknop meer lucht
+
+- De versieknop rechtsboven ongeveer 5px verder naar links geschoven zodat die de ornamentale kader niet meer raakt
+- De extra marge doorgetrokken in de responsieve layout zodat desktop en mobiel dezelfde veilige afstand tot de rand houden
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.42`
+
 ## v0.2.41 - Externe context voor alle woorden
 
 - De externe contextlaag werd uitgebreid van alleen canonieke begrippen en letters naar de volledige publieke woordenlijst: canonieke lemma's, letterlijke alias-ingangen, bronafgeleide woorden en letters
