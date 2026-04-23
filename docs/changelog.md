@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.45 - Rustigere wiki-focus
+
+- De wiki-modal zet focus bij openen niet langer automatisch op de zoekbalk maar op de sluitknop, zodat de zoekinput niet meteen geselecteerd wordt
+- Daardoor blijft de woordenboeknavigatie rustiger wanneer je de wiki opent of vanuit de site een item in de wiki opent
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.45`
+
 ## v0.2.44 - Robuustere publieke wiki
 
 - De publieke wiki laadt canonieke items nu via een robuustere volgorde: eerst `/api/wiki/index`, dan een gegenereerde statische dataset in `wiki/generated/public-wiki-items.json`, en pas daarna losse markdownbestanden als fallback

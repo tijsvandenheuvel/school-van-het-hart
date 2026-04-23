@@ -2,7 +2,7 @@
 
 Dit document bewaart de canonieke inhoud van de 12 homepage-concepten.
 
-De bestaande verdeling van 6 `WAT`- en 6 `HOE`-concepten blijft behouden in `v0.2.44`.
+De bestaande verdeling van 6 `WAT`- en 6 `HOE`-concepten blijft behouden in `v0.2.45`.
 
 ## WAT
 

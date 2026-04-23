@@ -2124,7 +2124,7 @@
       updateWikiHistoryButtons();
     }
 
-    wikiSearchInput.focus();
+    wikiCloseBtn.focus();
   }
 
   async function initializeWiki() {
