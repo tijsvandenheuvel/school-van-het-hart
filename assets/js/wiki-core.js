@@ -10,15 +10,27 @@
   const WIKILINK_RE = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
   const MARKDOWN_LINK_RE = /\[([^\]]+)\]\(([^)]+)\)/g;
   const STOPWORDS = new Set([
-    'aan', 'al', 'alleen', 'als', 'alsof', 'altijd', 'and', 'angle', 'are', 'bij', 'binnen',
-    'buildstap', 'but', 'compact', 'dan', 'daarom', 'dat', 'de', 'den', 'der', 'des', 'desktop',
-    'die', 'dit', 'doet', 'door', 'dragen', 'een', 'eens', 'en', 'er', 'for', 'geen', 'had',
-    'heb', 'heeft', 'het', 'hier', 'hoe', 'html', 'hun', 'iemand', 'iets', 'in', 'into', 'is',
-    'it', 'javascript', 'je', 'jij', 'kan', 'kun', 'kunnen', 'maar', 'maken', 'met', 'mij',
-    'mijn', 'mobile', 'moet', 'naar', 'niet', 'nog', 'nu', 'of', 'om', 'ons', 'ook', 'op',
-    'opnieuw', 'over', 'plain', 'samen', 'short', 'te', 'that', 'the', 'their', 'them', 'then',
-    'there', 'to', 'tot', 'uit', 'van', 'veel', 'verantwoordelijkheid', 'voor', 'waar', 'was',
-    'wat', 'we', 'weer', 'wel', 'werd', 'wie', 'wij', 'worden', 'wordt', 'you', 'your', 'ze',
+    'aan', 'al', 'alleen', 'allemaal', 'als', 'alsof', 'altijd', 'and', 'andere', 'angle',
+    'aanwezig', 'are', 'beetje', 'betekent', 'bij', 'binnen', 'blijft', 'blijven', 'bronnen',
+    'bronteksten', 'bouwen', 'buildstap', 'but', 'compact', 'concrete', 'daarbij', 'daarin',
+    'daarmee', 'daardoor', 'daarom', 'daarvoor', 'dan', 'dat', 'de', 'delen', 'den', 'der', 'des',
+    'desktop', 'deze', 'die', 'dit', 'doet', 'door', 'dragen', 'een', 'eens', 'eigen',
+    'elkaar', 'en', 'er', 'for', 'gaan', 'gebeurt', 'gedaan', 'geen', 'gedragen', 'geheel',
+    'geleerd', 'gemeenschappelijk', 'geoefend', 'gewoon', 'groeit', 'groeien', 'groep', 'grotere',
+    'had', 'hart', 'heb', 'hebben', 'heeft', 'hele', 'het',
+    'hier', 'hoe', 'hoort', 'html', 'hun', 'iemand', 'iets', 'in', 'index', 'into', 'is',
+    'iedereen', 'it', 'javascript', 'je', 'jij', 'kan', 'klik', 'komt', 'kun', 'kunnen', 'lang',
+    'leeft', 'levende', 'maar',
+    'maken', 'manier', 'mensen', 'met', 'mij', 'mijn', 'modal', 'mobile', 'moet', 'mogelijk',
+    'naar', 'niemand', 'niet', 'nog', 'nu', 'oefenen', 'of', 'om', 'omdat', 'ons', 'ontstaan',
+    'ontvangen', 'onze', 'ook', 'op', 'opnieuw', 'over', 'personen', 'plaats', 'plain',
+    'praktische', 'project', 'ruimte', 'samen', 'samenkomen', 'short', 'spreken',
+    'ontstaat', 'staat', 'te', 'tegelijk', 'teksten', 'that', 'the', 'their', 'them', 'then', 'there',
+    'tijdelijk', 'to', 'tot', 'tussen', 'uit', 'vallen', 'van', 'vanuit', 'vaste', 'veel',
+    'verantwoordelijkheid', 'verbindt', 'vertragen', 'verwijst', 'voelen', 'voedsel', 'voor',
+    'voortdurend', 'vraagt', 'waar', 'waarin', 'wanneer', 'was', 'wat', 'we',
+    'weer', 'wel', 'werd', 'wie', 'wij',
+    'wiki', 'wil', 'worden', 'wordt', 'you', 'your', 'ze',
     'zei', 'zich', 'zij', 'zo', 'zonder'
   ]);
 
@@ -743,9 +755,16 @@
       function register(termParts, tokenIndex) {
         const display = termParts.join(' ');
         const normalized = normalizeTerm(display);
+        const normalizedParts = normalized.split(' ').filter(Boolean);
 
         if (!normalized || normalized.length < 4) return;
         if (ignored.has(normalized) || existingTerms.has(normalized) || STOPWORDS.has(normalized)) return;
+        if (!normalizedParts.length) return;
+        if (normalizedParts.some((part) => STOPWORDS.has(part))) return;
+        if (normalizedParts.some((part) => ignored.has(part))) return;
+        if (normalizedParts.length > 1 && normalizedParts.some((part) => existingTerms.has(part))) return;
+        if (normalizedParts.every((part) => existingTerms.has(part))) return;
+        if (normalizedParts.length === 1 && normalizedParts[0].length < 6) return;
 
         const entry = candidateMap.get(normalized) || {
           term: display,

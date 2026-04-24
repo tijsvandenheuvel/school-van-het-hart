@@ -7,6 +7,11 @@ links:
   - taal
   - woorden
   - communicatie
+  - verhaal
+  - verhalen
+  - helder
+  - troebel
+  - verwarring
   - spraakverwarring
   - babylonische spraakverwarring
   - helend communiceren

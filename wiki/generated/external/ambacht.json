@@ -1,0 +1,36 @@
+{
+  "slug": "ambacht",
+  "title": "Ambacht",
+  "indexType": "word",
+  "generatedAt": "2026-04-24T10:59:00.000Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "een handwerkvak dat vaak aanzienlijke vaardigheden vereist",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "ambacht",
+      "url": "https://nl.wiktionary.org/wiki/ambacht"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "Leenwoord uit het Keltisch, in de betekenis van ‘handwerk’ voor het eerst aangetroffen in 772 Van : ambehte, op zijn beurt een Keltisch leenwoord",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "ambacht",
+      "url": "https://nl.wiktionary.org/wiki/ambacht"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "ambacht",
+      "url": "https://nl.wiktionary.org/wiki/ambacht"
+    }
+  ]
+}

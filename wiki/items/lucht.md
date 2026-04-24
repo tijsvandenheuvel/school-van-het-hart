@@ -4,6 +4,7 @@ summary: De sfeer van adem, openheid en ruimte die het samenleven letterlijk en 
 links:
   - lucht
   - adem
+  - openheid
   - open lucht
   - ademruimte
 ---

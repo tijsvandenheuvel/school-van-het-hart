@@ -3,6 +3,7 @@ title: Veiligheid
 summary: De beschermende bedding die nodig is opdat mensen echt kunnen spreken, voelen, leren en helen.
 links:
   - veiligheid
+  - vertrouwen
   - veilige bedding
   - veilige context
   - safe space

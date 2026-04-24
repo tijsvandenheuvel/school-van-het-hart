@@ -6,6 +6,10 @@ links:
   - bewustwording
   - bewustzijn
   - ontwaken
+  - inzicht
+  - inzichten
+  - beweging
+  - gemeenschappelijke beweging
   - collectieve fase
   - individuele fase
   - collectieve ontwikkeling

@@ -1,0 +1,36 @@
+{
+  "slug": "ambachtelijk",
+  "title": "Ambachtelijk",
+  "indexType": "word",
+  "generatedAt": "2026-04-24T10:57:24.468Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "volgens de methoden van het oude ambacht",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "ambachtelijk",
+      "url": "https://nl.wiktionary.org/wiki/ambachtelijk"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "afgeleid van ambacht",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "ambachtelijk",
+      "url": "https://nl.wiktionary.org/wiki/ambachtelijk"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "ambachtelijk",
+      "url": "https://nl.wiktionary.org/wiki/ambachtelijk"
+    }
+  ]
+}

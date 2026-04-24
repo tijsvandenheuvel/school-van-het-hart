@@ -1,0 +1,36 @@
+{
+  "slug": "gedachte",
+  "title": "Gedachte",
+  "indexType": "word",
+  "generatedAt": "2026-04-24T10:59:00.937Z",
+  "status": "ready",
+  "intro": {
+    "label": "Internetverklaring",
+    "text": "hetgeen wat men denkt",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "gedachte",
+      "url": "https://nl.wiktionary.org/wiki/gedachte"
+    }
+  },
+  "etymology": {
+    "label": "Etymologie",
+    "text": "In de betekenis van ‘het nadenken, idee’ voor het eerst aangetroffen in 901. Middelnederlands ghedachte, ghedochte, aanpassing van ghedacht, ghedocht, uit Oudnederlands gethāht, ontwikkeld uit West-Germaans *gi-þāh-ti, verbaalabstractum met Primärberührung bij *þankjan- ‘denken’. Evenzo afgeleid zijn Nederduits (vero.) Gedacht, Oudhoogduits gidāht en Oudengels ġeþōht (waaruit Engels thought).",
+    "source": {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "gedachte",
+      "url": "https://nl.wiktionary.org/wiki/gedachte"
+    }
+  },
+  "fallbackNote": "",
+  "sources": [
+    {
+      "project": "Wiktionary",
+      "language": "nl",
+      "title": "gedachte",
+      "url": "https://nl.wiktionary.org/wiki/gedachte"
+    }
+  ]
+}

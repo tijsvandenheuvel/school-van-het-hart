@@ -18,10 +18,12 @@
     word: 'Woord',
     text: 'Tekst'
   };
+  const ALIAS_CONNECTOR_WORDS = new Set(['en']);
   const ENTRY_KIND_LABELS = {
     canonical: 'Wiki-item',
     term: 'Woordenboekingang',
     'source-term': 'Bronlemma',
+    'source-concept': 'Bronbegrip',
     letter: 'Letter',
     passage: 'Bronpassage',
     source: 'Brontekst'
@@ -48,6 +50,48 @@
     'weer', 'wel', 'welke', 'wereld', 'werd', 'weten', 'worden', 'wordt', 'woorden',
     'zal', 'ze', 'zelf', 'zien', 'zich', 'zijn', 'zij', 'zo', 'zoals', 'zodat'
   ]);
+  const SOURCE_CONCEPT_DEFINITIONS = [
+    {
+      title: 'Ambacht',
+      summary: 'Het vaardige maken met handen, materiaal, aandacht en verantwoordelijkheid.',
+      variants: ['ambacht', 'ambachten', 'stiel', 'stielen'],
+      links: ['Ambachtelijk', 'Spel & creativiteit', 'Gedachtelijk'],
+      paragraphs: [
+        'Ambacht benoemt het concrete maken: werken met handen, materialen, ritme en zorg. Binnen de School van het Hart hoort het bij de praktijklaag van spel, creativiteit, bouwen, herstellen en leren door te doen.',
+        'Als bronbegrip staat ambacht niet los van gedachte. Wat met de handen gemaakt wordt, krijgt richting door innerlijke ordening, aandacht en bedoeling.'
+      ]
+    },
+    {
+      title: 'Ambachtelijk',
+      summary: 'De houding waarin maken aandachtig, lichamelijk en betekenisvol wordt.',
+      variants: ['ambachtelijk', 'ambachtelijke'],
+      links: ['Ambacht', 'Gedachtelijk', 'Spel & creativiteit'],
+      paragraphs: [
+        'Ambachtelijk wijst op een manier van werken waarin handeling, aandacht en materiaal samenkomen. Het gaat niet alleen om techniek, maar om zorgvuldigheid, belichaming en verantwoordelijkheid in het maken.',
+        'In de taalbewuste bronlaag raakt ambachtelijk aan gedachtelijk: wat we maken en wat we denken horen bij elkaar wanneer de vorm uit het hart en uit heldere aandacht voortkomt.'
+      ]
+    },
+    {
+      title: 'Gedachte',
+      summary: 'De innerlijke vormkracht waarmee taal, beeld en handelen richting krijgen.',
+      variants: ['gedachte', 'gedachten', 'gedachtenbeeld', 'welkomsgedachte'],
+      links: ['Gedachtelijk', 'Taalbewustzijn', 'Ambachtelijk'],
+      paragraphs: [
+        'Gedachte is de innerlijke beweging waarin betekenis vorm krijgt voordat ze gesproken, geschreven of gedaan wordt. In het taalbewustzijn is denken daarom niet los te maken van spreken, luisteren en handelen.',
+        'Een gedachte kan verwarren wanneer ze onbewust blijft, maar kan ook ordenen wanneer ze helder wordt en in verbinding met het hart wordt gebracht.'
+      ]
+    },
+    {
+      title: 'Gedachtelijk',
+      summary: 'De geestelijke of innerlijke laag waarin betekenis voorbereid en geordend wordt.',
+      variants: ['gedachtelijk', 'gedachtelijke'],
+      links: ['Gedachte', 'Ambachtelijk', 'Taalbewustzijn'],
+      paragraphs: [
+        'Gedachtelijk verwijst naar wat zich in de innerlijke vorming, betekenisgeving en verbeelding afspeelt. Het benoemt de laag waarin woorden, beelden en intenties zich eerst organiseren.',
+        'Samen met ambachtelijk maakt dit zichtbaar dat de School van het Hart niet alleen praktisch of alleen geestelijk werkt: het gedachte en het gemaakte moeten elkaar dragen.'
+      ]
+    }
+  ];
 
   function slugify(value) {
     return value
@@ -563,6 +607,19 @@
     return `${head} en [[${cleaned[cleaned.length - 1]}]]`;
   }
 
+  function normalizeAliasDisplayKey(value) {
+    return normalizeTerm(value)
+      .split(' ')
+      .filter((part) => part && !ALIAS_CONNECTOR_WORDS.has(part))
+      .join(' ');
+  }
+
+  function isAliasOnlyTitleVariant(alias, title) {
+    const aliasKey = normalizeAliasDisplayKey(alias);
+    const titleKey = normalizeAliasDisplayKey(title);
+    return Boolean(aliasKey && titleKey && aliasKey === titleKey);
+  }
+
   function parseMarkdownBulletList(markdown) {
     return markdown
       .split(/\r?\n/)
@@ -758,11 +815,16 @@
     return 'Wiki-item';
   }
 
+  function buildSyntheticTermSummary(sourceItem) {
+    if (!sourceItem.summary) return `Verwijst naar het hoofdbegrip ${sourceItem.title}.`;
+    return `Verwijst naar ${sourceItem.title}: ${sourceItem.summary.charAt(0).toLowerCase()}${sourceItem.summary.slice(1)}`;
+  }
+
   function buildSyntheticTermBody(term, sourceItem, relatedTitles) {
     const lines = [
       `# ${term}`,
       '',
-      `${term} is in deze woordenlijst een letterlijke ingang uit de bronteksten. Dit lemma verwijst in de eerste plaats naar [[${sourceItem.title}]].`
+      `${term} is in deze woordenlijst een ingang die vooral hoort bij [[${sourceItem.title}]]: ${sourceItem.summary ? sourceItem.summary.charAt(0).toLowerCase() + sourceItem.summary.slice(1) : 'het hoofdbegrip waar deze term naar verwijst.'}`
     ];
 
     if (relatedTitles.length) {
@@ -784,7 +846,12 @@
     canonicalItems.forEach((item) => {
       item.links.forEach((alias) => {
         const normalized = normalizeTerm(alias);
-        if (!normalized || normalized === normalizeTerm(item.title) || representedTerms.has(normalized)) return;
+        if (
+          !normalized ||
+          normalized === normalizeTerm(item.title) ||
+          isAliasOnlyTitleVariant(alias, item.title) ||
+          representedTerms.has(normalized)
+        ) return;
 
         representedTerms.add(normalized);
 
@@ -807,7 +874,7 @@
         syntheticItems.push({
           slug,
           title: alias.trim(),
-          summary: `Letterlijke woordenboekingang uit de bronteksten. Zie vooral ${item.title}.`,
+          summary: buildSyntheticTermSummary(item),
           links: [],
           body: buildSyntheticTermBody(alias.trim(), item, relatedTitles),
           kind: 'term',
@@ -820,20 +887,74 @@
     return syntheticItems;
   }
 
-  function buildSourceVocabularyItems(sourceEntries, existingItems, ignoredTerms = []) {
-    const passages = sourceEntries.filter((entry) => entry.indexType === 'passage');
-    if (!passages.length) return [];
+  function matchesNormalizedPhrase(normalizedText, normalizedPhrase) {
+    if (!normalizedText || !normalizedPhrase) return false;
+    return ` ${normalizedText} `.includes(` ${normalizedPhrase} `);
+  }
 
+  function collectSourceConceptEvidence(definition, sourceEntries, sourceTitlesBySlug) {
+    const variants = uniqueTerms([definition.title, ...(definition.variants || [])])
+      .map((term) => normalizeTerm(term))
+      .filter(Boolean);
+    const sources = new Map();
+    const snippets = [];
+
+    sourceEntries
+      .filter((entry) => entry.indexType === 'passage')
+      .forEach((entry) => {
+        const text = stripMarkdownForExtraction(entry.body, entry.title)
+          .replace(/\s*Bron:\s.*$/i, '')
+          .trim();
+        const normalizedText = normalizeTerm(text);
+        const hasMatch = variants.some((variant) => matchesNormalizedPhrase(normalizedText, variant));
+        if (!hasMatch) return;
+
+        const sourceSlug = entry.sourceSlug || entry.slug;
+        const sourceTitle = sourceTitlesBySlug.get(sourceSlug) || entry.sourceTitle || entry.title;
+        sources.set(sourceSlug, sourceTitle);
+
+        if (text && snippets.length < 6) {
+          snippets.push(text.slice(0, 260).replace(/\s+/g, ' ').trim());
+        }
+      });
+
+    return {
+      sources,
+      snippets
+    };
+  }
+
+  function buildSourceConceptBody(definition, sourceTitles) {
+    const bodyLines = [
+      `# ${definition.title}`,
+      '',
+      ...definition.paragraphs
+    ];
+
+    if (definition.links.length) {
+      bodyLines.push('', '## Verbonden begrippen', '', ...definition.links.map((title) => `- [[${title}]]`));
+    }
+
+    if (sourceTitles.length) {
+      bodyLines.push(
+        '',
+        '## Bronspoor',
+        '',
+        `Dit begrip wordt in de bronlaag zichtbaar via ${formatWikiLinkSeries(sourceTitles)}. De woordenschat bewaart hier het dragende begrip, niet elke toevallige woordgroep waarin het voorkomt.`
+      );
+    }
+
+    return bodyLines.join('\n');
+  }
+
+  function buildSourceVocabularyItems(sourceEntries, existingItems, ignoredTerms = []) {
     const ignored = new Set(ignoredTerms.map((term) => normalizeTerm(term)).filter(Boolean));
     const existingTerms = new Set();
-    const existingItemsBySlug = new Map(existingItems.map((item) => [item.slug, item]));
-    const relationEntries = buildTermEntries(existingItems);
     const sourceTitlesBySlug = new Map(
       sourceEntries
         .filter((entry) => entry.indexType === 'text')
         .map((entry) => [entry.slug, entry.title])
     );
-    const candidateMap = new Map();
 
     existingItems.forEach((item) => {
       [item.title, ...(Array.isArray(item.links) ? item.links : [])].forEach((term) => {
@@ -842,135 +963,32 @@
       });
     });
 
-    function registerCandidate(parts, passage, passageText, passageTokens, startIndex, relatedSlugs, seenInPassage) {
-      const normalizedParts = parts.map((part) => normalizeTerm(part)).filter(Boolean);
-      const rawNormalized = normalizedParts.join(' ');
-      if (!rawNormalized || ignored.has(rawNormalized) || SOURCE_TERM_STOPWORDS.has(rawNormalized)) return;
-
-      const mergedKey = buildTermVariantKeys(rawNormalized).find((variant) => existingTerms.has(variant) || candidateMap.has(variant)) || rawNormalized;
-      const normalized = normalizeTerm(mergedKey);
-      if (!normalized || existingTerms.has(normalized) || ignored.has(normalized) || SOURCE_TERM_STOPWORDS.has(normalized)) return;
-      if (seenInPassage.has(normalized)) return;
-
-      const wordCount = normalizedParts.length;
-      if (!wordCount || wordCount > 4) return;
-      if (wordCount === 1 && !isUsefulSourceToken(normalizedParts[0], 6)) return;
-      if (wordCount > 1 && normalizedParts.some((part) => !isUsefulSourceToken(part, 3))) return;
-
-      const snippetTokens = passageTokens.slice(Math.max(0, startIndex - 4), Math.min(passageTokens.length, startIndex + wordCount + 6));
-      const snippet = snippetTokens.map((token) => token.value).join(' ').trim() || passageText.slice(0, 220).trim();
-      const candidate = candidateMap.get(normalized) || {
-        normalized,
-        title: formatLemmaTitle(normalized),
-        frequency: 0,
-        passages: new Map(),
-        sources: new Map(),
-        relatedSlugs: new Map()
-      };
-
-      candidate.frequency += 1;
-      candidate.passages.set(passage.slug, {
-        slug: passage.slug,
-        title: passage.title,
-        sourceSlug: passage.sourceSlug,
-        sourceTitle: sourceTitlesBySlug.get(passage.sourceSlug) || passage.sourceSlug,
-        sourcePage: passage.sourcePage,
-        snippet
-      });
-      candidate.sources.set(passage.sourceSlug, sourceTitlesBySlug.get(passage.sourceSlug) || passage.sourceSlug);
-
-      relatedSlugs.forEach((slug) => {
-        const relatedItem = existingItemsBySlug.get(slug);
-        if (!relatedItem) return;
-        if (normalizeTerm(relatedItem.title) === normalized) return;
-        candidate.relatedSlugs.set(slug, relatedItem.title);
-      });
-
-      candidateMap.set(normalized, candidate);
-      seenInPassage.add(normalized);
-    }
-
-    passages.forEach((passage) => {
-      const passageText = stripMarkdownForExtraction(passage.body, passage.title)
-        .replace(/\s*Bron:\s.*$/i, '')
-        .trim();
-      if (!passageText) return;
-
-      const passageTokens = tokenizeSourceText(passageText);
-      if (!passageTokens.length) return;
-
-      const relatedSlugs = [...new Set(findTermMatches(passageText, relationEntries).map((match) => match.slug))];
-      const seenInPassage = new Set();
-
-      passageTokens.forEach((token, index) => {
-        if (index < passageTokens.length - 1) {
-          const next = passageTokens[index + 1];
-          if (isUsefulSourceToken(token.normalized, 3) && isUsefulSourceToken(next.normalized, 3)) {
-            registerCandidate([token.value, next.value], passage, passageText, passageTokens, index, relatedSlugs, seenInPassage);
-          }
-        }
-
-        if (index < passageTokens.length - 2) {
-          const next = passageTokens[index + 1];
-          const third = passageTokens[index + 2];
-          if (
-            isUsefulSourceToken(token.normalized, 3) &&
-            isUsefulSourceToken(next.normalized, 3) &&
-            isUsefulSourceToken(third.normalized, 3)
-          ) {
-            registerCandidate([token.value, next.value, third.value], passage, passageText, passageTokens, index, relatedSlugs, seenInPassage);
-          }
-        }
-      });
-    });
-
-    return [...candidateMap.values()]
-      .filter((candidate) => {
-        const wordCount = candidate.normalized.split(' ').length;
-        return wordCount > 1 &&
-          candidate.frequency >= 2 &&
-          candidate.sources.size >= 2 &&
-          candidate.relatedSlugs.size >= 1 &&
-          candidate.normalized.split(' ').some((part) => part.length >= 7);
+    return SOURCE_CONCEPT_DEFINITIONS
+      .filter((definition) => {
+        const normalized = normalizeTerm(definition.title);
+        return normalized && !ignored.has(normalized) && !existingTerms.has(normalized);
       })
-      .sort((left, right) => {
-        if (right.frequency !== left.frequency) return right.frequency - left.frequency;
-        if (right.sources.size !== left.sources.size) return right.sources.size - left.sources.size;
-        return collator.compare(left.title, right.title);
-      })
-      .slice(0, 240)
-      .map((candidate) => {
-        const relatedTitles = [...candidate.relatedSlugs.values()].slice(0, 8);
-        const sourceTitles = [...candidate.sources.values()];
-        const bodyLines = [
-          `# ${candidate.title}`,
-          '',
-          `${candidate.title} is een bronafgeleide woordenboekingang in de woordenschat van de School van het Hart.`,
-          '',
-          `Deze ingang werd automatisch afgeleid uit terugkerend gebruik in ${sourceTitles.length} bron${sourceTitles.length === 1 ? '' : 'nen'}: ${formatWikiLinkSeries(sourceTitles)}.`
-        ];
-
-        if (relatedTitles.length) {
-          bodyLines.push('', '## Gerelateerde woorden', '', ...relatedTitles.map((title) => `- [[${title}]]`));
-        } else {
-          bodyLines.push('', '## Gerelateerde woorden', '', '- [[Taalbewustzijn]]');
-        }
+      .map((definition) => {
+        const evidence = collectSourceConceptEvidence(definition, sourceEntries, sourceTitlesBySlug);
+        const sourceTitles = [...evidence.sources.values()];
 
         return {
-          slug: `woord-${slugify(candidate.title)}`,
-          title: candidate.title,
-          summary: `Bronafgeleide woordenboekingang uit ${sourceTitles.join(', ')}.`,
-          links: [],
-          body: bodyLines.join('\n'),
-          kind: 'source-term',
-          sourceSlug: [...candidate.sources.keys()][0] || '',
+          slug: slugify(definition.title),
+          title: definition.title,
+          summary: definition.summary,
+          links: definition.links,
+          body: buildSourceConceptBody(definition, sourceTitles),
+          kind: 'source-concept',
+          sourceSlug: [...evidence.sources.keys()][0] || '',
           indexType: 'word',
           resolveAsTerm: true,
           searchText: [
-            candidate.title,
+            definition.title,
+            definition.summary,
+            ...definition.links,
+            ...definition.variants,
             ...sourceTitles,
-            ...relatedTitles,
-            ...[...candidate.passages.values()].slice(0, 8).map((ref) => ref.snippet)
+            ...evidence.snippets
           ].join('\n')
         };
       });
@@ -1095,6 +1113,7 @@
       slug: item.slug,
       title: item.title,
       summary: item.summary,
+      kind: item.kind || '',
       isCanonical: item.kind === 'canonical',
       indexType: deriveIndexType(item),
       searchText: item.searchText || [item.title, item.summary, item.body, item.links.join(' ')].join(' ')
@@ -1467,9 +1486,64 @@
       .map(([letter, letterEntries]) => [letter, letterEntries.sort((left, right) => collator.compare(left.term, right.term))]);
   }
 
+  function getSearchRank(entry, query) {
+    const normalizedQuery = normalizeTerm(query);
+    const normalizedTerm = normalizeTerm(entry.term);
+    const normalizedSummary = normalizeTerm(entry.summary || '');
+    const normalizedSearchText = normalizeTerm(entry.searchText || '');
+    const terms = normalizedQuery.split(' ').filter(Boolean);
+    let score = 0;
+
+    if (!normalizedQuery) return score;
+
+    if (normalizedTerm === normalizedQuery) score += 1200;
+    else if (normalizedTerm.startsWith(normalizedQuery)) score += 950;
+    else if (normalizedTerm.split(' ').includes(normalizedQuery)) score += 820;
+    else if (normalizedTerm.includes(normalizedQuery)) score += 700;
+
+    if (entry.isCanonical) score += 420;
+    else if (entry.kind === 'source-concept') score += 180;
+    else if (entry.kind === 'term') score -= 80;
+    else if (entry.kind === 'source-term') score -= 180;
+    else if (entry.kind === 'source') score -= 260;
+
+    if (entry.indexType === 'word') score += 80;
+    else if (entry.indexType === 'letter') score -= 80;
+    else if (entry.indexType === 'text') score -= 180;
+
+    terms.forEach((term) => {
+      if (normalizedTerm === term) score += 140;
+      else if (normalizedTerm.startsWith(term)) score += 90;
+      else if (normalizedTerm.split(' ').includes(term)) score += 70;
+      else if (normalizedTerm.includes(term)) score += 45;
+
+      if (normalizedSummary.includes(term)) score += 12;
+      if (normalizedSearchText.includes(term)) score += 4;
+    });
+
+    score -= Math.min(normalizedTerm.length, 90) * 0.5;
+
+    return score;
+  }
+
   function getQueryFilteredEntries() {
-    const query = wikiState.query.trim().toLowerCase();
-    return wikiState.indexEntries.filter((entry) => !query || entry.searchText.toLowerCase().includes(query));
+    const query = wikiState.query.trim();
+    if (!query) return wikiState.indexEntries;
+
+    const normalizedQuery = normalizeTerm(query);
+    const queryTerms = normalizedQuery.split(' ').filter(Boolean);
+
+    return wikiState.indexEntries
+      .filter((entry) => {
+        const normalizedSearchText = normalizeTerm(entry.searchText || '');
+        return queryTerms.every((term) => normalizedSearchText.includes(term));
+      })
+      .map((entry) => ({
+        entry,
+        rank: getSearchRank(entry, query)
+      }))
+      .sort((left, right) => right.rank - left.rank || collator.compare(left.entry.term, right.entry.term))
+      .map((result) => result.entry);
   }
 
   function getVisibleIndexEntries() {
@@ -1545,6 +1619,7 @@
     }
 
     const isAllView = wikiState.activeSection === 'all';
+    const isSearchView = Boolean(wikiState.query.trim());
 
     if (isAllView) {
       const section = document.createElement('section');
@@ -1564,6 +1639,36 @@
       sectionHeader.appendChild(sectionCount);
 
       section.appendChild(sectionHeader);
+
+      if (isSearchView) {
+        const list = document.createElement('div');
+        list.className = 'wiki-index-items';
+
+        filtered.forEach((entry) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = `wiki-index-entry${entry.isCanonical ? ' is-canonical' : ''}${wikiState.currentSlug === entry.slug ? ' is-active' : ''}`;
+          button.addEventListener('click', () => navigateToWikiItem(entry.slug, { pushHistory: true, trigger: button }));
+
+          const term = document.createElement('span');
+          term.className = 'wiki-entry-term';
+          term.textContent = entry.term;
+          button.appendChild(term);
+
+          const target = document.createElement('span');
+          target.className = 'wiki-entry-target';
+          const label = INDEX_ENTRY_LABELS[entry.indexType] || 'Item';
+          target.textContent = entry.summary ? `${label} · ${entry.summary}` : label;
+          button.appendChild(target);
+
+          list.appendChild(button);
+        });
+
+        section.appendChild(list);
+        wikiIndexView.appendChild(section);
+        renderWikiStatus();
+        return;
+      }
 
       groupEntriesAlphabetically(filtered).forEach(([letter, entries]) => {
         const group = document.createElement('section');
@@ -1601,6 +1706,53 @@
         section.appendChild(group);
       });
 
+      wikiIndexView.appendChild(section);
+      renderWikiStatus();
+      return;
+    }
+
+    if (isSearchView) {
+      const section = document.createElement('section');
+      section.className = 'wiki-index-section';
+
+      const sectionHeader = document.createElement('div');
+      sectionHeader.className = 'wiki-index-section-header';
+
+      const sectionTitle = document.createElement('h2');
+      sectionTitle.className = 'wiki-index-section-title';
+      sectionTitle.textContent = INDEX_SECTION_LABELS[wikiState.activeSection] || wikiState.activeSection;
+      sectionHeader.appendChild(sectionTitle);
+
+      const sectionCount = document.createElement('p');
+      sectionCount.className = 'wiki-index-section-count';
+      sectionCount.textContent = `${filtered.length}`;
+      sectionHeader.appendChild(sectionCount);
+
+      section.appendChild(sectionHeader);
+
+      const list = document.createElement('div');
+      list.className = 'wiki-index-items';
+
+      filtered.forEach((entry) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `wiki-index-entry${entry.isCanonical ? ' is-canonical' : ''}${wikiState.currentSlug === entry.slug ? ' is-active' : ''}`;
+        button.addEventListener('click', () => navigateToWikiItem(entry.slug, { pushHistory: true, trigger: button }));
+
+        const term = document.createElement('span');
+        term.className = 'wiki-entry-term';
+        term.textContent = entry.term;
+        button.appendChild(term);
+
+        const target = document.createElement('span');
+        target.className = 'wiki-entry-target';
+        target.textContent = entry.summary;
+        button.appendChild(target);
+
+        list.appendChild(button);
+      });
+
+      section.appendChild(list);
       wikiIndexView.appendChild(section);
       renderWikiStatus();
       return;

@@ -8,6 +8,7 @@ links:
   - permacultuur
   - food forests
   - gedeelde grond
+  - tuinen
   - voedsel
   - buitenruimte
 ---

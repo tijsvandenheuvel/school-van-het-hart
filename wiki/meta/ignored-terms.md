@@ -10,3 +10,7 @@ Deze termen worden bewust niet meer als kandidaat voor een nieuw wiki-item getoo
 - vorm
 - vormen
 - manier
+- brengen
+- ervaring
+- functioneren
+- ideaal

@@ -9,6 +9,8 @@ links:
   - geldslavernij
   - verdeel en heers
   - mind control
+  - logica
+  - oude logica
 ---
 
 # Babylon

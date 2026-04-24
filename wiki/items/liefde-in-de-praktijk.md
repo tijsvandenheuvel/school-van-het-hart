@@ -5,6 +5,8 @@ links:
   - liefde in de praktijk
   - liefde
   - liefdesschool
+  - liefde als werkwoord
+  - werkwoord
   - eendracht
   - materie
   - expressie van liefde

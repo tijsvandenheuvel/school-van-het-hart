@@ -8,6 +8,7 @@ links:
   - genezing
   - gezondheid
   - herstel
+  - individueel werk
   - holistisch gezondheidscentrum
 ---
 

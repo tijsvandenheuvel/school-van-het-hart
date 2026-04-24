@@ -1,5 +1,37 @@
 # Changelog
 
+## v0.2.49 - Strakkere kandidaatflow
+
+- Aliasvarianten zoals `aarde water lucht vuur` blijven zoekbaar, maar worden niet meer als apart zichtbaar lemma naast `Aarde, water, lucht & vuur` getoond
+- Betekenisvolle kandidaatwoorden zoals `leerweg`, `inzicht`, `openheid`, `relatie`, `verhaal`, `vertrouwen`, `verwarring`, `midden`, `beweging`, `tuinen` en `werkwoord` zijn als aliassen naar bestaande begrippen gerouteerd
+- Generieke restkandidaten zoals `brengen`, `ervaring`, `functioneren` en `ideaal` zijn aan de ignore-lijst toegevoegd, waardoor de admin-kandidaatstroom nu leeg is
+- Synthetische woordenboekingangen beschrijven nu ook de samenvatting van hun hoofdbegrip, in plaats van alleen naar dat begrip te verwijzen
+- De externe woordencontextgenerator volgt nu dezelfde bronbegriplogica als de publieke wiki en regenereert de oude bronfrase-lemma's niet meer
+- De woordenschat- en taalbewustzijnsrichtlijnen verduidelijken wanneer een kandidaat alias, ignore-term of nieuw canoniek item wordt
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.49`
+
+## v0.2.48 - Verfijnde bronwoordenschat
+
+- De publieke woordenschat maakt niet langer automatisch losse lemma's van toevallige twee- of driewoordcombinaties uit `Excalibur` en `Het boek der geruststelling`
+- Een eerste bronbegrip-laag toegevoegd voor `Ambacht`, `Ambachtelijk`, `Gedachte` en `Gedachtelijk`, met heldere beschrijvingen, onderlinge verwijzingen en bronspoor
+- De externe contextcache aangevuld voor deze nieuwe bronbegrippen, met beschikbare Wiktionary-duiding en een bewuste placeholder waar geen externe duiding werd gevonden
+- De admin-kandidaattermen zijn aangescherpt: technische projectcontext wordt niet meer meegenomen en grammaticale ruis plus bestaande-begripcombinaties worden sterker gefilterd
+- De taalbewustzijnsrichtlijnen uitgebreid met de regel dat bronfrases zoekcontext zijn tenzij ze als dragend begrip worden beschreven
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.48`
+
+## v0.2.47 - Relevantere wiki-zoekresultaten
+
+- De wiki-zoekfunctie sorteert actieve zoekopdrachten nu op relevantie in plaats van opnieuw alfabetisch te groeperen
+- Titelmatches, canonieke begrippen en hoofdlemma's krijgen voorrang op brede bodymatches en bronafgeleide woordenboekingangen
+- De zoekresultaten blijven bij filterchips zoals `woorden` en `teksten` in dezelfde relevante volgorde staan
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.47`
+
+## v0.2.46 - Compactere wiki-sluitknop
+
+- De sluitknop in de wiki-toolbar blijft nu een compacte ronde icon-button in plaats van breed uit te rekken wanneer de toolbar op kleinere breedtes omslaat
+- Bij tablet- en small-desktopbreedtes blijft de wiki-sluitknop op de bovenste toolbarregel uitgelijnd met de andere icon-buttons
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.2.46`
+
 ## v0.2.45 - Rustigere wiki-focus
 
 - De wiki-modal zet focus bij openen niet langer automatisch op de zoekbalk maar op de sluitknop, zodat de zoekinput niet meteen geselecteerd wordt

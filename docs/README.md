@@ -1,8 +1,8 @@
 # Docs
 
-Laatst bijgewerkt: 2026-04-23
+Laatst bijgewerkt: 2026-04-24
 
-Huidige siteversie: `v0.2.45`
+Huidige siteversie: `v0.2.49`
 
 Actieve entrypoint: `index.html`
 

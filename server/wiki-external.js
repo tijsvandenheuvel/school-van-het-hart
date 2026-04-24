@@ -12,6 +12,7 @@ const GENERATED_DIR = path.join(ROOT_DIR, 'wiki', 'generated', 'external');
 const USER_AGENT = 'SchoolVanHetHartWikiBot/0.1 (local development external vocabulary context)';
 const RESPONSE_CACHE = new Map();
 const collator = new Intl.Collator('nl', { sensitivity: 'base' });
+const ALIAS_CONNECTOR_WORDS = new Set(['en']);
 const SOURCE_TERM_STOPWORDS = new Set([
   'aan', 'aarde', 'achter', 'alle', 'alleen', 'allerlei', 'als', 'alsof', 'altijd',
   'andere', 'beetje', 'belangrijk', 'bepaalde', 'beter', 'bij', 'binnen', 'bron',
@@ -34,6 +35,48 @@ const SOURCE_TERM_STOPWORDS = new Set([
   'weer', 'wel', 'welke', 'wereld', 'werd', 'weten', 'worden', 'wordt', 'woorden',
   'zal', 'ze', 'zelf', 'zien', 'zich', 'zijn', 'zij', 'zo', 'zoals', 'zodat'
 ]);
+const SOURCE_CONCEPT_DEFINITIONS = [
+  {
+    title: 'Ambacht',
+    summary: 'Het vaardige maken met handen, materiaal, aandacht en verantwoordelijkheid.',
+    variants: ['ambacht', 'ambachten', 'stiel', 'stielen'],
+    links: ['Ambachtelijk', 'Spel & creativiteit', 'Gedachtelijk'],
+    paragraphs: [
+      'Ambacht benoemt het concrete maken: werken met handen, materialen, ritme en zorg. Binnen de School van het Hart hoort het bij de praktijklaag van spel, creativiteit, bouwen, herstellen en leren door te doen.',
+      'Als bronbegrip staat ambacht niet los van gedachte. Wat met de handen gemaakt wordt, krijgt richting door innerlijke ordening, aandacht en bedoeling.'
+    ]
+  },
+  {
+    title: 'Ambachtelijk',
+    summary: 'De houding waarin maken aandachtig, lichamelijk en betekenisvol wordt.',
+    variants: ['ambachtelijk', 'ambachtelijke'],
+    links: ['Ambacht', 'Gedachtelijk', 'Spel & creativiteit'],
+    paragraphs: [
+      'Ambachtelijk wijst op een manier van werken waarin handeling, aandacht en materiaal samenkomen. Het gaat niet alleen om techniek, maar om zorgvuldigheid, belichaming en verantwoordelijkheid in het maken.',
+      'In de taalbewuste bronlaag raakt ambachtelijk aan gedachtelijk: wat we maken en wat we denken horen bij elkaar wanneer de vorm uit het hart en uit heldere aandacht voortkomt.'
+    ]
+  },
+  {
+    title: 'Gedachte',
+    summary: 'De innerlijke vormkracht waarmee taal, beeld en handelen richting krijgen.',
+    variants: ['gedachte', 'gedachten', 'gedachtenbeeld', 'welkomsgedachte'],
+    links: ['Gedachtelijk', 'Taalbewustzijn', 'Ambachtelijk'],
+    paragraphs: [
+      'Gedachte is de innerlijke beweging waarin betekenis vorm krijgt voordat ze gesproken, geschreven of gedaan wordt. In het taalbewustzijn is denken daarom niet los te maken van spreken, luisteren en handelen.',
+      'Een gedachte kan verwarren wanneer ze onbewust blijft, maar kan ook ordenen wanneer ze helder wordt en in verbinding met het hart wordt gebracht.'
+    ]
+  },
+  {
+    title: 'Gedachtelijk',
+    summary: 'De geestelijke of innerlijke laag waarin betekenis voorbereid en geordend wordt.',
+    variants: ['gedachtelijk', 'gedachtelijke'],
+    links: ['Gedachte', 'Ambachtelijk', 'Taalbewustzijn'],
+    paragraphs: [
+      'Gedachtelijk verwijst naar wat zich in de innerlijke vorming, betekenisgeving en verbeelding afspeelt. Het benoemt de laag waarin woorden, beelden en intenties zich eerst organiseren.',
+      'Samen met ambachtelijk maakt dit zichtbaar dat de School van het Hart niet alleen praktisch of alleen geestelijk werkt: het gedachte en het gemaakte moeten elkaar dragen.'
+    ]
+  }
+];
 
 function sleep(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -106,6 +149,28 @@ function uniqueTerms(values) {
     list.push(String(value).trim());
   });
   return list;
+}
+
+function formatWikiLinkSeries(titles) {
+  const cleaned = uniqueTerms(titles).filter(Boolean);
+  if (!cleaned.length) return '';
+  if (cleaned.length === 1) return `[[${cleaned[0]}]]`;
+  if (cleaned.length === 2) return `[[${cleaned[0]}]] en [[${cleaned[1]}]]`;
+  const head = cleaned.slice(0, -1).map((title) => `[[${title}]]`).join(', ');
+  return `${head} en [[${cleaned[cleaned.length - 1]}]]`;
+}
+
+function normalizeAliasDisplayKey(value) {
+  return Core.normalizeTerm(value)
+    .split(' ')
+    .filter((part) => part && !ALIAS_CONNECTOR_WORDS.has(part))
+    .join(' ');
+}
+
+function isAliasOnlyTitleVariant(alias, title) {
+  const aliasKey = normalizeAliasDisplayKey(alias);
+  const titleKey = normalizeAliasDisplayKey(title);
+  return Boolean(aliasKey && titleKey && aliasKey === titleKey);
 }
 
 function escapeRegExp(value) {
@@ -291,7 +356,12 @@ function buildSyntheticTermItems(canonicalItems, outgoingBySlug) {
   canonicalItems.forEach((item) => {
     (item.links || []).forEach((alias) => {
       const normalized = Core.normalizeTerm(alias);
-      if (!normalized || normalized === Core.normalizeTerm(item.title) || representedTerms.has(normalized)) return;
+      if (
+        !normalized ||
+        normalized === Core.normalizeTerm(item.title) ||
+        isAliasOnlyTitleVariant(alias, item.title) ||
+        representedTerms.has(normalized)
+      ) return;
 
       representedTerms.add(normalized);
 
@@ -322,20 +392,74 @@ function buildSyntheticTermItems(canonicalItems, outgoingBySlug) {
   return syntheticItems;
 }
 
-function buildSourceVocabularyItems(sourceEntries, existingItems, ignoredTerms = []) {
-  const passages = sourceEntries.filter((entry) => entry.indexType === 'passage');
-  if (!passages.length) return [];
+function matchesNormalizedPhrase(normalizedText, normalizedPhrase) {
+  if (!normalizedText || !normalizedPhrase) return false;
+  return ` ${normalizedText} `.includes(` ${normalizedPhrase} `);
+}
 
+function collectSourceConceptEvidence(definition, sourceEntries, sourceTitlesBySlug) {
+  const variants = uniqueTerms([definition.title, ...(definition.variants || [])])
+    .map((term) => Core.normalizeTerm(term))
+    .filter(Boolean);
+  const sources = new Map();
+  const snippets = [];
+
+  sourceEntries
+    .filter((entry) => entry.indexType === 'passage')
+    .forEach((entry) => {
+      const text = stripMarkdownForExtraction(entry.body, entry.title)
+        .replace(/\s*Bron:\s.*$/i, '')
+        .trim();
+      const normalizedText = Core.normalizeTerm(text);
+      const hasMatch = variants.some((variant) => matchesNormalizedPhrase(normalizedText, variant));
+      if (!hasMatch) return;
+
+      const sourceSlug = entry.sourceSlug || entry.slug;
+      const sourceTitle = sourceTitlesBySlug.get(sourceSlug) || entry.sourceTitle || entry.title;
+      sources.set(sourceSlug, sourceTitle);
+
+      if (text && snippets.length < 6) {
+        snippets.push(text.slice(0, 260).replace(/\s+/g, ' ').trim());
+      }
+    });
+
+  return {
+    sources,
+    snippets
+  };
+}
+
+function buildSourceConceptBody(definition, sourceTitles) {
+  const bodyLines = [
+    `# ${definition.title}`,
+    '',
+    ...definition.paragraphs
+  ];
+
+  if (definition.links.length) {
+    bodyLines.push('', '## Verbonden begrippen', '', ...definition.links.map((title) => `- [[${title}]]`));
+  }
+
+  if (sourceTitles.length) {
+    bodyLines.push(
+      '',
+      '## Bronspoor',
+      '',
+      `Dit begrip wordt in de bronlaag zichtbaar via ${formatWikiLinkSeries(sourceTitles)}. De woordenschat bewaart hier het dragende begrip, niet elke toevallige woordgroep waarin het voorkomt.`
+    );
+  }
+
+  return bodyLines.join('\n');
+}
+
+function buildSourceVocabularyItems(sourceEntries, existingItems, ignoredTerms = []) {
   const ignored = new Set(ignoredTerms.map((term) => Core.normalizeTerm(term)).filter(Boolean));
   const existingTerms = new Set();
-  const existingItemsBySlug = new Map(existingItems.map((item) => [item.slug, item]));
-  const relationEntries = buildTermEntries(existingItems);
   const sourceTitlesBySlug = new Map(
     sourceEntries
       .filter((entry) => entry.indexType === 'text')
       .map((entry) => [entry.slug, entry.title])
   );
-  const candidateMap = new Map();
 
   existingItems.forEach((item) => {
     [item.title, ...((Array.isArray(item.links) ? item.links : []))].forEach((term) => {
@@ -344,114 +468,35 @@ function buildSourceVocabularyItems(sourceEntries, existingItems, ignoredTerms =
     });
   });
 
-  function registerCandidate(parts, passage, passageText, passageTokens, startIndex, relatedSlugs, seenInPassage) {
-    const normalizedParts = parts.map((part) => Core.normalizeTerm(part)).filter(Boolean);
-    const rawNormalized = normalizedParts.join(' ');
-    if (!rawNormalized || ignored.has(rawNormalized) || SOURCE_TERM_STOPWORDS.has(rawNormalized)) return;
-
-    const mergedKey = buildTermVariantKeys(rawNormalized).find((variant) => existingTerms.has(variant) || candidateMap.has(variant)) || rawNormalized;
-    const normalized = Core.normalizeTerm(mergedKey);
-    if (!normalized || existingTerms.has(normalized) || ignored.has(normalized) || SOURCE_TERM_STOPWORDS.has(normalized)) return;
-    if (seenInPassage.has(normalized)) return;
-
-    const wordCount = normalizedParts.length;
-    if (!wordCount || wordCount > 4) return;
-    if (wordCount === 1 && !isUsefulSourceToken(normalizedParts[0], 6)) return;
-    if (wordCount > 1 && normalizedParts.some((part) => !isUsefulSourceToken(part, 3))) return;
-
-    const snippetTokens = passageTokens.slice(Math.max(0, startIndex - 4), Math.min(passageTokens.length, startIndex + wordCount + 6));
-    const snippet = snippetTokens.map((token) => token.value).join(' ').trim() || passageText.slice(0, 220).trim();
-    const candidate = candidateMap.get(normalized) || {
-      normalized,
-      title: formatLemmaTitle(normalized),
-      frequency: 0,
-      passages: new Map(),
-      sources: new Map(),
-      relatedSlugs: new Map()
-    };
-
-    candidate.frequency += 1;
-    candidate.passages.set(passage.slug, {
-      slug: passage.slug,
-      title: passage.title,
-      sourceSlug: passage.sourceSlug,
-      sourceTitle: sourceTitlesBySlug.get(passage.sourceSlug) || passage.sourceSlug,
-      sourcePage: passage.sourcePage,
-      snippet
-    });
-    candidate.sources.set(passage.sourceSlug, sourceTitlesBySlug.get(passage.sourceSlug) || passage.sourceSlug);
-
-    relatedSlugs.forEach((slug) => {
-      const relatedItem = existingItemsBySlug.get(slug);
-      if (!relatedItem) return;
-      if (Core.normalizeTerm(relatedItem.title) === normalized) return;
-      candidate.relatedSlugs.set(slug, relatedItem.title);
-    });
-
-    candidateMap.set(normalized, candidate);
-    seenInPassage.add(normalized);
-  }
-
-  passages.forEach((passage) => {
-    const passageText = stripMarkdownForExtraction(passage.body, passage.title)
-      .replace(/\s*Bron:\s.*$/i, '')
-      .trim();
-    if (!passageText) return;
-
-    const passageTokens = tokenizeSourceText(passageText);
-    if (!passageTokens.length) return;
-
-    const relatedSlugs = [...new Set(findTermMatches(passageText, relationEntries).map((match) => match.slug))];
-    const seenInPassage = new Set();
-
-    passageTokens.forEach((token, index) => {
-      if (index < passageTokens.length - 1) {
-        const next = passageTokens[index + 1];
-        if (isUsefulSourceToken(token.normalized, 3) && isUsefulSourceToken(next.normalized, 3)) {
-          registerCandidate([token.value, next.value], passage, passageText, passageTokens, index, relatedSlugs, seenInPassage);
-        }
-      }
-
-      if (index < passageTokens.length - 2) {
-        const next = passageTokens[index + 1];
-        const third = passageTokens[index + 2];
-        if (
-          isUsefulSourceToken(token.normalized, 3) &&
-          isUsefulSourceToken(next.normalized, 3) &&
-          isUsefulSourceToken(third.normalized, 3)
-        ) {
-          registerCandidate([token.value, next.value, third.value], passage, passageText, passageTokens, index, relatedSlugs, seenInPassage);
-        }
-      }
-    });
-  });
-
-  return [...candidateMap.values()]
-    .filter((candidate) => {
-      const wordCount = candidate.normalized.split(' ').length;
-      return wordCount > 1 &&
-        candidate.frequency >= 2 &&
-        candidate.sources.size >= 2 &&
-        candidate.relatedSlugs.size >= 1 &&
-        candidate.normalized.split(' ').some((part) => part.length >= 7);
+  return SOURCE_CONCEPT_DEFINITIONS
+    .filter((definition) => {
+      const normalized = Core.normalizeTerm(definition.title);
+      return normalized && !ignored.has(normalized) && !existingTerms.has(normalized);
     })
-    .sort((left, right) => {
-      if (right.frequency !== left.frequency) return right.frequency - left.frequency;
-      if (right.sources.size !== left.sources.size) return right.sources.size - left.sources.size;
-      return collator.compare(left.title, right.title);
-    })
-    .slice(0, 240)
-    .map((candidate) => ({
-      slug: `woord-${Core.slugify(candidate.title)}`,
-      title: candidate.title,
-      links: [],
-      body: '',
-      kind: 'source-term',
-      sourceSlug: [...candidate.sources.keys()][0] || '',
-      indexType: 'word',
-      resolveAsTerm: true,
-      summary: `Bronafgeleide woordenboekingang uit ${[...candidate.sources.values()].join(', ')}.`
-    }));
+    .map((definition) => {
+      const evidence = collectSourceConceptEvidence(definition, sourceEntries, sourceTitlesBySlug);
+      const sourceTitles = [...evidence.sources.values()];
+
+      return {
+        slug: Core.slugify(definition.title),
+        title: definition.title,
+        summary: definition.summary,
+        links: definition.links,
+        body: buildSourceConceptBody(definition, sourceTitles),
+        kind: 'source-concept',
+        sourceSlug: [...evidence.sources.keys()][0] || '',
+        indexType: 'word',
+        resolveAsTerm: true,
+        searchText: [
+          definition.title,
+          definition.summary,
+          ...definition.links,
+          ...(definition.variants || []),
+          ...sourceTitles,
+          ...evidence.snippets
+        ].join('\n')
+      };
+    });
 }
 
 function cleanWikiText(source) {

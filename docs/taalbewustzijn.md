@@ -38,6 +38,18 @@ Daarom onderscheiden we:
 - woorden
 - woordenboekingangen met één of meer woorden
 
+## Bronbegrippen
+
+Bronnen zoals `Excalibur` en `Het boek der geruststelling` leveren niet automatisch kant-en-klare begrippen op zodra twee of drie woorden naast elkaar staan.
+
+Voor deze bronlaag geldt voortaan:
+
+- toevallige woordgroepen blijven zoekcontext of bronspoor, geen publiek lemma
+- dragende woorden krijgen voorrang boven samengeraapte frases
+- afgeleide woorden verwijzen waar mogelijk naar hun bronbegrip, bijvoorbeeld `Ambachtelijk` naar `Ambacht` en `Gedachtelijk` naar `Gedachte`
+- bronbegrippen krijgen een heldere beschrijving in gewoon Nederlands, met broncontext als ondersteuning
+- woorden die vooral samenhangen binnen taalbewustzijn verwijzen naar elkaar, zonder dat elke combinatie een aparte pagina wordt
+
 ## Assimilatie van nieuwe bronnen
 
 Nieuwe bronteksten worden niet alleen opgeslagen, maar geassimileerd in de woordenschat van de School van het Hart.
@@ -58,6 +70,8 @@ Voor de praktische wiki-opbouw geldt nu:
 - meerwoordige lemma's horen ook gewoon thuis in de woordenlijst
 - elke betekenis krijgt bij voorkeur maar één canonieke pagina
 - varianten zoals komma's, ampersands, enkelvoud/meervoud en alternatieve schrijfwijzen horen in `links` van die canonieke pagina
+- aliassen blijven zoekbaar, maar schrijfwijzen die alleen hetzelfde begrip zonder verbindingswoord of leesteken herhalen worden niet als aparte publieke lemma's getoond
+- kandidaatwoorden worden eerst gerouteerd naar bestaande begrippen; alleen termen met een eigen betekenislast krijgen een nieuw canoniek item
 - dubbele pagina's worden niet naast elkaar behouden: inhoud samenbrengen, beste titel kiezen, oude variant schrappen en als alias bewaren
 - bronafgeleide OCR-termen mogen alleen blijven staan als ze inhoudelijk bruikbaar zijn en aan bestaande wiki-termen raken
 

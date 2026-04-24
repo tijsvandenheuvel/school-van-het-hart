@@ -4,6 +4,8 @@ summary: De basisvorm van samenkomen waarin communicatie, informatie en verantwo
 links:
   - cirkel
   - cirkels
+  - midden
+  - gedeeld midden
   - talking stick
   - main circle
 ---

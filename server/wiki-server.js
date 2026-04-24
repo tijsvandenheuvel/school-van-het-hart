@@ -106,10 +106,9 @@ async function writeIgnoredTerms(terms) {
 async function collectCandidateSources() {
   const sources = [];
   const conceptDoc = path.join(ROOT_DIR, 'docs', 'concepts.md');
-  const projectContextDoc = path.join(ROOT_DIR, 'docs', 'project-context.md');
   const itemNames = (await fs.readdir(ITEMS_DIR)).filter((name) => name.endsWith('.md')).sort();
 
-  for (const absolutePath of [conceptDoc, projectContextDoc]) {
+  for (const absolutePath of [conceptDoc]) {
     sources.push({
       path: relativeRootPath(absolutePath),
       text: await fs.readFile(absolutePath, 'utf8')

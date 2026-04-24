@@ -4,6 +4,7 @@ summary: De levende ervaring dat mensen, natuur en betekenis niet los van elkaar
 links:
   - verbinding
   - verbondenheid
+  - relatie
   - verbinding met mekaar
   - verbinding met de natuur
 ---
