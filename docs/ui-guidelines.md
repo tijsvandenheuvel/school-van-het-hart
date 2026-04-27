@@ -9,6 +9,8 @@ De homepage werkt nu volgens deze structuur:
 3. Kleine versieknop rechtsboven, binnen de paginakader
 4. Ornamentale sierkader rond de volledige pagina
 5. Cirkelcompositie met 12 labels rond een centraal hart
+   - de labels staan op een exacte 12-delige geometrische ring
+   - achter de kern ligt een subtiele mathematisch gegenereerde flower-of-life laag
 6. In de kern staan alleen:
    - `WAT`
    - het hart
@@ -24,7 +26,11 @@ De homepage werkt nu volgens deze structuur:
 - De hoekornamenten komen uit vier aparte SVG-assets zodat hart en lijnwerk niet fout hoeven mee te roteren.
 - De frameband leest als een smalle gouden strook met nuance in tint, niet als twee losse dominante lijnen.
 - Er staat geen tekst in of over het hart.
-- De zichtbare orbit-lijn is verborgen; enkel de zachte glow blijft.
+- De zichtbare orbit-lijn is verborgen; de zachte glow en subtiele flower-of-life geometrie dragen de cirkel.
+- De conceptlabels zijn echte cirkels en volgen een vaste ring met startpunt `-75deg` en stappen van `30deg`.
+- De buitenste flower-of-life ring raakt de conceptcirkels aan hun binnenrand; de flower-laag schaalt dus mee met de echte tokenmaat.
+- Hover-transforms op conceptcirkels mogen de onderliggende flower-geometrie niet herschalen; gebruik daarvoor layoutmaat, geen getransformeerde visuele maat.
+- Het hart staat op hetzelfde geometrische midden als de binnenste flower-of-life cirkel; responsive offsets mogen dat midden niet verschuiven.
 - `WAT`-labels hebben een groene tint.
 - `HOE`-labels hebben een paarse tint.
 - De hartvorm is een zachte rode kern, zonder extra opening of zwart gat.
@@ -41,8 +47,8 @@ Belangrijkste breakpoints:
 
 Extra afspraak:
 
-- Voor extra smalle schermen wordt `angleMobile` gebruikt wanneer die bestaat.
-- Dat gebeurt via JavaScript met `matchMedia('(max-width: 520px)')`.
+- De 12 concepten gebruiken op alle schermen dezelfde exacte geometrische ring.
+- Mobiel mag de ring schalen, maar niet terugvallen op losse handmatige compact-hoeken.
 
 ## Gevoelige zones
 
@@ -61,13 +67,14 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 - Hoofdcompositie: `index.html`, `.composition`
 - Ornamentale frame: `index.html`, `.page-frame`, `.page-frame-band`, `.page-frame-corner` en `assets/ornament-corner-*.svg`
 - Responsive regels: `index.html`, media queries
-- Labelhoeken: `index.html`, `const concepts = [...]`
-- Compact mobile hoeken: `index.html`, `angleMobile` en `syncTokenAngles()`
+- Geometrische ring: `assets/js/site.js`, `ORBIT_GEOMETRY`
+- Conceptdata: `assets/js/site.js`, `const concepts = [...]`
+- Flower-of-life laag: `index.html`, `.flower-of-life-layer` en `renderFlowerOfLife()`
 - Modalinhoud: `index.html`, `sections`, `renderModalBody()` en `.modal-copy`
 
 ## Versie-afspraak
 
-- Huidige versie: `v0.2.49`
+- Huidige versie: `v0.3.4`
 - Canonieke versiebron: de bovenste entry in `docs/changelog.md`
 - De versieknop in `index.html` leest die actuele versie uit de changelog
 - Verhoog de versie bij elke echte inhoudelijke, visuele of interactionele voortgang

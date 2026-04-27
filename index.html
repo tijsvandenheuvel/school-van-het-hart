@@ -318,6 +318,7 @@
       isolation: isolate;
       --orbit-radius: min(clamp(250px, 35vw, 430px), clamp(200px, 40vh, 320px));
       --core-width: clamp(220px, 24vw, 320px);
+      --flower-size: calc(var(--orbit-radius) * 2 + 18px);
     }
 
     .composition::before,
@@ -354,6 +355,38 @@
       gap: 18px;
       text-align: center;
       pointer-events: none;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    .flower-of-life-layer {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: var(--flower-size);
+      height: var(--flower-size);
+      transform: translate3d(-50%, -50%, 0);
+      z-index: 1;
+      overflow: visible;
+      pointer-events: none;
+      opacity: 0.54;
+      filter: drop-shadow(0 0 14px rgba(166, 126, 42, 0.08));
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    .flower-circle {
+      fill: none;
+      stroke: rgba(154, 119, 47, 0.34);
+      stroke-width: 1.8;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .flower-ring {
+      fill: none;
+      stroke: rgba(154, 119, 47, 0.42);
+      stroke-width: 1.5;
+      vector-effect: non-scaling-stroke;
     }
 
     .core-label {
@@ -383,7 +416,7 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      z-index: 2;
+      z-index: 3;
     }
 
     .orbit-measure {
@@ -400,16 +433,17 @@
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%) scale(var(--token-scale, 1));
+      transform: translate3d(-50%, -50%, 0) scale(var(--token-scale, 1));
+      transform-origin: center center;
       pointer-events: auto;
       z-index: 2;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: clamp(106px, 11vw, 150px);
-      min-height: 66px;
-      padding: 12px 14px;
-      border-radius: 28px;
+      width: clamp(112px, 10.4vw, 136px);
+      aspect-ratio: 1 / 1;
+      padding: 16px;
+      border-radius: 50%;
       border: 1.5px solid transparent;
       background: rgba(255, 255, 255, 0.9);
       color: var(--text);
@@ -423,14 +457,17 @@
       letter-spacing: 0.01em;
       text-align: center;
       text-wrap: balance;
+      overflow-wrap: anywhere;
+      hyphens: auto;
       cursor: pointer;
-      transition: transform 240ms ease, box-shadow 240ms ease, background 240ms ease, border-color 240ms ease;
+      transition: transform 240ms ease, background 240ms ease, border-color 240ms ease;
+      will-change: transform;
+      backface-visibility: hidden;
     }
 
     .token:hover,
     .token:focus-visible {
       --token-scale: 1.045;
-      box-shadow: 0 16px 28px rgba(22, 24, 30, 0.12);
       outline: none;
     }
 
@@ -450,6 +487,9 @@
       aspect-ratio: 1 / 1;
       display: grid;
       place-items: center;
+      transform: translateZ(0);
+      will-change: transform;
+      backface-visibility: hidden;
     }
 
     .heart-wrap::before {
@@ -467,6 +507,8 @@
       height: 100%;
       overflow: visible;
       filter: drop-shadow(0 18px 26px rgba(112, 86, 96, 0.14));
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
 
     .modal {
@@ -736,10 +778,9 @@
       }
       .heart-wrap { width: min(27vw, 220px); }
       .token {
-        width: clamp(100px, 13vw, 134px);
-        min-height: 62px;
+        width: clamp(98px, 13vw, 132px);
         font-size: 0.84rem;
-        padding: 11px 12px;
+        padding: 14px;
       }
       .modal-body { grid-template-columns: 1fr; }
     }
@@ -760,10 +801,9 @@
         width: min(18vw, 190px);
       }
       .token {
-        width: clamp(92px, 9vw, 120px);
-        min-height: 56px;
+        width: clamp(90px, 9vw, 116px);
         font-size: 0.78rem;
-        padding: 10px 11px;
+        padding: 13px;
       }
     }
 
@@ -839,11 +879,9 @@
       }
       .token {
         width: clamp(62px, 17vw, 78px);
-        min-height: 42px;
         font-size: 0.56rem;
         line-height: 1.1;
         padding: 6px 6px;
-        border-radius: 20px;
       }
       .modal { padding: 12px; }
       .modal-header { padding: 22px 18px 18px; }
@@ -894,7 +932,6 @@
       }
       .core-axis {
         gap: 5px;
-        transform: translateY(8px);
       }
       .core-label strong {
         font-size: clamp(0.92rem, 3.9vw, 1.06rem);
@@ -909,8 +946,7 @@
       }
       .token {
         width: clamp(58px, 16vw, 68px);
-        min-height: 40px;
-        font-size: 0.5rem;
+        font-size: 0.48rem;
         padding: 5px 5px;
       }
     }
@@ -932,13 +968,14 @@
         <span class="frame-toggle-icon" aria-hidden="true"></span>
       </button>
     </div>
-    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.2.49" aria-haspopup="dialog" aria-controls="changelogModal">v0.2.49</button>
+    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.4" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.4</button>
     <header class="page-header">
       <h1 class="page-title">
         <button class="page-title-trigger" id="visionTrigger" type="button" aria-haspopup="dialog" aria-controls="visionModal">School van het Hart</button>
       </h1>
     </header>
     <div class="composition">
+      <svg class="flower-of-life-layer" id="flowerOfLife" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"></svg>
       <section class="orbit" id="orbit" aria-label="Concepten rond de kern"></section>
       <div class="orbit-measure" id="orbitMeasure" aria-hidden="true"></div>
 

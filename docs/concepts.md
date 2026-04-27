@@ -2,14 +2,16 @@
 
 Dit document bewaart de canonieke inhoud van de 12 homepage-concepten.
 
-De bestaande verdeling van 6 `WAT`- en 6 `HOE`-concepten blijft behouden in `v0.2.49`.
+De bestaande verdeling van 6 `WAT`- en 6 `HOE`-concepten blijft behouden in `v0.3.4`.
+
+De homepage gebruikt vanaf `v0.3.0` een exacte 12-delige geometrische ring: startpunt `-75` graden en daarna telkens `30` graden verder.
 
 ## WAT
 
 ### School van het Hart
 Short: Een centrum voor collectieve bewustwording.
 
-Desktop angle: `-80`
+Geometry angle: `-75`
 
 #### Een levende leerschool
 
@@ -22,7 +24,7 @@ Ze is tegelijk ontmoetingsplek, leerplek en verzamelplaats. Wat vandaag versnipp
 ### Leren samenleven
 Short: Aan en van mekaar leren samenleven.
 
-Desktop angle: `-54`
+Geometry angle: `-45`
 
 #### Samenleven als leerweg
 
@@ -35,7 +37,7 @@ Dat leer je niet uit een boek. Je leert het door samen aanwezig te zijn, door fo
 ### Natuurverbinding
 Short: Verbinding met mekaar en de natuur.
 
-Desktop angle: `-24`
+Geometry angle: `-15`
 
 #### Thuiskomen in de natuur
 
@@ -48,7 +50,7 @@ In een verstedelijkte omgeving is gedeelde natuur een antwoord op een echte nood
 ### Nieuwe wereld
 Short: Een model in het klein voor wat wil ontstaan.
 
-Desktop angle: `24`
+Geometry angle: `15`
 
 #### Een plek voor de overgang
 
@@ -61,7 +63,7 @@ Die nieuwe wereld ontstaat niet in slogans maar in concrete vormen. Door hier op
 ### Collectieve heling
 Short: Samen angst en collectief trauma helen.
 
-Desktop angle: `54`
+Geometry angle: `45`
 
 #### Heling gebeurt niet alleen
 
@@ -74,7 +76,7 @@ Daarom is de School ook een plek van collectieve heling. In een veilige setting 
 ### Liefde in de praktijk
 Short: Een liefdesschool in de materie.
 
-Desktop angle: `80`
+Geometry angle: `75`
 
 #### Liefde als grondtoon
 
@@ -89,7 +91,7 @@ Als angst zakt, komt er ruimte voor eendracht. Dan wordt liefde weer een werkwoo
 ### Taalbewustzijn
 Short: De woorden bevrijden zodat communicatie weer helder wordt.
 
-Desktop angle: `106`
+Geometry angle: `105`
 
 #### Leven in verhalen
 
@@ -102,9 +104,7 @@ Taalbewustzijn helpt ons vertragen in de taal. Door samen te onderzoeken wat woo
 ### Rainbow
 Short: Een levend model van people for the people.
 
-Desktop angle: `132`
-
-Compact mobile angle: `126`
+Geometry angle: `135`
 
 #### Een bewezen inspiratie
 
@@ -117,9 +117,7 @@ Wat daar tijdelijk mogelijk blijkt, willen we hier een duurzamere vorm geven. De
 ### Cirkels
 Short: Samen verantwoordelijkheid dragen voor communicatie.
 
-Desktop angle: `158`
-
-Compact mobile angle: `160`
+Geometry angle: `165`
 
 #### Het gedeelde midden
 
@@ -132,9 +130,7 @@ Daar worden visie, afstemming, informatie en spanningen gedragen. De cirkel is d
 ### Zelfbestuur
 Short: De plek wordt gedragen door wie er aanwezig is.
 
-Desktop angle: `202`
-
-Compact mobile angle: `196`
+Geometry angle: `195`
 
 #### Samen de plek dragen
 
@@ -147,9 +143,7 @@ Daarom is de School ook geen klassiek woonproject. Mensen komen, verblijven, nem
 ### Magic Hat
 Short: Vrije bijdrage, open boekhouding, gedeelde draagkracht.
 
-Desktop angle: `228`
-
-Compact mobile angle: `230`
+Geometry angle: `225`
 
 #### Vertrouwen in plaats van druk
 
@@ -162,9 +156,7 @@ Wie geeft, koopt geen macht. Wat in de hoed komt, wordt gemeenschappelijk, en de
 ### Spel & creativiteit
 Short: Een grote speeltuin om spelenderwijs te leren.
 
-Desktop angle: `254`
-
-Compact mobile angle: `258`
+Geometry angle: `255`
 
 #### Maken als leerweg
 

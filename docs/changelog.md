@@ -1,5 +1,42 @@
 # Changelog
 
+## v0.3.4 - Rustige hover-lagen
+
+- De conceptcirkels, het hart en de flower-of-life laag op stabielere compositorlagen gezet zodat echte CSS-hover minder repaint-rimpel rond het hart veroorzaakt
+- De hoverstatus van conceptcirkels vergroot nu alleen via `transform`; de aparte hover-schaduw is verwijderd zodat de centrale compositie niet mee lijkt te bewegen
+- De geometriecontrole aangescherpt zodat token-hover geen box-shadow-transitie terugkrijgt en de flower- en hartlagen hun stabiele transformbasis behouden
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.4`
+
+## v0.3.3 - Stabiele hover-geometrie
+
+- De flower-of-life schaal gebruikt nu de stabiele layoutbreedte van de conceptcirkels in plaats van de hover-getransformeerde visuele breedte
+- Daardoor blijft de flower-laag op dezelfde maat wanneer een conceptcirkel vergroot bij hover en krijgt het hart geen kleine jitter meer mee
+- De geometriecontrole aangescherpt zodat de flower-schaal niet opnieuw afhankelijk wordt van `getBoundingClientRect()` op een hoverbare token
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.3`
+
+## v0.3.2 - Cirkels aan de flower-ring
+
+- De flower-of-life laag schaalt nu vanuit de echte tokenmaat zodat de buitenste flower-ring de binnenrand van de 12 conceptcirkels raakt
+- De conceptcirkels blijven op dezelfde exacte 12-delige ring staan; alleen de onderliggende geometrielaag wordt tangent op die cirkels afgestemd
+- De geometriecontrole uitgebreid met het nieuwe tangent-contract tussen orbitradius, tokenradius en buitenste flower-ring
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.2`
+
+## v0.3.1 - Hart in de binnenste cirkel
+
+- De oude mobiele kernverschuiving verwijderd zodat het hart exact op het geometrische midden van de flower-of-life laag blijft staan
+- Het hart blijft daardoor ook op small screens gecentreerd in de binnenste cirkel in plaats van enkele pixels onder het cirkelmidden te zakken
+- De `verify:flower` controle aangescherpt zodat een nieuwe verticale kern-offset rond het hart opnieuw opvalt
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.1`
+
+## v0.3.0 - Flower-of-life fundament
+
+- De homepage-orbit omgezet naar een exacte 12-delige geometrische ring met vaste stappen van 30 graden rond het hart
+- Een mathematisch gegenereerde flower-of-life laag toegevoegd als subtiel goud lijnwerk achter de centrale compositie
+- De 12 conceptlabels herwerkt naar echte cirkels, zodat elk element visueel als eigen cirkel op de geometrische ring staat
+- De oude handmatige desktop- en mobiele orbit-hoeken vervangen door één centrale geometrieconfiguratie die later kan dienen voor extra ringen of zoomniveaus
+- Een herhaalbare `verify:flower` controle toegevoegd voor versie, geometriecontract, documentatiehoeken en tokenvorm
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.0`
+
 ## v0.2.49 - Strakkere kandidaatflow
 
 - Aliasvarianten zoals `aarde water lucht vuur` blijven zoekbaar, maar worden niet meer als apart zichtbaar lemma naast `Aarde, water, lucht & vuur` getoond

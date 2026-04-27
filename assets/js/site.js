@@ -92,6 +92,15 @@
       ]
     }
   ];
+  const ORBIT_GEOMETRY = {
+    visibleTokenCount: 12,
+    ringStartAngle: -75,
+    ringStepAngle: 30,
+    flowerViewBoxSize: 1000,
+    flowerCircleRadius: 142,
+    flowerOuterRingRadiusRatio: 0.44162,
+    flowerGridRadius: 2
+  };
 
   function slugify(value) {
     return value
@@ -177,8 +186,7 @@
             'Ze is tegelijk ontmoetingsplek, leerplek en verzamelplaats. Wat vandaag versnipperd leeft in mensen, inzichten en initiatieven, mag hier samenkomen, op elkaar afgestemd worden en vorm krijgen in het echte leven.'
           ]
         }
-      ],
-      angle: -80
+      ]
     },
     {
       group: 'wat',
@@ -197,8 +205,7 @@
             'Dat leer je niet uit een boek. Je leert het door samen aanwezig te zijn, door fouten te mogen maken en te herstellen, en door te merken wat een groep van je vraagt en wat jij aan een groep te geven hebt. Zo wordt samenleven opnieuw een kunde en geen vaag ideaal.'
           ]
         }
-      ],
-      angle: -54
+      ]
     },
     {
       group: 'wat',
@@ -217,8 +224,7 @@
             'In een verstedelijkte omgeving is gedeelde natuur een antwoord op een echte nood. Door samen zorg te dragen voor een plek, voor tuinen, water, voedsel en buitenruimte, wordt natuurverbinding iets tastbaars en dagelijks.'
           ]
         }
-      ],
-      angle: -24
+      ]
     },
     {
       group: 'wat',
@@ -237,8 +243,7 @@
             'Die nieuwe wereld ontstaat niet in slogans maar in concrete vormen. Door hier oplossingen samen te brengen, uit te proberen en te dragen, wordt de School een klein model van wat later ook elders kan groeien.'
           ]
         }
-      ],
-      angle: 24
+      ]
     },
     {
       group: 'wat',
@@ -257,8 +262,7 @@
             'Daarom is de School ook een plek van collectieve heling. In een veilige setting kunnen we mekaar helpen om patronen te zien, spanning te ontladen en stilaan los te komen uit angst en zelfdestructie.'
           ]
         }
-      ],
-      angle: 54
+      ]
     },
     {
       group: 'wat',
@@ -277,8 +281,7 @@
             'Als angst zakt, komt er ruimte voor eendracht. Dan wordt liefde weer een werkwoord: iets wat zich in daden toont en stap voor stap een andere werkelijkheid mogelijk maakt.'
           ]
         }
-      ],
-      angle: 80
+      ]
     },
     {
       group: 'hoe',
@@ -297,8 +300,7 @@
             'Taalbewustzijn helpt ons vertragen in de taal. Door samen te onderzoeken wat woorden betekenen, waar misverstanden ontstaan en hoe we helderder kunnen spreken, bevrijden we communicatie uit de mist en maken we opnieuw ruimte voor waarheid en verbinding.'
           ]
         }
-      ],
-      angle: 106
+      ]
     },
     {
       group: 'hoe',
@@ -317,9 +319,7 @@
             'Wat daar tijdelijk mogelijk blijkt, willen we hier een duurzamere vorm geven. De openheid, de eenvoud, het samen dragen, het niet-commerciele en het diepe vertrouwen in the people for the people vormen een belangrijke voedingsbodem voor dit project.'
           ]
         }
-      ],
-      angle: 132,
-      angleMobile: 126
+      ]
     },
     {
       group: 'hoe',
@@ -338,9 +338,7 @@
             'Daar worden visie, afstemming, informatie en spanningen gedragen. De cirkel is dus niet alleen een gesprekstechniek, maar de plek waar veiligheid groeit en waar het gemeenschappelijke verhaal helder kan worden.'
           ]
         }
-      ],
-      angle: 158,
-      angleMobile: 160
+      ]
     },
     {
       group: 'hoe',
@@ -359,9 +357,7 @@
             'Daarom is de School ook geen klassiek woonproject. Mensen komen, verblijven, nemen taken op en geven die weer door; tijdelijke focalisers houden voor een tijd de focus op een deel van het geheel, zodat de plek levend en beweeglijk kan blijven.'
           ]
         }
-      ],
-      angle: 202,
-      angleMobile: 196
+      ]
     },
     {
       group: 'hoe',
@@ -380,9 +376,7 @@
             'Wie geeft, koopt geen macht. Wat in de hoed komt, wordt gemeenschappelijk, en de boekhouding blijft open. Zo verschuift geld van een instrument van scheiding naar een middel om samen ruimte mogelijk te maken.'
           ]
         }
-      ],
-      angle: 228,
-      angleMobile: 230
+      ]
     },
     {
       group: 'hoe',
@@ -401,14 +395,13 @@
             'Daarom is de School ook een speeltuin. Niet in de zin van vrijblijvendheid, maar omdat spel, kunst en creativiteit mensen openen, verbinden en in beweging brengen. Door samen te maken, leren we samen leven.'
           ]
         }
-      ],
-      angle: 254,
-      angleMobile: 258
+      ]
     }
   ];
 
   const orbit = document.getElementById('orbit');
   const orbitMeasure = document.getElementById('orbitMeasure');
+  const flowerOfLife = document.getElementById('flowerOfLife');
   const composition = document.querySelector('.composition');
   const page = document.querySelector('.page');
   const versionTrigger = document.getElementById('versionTrigger');
@@ -441,7 +434,6 @@
   const wikiCloseBtn = document.getElementById('wikiCloseBtn');
 
   const defaultVersion = versionTrigger.textContent.trim();
-  const compactOrbitQuery = window.matchMedia('(max-width: 420px)');
   const conceptsBySlug = new Map(concepts.map((item) => [slugify(item.title), item]));
   const tokens = [];
 
@@ -481,7 +473,7 @@
     directoryCollapsed: false
   };
 
-  concepts.forEach((item) => {
+  concepts.forEach((item, index) => {
     const button = document.createElement('button');
     button.className = `token ${item.group}`;
     button.type = 'button';
@@ -489,13 +481,60 @@
     button.setAttribute('aria-label', item.title);
     button.addEventListener('click', () => openConceptModal(item, button));
     orbit.appendChild(button);
-    tokens.push({ item, button });
+    tokens.push({ item, button, index });
   });
 
-  function getTokenAngle(item) {
-    return compactOrbitQuery.matches && typeof item.angleMobile === 'number'
-      ? item.angleMobile
-      : item.angle;
+  function getTokenAngle(index) {
+    const visibleIndex = index % ORBIT_GEOMETRY.visibleTokenCount;
+    return ORBIT_GEOMETRY.ringStartAngle + visibleIndex * ORBIT_GEOMETRY.ringStepAngle;
+  }
+
+  function createSvgCircle(className, cx, cy, radius) {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('class', className);
+    circle.setAttribute('cx', String(cx));
+    circle.setAttribute('cy', String(cy));
+    circle.setAttribute('r', String(radius));
+    return circle;
+  }
+
+  function renderFlowerOfLife() {
+    if (!flowerOfLife) return;
+
+    const { flowerViewBoxSize, flowerCircleRadius, flowerGridRadius } = ORBIT_GEOMETRY;
+    const center = flowerViewBoxSize / 2;
+    const circleRadius = flowerCircleRadius;
+    const rowHeight = Math.sqrt(3) / 2 * circleRadius;
+    const fragment = document.createDocumentFragment();
+
+    flowerOfLife.replaceChildren();
+
+    for (let q = -flowerGridRadius; q <= flowerGridRadius; q += 1) {
+      for (let r = -flowerGridRadius; r <= flowerGridRadius; r += 1) {
+        const s = -q - r;
+        if (Math.max(Math.abs(q), Math.abs(r), Math.abs(s)) > flowerGridRadius) continue;
+
+        const x = center + (q + r / 2) * circleRadius;
+        const y = center + r * rowHeight;
+        fragment.appendChild(createSvgCircle('flower-circle', x.toFixed(3), y.toFixed(3), circleRadius));
+      }
+    }
+
+    fragment.appendChild(createSvgCircle('flower-ring', center, center, circleRadius * 3));
+    fragment.appendChild(createSvgCircle('flower-ring', center, center, circleRadius * 3.11));
+    flowerOfLife.appendChild(fragment);
+  }
+
+  function syncFlowerOfLifeScale(radius) {
+    if (!flowerOfLife || !tokens.length) return;
+
+    const tokenRadius = tokens[0].button.offsetWidth / 2;
+    const outerRingRadius = radius - tokenRadius;
+    if (outerRingRadius <= 0) return;
+
+    const flowerSize = outerRingRadius / ORBIT_GEOMETRY.flowerOuterRingRadiusRatio;
+    flowerOfLife.style.width = `${flowerSize}px`;
+    flowerOfLife.style.height = `${flowerSize}px`;
   }
 
   function syncTokenLayout() {
@@ -508,8 +547,10 @@
 
     if (!radius || !centerX || !centerY) return;
 
-    tokens.forEach(({ item, button }) => {
-      const radians = getTokenAngle(item) * Math.PI / 180;
+    syncFlowerOfLifeScale(radius);
+
+    tokens.forEach(({ index, button }) => {
+      const radians = getTokenAngle(index) * Math.PI / 180;
       const x = centerX + Math.sin(radians) * radius;
       const y = centerY - Math.cos(radians) * radius;
       button.style.left = `${x}px`;
@@ -2286,6 +2327,7 @@
     updateWikiHistoryButtons();
   }
 
+  renderFlowerOfLife();
   scheduleTokenLayout();
   loadChangelog();
   initializeWiki();
@@ -2302,12 +2344,6 @@
     setWikiDirectoryCollapsed(storedDirectoryPreference == null ? true : storedDirectoryPreference === 'true', { persist: false });
   } catch (error) {
     setWikiDirectoryCollapsed(true, { persist: false });
-  }
-
-  if (typeof compactOrbitQuery.addEventListener === 'function') {
-    compactOrbitQuery.addEventListener('change', scheduleTokenLayout);
-  } else if (typeof compactOrbitQuery.addListener === 'function') {
-    compactOrbitQuery.addListener(scheduleTokenLayout);
   }
 
   window.addEventListener('resize', scheduleTokenLayout);
