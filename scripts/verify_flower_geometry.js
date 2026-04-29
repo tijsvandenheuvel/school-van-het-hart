@@ -12,7 +12,7 @@ const concepts = read('docs/concepts.md');
 const uiGuidelines = read('docs/ui-guidelines.md');
 const projectContext = read('docs/project-context.md');
 const packageJson = JSON.parse(read('package.json'));
-const currentVersion = 'v0.3.4';
+const currentVersion = 'v0.3.5';
 
 function extractNumber(source, key) {
   const match = source.match(new RegExp(`${key}:\\s*(-?\\d+(?:\\.\\d+)?)`));
@@ -20,7 +20,7 @@ function extractNumber(source, key) {
   return Number(match[1]);
 }
 
-assert.match(changelog, /^## v0\.3\.4 - Rustige hover-lagen/m);
+assert.match(changelog, /^## v0\.3\.5 - Schoolbibliotheek/m);
 assert.equal(packageJson.version, currentVersion.slice(1));
 assert.match(html, new RegExp(`id="versionTrigger"[^>]*>${currentVersion}<\\/button>`));
 assert.match(html, /id="flowerOfLife"/);

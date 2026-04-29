@@ -41,6 +41,9 @@ De homepage moet:
 - `scripts/assimilate_sources.py`
   De lokale bronpipeline voor OCR, bronstructurering en de woordenschat-assimilatie van docx- en PDF-bronnen.
 
+- `scripts/generate_library_assets.js`
+  De lokale bibliotheekpipeline voor WebP-pagina-assets en artikeldata bovenop de bestaande broncatalogus.
+
 ## Werkafspraken
 
 - Werk verder op `index.html` tenzij er later echt meerdere pagina's komen.
@@ -49,7 +52,7 @@ De homepage moet:
 - `docs/changelog.md` bewaart de canonieke versiegeschiedenis; de bovenste entry bepaalt de actuele siteversie.
 - `docs/taalbewustzijn.md` bewaart de taalafspraken voor helder Nederlands, brontrouw en woordenschatassimilatie.
 - De versieknop rechtsboven en de changelog-modal in `index.html` lezen die changelog-inhoud in.
-- Huidige versie is `v0.3.4`.
+- Huidige versie is `v0.3.5`.
 - Elke inhoudelijke, visuele of interactionele iteratie krijgt meteen een nieuwe changelog-entry.
 
 ## Verificatie-afspraak
@@ -67,8 +70,9 @@ Na layoutwijzigingen minstens controleren op:
 - Klik op de paginatitel `School van het Hart` opent een aparte modal met de volledige visietekst uit `docs/visietekst.md`.
 - Klik op de versieknop rechtsboven opent een changelog-modal met de recente wijzigingen.
 - Klik op de `Wiki`-knop opent een publieke markdown-wiki-modal met een A-Z woordenboekindex, zoekveld, backlinks en uitgaande links.
+- Klik op de `Bibliotheek`-knop opent een full-screen schoolbibliotheek met scanpagina's voor PDF-bronnen en leesartikels voor Word-bronnen.
 - Begrippen in conceptteksten, visietekst en wiki-artikelen linken door naar letterlijke woordenboekingangen, die waar nodig doorverwijzen naar een hoofdlemma.
-- De woordenschat wordt uitgebreid met letters, woorden, begrippen, bronpassages, bronteksten en extra bronlemma's uit de ingest-pipeline.
+- De woordenschat wordt uitgebreid met letters, woorden, begrippen, bronpassages, bronteksten en extra bronlemma's uit de ingest-pipeline; PDF-bronteksten verwijzen voor lezen door naar de bibliotheek.
 - De subtiele frame-toggle naast `Wiki` zet de ornamentale rand lokaal aan of uit en bewaart die voorkeur in de browser.
 - `Escape` sluit de modal.
 - Klik buiten de modal sluit ook.

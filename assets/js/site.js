@@ -5,7 +5,9 @@
   const wikiPublicDataPath = './wiki/generated/public-wiki-items.json';
   const wikiExternalBasePath = './wiki/generated/external';
   const sourceCatalogPath = './wiki/meta/source-catalog.json';
+  const libraryCatalogPath = './assets/library/library-catalog.json';
   const ignoredTermsPath = './wiki/meta/ignored-terms.md';
+  const sourcePageWikilinkPrefix = '[[source-page:';
   const collator = new Intl.Collator('nl', { sensitivity: 'base' });
   const INDEX_SECTION_ORDER = ['letter', 'word', 'text'];
   const INDEX_SECTION_LABELS = {
@@ -406,6 +408,7 @@
   const page = document.querySelector('.page');
   const versionTrigger = document.getElementById('versionTrigger');
   const wikiTrigger = document.getElementById('wikiTrigger');
+  const libraryTrigger = document.getElementById('libraryTrigger');
   const visionTrigger = document.getElementById('visionTrigger');
   const frameToggle = document.getElementById('frameToggle');
   const modal = document.getElementById('modal');
@@ -432,6 +435,18 @@
   const wikiIndexView = document.getElementById('wikiIndexView');
   const wikiItemView = document.getElementById('wikiItemView');
   const wikiCloseBtn = document.getElementById('wikiCloseBtn');
+  const libraryModal = document.getElementById('libraryModal');
+  const libraryTitle = document.getElementById('libraryTitle');
+  const libraryPageControls = document.getElementById('libraryPageControls');
+  const librarySourceList = document.getElementById('librarySourceList');
+  const libraryReader = document.getElementById('libraryReader');
+  const libraryCloseBtn = document.getElementById('libraryCloseBtn');
+  const sourcePagePreviewModal = document.getElementById('sourcePagePreviewModal');
+  const sourcePreviewTitle = document.getElementById('sourcePreviewTitle');
+  const sourcePreviewMeta = document.getElementById('sourcePreviewMeta');
+  const sourcePreviewBody = document.getElementById('sourcePreviewBody');
+  const sourcePreviewOpenBookBtn = document.getElementById('sourcePreviewOpenBookBtn');
+  const sourcePreviewCloseBtn = document.getElementById('sourcePreviewCloseBtn');
 
   const defaultVersion = versionTrigger.textContent.trim();
   const conceptsBySlug = new Map(concepts.map((item) => [slugify(item.title), item]));
@@ -441,6 +456,8 @@
   let lastConceptTrigger = null;
   let lastVisionTrigger = null;
   let lastWikiTrigger = null;
+  let lastLibraryTrigger = null;
+  let lastSourcePreviewTrigger = null;
 
   const changelogState = {
     version: defaultVersion
@@ -471,6 +488,21 @@
     query: '',
     activeSection: 'all',
     directoryCollapsed: false
+  };
+
+  const libraryState = {
+    loaded: false,
+    loading: null,
+    error: '',
+    sources: [],
+    sourcesBySlug: new Map(),
+    currentSlug: '',
+    currentPage: 1
+  };
+
+  const sourcePreviewState = {
+    sourceSlug: '',
+    pageNumber: 1
   };
 
   concepts.forEach((item, index) => {
@@ -567,7 +599,9 @@
     const isOpen = modal.classList.contains('open')
       || changelogModal.classList.contains('open')
       || visionModal.classList.contains('open')
-      || wikiModal.classList.contains('open');
+      || wikiModal.classList.contains('open')
+      || libraryModal.classList.contains('open')
+      || sourcePagePreviewModal.classList.contains('open');
     document.body.style.overflow = isOpen ? 'hidden' : '';
   }
 
@@ -1215,6 +1249,120 @@
     return resolveLinkEntry(term, wikiState.linkEntries);
   }
 
+  async function loadLibraryCatalog() {
+    if (libraryState.loaded) return libraryState;
+    if (libraryState.loading) return libraryState.loading;
+
+    libraryState.loading = fetch(libraryCatalogPath, { cache: 'no-store' })
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then((payload) => {
+        const sources = Array.isArray(payload.sources) ? payload.sources : [];
+        libraryState.sources = sources;
+        libraryState.sourcesBySlug = new Map(sources.map((source) => [source.slug, source]));
+        libraryState.loaded = true;
+        libraryState.error = '';
+        return libraryState;
+      })
+      .catch((error) => {
+        libraryState.error = 'De bibliotheek kon niet geladen worden.';
+        throw error;
+      })
+      .finally(() => {
+        libraryState.loading = null;
+      });
+
+    return libraryState.loading;
+  }
+
+  function getLibrarySource(sourceSlug) {
+    return libraryState.sourcesBySlug.get(sourceSlug) || null;
+  }
+
+  function clampPage(source, pageNumber) {
+    const requested = Number.parseInt(pageNumber, 10) || 1;
+    if (!source || !source.pageCount) return 1;
+    return Math.min(Math.max(requested, 1), source.pageCount);
+  }
+
+  function getLibraryPageSrc(source, pageNumber) {
+    const page = String(clampPage(source, pageNumber)).padStart(3, '0');
+    return `${source.pageBasePath}/page-${page}.${source.pageExtension || 'webp'}`;
+  }
+
+  function createLibraryPageImage(source, pageNumber, loading = 'lazy') {
+    const image = document.createElement('img');
+    image.className = `library-page-image${source.displayRotation ? ' is-rotated' : ''}`;
+    image.src = getLibraryPageSrc(source, pageNumber);
+    image.alt = `${source.title}, pagina ${pageNumber}`;
+    image.loading = loading;
+    image.decoding = 'async';
+    if (source.displayRotation) {
+      image.style.transform = `rotate(${source.displayRotation}deg)`;
+    }
+    return image;
+  }
+
+  function preloadNearbyLibraryPages(source, pageNumber) {
+    if (!source || source.kind !== 'pdf') return;
+    [pageNumber - 1, pageNumber + 1].forEach((nearbyPage) => {
+      if (nearbyPage < 1 || nearbyPage > source.pageCount) return;
+      const image = new Image();
+      image.decoding = 'async';
+      image.src = getLibraryPageSrc(source, nearbyPage);
+    });
+  }
+
+  function getSourceReferenceSlug(title) {
+    const normalized = normalizeTerm(title);
+    if (normalized === 'excalibur') return 'excalibur-bron';
+    if (normalized === 'het boek der geruststelling' || normalized === 'boek der geruststelling') {
+      return 'boek-der-geruststelling-bron';
+    }
+    return '';
+  }
+
+  function parseSourcePageTarget(target) {
+    const match = String(target || '').trim().match(/^source-page:([^:]+):(\d+)$/);
+    if (!match) return null;
+    return {
+      sourceSlug: match[1],
+      pageNumber: Number(match[2])
+    };
+  }
+
+  function findSourcePageReferenceMatches(text) {
+    const matches = [];
+    const pattern = /\b(Excalibur|Het boek der geruststelling|Boek der geruststelling),?\s+p\.\s*(\d{1,3})\b/giu;
+    let match;
+
+    while ((match = pattern.exec(text))) {
+      const sourceSlug = getSourceReferenceSlug(match[1]);
+      const pageNumber = Number(match[2]);
+      if (!sourceSlug || !pageNumber) continue;
+      matches.push({
+        start: match.index,
+        end: match.index + match[0].length,
+        label: match[0],
+        sourceSlug,
+        pageNumber
+      });
+    }
+
+    return matches;
+  }
+
+  function createSourcePageButton(label, sourceSlug, pageNumber) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'source-page-link';
+    button.textContent = label;
+    button.addEventListener('click', () => openSourcePagePreview(sourceSlug, pageNumber, button));
+    return button;
+  }
+
   function openWikiFromAnywhere(slug, trigger) {
     if (!slug) return;
     openWikiModal({ slug, pushHistory: true, trigger });
@@ -1231,6 +1379,24 @@
 
   function appendAutoLinkedText(parent, text, options = {}) {
     if (!text) return;
+
+    if (!options.skipSourcePageLinks) {
+      const sourceMatches = findSourcePageReferenceMatches(text);
+      if (sourceMatches.length) {
+        let cursor = 0;
+        sourceMatches.forEach((match) => {
+          if (match.start > cursor) {
+            appendAutoLinkedText(parent, text.slice(cursor, match.start), { ...options, skipSourcePageLinks: true });
+          }
+          parent.appendChild(createSourcePageButton(match.label, match.sourceSlug, match.pageNumber));
+          cursor = match.end;
+        });
+        if (cursor < text.length) {
+          appendAutoLinkedText(parent, text.slice(cursor), { ...options, skipSourcePageLinks: true });
+        }
+        return;
+      }
+    }
 
     if (!wikiState.loaded) {
       parent.appendChild(document.createTextNode(text));
@@ -1269,6 +1435,13 @@
 
       const target = match[1].trim();
       const label = (match[2] || match[1]).trim();
+      const sourcePageTarget = parseSourcePageTarget(target);
+      if (sourcePageTarget) {
+        parent.appendChild(createSourcePageButton(label, sourcePageTarget.sourceSlug, sourcePageTarget.pageNumber));
+        cursor = wikiLinkRegex.lastIndex;
+        continue;
+      }
+
       const resolved = resolveWikiTarget(target);
       if (resolved) {
         parent.appendChild(createInlineWikiButton(label, resolved.slug));
@@ -2057,7 +2230,11 @@
 
     const article = document.createElement('article');
     article.className = 'wiki-article';
-    article.appendChild(renderMarkdown(item.body, { excludeSlug: item.slug }));
+    if (item.kind === 'source') {
+      article.appendChild(renderWikiSourceContent(item));
+    } else {
+      article.appendChild(renderMarkdown(item.body, { excludeSlug: item.slug }));
+    }
 
     const external = renderWikiExternalSection(item);
     wikiItemView.append(header, article);
@@ -2185,6 +2362,239 @@
     }
   }
 
+  function renderLibrarySourceList() {
+    librarySourceList.replaceChildren();
+    libraryState.sources.forEach((source) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `library-source-card${libraryState.currentSlug === source.slug ? ' is-active' : ''}`;
+      button.addEventListener('click', () => {
+        libraryState.currentSlug = source.slug;
+        libraryState.currentPage = source.kind === 'pdf' ? clampPage(source, libraryState.currentPage) : 1;
+        renderLibrary();
+      });
+
+      const title = document.createElement('span');
+      title.className = 'library-source-title';
+      title.textContent = source.title;
+      button.appendChild(title);
+
+      const meta = document.createElement('span');
+      meta.className = 'library-source-meta';
+      meta.textContent = source.kind === 'pdf' ? `${source.pageCount} scanpagina's` : 'Leesartikel';
+      button.appendChild(meta);
+
+      librarySourceList.appendChild(button);
+    });
+  }
+
+  function renderLibraryPageControls(source) {
+    libraryPageControls.replaceChildren();
+    if (!source || source.kind !== 'pdf') return;
+
+    const previous = document.createElement('button');
+    previous.type = 'button';
+    previous.className = 'library-page-btn';
+    previous.textContent = '←';
+    previous.setAttribute('aria-label', 'Vorige pagina');
+    previous.disabled = libraryState.currentPage <= 1;
+    previous.addEventListener('click', () => {
+      libraryState.currentPage = clampPage(source, libraryState.currentPage - 1);
+      renderLibrary();
+    });
+
+    const indicator = document.createElement('span');
+    indicator.className = 'library-page-indicator';
+    indicator.textContent = `Pagina ${libraryState.currentPage} / ${source.pageCount}`;
+
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.className = 'library-page-btn';
+    next.textContent = '→';
+    next.setAttribute('aria-label', 'Volgende pagina');
+    next.disabled = libraryState.currentPage >= source.pageCount;
+    next.addEventListener('click', () => {
+      libraryState.currentPage = clampPage(source, libraryState.currentPage + 1);
+      renderLibrary();
+    });
+
+    libraryPageControls.append(previous, indicator, next);
+  }
+
+  function renderLibraryArticle(source) {
+    const shell = document.createElement('article');
+    shell.className = 'library-article-shell';
+
+    if (Array.isArray(source.tableOfContents) && source.tableOfContents.length > 1) {
+      const nav = document.createElement('nav');
+      nav.className = 'library-article-toc';
+      nav.setAttribute('aria-label', 'Inhoudsopgave');
+      source.tableOfContents.slice(0, 12).forEach((entry) => {
+        const link = document.createElement('a');
+        link.href = `#${entry.id}`;
+        link.textContent = entry.title;
+        nav.appendChild(link);
+      });
+      shell.appendChild(nav);
+    }
+
+    const article = document.createElement('div');
+    article.className = 'library-article';
+    article.innerHTML = source.articleHtml || '<p>Deze bron kon nog niet als artikel geladen worden.</p>';
+    shell.appendChild(article);
+    return shell;
+  }
+
+  function renderLibraryPage(source) {
+    const stage = document.createElement('div');
+    stage.className = 'library-page-stage';
+
+    const wrap = document.createElement('div');
+    wrap.className = 'library-page-image-wrap';
+    wrap.appendChild(createLibraryPageImage(source, libraryState.currentPage, 'eager'));
+    stage.appendChild(wrap);
+    preloadNearbyLibraryPages(source, libraryState.currentPage);
+    return stage;
+  }
+
+  function renderLibrary() {
+    libraryReader.replaceChildren();
+    renderLibrarySourceList();
+
+    const source = getLibrarySource(libraryState.currentSlug) || libraryState.sources[0];
+    if (!source) {
+      const empty = document.createElement('p');
+      empty.className = 'wiki-empty';
+      empty.textContent = libraryState.error || 'Geen bibliotheekbronnen gevonden.';
+      libraryReader.appendChild(empty);
+      libraryTitle.textContent = 'Bibliotheek';
+      renderLibraryPageControls(null);
+      return;
+    }
+
+    libraryState.currentSlug = source.slug;
+    libraryState.currentPage = source.kind === 'pdf' ? clampPage(source, libraryState.currentPage) : 1;
+    libraryTitle.textContent = source.title;
+    renderLibraryPageControls(source);
+
+    if (source.kind === 'pdf') {
+      libraryReader.appendChild(renderLibraryPage(source));
+      return;
+    }
+
+    libraryReader.appendChild(renderLibraryArticle(source));
+  }
+
+  function renderSourcePreview(source, pageNumber) {
+    sourcePreviewBody.replaceChildren();
+    sourcePreviewTitle.textContent = source.title;
+    sourcePreviewMeta.textContent = `Pagina ${pageNumber} / ${source.pageCount}`;
+    sourcePreviewBody.appendChild(createLibraryPageImage(source, pageNumber, 'eager'));
+  }
+
+  function closeLibraryModal(options = {}) {
+    if (document.activeElement instanceof HTMLElement && libraryModal.contains(document.activeElement) && options.restoreFocus !== false) {
+      (lastLibraryTrigger || libraryTrigger).focus();
+    }
+    libraryModal.classList.remove('open');
+    libraryModal.setAttribute('aria-hidden', 'true');
+    updateBodyScrollLock();
+  }
+
+  async function openLibraryModal(options = {}) {
+    await loadLibraryCatalog();
+    closeConceptModal({ restoreFocus: false });
+    closeChangelogModal({ restoreFocus: false });
+    closeVisionModal({ restoreFocus: false });
+    closeWikiModal({ restoreFocus: false });
+    closeSourcePagePreview({ restoreFocus: false });
+
+    if (options.trigger instanceof HTMLElement) {
+      lastLibraryTrigger = options.trigger;
+    }
+
+    const source = getLibrarySource(options.sourceSlug) || libraryState.sources[0];
+    libraryState.currentSlug = source ? source.slug : '';
+    libraryState.currentPage = source && source.kind === 'pdf' ? clampPage(source, options.pageNumber || 1) : 1;
+    renderLibrary();
+
+    libraryModal.classList.add('open');
+    libraryModal.setAttribute('aria-hidden', 'false');
+    updateBodyScrollLock();
+    libraryCloseBtn.focus();
+  }
+
+  function closeSourcePagePreview(options = {}) {
+    if (document.activeElement instanceof HTMLElement && sourcePagePreviewModal.contains(document.activeElement) && options.restoreFocus !== false) {
+      (lastSourcePreviewTrigger || lastWikiTrigger || wikiTrigger).focus();
+    }
+    sourcePagePreviewModal.classList.remove('open');
+    sourcePagePreviewModal.setAttribute('aria-hidden', 'true');
+    updateBodyScrollLock();
+  }
+
+  async function openSourcePagePreview(sourceSlug, pageNumber, trigger = document.activeElement) {
+    await loadLibraryCatalog();
+    const source = getLibrarySource(sourceSlug);
+    if (!source || source.kind !== 'pdf') return;
+
+    const page = clampPage(source, pageNumber);
+    sourcePreviewState.sourceSlug = source.slug;
+    sourcePreviewState.pageNumber = page;
+    lastSourcePreviewTrigger = trigger instanceof HTMLElement ? trigger : null;
+    renderSourcePreview(source, page);
+
+    sourcePagePreviewModal.classList.add('open');
+    sourcePagePreviewModal.setAttribute('aria-hidden', 'false');
+    updateBodyScrollLock();
+    sourcePreviewOpenBookBtn.focus();
+  }
+
+  function renderWikiSourceContent(item) {
+    const source = getLibrarySource(item.slug);
+
+    if (!source && !libraryState.loaded && !libraryState.loading) {
+      loadLibraryCatalog().then(() => {
+        if (wikiState.currentSlug === item.slug) renderWikiReader();
+      }).catch(() => {
+        if (wikiState.currentSlug === item.slug) renderWikiReader();
+      });
+    }
+
+    if (!source) {
+      const loading = document.createElement('p');
+      loading.className = 'wiki-empty';
+      loading.textContent = libraryState.error || 'Bibliotheekweergave wordt geladen...';
+      return loading;
+    }
+
+    if (source.kind === 'pdf') {
+      const card = document.createElement('section');
+      card.className = 'wiki-source-card';
+
+      const heading = document.createElement('h3');
+      heading.textContent = source.title;
+      card.appendChild(heading);
+
+      const summary = document.createElement('p');
+      summary.textContent = 'Deze scanbron lees je als vooraf gerenderde pagina-afbeeldingen in de schoolbibliotheek. De OCR blijft beschikbaar voor zoeken en bronverwijzingen.';
+      card.appendChild(summary);
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'wiki-source-card-btn';
+      button.textContent = 'Open in bibliotheek';
+      button.addEventListener('click', () => openLibraryModal({ sourceSlug: source.slug, pageNumber: 1, trigger: button }));
+      card.appendChild(button);
+      return card;
+    }
+
+    const shell = document.createElement('article');
+    shell.className = 'wiki-source-article-shell';
+    shell.appendChild(renderLibraryArticle(source));
+    return shell;
+  }
+
   function renderConceptBody(item) {
     modalBody.replaceChildren();
 
@@ -2220,6 +2630,8 @@
     closeChangelogModal({ restoreFocus: false });
     closeVisionModal({ restoreFocus: false });
     closeWikiModal({ restoreFocus: false });
+    closeLibraryModal({ restoreFocus: false });
+    closeSourcePagePreview({ restoreFocus: false });
     lastConceptTrigger = trigger instanceof HTMLElement ? trigger : null;
     modal.classList.add('open', item.group);
     modal.classList.remove(item.group === 'wat' ? 'hoe' : 'wat');
@@ -2258,6 +2670,8 @@
     closeConceptModal({ restoreFocus: false });
     closeVisionModal({ restoreFocus: false });
     closeWikiModal({ restoreFocus: false });
+    closeLibraryModal({ restoreFocus: false });
+    closeSourcePagePreview({ restoreFocus: false });
     changelogModal.classList.add('open');
     changelogModal.setAttribute('aria-hidden', 'false');
     updateBodyScrollLock();
@@ -2278,6 +2692,8 @@
     closeConceptModal({ restoreFocus: false });
     closeChangelogModal({ restoreFocus: false });
     closeWikiModal({ restoreFocus: false });
+    closeLibraryModal({ restoreFocus: false });
+    closeSourcePagePreview({ restoreFocus: false });
     visionModal.classList.add('open');
     visionModal.setAttribute('aria-hidden', 'false');
     updateBodyScrollLock();
@@ -2300,6 +2716,8 @@
     closeConceptModal({ restoreFocus: false });
     closeChangelogModal({ restoreFocus: false });
     closeVisionModal({ restoreFocus: false });
+    closeLibraryModal({ restoreFocus: false });
+    closeSourcePagePreview({ restoreFocus: false });
 
     wikiModal.classList.add('open');
     wikiModal.setAttribute('aria-hidden', 'false');
@@ -2357,8 +2775,11 @@
   closeChangelogBtn.addEventListener('click', () => closeChangelogModal());
   closeVisionBtn.addEventListener('click', () => closeVisionModal());
   wikiCloseBtn.addEventListener('click', () => closeWikiModal());
+  libraryCloseBtn.addEventListener('click', () => closeLibraryModal());
+  sourcePreviewCloseBtn.addEventListener('click', () => closeSourcePagePreview());
   versionTrigger.addEventListener('click', openChangelogModal);
   wikiTrigger.addEventListener('click', (event) => openWikiModal({ trigger: event.currentTarget }));
+  libraryTrigger.addEventListener('click', (event) => openLibraryModal({ trigger: event.currentTarget }));
   visionTrigger.addEventListener('click', (event) => openVisionModal(event.currentTarget));
   if (frameToggle) {
     frameToggle.addEventListener('click', () => setFrameEnabled(page.dataset.frameEnabled !== 'true'));
@@ -2394,8 +2815,32 @@
     if (event.target === wikiModal) closeWikiModal();
   });
 
+  libraryModal.addEventListener('click', (event) => {
+    if (event.target === libraryModal) closeLibraryModal();
+  });
+
+  sourcePagePreviewModal.addEventListener('click', (event) => {
+    if (event.target === sourcePagePreviewModal) closeSourcePagePreview();
+  });
+
+  sourcePreviewOpenBookBtn.addEventListener('click', () => {
+    openLibraryModal({
+      sourceSlug: sourcePreviewState.sourceSlug,
+      pageNumber: sourcePreviewState.pageNumber,
+      trigger: lastSourcePreviewTrigger || sourcePreviewOpenBookBtn
+    });
+  });
+
   window.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
+    if (sourcePagePreviewModal.classList.contains('open')) {
+      closeSourcePagePreview();
+      return;
+    }
+    if (libraryModal.classList.contains('open')) {
+      closeLibraryModal();
+      return;
+    }
     if (wikiModal.classList.contains('open')) {
       closeWikiModal();
       return;
@@ -2412,4 +2857,7 @@
       closeConceptModal();
     }
   });
+
+  window.openSourcePagePreview = openSourcePagePreview;
+  window.openLibraryModal = openLibraryModal;
 })();

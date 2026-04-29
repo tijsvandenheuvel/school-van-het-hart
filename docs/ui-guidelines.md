@@ -5,7 +5,7 @@
 De homepage werkt nu volgens deze structuur:
 
 1. Grote titel bovenaan: `School van het Hart`
-2. Kleine control group linksboven binnen de paginakader: `Wiki` plus een subtiele frame-toggle zonder zichtbaar label
+2. Kleine control group linksboven binnen de paginakader: `Wiki`, `Bibliotheek` plus een subtiele frame-toggle zonder zichtbaar label
 3. Kleine versieknop rechtsboven, binnen de paginakader
 4. Ornamentale sierkader rond de volledige pagina
 5. Cirkelcompositie met 12 labels rond een centraal hart
@@ -35,6 +35,7 @@ De homepage werkt nu volgens deze structuur:
 - `HOE`-labels hebben een paarse tint.
 - De hartvorm is een zachte rode kern, zonder extra opening of zwart gat.
 - De wiki gebruikt de term `Woordenschat` als overkoepelende noemer boven letters, woorden, begrippen, passages, teksten en runtime-afgeleide bronlemma's.
+- De bibliotheek is de primaire leeservaring voor bronteksten: PDF's als scanpagina's en Word-bronnen als rustige artikels.
 
 ## Responsive regels
 
@@ -62,7 +63,7 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 ## Praktische editpunten in code
 
 - Versieknop: `index.html`, element `.version-note`
-- Bovenste controls: `index.html`, `.page-controls-start`, `.wiki-note` en `.frame-toggle`
+- Bovenste controls: `index.html`, `.page-controls-start`, `.wiki-note`, `#libraryTrigger` en `.frame-toggle`
 - Titellayout: `index.html`, `.page-header` en `.page-title`
 - Hoofdcompositie: `index.html`, `.composition`
 - Ornamentale frame: `index.html`, `.page-frame`, `.page-frame-band`, `.page-frame-corner` en `assets/ornament-corner-*.svg`
@@ -70,11 +71,12 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 - Geometrische ring: `assets/js/site.js`, `ORBIT_GEOMETRY`
 - Conceptdata: `assets/js/site.js`, `const concepts = [...]`
 - Flower-of-life laag: `index.html`, `.flower-of-life-layer` en `renderFlowerOfLife()`
-- Modalinhoud: `index.html`, `sections`, `renderModalBody()` en `.modal-copy`
+- Modalinhoud: `index.html`, `sections`, `renderConceptBody()` en `.modal-copy`
+- Bibliotheek: `index.html`, `#libraryModal`, `#sourcePagePreviewModal`, `assets/library/library-catalog.json` en `renderLibrary()`
 
 ## Versie-afspraak
 
-- Huidige versie: `v0.3.4`
+- Huidige versie: `v0.3.5`
 - Canonieke versiebron: de bovenste entry in `docs/changelog.md`
 - De versieknop in `index.html` leest die actuele versie uit de changelog
 - Verhoog de versie bij elke echte inhoudelijke, visuele of interactionele voortgang

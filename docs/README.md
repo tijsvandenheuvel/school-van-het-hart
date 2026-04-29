@@ -2,7 +2,7 @@
 
 Laatst bijgewerkt: 2026-04-24
 
-Huidige siteversie: `v0.3.4`
+Huidige siteversie: `v0.3.5`
 
 Actieve entrypoint: `index.html`
 
@@ -34,14 +34,23 @@ Domein: `schoolvanhethart.be`
 - `../wiki/meta/source-catalog.json`
   De gegenereerde broncatalogus met letters, passages en bronteksten voor de multi-index woordenschat in de wiki-modal, waaruit de site ook extra bronlemma's afleidt.
 
+- `../assets/library/library-catalog.json`
+  De gegenereerde schoolbibliotheekcatalogus met scanpagina's voor PDF-bronnen en artikel-HTML voor Word-bronnen.
+
+- `../assets/library/pages/`
+  Vooraf gerenderde WebP-pagina's voor PDF-bronnen, zodat boeken per pagina gelezen worden zonder volledige PDF-runtime.
+
 - `../assets/js/site.js`
-  De huidige client-side runtime voor orbit, changelog, visietekst-modal, multi-index woordenschat, autolinks, backlinks en runtime-afgeleide bronlemma's.
+  De huidige client-side runtime voor orbit, changelog, visietekst-modal, bibliotheekviewer, multi-index woordenschat, autolinks, backlinks en runtime-afgeleide bronlemma's.
 
 - `../assets/css/wiki.css`
   De aanvullende stijlen voor de wiki-modal, rustige tekstlinks en visietekstweergave.
 
 - `../scripts/assimilate_sources.py`
   De bronpipeline voor docx- en scanbronnen: renderen, roteren, OCR'en, structureren en uitschrijven naar wiki-bronnen en broncatalogus.
+
+- `../scripts/generate_library_assets.js`
+  De bibliotheekpipeline die PDF's rendert naar WebP-pagina's en Word-bronnen omzet naar rustige artikeldata.
 
 - `ui-guidelines.md`
   De huidige layoutregels, versie-afspraken en responsive aandachtspunten.

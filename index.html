@@ -964,11 +964,12 @@
     </div>
     <div class="page-controls-start">
       <button class="wiki-note" id="wikiTrigger" type="button" aria-label="Open wiki" aria-haspopup="dialog" aria-controls="wikiModal">Wiki</button>
+      <button class="wiki-note" id="libraryTrigger" type="button" aria-label="Open bibliotheek" aria-haspopup="dialog" aria-controls="libraryModal">Bibliotheek</button>
       <button class="frame-toggle active" id="frameToggle" type="button" aria-pressed="true" aria-label="Verberg ornamentale kader" title="Verberg ornamentale kader">
         <span class="frame-toggle-icon" aria-hidden="true"></span>
       </button>
     </div>
-    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.4" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.4</button>
+    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.5" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.5</button>
     <header class="page-header">
       <h1 class="page-title">
         <button class="page-title-trigger" id="visionTrigger" type="button" aria-haspopup="dialog" aria-controls="visionModal">School van het Hart</button>
@@ -1076,6 +1077,39 @@
         <section class="wiki-reader" id="wikiReaderPane">
           <section class="wiki-item-view" id="wikiItemView"></section>
         </section>
+      </div>
+    </article>
+  </div>
+
+  <div class="library-modal" id="libraryModal" aria-hidden="true">
+    <article class="library-shell" role="dialog" aria-modal="true" aria-label="Bibliotheek">
+      <div class="library-toolbar">
+        <div>
+          <p class="library-kicker">Schoolbibliotheek</p>
+          <h2 id="libraryTitle">Bibliotheek</h2>
+        </div>
+        <div class="library-page-controls" id="libraryPageControls"></div>
+        <button class="wiki-toolbar-btn wiki-toolbar-close" id="libraryCloseBtn" type="button" aria-label="Sluit bibliotheek">×</button>
+      </div>
+      <div class="library-content">
+        <aside class="library-source-list" id="librarySourceList" aria-label="Bronnen"></aside>
+        <section class="library-reader" id="libraryReader" aria-live="polite"></section>
+      </div>
+    </article>
+  </div>
+
+  <div class="source-preview-modal" id="sourcePagePreviewModal" aria-hidden="true">
+    <article class="source-preview-card" role="dialog" aria-modal="true" aria-labelledby="sourcePreviewTitle">
+      <div class="source-preview-header">
+        <div>
+          <p class="library-kicker" id="sourcePreviewMeta">Bronpagina</p>
+          <h2 id="sourcePreviewTitle">Pagina-preview</h2>
+        </div>
+        <button class="wiki-toolbar-btn wiki-toolbar-close" id="sourcePreviewCloseBtn" type="button" aria-label="Sluit pagina-preview">×</button>
+      </div>
+      <div class="source-preview-body" id="sourcePreviewBody"></div>
+      <div class="source-preview-actions">
+        <button class="library-primary-btn" id="sourcePreviewOpenBookBtn" type="button">Open boek</button>
       </div>
     </article>
   </div>

@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.3.5 - Schoolbibliotheek
+
+- Een nieuwe `Bibliotheek`-knop toegevoegd naast `Wiki`, met een full-screen viewer voor de vier huidige bronnen
+- PDF-bronnen worden vooraf als losse WebP-pagina's in `assets/library/pages/` gegenereerd en via `assets/library/library-catalog.json` ontsloten
+- `Excalibur` en `Het boek der geruststelling` lezen nu als echte scanpagina's, met display-rotatie voor `Het boek der geruststelling` en lazy/preload-gedrag per huidige pagina
+- DOCX-bronnen krijgen een rustige artikelweergave met beperkte leesbreedte, hoofdstukstructuur en optionele inhoudsopgave
+- De wiki behoudt de OCR-zoeklaag, maar toont PDF-bronteksten primair als bronkaart met `Open in bibliotheek`
+- Interne bronverwijzingen zoals `[[source-page:excalibur-bron:17|Excalibur p. 17]]` en bestaande `Excalibur, p. 63`-verwijzingen openen een compacte pagina-preview met doorklik naar de volledige viewer
+- Nieuwe scripts `npm run library:assets` en `npm run verify:library` toegevoegd voor assetgeneratie en bibliotheekcontrole
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.5`
+
 ## v0.3.4 - Rustige hover-lagen
 
 - De conceptcirkels, het hart en de flower-of-life laag op stabielere compositorlagen gezet zodat echte CSS-hover minder repaint-rimpel rond het hart veroorzaakt
