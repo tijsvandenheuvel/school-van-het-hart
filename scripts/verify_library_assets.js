@@ -14,7 +14,7 @@ const htmlPath = path.join(root, 'index.html');
 const expectedSources = new Map([
   ['svhh-basisdoc-bron', { kind: 'docx' }],
   ['svhh-visietekst-bron', { kind: 'docx' }],
-  ['excalibur-bron', { kind: 'pdf', rotation: 0 }],
+  ['excalibur-bron', { kind: 'pdf', rotation: 0, pageRotations: [{ from: 5, to: 111, rotation: 90 }] }],
   ['boek-der-geruststelling-bron', { kind: 'pdf', rotation: 90 }]
 ]);
 
@@ -73,6 +73,11 @@ for (const [slug, expected] of expectedSources.entries()) {
     const count = pdfPageCount(sourceFile);
     assert.equal(source.pageCount, count, `${slug} pageCount must match PDF`);
     assert.equal(source.displayRotation, expected.rotation, `${slug} displayRotation is wrong`);
+    if (expected.pageRotations) {
+      assert.deepEqual(source.pageRotations, expected.pageRotations, `${slug} pageRotations are wrong`);
+    } else {
+      assert.deepEqual(source.pageRotations || [], [], `${slug} should not define pageRotations`);
+    }
     assert.ok(source.pageBasePath.endsWith(`/pages/${slug}`), `${slug} pageBasePath should point to its page directory`);
 
     const pageDir = path.join(root, 'assets/library/pages', slug);
@@ -94,11 +99,25 @@ for (const [slug, expected] of expectedSources.entries()) {
 
 const siteJs = fs.readFileSync(siteJsPath, 'utf8');
 const html = fs.readFileSync(htmlPath, 'utf8');
+const wikiCss = fs.readFileSync(path.join(root, 'assets/css/wiki.css'), 'utf8');
 assert.match(siteJs, /function\s+openSourcePagePreview\s*\(/, 'openSourcePagePreview entrypoint is missing');
 assert.match(siteJs, /function\s+openLibraryModal\s*\(/, 'openLibraryModal entrypoint is missing');
+assert.match(siteJs, /function\s+getLibraryPageRotation\s*\(/, 'page-specific library rotation helper is missing');
+assert.match(siteJs, /libraryState\.currentPage\s*=\s*source\.kind === 'pdf' \? 1 : 1/, 'switching library sources should reset to page 1');
+assert.match(siteJs, /resetReaderScroll:\s*shouldResetReaderScroll/, 'switching library sources should reset reader scroll');
+assert.match(siteJs, /libraryReader\.scrollTop\s*=\s*0/, 'library reader should scroll to top after source changes');
+assert.match(siteJs, /className\s*=\s*'library-page-jump-input'/, 'direct page jump input is missing');
+assert.match(siteJs, /jumpInput\.type\s*=\s*'text'/, 'page jump input should avoid browser number spinners');
+assert.match(siteJs, /jumpInput\.addEventListener\('input'/, 'page jump input should navigate when the number changes');
+assert.doesNotMatch(siteJs, /library-page-jump-btn/, 'page jump should not include a separate Go button');
+assert.match(siteJs, /--library-page-rotation/, 'rotated page images should use the centered rotation CSS variable');
 assert.match(siteJs, /\[\[source-page:/, 'source-page wikilink syntax is not handled');
 assert.match(html, /id="libraryTrigger"/, 'Bibliotheek trigger is missing');
 assert.match(html, /id="libraryModal"/, 'Library modal is missing');
 assert.match(html, /id="sourcePagePreviewModal"/, 'Source page preview modal is missing');
+assert.match(wikiCss, /\.library-page-stage\s*\{[\s\S]*?height:\s*100%/, 'library page stage must use the reader height as sizing boundary');
+assert.match(wikiCss, /\.library-page-image-wrap\s*\{[\s\S]*?height:\s*100%/, 'library page image wrapper must be height-constrained');
+assert.match(wikiCss, /\.library-page-image\s*\{[\s\S]*?max-height:\s*100%/, 'vertical library pages must fit inside the modal reader');
+assert.match(wikiCss, /\.library-page-image\.is-rotated\s*\{[\s\S]*?position:\s*absolute[\s\S]*?translate\(-50%,\s*-50%\)/, 'rotated pages must stay centered in the reader');
 
 console.log('Library assets verified.');

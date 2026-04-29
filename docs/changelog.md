@@ -1,5 +1,35 @@
 # Changelog
 
+## v0.3.9 - Artikelstart bij bronwissel
+
+- De bibliotheekreader springt nu terug naar boven wanneer je een andere bron opent
+- Word-artikels nemen daardoor niet langer de scrollpositie van het vorige artikel of boek over
+- De bibliotheekcontrole uitgebreid met een regressie voor scroll-reset bij bronwissels
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.9`
+
+## v0.3.8 - Directe paginakeuze
+
+- De bibliotheeknavigator gebruikt nu een rustige paginainvoer zonder ingebouwde browserpijltjes
+- De aparte `Ga`-knop is verwijderd; gewijzigde paginanummers openen de gekozen pagina automatisch
+- Geroteerde scanpagina's blijven na een directe paginasprong gecentreerd in de reader
+- De bibliotheekcontrole uitgebreid met regressies die de knoploze directe paginakeuze bewaken
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.8`
+
+## v0.3.7 - Verticale scanpassing
+
+- Verticale scanpagina's schalen nu op de beschikbare hoogte binnen de bibliotheekreader, zodat het blad niet meer buiten de modal valt
+- De pagina-afbeelding en wrapper hebben nu een vaste hoogtebegrenzing binnen de reader in plaats van alleen een algemene viewportbegrenzing
+- De bibliotheekcontrole uitgebreid met een regressie die bewaakt dat verticale pagina's binnen de modal-reader blijven passen
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.7`
+
+## v0.3.6 - Bibliotheeknavigatie
+
+- Bronwissels in de bibliotheek openen een PDF-bron nu opnieuw op pagina 1 in plaats van de paginastand van het vorige boek over te nemen
+- Excalibur-pagina's 5 t/m 111 krijgen nu display-rotatie zodat de scanpagina's rechtop gelezen worden, terwijl pagina 1 t/m 4 ongeroteerd blijven
+- De bibliotheektoolbar heeft nu een directe paginainvoer met `Ga`, zodat hoge paginanummers bereikbaar zijn zonder tientallen keren op de pijlen te klikken
+- De bibliotheekcontrole uitgebreid met regressies voor page-reset, Excalibur-paginarotaties en directe paginanavigatie
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.6`
+
 ## v0.3.5 - Schoolbibliotheek
 
 - Een nieuwe `Bibliotheek`-knop toegevoegd naast `Wiki`, met een full-screen viewer voor de vier huidige bronnen

@@ -1292,15 +1292,28 @@
     return `${source.pageBasePath}/page-${page}.${source.pageExtension || 'webp'}`;
   }
 
+  function getLibraryPageRotation(source, pageNumber) {
+    if (!source) return 0;
+    const page = clampPage(source, pageNumber);
+    const pageRotation = (source.pageRotations || []).find((entry) => {
+      const from = Number(entry.from) || 1;
+      const to = Number(entry.to) || from;
+      return page >= from && page <= to;
+    });
+    if (pageRotation) return Number(pageRotation.rotation) || 0;
+    return Number(source.displayRotation) || 0;
+  }
+
   function createLibraryPageImage(source, pageNumber, loading = 'lazy') {
+    const rotation = getLibraryPageRotation(source, pageNumber);
     const image = document.createElement('img');
-    image.className = `library-page-image${source.displayRotation ? ' is-rotated' : ''}`;
+    image.className = `library-page-image${rotation ? ' is-rotated' : ''}`;
     image.src = getLibraryPageSrc(source, pageNumber);
     image.alt = `${source.title}, pagina ${pageNumber}`;
     image.loading = loading;
     image.decoding = 'async';
-    if (source.displayRotation) {
-      image.style.transform = `rotate(${source.displayRotation}deg)`;
+    if (rotation) {
+      image.style.setProperty('--library-page-rotation', `${rotation}deg`);
     }
     return image;
   }
@@ -2369,9 +2382,10 @@
       button.type = 'button';
       button.className = `library-source-card${libraryState.currentSlug === source.slug ? ' is-active' : ''}`;
       button.addEventListener('click', () => {
+        const shouldResetReaderScroll = libraryState.currentSlug !== source.slug;
         libraryState.currentSlug = source.slug;
-        libraryState.currentPage = source.kind === 'pdf' ? clampPage(source, libraryState.currentPage) : 1;
-        renderLibrary();
+        libraryState.currentPage = source.kind === 'pdf' ? 1 : 1;
+        renderLibrary({ resetReaderScroll: shouldResetReaderScroll });
       });
 
       const title = document.createElement('span');
@@ -2391,6 +2405,7 @@
   function renderLibraryPageControls(source) {
     libraryPageControls.replaceChildren();
     if (!source || source.kind !== 'pdf') return;
+    let jumpTimer = null;
 
     const previous = document.createElement('button');
     previous.type = 'button';
@@ -2405,7 +2420,59 @@
 
     const indicator = document.createElement('span');
     indicator.className = 'library-page-indicator';
-    indicator.textContent = `Pagina ${libraryState.currentPage} / ${source.pageCount}`;
+    indicator.textContent = `van ${source.pageCount}`;
+
+    const jumpControl = document.createElement('div');
+    jumpControl.className = 'library-page-jump';
+    jumpControl.setAttribute('role', 'group');
+    jumpControl.setAttribute('aria-label', 'Paginanummer kiezen');
+
+    const jumpLabel = document.createElement('span');
+    jumpLabel.className = 'library-page-jump-label';
+    jumpLabel.textContent = 'Pagina';
+    jumpControl.appendChild(jumpLabel);
+
+    const jumpInput = document.createElement('input');
+    jumpInput.className = 'library-page-jump-input';
+    jumpInput.type = 'text';
+    jumpInput.inputMode = 'numeric';
+    jumpInput.pattern = '[0-9]*';
+    jumpInput.value = String(libraryState.currentPage);
+    jumpInput.setAttribute('aria-label', `Paginanummer tussen 1 en ${source.pageCount}`);
+    jumpControl.appendChild(jumpInput);
+
+    jumpControl.appendChild(indicator);
+
+    const jumpToInputPage = () => {
+      window.clearTimeout(jumpTimer);
+      if (!jumpInput.value.trim()) {
+        jumpInput.value = String(libraryState.currentPage);
+        return;
+      }
+      const nextPage = clampPage(source, jumpInput.value);
+      if (nextPage === libraryState.currentPage) {
+        jumpInput.value = String(libraryState.currentPage);
+        return;
+      }
+      libraryState.currentPage = nextPage;
+      renderLibrary();
+    };
+
+    jumpInput.addEventListener('input', () => {
+      jumpInput.value = jumpInput.value.replace(/\D/g, '');
+      if (!jumpInput.value) return;
+      window.clearTimeout(jumpTimer);
+      jumpTimer = window.setTimeout(jumpToInputPage, 280);
+    });
+
+    jumpInput.addEventListener('change', jumpToInputPage);
+    jumpInput.addEventListener('blur', jumpToInputPage);
+    jumpInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        jumpToInputPage();
+      }
+    });
 
     const next = document.createElement('button');
     next.type = 'button';
@@ -2418,7 +2485,7 @@
       renderLibrary();
     });
 
-    libraryPageControls.append(previous, indicator, next);
+    libraryPageControls.append(previous, jumpControl, next);
   }
 
   function renderLibraryArticle(source) {
@@ -2457,7 +2524,7 @@
     return stage;
   }
 
-  function renderLibrary() {
+  function renderLibrary(options = {}) {
     libraryReader.replaceChildren();
     renderLibrarySourceList();
 
@@ -2469,6 +2536,7 @@
       libraryReader.appendChild(empty);
       libraryTitle.textContent = 'Bibliotheek';
       renderLibraryPageControls(null);
+      if (options.resetReaderScroll) libraryReader.scrollTop = 0;
       return;
     }
 
@@ -2479,10 +2547,12 @@
 
     if (source.kind === 'pdf') {
       libraryReader.appendChild(renderLibraryPage(source));
+      if (options.resetReaderScroll) libraryReader.scrollTop = 0;
       return;
     }
 
     libraryReader.appendChild(renderLibraryArticle(source));
+    if (options.resetReaderScroll) libraryReader.scrollTop = 0;
   }
 
   function renderSourcePreview(source, pageNumber) {
@@ -2516,7 +2586,7 @@
     const source = getLibrarySource(options.sourceSlug) || libraryState.sources[0];
     libraryState.currentSlug = source ? source.slug : '';
     libraryState.currentPage = source && source.kind === 'pdf' ? clampPage(source, options.pageNumber || 1) : 1;
-    renderLibrary();
+    renderLibrary({ resetReaderScroll: true });
 
     libraryModal.classList.add('open');
     libraryModal.setAttribute('aria-hidden', 'false');

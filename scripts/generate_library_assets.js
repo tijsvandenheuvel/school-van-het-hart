@@ -27,6 +27,12 @@ const DISPLAY_ROTATION_BY_SLUG = {
   'boek-der-geruststelling-bron': 90
 };
 
+const PAGE_ROTATIONS_BY_SLUG = {
+  'excalibur-bron': [
+    { from: 5, to: 111, rotation: 90 }
+  ]
+};
+
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
@@ -213,6 +219,7 @@ function renderPdfSource(source) {
     pageBasePath: `./assets/library/pages/${source.slug}`,
     pageExtension: 'webp',
     displayRotation: DISPLAY_ROTATION_BY_SLUG[source.slug] || 0,
+    pageRotations: PAGE_ROTATIONS_BY_SLUG[source.slug] || [],
     articleHtml: '',
     tableOfContents: []
   };
@@ -230,6 +237,7 @@ function renderDocxSource(source) {
     pageBasePath: '',
     pageExtension: '',
     displayRotation: 0,
+    pageRotations: [],
     articleHtml: article.articleHtml,
     tableOfContents: article.tableOfContents
   };
