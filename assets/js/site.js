@@ -3207,7 +3207,10 @@
   }
 
   renderFlowerOfLife();
+  syncTokenLayout();
   scheduleTokenLayout();
+  window.requestAnimationFrame(scheduleTokenLayout);
+  window.addEventListener('load', syncTokenLayout, { once: true });
   loadChangelog();
   initializeWiki();
 

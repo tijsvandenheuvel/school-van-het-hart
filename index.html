@@ -31,6 +31,12 @@
       --page-frame-width: clamp(6px, 0.62vw, 8px);
       --page-frame-band-outset: calc(var(--page-frame-width) * 0.5 + 2px);
       --page-corner-size: clamp(108px, 10.8vw, 140px);
+      --header-frame-gap: clamp(14px, 1.2vw, 20px);
+      --composition-header-safe: clamp(108px, 14svh, 148px);
+      --composition-edge-gap: clamp(14px, 1.8vmin, 24px);
+      --orbit-outer-gap: clamp(10px, 1.8vmin, 24px);
+      --orbit-touch-ratio: 0.517638;
+      --orbit-fit-ratio: 0.397321;
       --font-display: Georgia, "Times New Roman", serif;
       --font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
@@ -61,9 +67,9 @@
       width: 100%;
       padding: clamp(24px, 2.2vw, 36px) clamp(24px, 2.4vw, 38px) clamp(26px, 2.4vw, 34px);
       display: grid;
-      grid-template-rows: auto minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr);
       justify-items: center;
-      align-items: start;
+      align-items: center;
       gap: clamp(12px, 1.8vw, 22px);
       isolation: isolate;
     }
@@ -97,8 +103,8 @@
 
     .page-controls-start {
       position: absolute;
-      top: calc(var(--page-frame-inset) + 10px);
-      left: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.72);
+      top: calc(var(--page-frame-inset) + var(--header-frame-gap));
+      left: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.72 + var(--header-frame-gap));
       z-index: 6;
       display: inline-flex;
       align-items: center;
@@ -181,7 +187,7 @@
 
     .version-note {
       position: absolute;
-      top: calc(var(--page-frame-inset) + 10px);
+      top: calc(var(--page-frame-inset) + var(--header-frame-gap));
       --version-frame-gap: 18px;
       right: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.72 + var(--version-frame-gap));
       z-index: 6;
@@ -279,6 +285,7 @@
       width: 100%;
       height: 0;
       padding: 0;
+      display: none;
       overflow: hidden;
       pointer-events: none;
     }
@@ -318,14 +325,15 @@
     .composition {
       position: relative;
       z-index: 3;
-      width: min(1280px, calc(100% - 72px));
-      height: min(980px, calc(100vh - 190px));
-      min-height: 620px;
+      --composition-size: min(1120px, calc(100vw - var(--composition-edge-gap) - var(--composition-edge-gap)), calc(100svh - var(--composition-header-safe) - var(--page-frame-inset) - var(--page-frame-inset)));
+      width: var(--composition-size);
+      height: var(--composition-size);
       display: grid;
       place-items: center;
       isolation: isolate;
-      --orbit-radius: min(clamp(250px, 35vw, 430px), clamp(200px, 40vh, 320px));
-      --core-width: clamp(220px, 24vw, 320px);
+      --orbit-radius: calc((var(--composition-size) - var(--orbit-outer-gap) - var(--orbit-outer-gap)) * var(--orbit-fit-ratio));
+      --token-size: calc(var(--orbit-radius) * var(--orbit-touch-ratio));
+      --core-width: clamp(190px, calc(var(--orbit-radius) * 0.82), 340px);
       --flower-size: calc(var(--orbit-radius) * 2 + 18px);
     }
 
@@ -448,9 +456,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: clamp(112px, 10.4vw, 136px);
+      width: var(--token-size);
       aspect-ratio: 1 / 1;
-      padding: 16px;
+      padding: clamp(5px, calc(var(--token-size) * 0.11), 18px);
       border-radius: 50%;
       border: 1.5px solid transparent;
       background: rgba(255, 255, 255, 0.9);
@@ -460,7 +468,7 @@
       -webkit-appearance: none;
       -moz-appearance: none;
       font-family: var(--font-body);
-      font-size: 0.9rem;
+      font-size: clamp(0.48rem, calc(var(--token-size) * 0.08), 1.08rem);
       line-height: 1.15;
       letter-spacing: 0.01em;
       text-align: center;
@@ -475,7 +483,7 @@
 
     .token:hover,
     .token:focus-visible {
-      --token-scale: 1.045;
+      --token-scale: 1;
       outline: none;
     }
 
@@ -491,7 +499,7 @@
 
     .heart-wrap {
       position: relative;
-      width: min(20vw, 236px);
+      width: clamp(104px, calc(var(--orbit-radius) * 0.58), 280px);
       aspect-ratio: 1 / 1;
       display: grid;
       place-items: center;
@@ -773,45 +781,30 @@
     @media (max-width: 980px) {
       :root {
         --page-corner-size: clamp(88px, 14vw, 112px);
+        --composition-header-safe: clamp(104px, 14svh, 136px);
       }
       .page-title-trigger {
         font-size: clamp(1.98rem, 5vw, 3.35rem);
       }
       .composition {
-        width: min(100%, calc(100% - 44px));
-        height: min(840px, calc(100vh - 178px));
-        min-height: 600px;
-        --orbit-radius: min(clamp(190px, 33vw, 290px), clamp(160px, 31vh, 240px));
+        --composition-size: min(920px, calc(100vw - var(--composition-edge-gap) - var(--composition-edge-gap)), calc(100svh - var(--composition-header-safe) - var(--page-frame-inset) - var(--page-frame-inset)));
         --core-width: clamp(210px, 30vw, 280px);
-      }
-      .heart-wrap { width: min(27vw, 220px); }
-      .token {
-        width: clamp(98px, 13vw, 132px);
-        font-size: 0.84rem;
-        padding: 14px;
       }
       .modal-body { grid-template-columns: 1fr; }
     }
 
     @media (max-height: 760px) and (min-width: 761px) {
+      :root {
+        --composition-header-safe: clamp(96px, 15svh, 128px);
+      }
       .composition {
-        height: min(740px, calc(100vh - 164px));
-        min-height: 590px;
-        --orbit-radius: min(clamp(220px, 29vw, 300px), clamp(160px, 33vh, 244px));
+        --composition-size: min(820px, calc(100vw - var(--composition-edge-gap) - var(--composition-edge-gap)), calc(100svh - var(--composition-header-safe) - var(--page-frame-inset) - var(--page-frame-inset)));
       }
       .core-label strong {
         font-size: clamp(1.32rem, 2.1vw, 1.9rem);
       }
       .core-label span {
         font-size: 0.82rem;
-      }
-      .heart-wrap {
-        width: min(18vw, 190px);
-      }
-      .token {
-        width: clamp(90px, 9vw, 116px);
-        font-size: 0.78rem;
-        padding: 13px;
       }
     }
 
@@ -821,6 +814,10 @@
         --page-frame-width: 6px;
         --page-frame-band-outset: calc(var(--page-frame-width) * 0.5 + 2px);
         --page-corner-size: clamp(74px, 19vw, 92px);
+        --header-frame-gap: clamp(10px, 2.6vw, 16px);
+        --composition-header-safe: clamp(116px, 18svh, 150px);
+        --composition-edge-gap: clamp(8px, 2.4vw, 14px);
+        --orbit-outer-gap: clamp(8px, 2.6vw, 14px);
       }
       .page {
         padding: 20px 14px 22px;
@@ -831,14 +828,14 @@
         padding: 0;
       }
       .page-controls-start {
-        top: calc(var(--page-frame-inset) + 6px);
-        left: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.58);
+        top: calc(var(--page-frame-inset) + var(--header-frame-gap));
+        left: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.58 + var(--header-frame-gap));
         gap: 8px;
         flex-wrap: wrap;
         max-width: calc(100vw - var(--page-corner-size) * 1.38 - 118px);
       }
       .version-note {
-        top: calc(var(--page-frame-inset) + 6px);
+        top: calc(var(--page-frame-inset) + var(--header-frame-gap));
         --version-frame-gap: 16px;
         right: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.58 + var(--version-frame-gap));
         font-size: 0.68rem;
@@ -857,10 +854,7 @@
         letter-spacing: 0.04em;
       }
       .composition {
-        width: 100%;
-        height: min(640px, calc(100vh - 164px));
-        min-height: 520px;
-        --orbit-radius: min(clamp(124px, 32vw, 160px), clamp(102px, 23vh, 136px));
+        --composition-size: min(680px, calc(100vw - var(--composition-edge-gap) - var(--composition-edge-gap)), calc(100svh - var(--composition-header-safe) - var(--page-frame-inset) - var(--page-frame-inset)));
         --core-width: min(172px, 54vw);
       }
       .composition::before {
@@ -883,16 +877,12 @@
         max-width: 150px;
         font-size: 0.66rem;
       }
-      .heart-wrap { width: min(34vw, 146px); }
       .token:hover,
       .token:focus-visible {
-        --token-scale: 1.04;
+        --token-scale: 1;
       }
       .token {
-        width: clamp(62px, 17vw, 78px);
-        font-size: 0.56rem;
         line-height: 1.1;
-        padding: 6px 6px;
       }
       .modal { padding: 12px; }
       .modal-header { padding: 22px 18px 18px; }
@@ -903,6 +893,10 @@
       :root {
         --page-frame-inset: 9px;
         --page-corner-size: 74px;
+        --header-frame-gap: clamp(8px, 2.8vw, 12px);
+        --composition-header-safe: clamp(132px, 19svh, 168px);
+        --composition-edge-gap: 8px;
+        --orbit-outer-gap: 8px;
       }
       .page {
         padding: 18px 10px 18px;
@@ -917,13 +911,13 @@
         padding: 0;
       }
       .page-controls-start {
-        top: calc(var(--page-frame-inset) + 4px);
-        left: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.42);
+        top: calc(var(--page-frame-inset) + var(--header-frame-gap));
+        left: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.42 + var(--header-frame-gap));
         gap: 6px;
         max-width: calc(100vw - var(--page-corner-size) * 1.02 - 102px);
       }
       .version-note {
-        top: calc(var(--page-frame-inset) + 4px);
+        top: calc(var(--page-frame-inset) + var(--header-frame-gap));
         --version-frame-gap: 14px;
         right: calc(var(--page-frame-inset) + var(--page-corner-size) * 0.42 + var(--version-frame-gap));
         font-size: 0.62rem;
@@ -938,10 +932,7 @@
         height: 11px;
       }
       .composition {
-        height: min(640px, calc(100svh - 142px));
-        height: min(640px, calc(100vh - 142px));
-        min-height: 560px;
-        --orbit-radius: min(clamp(126px, 35vw, 144px), 28vh);
+        --composition-size: min(560px, calc(100vw - var(--composition-edge-gap) - var(--composition-edge-gap)), calc(100svh - var(--composition-header-safe) - var(--page-frame-inset) - var(--page-frame-inset)));
         --core-width: min(144px, 48vw);
       }
       .core-axis {
@@ -955,17 +946,9 @@
       .core-label span {
         display: none;
       }
-      .heart-wrap {
-        width: min(30vw, 118px);
-      }
-      .token {
-        width: clamp(58px, 16vw, 68px);
-        font-size: 0.48rem;
-        padding: 5px 5px;
-      }
     }
   </style>
-  <link rel="stylesheet" href="./assets/css/wiki.css?v=0.3.16" />
+  <link rel="stylesheet" href="./assets/css/wiki.css?v=0.3.19" />
 </head>
 <body>
   <main class="page">
@@ -987,7 +970,7 @@
         <span class="frame-toggle-icon" aria-hidden="true"></span>
       </button>
     </div>
-    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.16" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.16</button>
+    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.19" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.19</button>
     <header class="page-header" aria-hidden="true"></header>
     <div class="composition">
       <svg class="flower-of-life-layer" id="flowerOfLife" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -1188,6 +1171,6 @@
     </article>
   </div>
 
-  <script src="./assets/js/site.js?v=0.3.16"></script>
+  <script src="./assets/js/site.js?v=0.3.19"></script>
 </body>
 </html>

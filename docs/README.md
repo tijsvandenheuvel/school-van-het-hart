@@ -2,7 +2,7 @@
 
 Laatst bijgewerkt: 2026-04-24
 
-Huidige siteversie: `v0.3.16`
+Huidige siteversie: `v0.3.19`
 
 Actieve entrypoint: `index.html`
 

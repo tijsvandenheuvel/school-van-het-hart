@@ -1,5 +1,30 @@
 # Changelog
 
+## v0.3.19 - Rustigere grote cirkel
+
+- De maximale homepagecirkel op brede schermen iets kleiner gemaakt zodat de compositie meer lucht behoudt
+- De tekst in de twaalf conceptcirkels teruggebracht naar een enkele token-size formule voor consistente schaal over alle viewports
+- Vaste font-size overrides voor tablet, lage desktop en mobiel verwijderd zodat de labels niet plots kleiner worden op grotere schermen
+- De geometriecontrole uitgebreid met regressies voor de nieuwe maximale compositiemaat en proportionele token-typografie
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.19`
+
+## v0.3.18 - Tangente conceptcirkel
+
+- De hoofdcompositie gebruikt nu de grootst mogelijke vierkante maat binnen viewport, header en kader
+- De twaalf conceptcirkels krijgen hun diameter uit de orbit-radius, zodat aangrenzende cirkels elkaar raken zonder te overlappen
+- De hoverstaat vergroot conceptcirkels niet meer, zodat de tangentiele ring ook tijdens interactie behouden blijft
+- De hartkern schaalt mee met de grotere orbit en blijft gecentreerd in de compositie
+- De geometriecontrole uitgebreid met regressies voor orbit-fit, tangent-ratio en vaste token-diameter
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.18`
+
+## v0.3.17 - Gecentreerde hartcirkel
+
+- De hoofdcompositie centreert de hartcirkel nu verticaal en horizontaal binnen de pagina
+- De orbit-schaal houdt expliciet ruimte vrij onder de headerknoppen zodat de bovenste conceptcirkels niet onder de navigatie schuiven
+- De headerknoppen gebruiken dezelfde expliciete kaderafstand als de versieknop, met aangepaste waarden voor smallere viewports
+- De collectienavigatiecontrole uitgebreid met regressies voor headerafstand, compositieafstand en gecentreerde pagina-uitlijning
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.17`
+
 ## v0.3.16 - Homeknop in de header
 
 - De hoofdtitel is verplaatst naar een grotere linksboven knop `School van het Hart`

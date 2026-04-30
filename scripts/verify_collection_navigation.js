@@ -51,7 +51,13 @@ if (indexHtml.includes('id="wordsTrigger"')) {
 }
 assertIncludes(indexHtml, 'page-header" aria-hidden="true"', 'achtergrondtitel is verborgen');
 assertIncludes(indexHtml, '--version-frame-gap', 'versieknop gebruikt expliciete kaderafstand');
-assertIncludes(indexHtml, 'v0.3.16', 'index-versie');
-assertMatch(changelog, /^## v0\.3\.16 - /m, 'changelog v0.3.16');
+assertIncludes(indexHtml, '--header-frame-gap', 'headerknoppen gebruiken expliciete kaderafstand');
+assertIncludes(indexHtml, '--composition-header-safe', 'compositie reserveert ruimte onder de header');
+assertMatch(indexHtml, /\.page\s*\{[\s\S]*?align-items:\s*center/, 'pagina centreert de compositie verticaal');
+if (indexHtml.includes('calc(100vh - 190px)')) {
+  throw new Error('oude compositiehoogte calc(100vh - 190px) is teruggekeerd');
+}
+assertIncludes(indexHtml, 'v0.3.19', 'index-versie');
+assertMatch(changelog, /^## v0\.3\.19 - /m, 'changelog v0.3.19');
 
 console.log('Collectienavigatie-verificatie geslaagd.');
