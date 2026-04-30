@@ -407,9 +407,10 @@
   const composition = document.querySelector('.composition');
   const page = document.querySelector('.page');
   const versionTrigger = document.getElementById('versionTrigger');
+  const homeTrigger = document.getElementById('homeTrigger');
+  const alphabetTrigger = document.getElementById('alphabetTrigger');
   const wikiTrigger = document.getElementById('wikiTrigger');
   const libraryTrigger = document.getElementById('libraryTrigger');
-  const visionTrigger = document.getElementById('visionTrigger');
   const frameToggle = document.getElementById('frameToggle');
   const modal = document.getElementById('modal');
   const modalTitle = document.getElementById('modal-title');
@@ -435,6 +436,13 @@
   const wikiIndexView = document.getElementById('wikiIndexView');
   const wikiItemView = document.getElementById('wikiItemView');
   const wikiCloseBtn = document.getElementById('wikiCloseBtn');
+  const alphabetModal = document.getElementById('alphabetModal');
+  const alphabetTitle = document.getElementById('alphabetTitle');
+  const alphabetBackBtn = document.getElementById('alphabetBackBtn');
+  const alphabetStatus = document.getElementById('alphabetStatus');
+  const alphabetCircle = document.getElementById('alphabetCircle');
+  const alphabetReader = document.getElementById('alphabetReader');
+  const alphabetCloseBtn = document.getElementById('alphabetCloseBtn');
   const libraryModal = document.getElementById('libraryModal');
   const libraryShell = libraryModal?.querySelector('.library-shell');
   const libraryContent = document.getElementById('libraryContent');
@@ -462,6 +470,7 @@
   let lastConceptTrigger = null;
   let lastVisionTrigger = null;
   let lastWikiTrigger = null;
+  let lastAlphabetTrigger = null;
   let lastLibraryTrigger = null;
   let lastSourcePreviewTrigger = null;
 
@@ -494,6 +503,10 @@
     query: '',
     activeSection: 'all',
     directoryCollapsed: false
+  };
+
+  const alphabetState = {
+    currentSlug: ''
   };
 
   const libraryState = {
@@ -611,6 +624,7 @@
       || changelogModal.classList.contains('open')
       || visionModal.classList.contains('open')
       || wikiModal.classList.contains('open')
+      || alphabetModal.classList.contains('open')
       || libraryModal.classList.contains('open')
       || sourcePagePreviewModal.classList.contains('open');
     document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -1389,6 +1403,15 @@
 
   function openWikiFromAnywhere(slug, trigger) {
     if (!slug) return;
+    const item = getWikiItem(slug);
+    if (item && item.indexType === 'letter') {
+      openAlphabetModal({ slug, trigger });
+      return;
+    }
+    if (item && item.indexType === 'text') {
+      openLibraryModal({ sourceSlug: item.slug, trigger });
+      return;
+    }
     openWikiModal({ slug, pushHistory: true, trigger });
   }
 
@@ -1808,29 +1831,16 @@
       counts[entry.indexType] += 1;
     });
 
-    const filters = [
-      { key: 'all', label: 'Alles', count: filtered.length },
-      { key: 'letter', label: 'letters', count: counts.letter },
-      { key: 'word', label: 'woorden', count: counts.word },
-      { key: 'text', label: 'teksten', count: counts.text }
-    ];
-
-    filters.forEach((filter) => {
-      if (filter.key !== 'all' && filter.count === 0) return;
-
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = `wiki-status-btn${wikiState.activeSection === filter.key ? ' is-active' : ''}`;
-      button.setAttribute('aria-pressed', wikiState.activeSection === filter.key ? 'true' : 'false');
-      button.textContent = filter.key === 'all' ? `Alles ${filter.count}` : `${filter.count} ${filter.label}`;
-      button.disabled = filter.count === 0 && filter.key !== 'all';
-      button.addEventListener('click', () => {
-        ensureWikiDirectoryOpen();
-        wikiState.activeSection = filter.key;
-        renderWikiIndex();
-      });
-      wikiStatus.appendChild(button);
-    });
+    const status = document.createElement('span');
+    status.className = 'wiki-status-summary';
+    if (wikiState.activeSection === 'word') {
+      status.textContent = `${counts.word} woorden`;
+    } else if (wikiState.activeSection === 'all') {
+      status.textContent = `${filtered.length} ingangen`;
+    } else {
+      status.textContent = `${getVisibleIndexEntries().length} ingangen`;
+    }
+    wikiStatus.appendChild(status);
   }
 
   function renderWikiIndex() {
@@ -2319,6 +2329,155 @@
     updateWikiHistoryButtons();
   }
 
+  function getWikiItem(slug) {
+    return wikiState.itemsBySlug.get(slug) || null;
+  }
+
+  function getAlphabetItems() {
+    return wikiState.items
+      .filter((item) => item.indexType === 'letter')
+      .sort((left, right) => collator.compare(left.title, right.title));
+  }
+
+  function syncCollectionNav(activeTarget) {
+    document.querySelectorAll('[data-collection-target]').forEach((button) => {
+      const isActive = button.getAttribute('data-collection-target') === activeTarget;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+  }
+
+  function renderAlphabetCircle() {
+    alphabetCircle.replaceChildren();
+    const letters = getAlphabetItems();
+    const shell = document.createElement('div');
+    shell.className = 'alphabet-circle';
+
+    const center = document.createElement('div');
+    center.className = 'alphabet-circle-center';
+    center.textContent = 'ABC';
+    shell.appendChild(center);
+
+    letters.forEach((item, index) => {
+      const angle = -90 + (index * 360 / Math.max(letters.length, 1));
+      const radians = angle * Math.PI / 180;
+      const radius = 41;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `alphabet-letter-node${alphabetState.currentSlug === item.slug ? ' is-active' : ''}`;
+      button.textContent = item.title;
+      button.setAttribute('aria-label', `Open letter ${item.title}`);
+      button.style.left = `${50 + Math.cos(radians) * radius}%`;
+      button.style.top = `${50 + Math.sin(radians) * radius}%`;
+      button.addEventListener('click', () => navigateToAlphabetLetter(item.slug, button));
+      shell.appendChild(button);
+    });
+
+    alphabetCircle.appendChild(shell);
+  }
+
+  function renderAlphabetReader() {
+    alphabetReader.replaceChildren();
+    const letterCount = getAlphabetItems().length;
+    alphabetStatus.textContent = alphabetState.currentSlug ? 'Letterbetekenis' : `${letterCount} letters`;
+    alphabetBackBtn.disabled = !alphabetState.currentSlug;
+
+    if (!alphabetState.currentSlug) {
+      alphabetTitle.textContent = 'Letters';
+      const empty = document.createElement('section');
+      empty.className = 'wiki-reader-empty';
+
+      const heading = document.createElement('h2');
+      heading.textContent = 'Alfabet';
+      empty.appendChild(heading);
+
+      const paragraph = document.createElement('p');
+      paragraph.textContent = 'Kies een letter uit de cirkel. Elke letter opent een eigen betekenislaag met bronverwijzingen en verbindingen naar woorden, teksten en andere beschrijvingen.';
+      empty.appendChild(paragraph);
+
+      alphabetReader.appendChild(empty);
+      return;
+    }
+
+    const item = getWikiItem(alphabetState.currentSlug);
+    if (!item) {
+      alphabetState.currentSlug = '';
+      renderAlphabetReader();
+      return;
+    }
+
+    alphabetTitle.textContent = `Letter ${item.title}`;
+
+    const header = document.createElement('header');
+    header.className = 'wiki-item-header';
+
+    const title = document.createElement('h2');
+    title.className = 'wiki-item-title';
+    title.textContent = item.title;
+    header.appendChild(title);
+
+    const summary = document.createElement('p');
+    summary.className = 'wiki-item-summary';
+    summary.textContent = item.summary;
+    header.appendChild(summary);
+
+    const article = document.createElement('article');
+    article.className = 'wiki-article';
+    article.appendChild(renderMarkdown(item.body, { excludeSlug: item.slug }));
+
+    const external = renderWikiExternalSection(item);
+    alphabetReader.append(header, article);
+    if (external) {
+      alphabetReader.appendChild(external);
+    }
+
+    if (
+      shouldRenderWikiExternalContext(item) &&
+      !wikiState.externalBySlug.has(item.slug) &&
+      !wikiState.externalLoadingBySlug.has(item.slug)
+    ) {
+      loadWikiExternalContext(item).then(() => {
+        if (alphabetState.currentSlug === item.slug) {
+          renderAlphabetReader();
+        }
+      });
+    }
+  }
+
+  function renderAlphabet() {
+    renderAlphabetCircle();
+    renderAlphabetReader();
+  }
+
+  function navigateToAlphabetLetter(slug, trigger) {
+    if (!slug) return;
+    alphabetState.currentSlug = slug;
+    if (trigger instanceof HTMLElement) {
+      lastAlphabetTrigger = trigger;
+    }
+    renderAlphabet();
+    alphabetReader.scrollTop = 0;
+  }
+
+  function openCollectionTarget(target, trigger = document.activeElement) {
+    if (target === 'letters') {
+      openAlphabetModal({ trigger });
+      return;
+    }
+
+    if (target === 'words') {
+      openWordsModal(trigger);
+      return;
+    }
+
+    if (target === 'texts') {
+      openLibraryModal({ trigger });
+      return;
+    }
+
+    openWikiModal({ trigger, section: 'all' });
+  }
+
   function renderVisionStatus(message) {
     visionBody.replaceChildren();
     const status = document.createElement('p');
@@ -2715,6 +2874,7 @@
     closeChangelogModal({ restoreFocus: false });
     closeVisionModal({ restoreFocus: false });
     closeWikiModal({ restoreFocus: false });
+    closeAlphabetModal({ restoreFocus: false });
     closeSourcePagePreview({ restoreFocus: false });
 
     if (options.trigger instanceof HTMLElement) {
@@ -2729,6 +2889,7 @@
 
     libraryModal.classList.add('open');
     libraryModal.setAttribute('aria-hidden', 'false');
+    syncCollectionNav('texts');
     updateBodyScrollLock();
     libraryCloseBtn.focus();
   }
@@ -2870,6 +3031,7 @@
     closeChangelogModal({ restoreFocus: false });
     closeVisionModal({ restoreFocus: false });
     closeWikiModal({ restoreFocus: false });
+    closeAlphabetModal({ restoreFocus: false });
     closeLibraryModal({ restoreFocus: false });
     closeSourcePagePreview({ restoreFocus: false });
     lastConceptTrigger = trigger instanceof HTMLElement ? trigger : null;
@@ -2910,6 +3072,7 @@
     closeConceptModal({ restoreFocus: false });
     closeVisionModal({ restoreFocus: false });
     closeWikiModal({ restoreFocus: false });
+    closeAlphabetModal({ restoreFocus: false });
     closeLibraryModal({ restoreFocus: false });
     closeSourcePagePreview({ restoreFocus: false });
     changelogModal.classList.add('open');
@@ -2918,9 +3081,21 @@
     closeChangelogBtn.focus();
   }
 
+  function openHomeView() {
+    closeConceptModal({ restoreFocus: false });
+    closeChangelogModal({ restoreFocus: false });
+    closeVisionModal({ restoreFocus: false });
+    closeWikiModal({ restoreFocus: false });
+    closeAlphabetModal({ restoreFocus: false });
+    closeLibraryModal({ restoreFocus: false });
+    closeSourcePagePreview({ restoreFocus: false });
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    homeTrigger.focus();
+  }
+
   function closeVisionModal(options = {}) {
     if (document.activeElement instanceof HTMLElement && visionModal.contains(document.activeElement) && options.restoreFocus !== false) {
-      (lastVisionTrigger || visionTrigger).focus();
+      (lastVisionTrigger || homeTrigger).focus();
     }
     visionModal.classList.remove('open');
     visionModal.setAttribute('aria-hidden', 'true');
@@ -2932,6 +3107,7 @@
     closeConceptModal({ restoreFocus: false });
     closeChangelogModal({ restoreFocus: false });
     closeWikiModal({ restoreFocus: false });
+    closeAlphabetModal({ restoreFocus: false });
     closeLibraryModal({ restoreFocus: false });
     closeSourcePagePreview({ restoreFocus: false });
     visionModal.classList.add('open');
@@ -2951,16 +3127,60 @@
     updateBodyScrollLock();
   }
 
+  function closeAlphabetModal(options = {}) {
+    if (document.activeElement instanceof HTMLElement && alphabetModal.contains(document.activeElement) && options.restoreFocus !== false) {
+      (lastAlphabetTrigger || alphabetTrigger).focus();
+    }
+    alphabetModal.classList.remove('open');
+    alphabetModal.setAttribute('aria-hidden', 'true');
+    updateBodyScrollLock();
+  }
+
+  async function openAlphabetModal(options = {}) {
+    await loadWikiData();
+    closeConceptModal({ restoreFocus: false });
+    closeChangelogModal({ restoreFocus: false });
+    closeVisionModal({ restoreFocus: false });
+    closeWikiModal({ restoreFocus: false });
+    closeLibraryModal({ restoreFocus: false });
+    closeSourcePagePreview({ restoreFocus: false });
+
+    if (options.trigger instanceof HTMLElement) {
+      lastAlphabetTrigger = options.trigger;
+    }
+
+    alphabetState.currentSlug = options.slug || '';
+    renderAlphabet();
+
+    alphabetModal.classList.add('open');
+    alphabetModal.setAttribute('aria-hidden', 'false');
+    syncCollectionNav('letters');
+    updateBodyScrollLock();
+    alphabetCloseBtn.focus();
+  }
+
+  function openWordsModal(trigger = document.activeElement) {
+    openWikiModal({ trigger, section: 'word' });
+  }
+
   async function openWikiModal(options = {}) {
     await loadWikiData();
     closeConceptModal({ restoreFocus: false });
     closeChangelogModal({ restoreFocus: false });
     closeVisionModal({ restoreFocus: false });
+    closeAlphabetModal({ restoreFocus: false });
     closeLibraryModal({ restoreFocus: false });
     closeSourcePagePreview({ restoreFocus: false });
 
+    wikiState.activeSection = options.section || (options.slug ? wikiState.activeSection : 'all');
+    if (!options.slug) {
+      wikiState.query = '';
+      wikiSearchInput.value = '';
+    }
+
     wikiModal.classList.add('open');
     wikiModal.setAttribute('aria-hidden', 'false');
+    syncCollectionNav(wikiState.activeSection === 'word' ? 'words' : 'all');
     updateBodyScrollLock();
 
     if (options.trigger instanceof HTMLElement) {
@@ -2982,6 +3202,7 @@
     await loadWikiData();
     renderWikiIndex();
     renderWikiReader();
+    renderAlphabet();
     updateWikiHistoryButtons();
   }
 
@@ -3022,12 +3243,18 @@
   closeChangelogBtn.addEventListener('click', () => closeChangelogModal());
   closeVisionBtn.addEventListener('click', () => closeVisionModal());
   wikiCloseBtn.addEventListener('click', () => closeWikiModal());
+  alphabetCloseBtn.addEventListener('click', () => closeAlphabetModal());
+  alphabetBackBtn.addEventListener('click', () => {
+    alphabetState.currentSlug = '';
+    renderAlphabet();
+  });
   libraryCloseBtn.addEventListener('click', () => closeLibraryModal());
   sourcePreviewCloseBtn.addEventListener('click', () => closeSourcePagePreview());
   versionTrigger.addEventListener('click', openChangelogModal);
-  wikiTrigger.addEventListener('click', (event) => openWikiModal({ trigger: event.currentTarget }));
+  homeTrigger.addEventListener('click', openHomeView);
+  alphabetTrigger.addEventListener('click', (event) => openAlphabetModal({ trigger: event.currentTarget }));
+  wikiTrigger.addEventListener('click', (event) => openWikiModal({ trigger: event.currentTarget, section: 'all' }));
   libraryTrigger.addEventListener('click', (event) => openLibraryModal({ trigger: event.currentTarget }));
-  visionTrigger.addEventListener('click', (event) => openVisionModal(event.currentTarget));
   if (frameToggle) {
     frameToggle.addEventListener('click', () => setFrameEnabled(page.dataset.frameEnabled !== 'true'));
   }
@@ -3052,6 +3279,12 @@
     renderWikiIndex();
   });
 
+  document.addEventListener('click', (event) => {
+    const collectionButton = event.target.closest('[data-collection-target]');
+    if (!collectionButton) return;
+    openCollectionTarget(collectionButton.getAttribute('data-collection-target'), collectionButton);
+  });
+
   modal.addEventListener('click', (event) => {
     if (event.target === modal) closeConceptModal();
   });
@@ -3066,6 +3299,10 @@
 
   wikiModal.addEventListener('click', (event) => {
     if (event.target === wikiModal) closeWikiModal();
+  });
+
+  alphabetModal.addEventListener('click', (event) => {
+    if (event.target === alphabetModal) closeAlphabetModal();
   });
 
   libraryModal.addEventListener('click', (event) => {
@@ -3096,6 +3333,10 @@
     }
     if (wikiModal.classList.contains('open')) {
       closeWikiModal();
+      return;
+    }
+    if (alphabetModal.classList.contains('open')) {
+      closeAlphabetModal();
       return;
     }
     if (visionModal.classList.contains('open')) {

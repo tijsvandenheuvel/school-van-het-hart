@@ -52,7 +52,7 @@ De homepage moet:
 - `docs/changelog.md` bewaart de canonieke versiegeschiedenis; de bovenste entry bepaalt de actuele siteversie.
 - `docs/taalbewustzijn.md` bewaart de taalafspraken voor helder Nederlands, brontrouw en woordenschatassimilatie.
 - De versieknop rechtsboven en de changelog-modal in `index.html` lezen die changelog-inhoud in.
-- Huidige versie is `v0.3.13`.
+- Huidige versie is `v0.3.16`.
 - Elke inhoudelijke, visuele of interactionele iteratie krijgt meteen een nieuwe changelog-entry.
 
 ## Verificatie-afspraak
@@ -67,7 +67,7 @@ Na layoutwijzigingen minstens controleren op:
 - Elk concept is klikbaar.
 - Klik opent een modal met titel, korte samenvatting en langere bodytekst.
 - De modalbody ondersteunt meerdere secties met tussentitels en alinea's.
-- Klik op de paginatitel `School van het Hart` opent een aparte modal met de volledige visietekst uit `docs/visietekst.md`.
+- Klik op de linksboven homeknop `School van het Hart` sluit open modals en brengt de gebruiker terug naar de homepage.
 - Klik op de versieknop rechtsboven opent een changelog-modal met de recente wijzigingen.
 - Klik op de `Wiki`-knop opent een publieke markdown-wiki-modal met een A-Z woordenboekindex, zoekveld, backlinks en uitgaande links.
 - Klik op de `Bibliotheek`-knop opent een full-screen schoolbibliotheek met scanpagina's voor PDF-bronnen en leesartikels voor Word-bronnen.

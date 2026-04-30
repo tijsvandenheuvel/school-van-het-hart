@@ -1,6 +1,6 @@
 {
   "name": "school-van-het-hart",
-  "version": "0.3.13",
+  "version": "0.3.16",
   "private": true,
   "scripts": {
     "sources:assimilate": "python3 scripts/assimilate_sources.py",
@@ -11,6 +11,7 @@
     "wiki:external": "node scripts/generate_wiki_external.js",
     "wiki:dev": "node server/wiki-server.js",
     "image:corner": "node server/generate-corner-study.js",
-    "verify:flower": "node scripts/verify_flower_geometry.js"
+    "verify:flower": "node scripts/verify_flower_geometry.js",
+    "verify:collections": "node scripts/verify_collection_navigation.js"
   }
 }

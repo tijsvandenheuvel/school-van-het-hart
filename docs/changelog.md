@@ -1,5 +1,31 @@
 # Changelog
 
+## v0.3.16 - Homeknop in de header
+
+- De hoofdtitel is verplaatst naar een grotere linksboven knop `School van het Hart`
+- De oude achtergrondtitel op de homepage is verborgen zodat de header rustiger en bruikbaarder wordt
+- De nieuwe homeknop sluit open modals en brengt de gebruiker terug naar de homepage
+- De versieknop gebruikt nu een expliciete kaderafstand per viewport zodat er steeds lucht blijft tot de ornamentale rand
+- De collectienavigatiecontrole uitgebreid met regressies voor de homeknop, verborgen achtergrondtitel en versieafstand
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.16`
+
+## v0.3.15 - Heldere hoofdlabels
+
+- De hoofdpagina toont opnieuw de publieksknoppen `Alfabet`, `Wiki` en `Bibliotheek`
+- De interne modalnavigatie blijft `Letters`, `Woorden`, `Teksten` en `Alles`
+- De dubbele navigatie in `Woorden` en `Alles` verwijderd door de wiki-statuschips te vervangen door een gewone teller
+- De collectienavigatiecontrole uitgebreid met regressies voor hoofdlabels en enkelvoudige interne navigatie
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.15`
+
+## v0.3.14 - Collectienavigatie
+
+- De linksboven navigatie is gelijkgetrokken naar `Letters`, `Woorden`, `Teksten` en `Alles`, waarbij elke ingang de juiste gespecialiseerde modal opent
+- Een nieuwe alfabetmodal toegevoegd met een alfabetcirkel als homeview en doorklikbare letterbetekenissen vanuit de bestaande letterlaag
+- De wiki-, alfabet- en bibliotheektoolbars kregen dezelfde collectienavigatie zodat je vlot tussen letters, woorden, teksten en alles kunt springen
+- Inline links naar letters openen nu de alfabetmodal en tekstverwijzingen blijven naar de bibliotheekviewer leiden waar mogelijk
+- Een nieuwe `verify:collections` controle toegevoegd voor de collectienavigatie, alfabetmodal en versieflow
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.14`
+
 ## v0.3.13 - Bereikbare zoomhoeken
 
 - Ingezoomde geroteerde scanpagina's worden nu in een expliciet scrollbaar frame geplaatst
