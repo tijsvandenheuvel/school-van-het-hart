@@ -100,21 +100,71 @@ for (const [slug, expected] of expectedSources.entries()) {
 const siteJs = fs.readFileSync(siteJsPath, 'utf8');
 const html = fs.readFileSync(htmlPath, 'utf8');
 const wikiCss = fs.readFileSync(path.join(root, 'assets/css/wiki.css'), 'utf8');
+
+function extractMediaBlock(css, maxWidth) {
+  const marker = `@media (max-width: ${maxWidth}px)`;
+  const start = css.indexOf(marker);
+  assert.notEqual(start, -1, `Missing ${marker} block`);
+  const open = css.indexOf('{', start);
+  assert.notEqual(open, -1, `Missing opening brace for ${marker}`);
+  let depth = 0;
+  for (let index = open; index < css.length; index += 1) {
+    if (css[index] === '{') depth += 1;
+    if (css[index] === '}') depth -= 1;
+    if (depth === 0) return css.slice(open + 1, index);
+  }
+  throw new Error(`Missing closing brace for ${marker}`);
+}
+
+const tabletCss = extractMediaBlock(wikiCss, 980);
+const mobileCss = extractMediaBlock(wikiCss, 760);
+
 assert.match(siteJs, /function\s+openSourcePagePreview\s*\(/, 'openSourcePagePreview entrypoint is missing');
 assert.match(siteJs, /function\s+openLibraryModal\s*\(/, 'openLibraryModal entrypoint is missing');
 assert.match(siteJs, /function\s+getLibraryPageRotation\s*\(/, 'page-specific library rotation helper is missing');
 assert.match(siteJs, /libraryState\.currentPage\s*=\s*source\.kind === 'pdf' \? 1 : 1/, 'switching library sources should reset to page 1');
 assert.match(siteJs, /resetReaderScroll:\s*shouldResetReaderScroll/, 'switching library sources should reset reader scroll');
 assert.match(siteJs, /libraryReader\.scrollTop\s*=\s*0/, 'library reader should scroll to top after source changes');
+assert.match(siteJs, /function\s+setLibrarySourcesCollapsed\s*\(/, 'library source list collapse helper is missing');
+assert.match(siteJs, /svhh-library-sources-collapsed-v1/, 'library source list collapse preference should be persisted');
+assert.match(siteJs, /zoom:\s*1/, 'library zoom state is missing');
+assert.match(siteJs, /function\s+setLibraryZoom\s*\(/, 'library zoom helper is missing');
+assert.match(siteJs, /function\s+sizeZoomedRotatedPage\s*\(/, 'zoomed rotated page sizing helper is missing');
+assert.match(siteJs, /libraryZoomMax\s*=\s*2\.5/, 'library zoom maximum should be explicit');
 assert.match(siteJs, /className\s*=\s*'library-page-jump-input'/, 'direct page jump input is missing');
 assert.match(siteJs, /jumpInput\.type\s*=\s*'text'/, 'page jump input should avoid browser number spinners');
 assert.match(siteJs, /jumpInput\.addEventListener\('input'/, 'page jump input should navigate when the number changes');
 assert.doesNotMatch(siteJs, /library-page-jump-btn/, 'page jump should not include a separate Go button');
+assert.match(siteJs, /library-page-turn-btn/, 'desktop page turn controls should be rendered next to the scan page');
+assert.match(siteJs, /library-page-toolbar-btn/, 'mobile page turn controls should be rendered in the toolbar');
+assert.match(siteJs, /library-zoom-controls/, 'library zoom controls should be rendered for PDF sources');
+assert.match(siteJs, /library-page-zoom-frame/, 'library zoom frame is missing');
+assert.match(siteJs, /library-page-rotated-frame/, 'rotated zoom frame is missing');
+assert.match(siteJs, /function\s+startLibrarySwipe\s*\(/, 'mobile swipe start handler is missing');
+assert.match(siteJs, /function\s+finishLibrarySwipe\s*\(/, 'mobile swipe finish handler is missing');
 assert.match(siteJs, /--library-page-rotation/, 'rotated page images should use the centered rotation CSS variable');
 assert.match(siteJs, /\[\[source-page:/, 'source-page wikilink syntax is not handled');
 assert.match(html, /id="libraryTrigger"/, 'Bibliotheek trigger is missing');
 assert.match(html, /id="libraryModal"/, 'Library modal is missing');
+assert.match(html, /id="librarySourceToggleBtn"/, 'Library source list collapse button is missing');
+assert.match(html, /class="[^"]*library-toolbar-close[^"]*"[^>]*id="libraryCloseBtn"/, 'Library close button should have a library-specific toolbar class');
+assert.match(html, /id="libraryContent"/, 'Library content shell is missing');
 assert.match(html, /id="sourcePagePreviewModal"/, 'Source page preview modal is missing');
+assert.match(wikiCss, /\.library-content\.is-source-list-collapsed/, 'library source list collapsed layout is missing');
+assert.match(wikiCss, /\.library-page-turn-btn/, 'library page turn controls should have dedicated styling');
+assert.match(wikiCss, /\.library-page-toolbar-btn\s*\{[\s\S]*?display:\s*none/, 'toolbar page turn controls should be hidden by default');
+assert.match(wikiCss, /\.library-zoom-controls\s*\{[\s\S]*?display:\s*inline-flex/, 'desktop/tablet zoom controls should be visible by default');
+assert.match(wikiCss, /\.library-page-image-wrap\.is-zoomed\s*\{[\s\S]*?align-items:\s*start[\s\S]*?justify-items:\s*start/, 'zoomed page image wrapper should allow top-left scrollable inspection');
+assert.match(wikiCss, /\.library-page-zoom-frame\s*\{[\s\S]*?position:\s*relative/, 'zoom frame should anchor rotated pages');
+assert.match(wikiCss, /\.library-page-image-wrap\.is-zoomed \.library-page-zoom-frame\s*\{[\s\S]*?place-items:\s*start start/, 'zoomed pages should anchor the scrollable canvas at the top-left');
+assert.match(wikiCss, /\.library-page-rotated-frame\s*\{[\s\S]*?position:\s*relative/, 'rotated zoom frame should create a scrollable page box');
+assert.match(wikiCss, /\.library-page-image-wrap\.is-zoomed \.library-page-image\.is-rotated\s*\{[\s\S]*?transform-origin:\s*top left/, 'zoomed rotated pages should anchor from the top-left corner');
+assert.match(wikiCss, /touch-action:\s*pan-y pinch-zoom/, 'library reader should allow mobile pinch zoom gestures');
+assert.match(mobileCss, /\.library-page-turn-btn\s*\{[\s\S]*?display:\s*none/, 'mobile layout should hide desktop page turn buttons for swipe reading');
+assert.match(mobileCss, /\.library-page-toolbar-btn\s*\{[\s\S]*?display:\s*inline-block/, 'mobile layout should show compact toolbar page turn buttons');
+assert.match(mobileCss, /\.library-zoom-controls\s*\{[\s\S]*?display:\s*none/, 'mobile layout should leave zoom to native gestures');
+assert.doesNotMatch(tabletCss, /\.library-page-controls\s*\{[\s\S]*?grid-row:\s*2/, 'tablet library toolbar should keep page controls inline');
+assert.match(mobileCss, /\.library-page-controls\s*\{[\s\S]*?grid-row:\s*2/, 'mobile library toolbar should stack page controls below the title row');
 assert.match(wikiCss, /\.library-page-stage\s*\{[\s\S]*?height:\s*100%/, 'library page stage must use the reader height as sizing boundary');
 assert.match(wikiCss, /\.library-page-image-wrap\s*\{[\s\S]*?height:\s*100%/, 'library page image wrapper must be height-constrained');
 assert.match(wikiCss, /\.library-page-image\s*\{[\s\S]*?max-height:\s*100%/, 'vertical library pages must fit inside the modal reader');

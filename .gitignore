@@ -1,3 +1,4 @@
 bronnen/
 tmp/
 __pycache__/
+.playwright-mcp/

@@ -1,5 +1,35 @@
 # Changelog
 
+## v0.3.13 - Bereikbare zoomhoeken
+
+- Ingezoomde geroteerde scanpagina's worden nu in een expliciet scrollbaar frame geplaatst
+- De zoomweergave ankert aan de volledige pagina in plaats van aan het gecentreerde middenpunt, zodat ook linksboven bereikbaar blijft
+- De bibliotheekcontrole uitgebreid met regressies voor het geroteerde zoomframe
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.13`
+
+## v0.3.12 - Paginazoom in de bibliotheek
+
+- PDF-scanpagina's hebben nu desktop/tablet-zoomcontrols met zoom uit, percentage-reset en zoom in
+- Ingezoomde pagina's krijgen een scrollbaar leesvlak zodat details inspecteerbaar blijven
+- Mobiele pagina's blijven gericht op swipe en native pinch-zoom, zonder extra zoomknoppen in de krappe header
+- De bibliotheekcontrole uitgebreid met regressies voor zoomstate, zoomknoppen en scrollbare zoomweergave
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.12`
+
+## v0.3.11 - Paginering in lijn
+
+- De bibliotheektoolbar houdt de paginanummering nu op tabletbrede schermen in dezelfde rij als titel en sluitknop
+- De smalle mobiele layout stapelt de paginering onder de titel en toont daar opnieuw compacte vorige/volgende pijlen naast het paginanummer
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.11`
+
+## v0.3.10 - Ruimere boekviewer
+
+- De bibliotheekbronnenlijst is nu inklapbaar met dezelfde compacte toggle als de wiki-sidebar
+- Op brede schermen staan de vorige/volgende knoppen naast de scanpagina, terwijl de paginanummering in de toolbar blijft staan
+- Op mobiel kunnen PDF-pagina's met een horizontale swipe worden omgeslagen
+- De bibliotheekcontrole uitgebreid met regressies voor de inklapbare bronnenlijst, desktop-pijlen en mobiele swipe-navigatie
+- De frontend-assets krijgen een `v0.3.10` cachebuster zodat de nieuwe bibliotheeknavigatie meteen geladen wordt
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.10`
+
 ## v0.3.9 - Artikelstart bij bronwissel
 
 - De bibliotheekreader springt nu terug naar boven wanneer je een andere bron opent

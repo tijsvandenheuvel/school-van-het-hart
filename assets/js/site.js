@@ -436,8 +436,11 @@
   const wikiItemView = document.getElementById('wikiItemView');
   const wikiCloseBtn = document.getElementById('wikiCloseBtn');
   const libraryModal = document.getElementById('libraryModal');
+  const libraryShell = libraryModal?.querySelector('.library-shell');
+  const libraryContent = document.getElementById('libraryContent');
   const libraryTitle = document.getElementById('libraryTitle');
   const libraryPageControls = document.getElementById('libraryPageControls');
+  const librarySourceToggleBtn = document.getElementById('librarySourceToggleBtn');
   const librarySourceList = document.getElementById('librarySourceList');
   const libraryReader = document.getElementById('libraryReader');
   const libraryCloseBtn = document.getElementById('libraryCloseBtn');
@@ -449,6 +452,9 @@
   const sourcePreviewCloseBtn = document.getElementById('sourcePreviewCloseBtn');
 
   const defaultVersion = versionTrigger.textContent.trim();
+  const libraryZoomMin = 1;
+  const libraryZoomMax = 2.5;
+  const libraryZoomStep = 0.25;
   const conceptsBySlug = new Map(concepts.map((item) => [slugify(item.title), item]));
   const tokens = [];
 
@@ -497,7 +503,12 @@
     sources: [],
     sourcesBySlug: new Map(),
     currentSlug: '',
-    currentPage: 1
+    currentPage: 1,
+    zoom: 1,
+    sourcesCollapsed: false,
+    swipeStartX: 0,
+    swipeStartY: 0,
+    swipeTracking: false
   };
 
   const sourcePreviewState = {
@@ -2361,6 +2372,44 @@
     setWikiDirectoryCollapsed(false, options);
   }
 
+  function setLibrarySourcesCollapsed(collapsed, options = {}) {
+    libraryState.sourcesCollapsed = Boolean(collapsed);
+    if (libraryContent) {
+      libraryContent.classList.toggle('is-source-list-collapsed', libraryState.sourcesCollapsed);
+    }
+    if (libraryShell) {
+      libraryShell.classList.toggle('is-source-list-collapsed', libraryState.sourcesCollapsed);
+    }
+    if (librarySourceList) {
+      librarySourceList.setAttribute('aria-hidden', libraryState.sourcesCollapsed ? 'true' : 'false');
+      if ('inert' in librarySourceList) {
+        librarySourceList.inert = libraryState.sourcesCollapsed;
+      }
+    }
+    if (librarySourceToggleBtn) {
+      const label = libraryState.sourcesCollapsed ? 'Toon bronnenlijst' : 'Verberg bronnenlijst';
+      librarySourceToggleBtn.classList.toggle('is-collapsed', libraryState.sourcesCollapsed);
+      librarySourceToggleBtn.setAttribute('aria-expanded', libraryState.sourcesCollapsed ? 'false' : 'true');
+      librarySourceToggleBtn.setAttribute('aria-label', label);
+      librarySourceToggleBtn.setAttribute('title', label);
+    }
+    if (
+      libraryState.sourcesCollapsed &&
+      document.activeElement instanceof HTMLElement &&
+      librarySourceList &&
+      librarySourceList.contains(document.activeElement)
+    ) {
+      librarySourceToggleBtn?.focus();
+    }
+    if (options.persist !== false) {
+      try {
+        window.localStorage.setItem('svhh-library-sources-collapsed-v1', libraryState.sourcesCollapsed ? 'true' : 'false');
+      } catch (error) {
+        // Ignore storage issues and keep the in-memory preference.
+      }
+    }
+  }
+
   async function renderVisionBody() {
     try {
       await loadWikiData();
@@ -2383,6 +2432,7 @@
       button.className = `library-source-card${libraryState.currentSlug === source.slug ? ' is-active' : ''}`;
       button.addEventListener('click', () => {
         const shouldResetReaderScroll = libraryState.currentSlug !== source.slug;
+        if (shouldResetReaderScroll) libraryState.zoom = 1;
         libraryState.currentSlug = source.slug;
         libraryState.currentPage = source.kind === 'pdf' ? 1 : 1;
         renderLibrary({ resetReaderScroll: shouldResetReaderScroll });
@@ -2402,6 +2452,37 @@
     });
   }
 
+  function navigateLibraryPage(source, pageNumber) {
+    if (!source || source.kind !== 'pdf') return;
+    const nextPage = clampPage(source, pageNumber);
+    if (nextPage === libraryState.currentPage) return;
+    libraryState.currentPage = nextPage;
+    renderLibrary();
+  }
+
+  function formatLibraryZoom() {
+    return `${Math.round(libraryState.zoom * 100)}%`;
+  }
+
+  function setLibraryZoom(zoom) {
+    const nextZoom = Math.min(libraryZoomMax, Math.max(libraryZoomMin, Number(zoom) || 1));
+    if (Math.abs(nextZoom - libraryState.zoom) < 0.001) return;
+    libraryState.zoom = nextZoom;
+    renderLibrary();
+  }
+
+  function sizeZoomedRotatedPage(frame, image) {
+    if (!frame || !image || !image.naturalWidth || !image.naturalHeight) return;
+    const wrap = frame.closest('.library-page-image-wrap');
+    const availableHeight = Math.max(220, (wrap?.clientHeight || window.innerHeight * 0.7) - 36);
+    const rotatedHeight = availableHeight * libraryState.zoom;
+    const rotatedWidth = rotatedHeight * (image.naturalHeight / image.naturalWidth);
+    frame.style.width = `${rotatedWidth}px`;
+    frame.style.height = `${rotatedHeight}px`;
+    image.style.width = `${rotatedHeight}px`;
+    image.style.height = 'auto';
+  }
+
   function renderLibraryPageControls(source) {
     libraryPageControls.replaceChildren();
     if (!source || source.kind !== 'pdf') return;
@@ -2409,14 +2490,11 @@
 
     const previous = document.createElement('button');
     previous.type = 'button';
-    previous.className = 'library-page-btn';
+    previous.className = 'library-page-btn library-page-toolbar-btn';
     previous.textContent = '←';
     previous.setAttribute('aria-label', 'Vorige pagina');
     previous.disabled = libraryState.currentPage <= 1;
-    previous.addEventListener('click', () => {
-      libraryState.currentPage = clampPage(source, libraryState.currentPage - 1);
-      renderLibrary();
-    });
+    previous.addEventListener('click', () => navigateLibraryPage(source, libraryState.currentPage - 1));
 
     const indicator = document.createElement('span');
     indicator.className = 'library-page-indicator';
@@ -2454,8 +2532,7 @@
         jumpInput.value = String(libraryState.currentPage);
         return;
       }
-      libraryState.currentPage = nextPage;
-      renderLibrary();
+      navigateLibraryPage(source, nextPage);
     };
 
     jumpInput.addEventListener('input', () => {
@@ -2476,16 +2553,43 @@
 
     const next = document.createElement('button');
     next.type = 'button';
-    next.className = 'library-page-btn';
+    next.className = 'library-page-btn library-page-toolbar-btn';
     next.textContent = '→';
     next.setAttribute('aria-label', 'Volgende pagina');
     next.disabled = libraryState.currentPage >= source.pageCount;
-    next.addEventListener('click', () => {
-      libraryState.currentPage = clampPage(source, libraryState.currentPage + 1);
-      renderLibrary();
-    });
+    next.addEventListener('click', () => navigateLibraryPage(source, libraryState.currentPage + 1));
 
-    libraryPageControls.append(previous, jumpControl, next);
+    const zoomControls = document.createElement('div');
+    zoomControls.className = 'library-zoom-controls';
+    zoomControls.setAttribute('role', 'group');
+    zoomControls.setAttribute('aria-label', 'Paginazoom');
+
+    const zoomOut = document.createElement('button');
+    zoomOut.type = 'button';
+    zoomOut.className = 'library-page-btn library-zoom-btn';
+    zoomOut.textContent = '-';
+    zoomOut.setAttribute('aria-label', 'Zoom uit');
+    zoomOut.disabled = libraryState.zoom <= libraryZoomMin;
+    zoomOut.addEventListener('click', () => setLibraryZoom(libraryState.zoom - libraryZoomStep));
+
+    const zoomReset = document.createElement('button');
+    zoomReset.type = 'button';
+    zoomReset.className = 'library-zoom-reset';
+    zoomReset.textContent = formatLibraryZoom();
+    zoomReset.setAttribute('aria-label', 'Herstel zoom naar 100%');
+    zoomReset.disabled = Math.abs(libraryState.zoom - 1) < 0.001;
+    zoomReset.addEventListener('click', () => setLibraryZoom(1));
+
+    const zoomIn = document.createElement('button');
+    zoomIn.type = 'button';
+    zoomIn.className = 'library-page-btn library-zoom-btn';
+    zoomIn.textContent = '+';
+    zoomIn.setAttribute('aria-label', 'Zoom in');
+    zoomIn.disabled = libraryState.zoom >= libraryZoomMax;
+    zoomIn.addEventListener('click', () => setLibraryZoom(libraryState.zoom + libraryZoomStep));
+
+    zoomControls.append(zoomOut, zoomReset, zoomIn);
+    libraryPageControls.append(previous, jumpControl, next, zoomControls);
   }
 
   function renderLibraryArticle(source) {
@@ -2516,10 +2620,44 @@
     const stage = document.createElement('div');
     stage.className = 'library-page-stage';
 
+    const previous = document.createElement('button');
+    previous.type = 'button';
+    previous.className = 'library-page-btn library-page-turn-btn library-page-turn-prev';
+    previous.textContent = '←';
+    previous.setAttribute('aria-label', 'Vorige pagina');
+    previous.disabled = libraryState.currentPage <= 1;
+    previous.addEventListener('click', () => navigateLibraryPage(source, libraryState.currentPage - 1));
+    stage.appendChild(previous);
+
     const wrap = document.createElement('div');
-    wrap.className = 'library-page-image-wrap';
-    wrap.appendChild(createLibraryPageImage(source, libraryState.currentPage, 'eager'));
+    wrap.className = `library-page-image-wrap${libraryState.zoom > 1 ? ' is-zoomed' : ''}`;
+    wrap.style.setProperty('--library-page-zoom', String(libraryState.zoom));
+    const zoomFrame = document.createElement('div');
+    zoomFrame.className = 'library-page-zoom-frame';
+    const image = createLibraryPageImage(source, libraryState.currentPage, 'eager');
+    const rotation = getLibraryPageRotation(source, libraryState.currentPage);
+    if (libraryState.zoom > 1 && rotation) {
+      const rotatedFrame = document.createElement('div');
+      rotatedFrame.className = 'library-page-rotated-frame';
+      rotatedFrame.appendChild(image);
+      image.addEventListener('load', () => sizeZoomedRotatedPage(rotatedFrame, image), { once: true });
+      if (image.complete) sizeZoomedRotatedPage(rotatedFrame, image);
+      zoomFrame.appendChild(rotatedFrame);
+    } else {
+      zoomFrame.appendChild(image);
+    }
+    wrap.appendChild(zoomFrame);
     stage.appendChild(wrap);
+
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.className = 'library-page-btn library-page-turn-btn library-page-turn-next';
+    next.textContent = '→';
+    next.setAttribute('aria-label', 'Volgende pagina');
+    next.disabled = libraryState.currentPage >= source.pageCount;
+    next.addEventListener('click', () => navigateLibraryPage(source, libraryState.currentPage + 1));
+    stage.appendChild(next);
+
     preloadNearbyLibraryPages(source, libraryState.currentPage);
     return stage;
   }
@@ -2586,12 +2724,44 @@
     const source = getLibrarySource(options.sourceSlug) || libraryState.sources[0];
     libraryState.currentSlug = source ? source.slug : '';
     libraryState.currentPage = source && source.kind === 'pdf' ? clampPage(source, options.pageNumber || 1) : 1;
+    libraryState.zoom = 1;
     renderLibrary({ resetReaderScroll: true });
 
     libraryModal.classList.add('open');
     libraryModal.setAttribute('aria-hidden', 'false');
     updateBodyScrollLock();
     libraryCloseBtn.focus();
+  }
+
+  function getCurrentLibrarySource() {
+    return getLibrarySource(libraryState.currentSlug);
+  }
+
+  function shouldHandleLibrarySwipe(event) {
+    if (!libraryModal.classList.contains('open')) return false;
+    if (!window.matchMedia('(max-width: 760px)').matches) return false;
+    if (event.pointerType && event.pointerType !== 'touch') return false;
+    const source = getCurrentLibrarySource();
+    return Boolean(source && source.kind === 'pdf');
+  }
+
+  function startLibrarySwipe(event) {
+    if (!shouldHandleLibrarySwipe(event)) return;
+    libraryState.swipeTracking = true;
+    libraryState.swipeStartX = event.clientX;
+    libraryState.swipeStartY = event.clientY;
+  }
+
+  function finishLibrarySwipe(event) {
+    if (!libraryState.swipeTracking) return;
+    libraryState.swipeTracking = false;
+    if (!shouldHandleLibrarySwipe(event)) return;
+    const deltaX = event.clientX - libraryState.swipeStartX;
+    const deltaY = event.clientY - libraryState.swipeStartY;
+    if (Math.abs(deltaX) < 55 || Math.abs(deltaX) < Math.abs(deltaY) * 1.35) return;
+    const source = getCurrentLibrarySource();
+    if (!source) return;
+    navigateLibraryPage(source, libraryState.currentPage + (deltaX < 0 ? 1 : -1));
   }
 
   function closeSourcePagePreview(options = {}) {
@@ -2834,6 +3004,13 @@
     setWikiDirectoryCollapsed(true, { persist: false });
   }
 
+  try {
+    const storedLibrarySourcesPreference = window.localStorage.getItem('svhh-library-sources-collapsed-v1');
+    setLibrarySourcesCollapsed(storedLibrarySourcesPreference === 'true', { persist: false });
+  } catch (error) {
+    setLibrarySourcesCollapsed(false, { persist: false });
+  }
+
   window.addEventListener('resize', scheduleTokenLayout);
 
   if (typeof ResizeObserver === 'function') {
@@ -2857,6 +3034,12 @@
   wikiBackBtn.addEventListener('click', goBackInWiki);
   wikiForwardBtn.addEventListener('click', goForwardInWiki);
   wikiDirectoryToggleBtn.addEventListener('click', () => setWikiDirectoryCollapsed(!wikiState.directoryCollapsed));
+  librarySourceToggleBtn.addEventListener('click', () => setLibrarySourcesCollapsed(!libraryState.sourcesCollapsed));
+  libraryReader.addEventListener('pointerdown', startLibrarySwipe);
+  libraryReader.addEventListener('pointerup', finishLibrarySwipe);
+  libraryReader.addEventListener('pointercancel', () => {
+    libraryState.swipeTracking = false;
+  });
   wikiSearchInput.addEventListener('pointerdown', () => ensureWikiDirectoryOpen());
   wikiSearchInput.addEventListener('click', () => ensureWikiDirectoryOpen());
   wikiSearchInput.addEventListener('keydown', (event) => {

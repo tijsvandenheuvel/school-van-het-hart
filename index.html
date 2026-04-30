@@ -951,7 +951,7 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="./assets/css/wiki.css?v=0.3.9" />
+  <link rel="stylesheet" href="./assets/css/wiki.css?v=0.3.13" />
 </head>
 <body>
   <main class="page">
@@ -969,7 +969,7 @@
         <span class="frame-toggle-icon" aria-hidden="true"></span>
       </button>
     </div>
-    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.9" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.9</button>
+    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.13" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.13</button>
     <header class="page-header">
       <h1 class="page-title">
         <button class="page-title-trigger" id="visionTrigger" type="button" aria-haspopup="dialog" aria-controls="visionModal">School van het Hart</button>
@@ -1084,14 +1084,17 @@
   <div class="library-modal" id="libraryModal" aria-hidden="true">
     <article class="library-shell" role="dialog" aria-modal="true" aria-label="Bibliotheek">
       <div class="library-toolbar">
+        <button class="wiki-toolbar-btn wiki-directory-toggle" id="librarySourceToggleBtn" type="button" aria-label="Verberg bronnenlijst" aria-expanded="true" aria-controls="librarySourceList" title="Verberg bronnenlijst">
+          <span class="wiki-directory-toggle-icon" aria-hidden="true"></span>
+        </button>
         <div>
           <p class="library-kicker">Schoolbibliotheek</p>
           <h2 id="libraryTitle">Bibliotheek</h2>
         </div>
         <div class="library-page-controls" id="libraryPageControls"></div>
-        <button class="wiki-toolbar-btn wiki-toolbar-close" id="libraryCloseBtn" type="button" aria-label="Sluit bibliotheek">×</button>
+        <button class="wiki-toolbar-btn wiki-toolbar-close library-toolbar-close" id="libraryCloseBtn" type="button" aria-label="Sluit bibliotheek">×</button>
       </div>
-      <div class="library-content">
+      <div class="library-content" id="libraryContent">
         <aside class="library-source-list" id="librarySourceList" aria-label="Bronnen"></aside>
         <section class="library-reader" id="libraryReader" aria-live="polite"></section>
       </div>
@@ -1132,6 +1135,6 @@
     </article>
   </div>
 
-  <script src="./assets/js/site.js"></script>
+  <script src="./assets/js/site.js?v=0.3.13"></script>
 </body>
 </html>

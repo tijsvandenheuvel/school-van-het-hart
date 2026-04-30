@@ -12,7 +12,7 @@ const concepts = read('docs/concepts.md');
 const uiGuidelines = read('docs/ui-guidelines.md');
 const projectContext = read('docs/project-context.md');
 const packageJson = JSON.parse(read('package.json'));
-const currentVersion = 'v0.3.9';
+const currentVersion = 'v0.3.13';
 
 function extractNumber(source, key) {
   const match = source.match(new RegExp(`${key}:\\s*(-?\\d+(?:\\.\\d+)?)`));
