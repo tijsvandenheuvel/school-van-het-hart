@@ -101,7 +101,8 @@
     flowerViewBoxSize: 1000,
     flowerCircleRadius: 142,
     flowerOuterRingRadiusRatio: 0.44162,
-    flowerGridRadius: 2
+    flowerPatternRotationDegrees: 30,
+    flowerGridRadius: 4
   };
 
   function slugify(value) {
@@ -558,37 +559,142 @@
 
   function createSvgCircle(className, cx, cy, radius) {
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    circle.setAttribute('class', className);
+    if (className) circle.setAttribute('class', className);
     circle.setAttribute('cx', String(cx));
     circle.setAttribute('cy', String(cy));
     circle.setAttribute('r', String(radius));
     return circle;
   }
 
+  function createSvgArc(className, cx, cy, radius, startAngle, endAngle) {
+    const start = {
+      x: cx + Math.cos(startAngle) * radius,
+      y: cy + Math.sin(startAngle) * radius
+    };
+    const end = {
+      x: cx + Math.cos(endAngle) * radius,
+      y: cy + Math.sin(endAngle) * radius
+    };
+    const delta = endAngle - startAngle;
+    const arc = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    arc.setAttribute('class', className);
+    arc.setAttribute(
+      'd',
+      [
+        `M ${start.x.toFixed(3)} ${start.y.toFixed(3)}`,
+        `A ${radius} ${radius} 0 ${delta > Math.PI ? 1 : 0} 1 ${end.x.toFixed(3)} ${end.y.toFixed(3)}`
+      ].join(' ')
+    );
+    return arc;
+  }
+
   function renderFlowerOfLife() {
     if (!flowerOfLife) return;
 
-    const { flowerViewBoxSize, flowerCircleRadius, flowerGridRadius } = ORBIT_GEOMETRY;
+    const {
+      flowerViewBoxSize,
+      flowerCircleRadius,
+      flowerGridRadius,
+      flowerPatternRotationDegrees
+    } = ORBIT_GEOMETRY;
     const center = flowerViewBoxSize / 2;
     const circleRadius = flowerCircleRadius;
+    const outerRingRadius = circleRadius * 3;
+    const rotationRadians = flowerPatternRotationDegrees * Math.PI / 180;
+    const rotationCos = Math.cos(rotationRadians);
+    const rotationSin = Math.sin(rotationRadians);
     const rowHeight = Math.sqrt(3) / 2 * circleRadius;
     const fragment = document.createDocumentFragment();
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    const clipPath = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath');
+    const clippedPattern = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    const centers = [];
 
     flowerOfLife.replaceChildren();
+    clipPath.setAttribute('id', 'flowerPatternClip');
+    clipPath.appendChild(createSvgCircle('', center, center, outerRingRadius));
+    defs.appendChild(clipPath);
+    fragment.appendChild(defs);
+    clippedPattern.setAttribute('clip-path', 'url(#flowerPatternClip)');
 
     for (let q = -flowerGridRadius; q <= flowerGridRadius; q += 1) {
       for (let r = -flowerGridRadius; r <= flowerGridRadius; r += 1) {
         const s = -q - r;
         if (Math.max(Math.abs(q), Math.abs(r), Math.abs(s)) > flowerGridRadius) continue;
 
-        const x = center + (q + r / 2) * circleRadius;
-        const y = center + r * rowHeight;
-        fragment.appendChild(createSvgCircle('flower-circle', x.toFixed(3), y.toFixed(3), circleRadius));
+        const gridX = (q + r / 2) * circleRadius;
+        const gridY = r * rowHeight;
+        const x = center + gridX * rotationCos - gridY * rotationSin;
+        const y = center + gridX * rotationSin + gridY * rotationCos;
+        const distanceFromCenter = Math.hypot(gridX, gridY);
+        if (distanceFromCenter >= outerRingRadius + circleRadius) continue;
+        centers.push({ x, y });
       }
     }
 
-    fragment.appendChild(createSvgCircle('flower-ring', center, center, circleRadius * 3));
-    fragment.appendChild(createSvgCircle('flower-ring', center, center, circleRadius * 3.11));
+    centers.forEach((source, sourceIndex) => {
+      const angles = [];
+
+      centers.forEach((target, targetIndex) => {
+        if (sourceIndex === targetIndex) return;
+        const dx = target.x - source.x;
+        const dy = target.y - source.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance <= 0.001 || distance > circleRadius * 2 + 0.001) return;
+
+        const midpoint = {
+          x: source.x + dx / 2,
+          y: source.y + dy / 2
+        };
+        const heightSquared = circleRadius ** 2 - (distance / 2) ** 2;
+        const height = Math.sqrt(Math.max(0, heightSquared));
+        const perpendicular = {
+          x: -dy / distance,
+          y: dx / distance
+        };
+        const intersections = height <= 0.001
+          ? [midpoint]
+          : [
+            {
+              x: midpoint.x + perpendicular.x * height,
+              y: midpoint.y + perpendicular.y * height
+            },
+            {
+              x: midpoint.x - perpendicular.x * height,
+              y: midpoint.y - perpendicular.y * height
+            }
+          ];
+
+        intersections.forEach((point) => {
+          if (Math.hypot(point.x - center, point.y - center) > outerRingRadius + 0.001) return;
+          const angle = Math.atan2(point.y - source.y, point.x - source.x);
+          angles.push(angle < 0 ? angle + Math.PI * 2 : angle);
+        });
+      });
+
+      const uniqueAngles = [...new Set(angles.map((angle) => angle.toFixed(6)))].map(Number).sort((a, b) => a - b);
+      if (uniqueAngles.length < 2) return;
+
+      uniqueAngles.forEach((startAngle, index) => {
+        const nextAngle = uniqueAngles[(index + 1) % uniqueAngles.length];
+        const endAngle = nextAngle > startAngle ? nextAngle : nextAngle + Math.PI * 2;
+        const delta = endAngle - startAngle;
+        if (delta <= 0.001) return;
+
+        const midpointAngle = startAngle + delta / 2;
+        const midpoint = {
+          x: source.x + Math.cos(midpointAngle) * circleRadius,
+          y: source.y + Math.sin(midpointAngle) * circleRadius
+        };
+        if (Math.hypot(midpoint.x - center, midpoint.y - center) > outerRingRadius + 0.001) return;
+
+        clippedPattern.appendChild(createSvgArc('flower-circle', source.x, source.y, circleRadius, startAngle, endAngle));
+      });
+    });
+
+    fragment.appendChild(clippedPattern);
+    fragment.appendChild(createSvgCircle('flower-ring', center, center, outerRingRadius));
+    fragment.appendChild(createSvgCircle('flower-ring', center, center, outerRingRadius + circleRadius * 0.11));
     flowerOfLife.appendChild(fragment);
   }
 

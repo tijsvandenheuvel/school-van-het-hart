@@ -1,5 +1,60 @@
 # Changelog
 
+## v0.3.38 - Flowerbogen op snijpunten
+
+- De letterlijke zeshoekige clip verwijderd uit het flower-of-life lijnpatroon
+- De flower-generator berekent nu de snijpunten tussen gelijke cirkels en tekent alleen de boogsegmenten tussen opeenvolgende snijpunten
+- De buitenrand ontstaat daardoor uit cirkelintersecties in plaats van uit een polygonale mask
+- De ronde buitenclip blijft alleen als harde begrenzing binnen de buitenring behouden
+- De flower-geometrieverificatie uitgebreid met regressies voor arcsegmenten en tegen terugkeer van de polygonclip
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.38`
+
+## v0.3.37 - Gebalanceerde flowerclip
+
+- De zeshoekige flowerclip strakker gezet dan de vorige ruime variant, zonder terug te vallen op de te harde clip
+- De clipverhouding staat nu op `1.045`, zodat de buitenste bladboog zichtbaar blijft maar de rand opnieuw duidelijk zeshoekig aanvoelt
+- De flower-geometrieverificatie bijgewerkt naar de nieuwe balanswaarde
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.37`
+
+## v0.3.36 - Ruimere flowerclip
+
+- De zeshoekige flowerclip is iets ruimer gemaakt zodat de buitenste rand van de buitenste blaadjes zichtbaar blijft
+- Het patroon gebruikt nu een dubbele clip: een ruimere zeshoek voor het zeshoekige effect en een ronde clip om buiten de hoofdring af te snijden
+- De clipverhouding is als expliciete geometrieparameter vastgelegd
+- De flower-geometrieverificatie uitgebreid met regressies voor de dubbele clip en ruimere zeshoek
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.36`
+
+## v0.3.35 - Klassieke flower-oriëntatie
+
+- Het flower-of-life raster is naar de klassieke oriëntatie gedraaid, met een omliggende cirkel boven en onder de kern
+- De zeshoekige clip en ronde buitenringen blijven behouden rond de gedraaide rasterlaag
+- De rotatie is als expliciete geometrieparameter vastgelegd zodat de oriëntatie niet per ongeluk terugvalt
+- De flower-geometrieverificatie uitgebreid met regressies voor de rasterrotatie
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.35`
+
+## v0.3.34 - Zeshoekige flowerclip
+
+- Het flower-of-life lijnpatroon wordt nu binnen een ingeschreven zeshoek geclipt in plaats van op een volledig ronde clip
+- De buitenste cirkelringen blijven rond, zodat het patroon een zeshoekige rand krijgt binnen de ronde begrenzing
+- De extra buitenste cirkellaag blijft bestaan, maar wordt nu scherper afgesneden aan de zeshoekige patroonrand
+- De flower-geometrieverificatie uitgebreid met regressies voor de polygonale clip
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.34`
+
+## v0.3.33 - Extra flower-randlaag
+
+- De flower-of-life generator tekent nu nog een extra hexagonale laag cirkels buiten de hoofdring
+- Die buitenste cirkels blijven geclipt op de hoofdcirkel, zodat alleen de randblaadjes binnen het patroon zichtbaar zijn
+- De flower-geometrieverificatie aangescherpt zodat de extra randlaag behouden blijft
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.33`
+
+## v0.3.32 - Volledige flower-rand
+
+- De flower-of-life generator tekent nu ook de buitenste afgesneden cirkels, zodat de blaadjes tot aan de rand van de hoofdcirkel lopen
+- Het patroon wordt naar de buitenring geclipt zodat de extra cirkels geen lijnwerk buiten de cirkel tonen
+- De buitenringen blijven bovenop het geclipte patroon liggen voor een duidelijke begrenzing
+- De flower-geometrieverificatie uitgebreid met regressies voor de nieuwe buitenlaag en clip-path
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.32`
+
 ## v0.3.31 - Releaseteller in header
 
 - De changelogteller telt nu changelog-releases in plaats van losse bulletregels

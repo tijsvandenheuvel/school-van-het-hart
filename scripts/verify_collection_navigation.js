@@ -97,7 +97,7 @@ if (siteJs.includes('wikiStatus.appendChild(status)')) {
 if (indexHtml.includes('calc(100vh - 190px)')) {
   throw new Error('oude compositiehoogte calc(100vh - 190px) is teruggekeerd');
 }
-assertIncludes(indexHtml, 'v0.3.31', 'index-versie');
-assertMatch(changelog, /^## v0\.3\.31 - /m, 'changelog v0.3.31');
+assertIncludes(indexHtml, 'v0.3.38', 'index-versie');
+assertMatch(changelog, /^## v0\.3\.38 - /m, 'changelog v0.3.38');
 
 console.log('Collectienavigatie-verificatie geslaagd.');

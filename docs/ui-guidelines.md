@@ -29,6 +29,10 @@ De homepage werkt nu volgens deze structuur:
 - De zichtbare orbit-lijn is verborgen; de zachte glow en subtiele flower-of-life geometrie dragen de cirkel.
 - De conceptlabels zijn echte cirkels en volgen een vaste ring met startpunt `-75deg` en stappen van `30deg`.
 - De buitenste flower-of-life ring raakt de conceptcirkels aan hun binnenrand; de flower-laag schaalt dus mee met de echte tokenmaat.
+- De flower-of-life laag tekent ook de buitenste geclipte cirkels buiten de hoofdring zodat de randblaadjes tot aan de hoofdcirkel lopen.
+- Het flower-of-life lijnpatroon gebruikt een ingeschreven zeshoekige clip binnen de ronde buitenringen.
+- Het flower-of-life raster staat in de klassieke oriëntatie met een omliggende cirkel boven en onder de kern.
+- De flower-of-life buitenrand ontstaat uit boogsegmenten tussen echte cirkelsnijpunten, niet uit een letterlijke polygonale clip.
 - Hover-transforms op conceptcirkels mogen de onderliggende flower-geometrie niet herschalen; gebruik daarvoor layoutmaat, geen getransformeerde visuele maat.
 - Het hart staat op hetzelfde geometrische midden als de binnenste flower-of-life cirkel; responsive offsets mogen dat midden niet verschuiven.
 - `WAT`-labels hebben een groene tint.
@@ -76,7 +80,7 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 
 ## Versie-afspraak
 
-- Huidige versie: `v0.3.31`
+- Huidige versie: `v0.3.38`
 - Canonieke versiebron: de bovenste entry in `docs/changelog.md`
 - De versieknop in `index.html` leest die actuele versie uit de changelog
 - Verhoog de versie bij elke echte inhoudelijke, visuele of interactionele voortgang
