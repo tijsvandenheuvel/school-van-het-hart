@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.3.39 - Woordenschat als hoofdknop
+
+- De hoofdheader toont nu `Woordenschat` in plaats van `Wiki`
+- Klik op `Woordenschat` opent direct de woordenview in plaats van de allesview
+- De woorden- en allesview openen standaard met de woordenlijst zichtbaar
+- De tekstenview opent standaard met de bronnenlijst zichtbaar
+- De initiële woordenschatmarkup en lijsttoggle starten zichtbaar voor nieuwe bezoekers
+- De collectienavigatieverificatie en documentatie gesynchroniseerd naar `v0.3.39`
+
 ## v0.3.38 - Flowerbogen op snijpunten
 
 - De letterlijke zeshoekige clip verwijderd uit het flower-of-life lijnpatroon

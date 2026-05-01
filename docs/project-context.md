@@ -52,7 +52,7 @@ De homepage moet:
 - `docs/changelog.md` bewaart de canonieke versiegeschiedenis; de bovenste entry bepaalt de actuele siteversie.
 - `docs/taalbewustzijn.md` bewaart de taalafspraken voor helder Nederlands, brontrouw en woordenschatassimilatie.
 - De versieknop rechtsboven en de changelog-modal in `index.html` lezen die changelog-inhoud in.
-- Huidige versie is `v0.3.38`.
+- Huidige versie is `v0.3.39`.
 - Elke inhoudelijke, visuele of interactionele iteratie krijgt meteen een nieuwe changelog-entry.
 
 ## Verificatie-afspraak
@@ -69,10 +69,10 @@ Na layoutwijzigingen minstens controleren op:
 - De modalbody ondersteunt meerdere secties met tussentitels en alinea's.
 - Klik op de linksboven homeknop `School van het Hart` sluit open modals en brengt de gebruiker terug naar de homepage.
 - Klik op de versieknop rechtsboven opent een changelog-modal met de recente wijzigingen.
-- Klik op de `Wiki`-knop opent een publieke markdown-wiki-modal met een A-Z woordenboekindex, zoekveld, backlinks en uitgaande links.
+- Klik op de `Woordenschat`-knop opent direct de woordenview van de publieke woordenschatmodal met een A-Z woordenboekindex, zoekveld, backlinks en uitgaande links.
 - Klik op de `Bibliotheek`-knop opent een full-screen schoolbibliotheek met scanpagina's voor PDF-bronnen en leesartikels voor Word-bronnen.
 - Begrippen in conceptteksten, visietekst en wiki-artikelen linken door naar letterlijke woordenboekingangen, die waar nodig doorverwijzen naar een hoofdlemma.
 - De woordenschat wordt uitgebreid met letters, woorden, begrippen, bronpassages, bronteksten en extra bronlemma's uit de ingest-pipeline; PDF-bronteksten verwijzen voor lezen door naar de bibliotheek.
-- De subtiele frame-toggle naast `Wiki` zet de ornamentale rand lokaal aan of uit en bewaart die voorkeur in de browser.
+- De subtiele frame-toggle naast `Woordenschat` zet de ornamentale rand lokaal aan of uit en bewaart die voorkeur in de browser.
 - `Escape` sluit de modal.
 - Klik buiten de modal sluit ook.

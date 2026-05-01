@@ -30,7 +30,7 @@ function assertDoesNotMatch(source, pattern, label) {
   ['home-note', 'grotere homeknop'],
   ['alphabetTrigger', 'header letters-trigger'],
   ['libraryTrigger', 'header bibliotheek-trigger'],
-  ['wikiTrigger', 'header alles-trigger'],
+  ['wikiTrigger', 'header woordenschat-trigger'],
   ['alphabetModal', 'alfabetmodal'],
   ['alphabetCircle', 'alfabetcirkel'],
   ['alphabetReader', 'alfabetreader'],
@@ -58,10 +58,16 @@ function assertDoesNotMatch(source, pattern, label) {
   ['.alphabet-letter-node', 'letterknop styling']
 ].forEach(([expected, label]) => assertIncludes(wikiCss, expected, label));
 
-assertMatch(indexHtml, /<button[^>]+id="homeTrigger"[\s\S]*?>School van het Hart<\/button>[\s\S]*?<button[^>]+id="alphabetTrigger"[\s\S]*?>Alfabet<\/button>[\s\S]*?<button[^>]+id="wikiTrigger"[\s\S]*?>Wiki<\/button>[\s\S]*?<button[^>]+id="libraryTrigger"[\s\S]*?>Bibliotheek<\/button>/, 'hoofdnavigatie toont School van het Hart/Alfabet/Wiki/Bibliotheek');
+assertMatch(indexHtml, /<button[^>]+id="homeTrigger"[\s\S]*?>School van het Hart<\/button>[\s\S]*?<button[^>]+id="alphabetTrigger"[\s\S]*?>Alfabet<\/button>[\s\S]*?<button[^>]+id="wikiTrigger"[\s\S]*?>Woordenschat<\/button>[\s\S]*?<button[^>]+id="libraryTrigger"[\s\S]*?>Bibliotheek<\/button>/, 'hoofdnavigatie toont School van het Hart/Alfabet/Woordenschat/Bibliotheek');
+assertIncludes(indexHtml, 'aria-label="Open woordenschat"', 'hoofdnavigatie gebruikt woordenschat als label');
 if (indexHtml.includes('id="wordsTrigger"')) {
   throw new Error('hoofdnavigatie bevat nog een aparte Woorden-knop');
 }
+assertDoesNotMatch(indexHtml, /<button[^>]+id="wikiTrigger"[\s\S]*?>Wiki<\/button>/, 'hoofdnavigatie mag Wiki niet meer als zichtbaar label tonen');
+assertDoesNotMatch(indexHtml, /wiki-shell is-directory-collapsed/, 'woordenschatmodal start niet langer met verborgen woordenlijst');
+assertDoesNotMatch(indexHtml, /wiki-content is-directory-collapsed/, 'woordenschatcontent start niet langer met verborgen woordenlijst');
+assertIncludes(indexHtml, 'id="wikiDirectoryToggleBtn" type="button" aria-label="Verberg woordenlijst" aria-expanded="true"', 'woordenlijsttoggle start als zichtbaar');
+assertIncludes(indexHtml, '<aside class="wiki-directory" id="wikiDirectoryPane" aria-hidden="false">', 'woordenlijstpaneel start zichtbaar');
 assertIncludes(indexHtml, 'page-header" aria-hidden="true"', 'achtergrondtitel is verborgen');
 assertIncludes(indexHtml, '--version-frame-gap', 'versieknop gebruikt expliciete kaderafstand');
 assertIncludes(indexHtml, '--header-frame-gap', 'headerknoppen gebruiken expliciete kaderafstand');
@@ -74,6 +80,10 @@ assertMatch(siteJs, /entryCount\s*\+=\s*1/, 'changelogparser telt release entrie
 assertDoesNotMatch(siteJs, /changeCount\s*\+=\s*1/, 'changelogparser telt niet langer losse bullets als tellerwaarde');
 assertMatch(siteJs, /updateChangelogCount\(parsed\.entryCount\)/, 'changelogteller gebruikt het aantal releases');
 assertMatch(siteJs, /changelogBody\.replaceChildren\(parsed\.fragment\)/, 'changelogteller staat niet langer in de scrollende modalinhoud');
+assertMatch(siteJs, /wikiTrigger\.addEventListener\('click', \(event\) => openWordsModal\(event\.currentTarget\)\)/, 'hoofdknop Woordenschat opent direct de woordenview');
+assertMatch(siteJs, /if \(!options\.slug\) \{[\s\S]*?setWikiDirectoryCollapsed\(false, \{ persist: false \}\);/, 'woorden en alles openen standaard met zichtbare woordenlijst');
+assertMatch(siteJs, /function\s+openLibraryModal\s*\([\s\S]*?setLibrarySourcesCollapsed\(false, \{ persist: false \}\);/, 'teksten openen standaard met zichtbare bronnenlijst');
+assertMatch(siteJs, /setWikiDirectoryCollapsed\(storedDirectoryPreference == null \? false : storedDirectoryPreference === 'true', \{ persist: false \}\)/, 'nieuwe bezoekers starten met zichtbare woordenlijst');
 assertMatch(wikiCss, /\.library-modal,\s*\n\.source-preview-modal\s*\{[\s\S]*?background:\s*rgba\(232,\s*240,\s*244,\s*0\.46\)/, 'tekstenmodal gebruikt dezelfde backdrop als de andere viewmodals');
 assertMatch(wikiCss, /\.wiki-shell\s*\{[\s\S]*?width:\s*min\(1280px,\s*100%\)[\s\S]*?height:\s*min\(92vh,\s*940px\)[\s\S]*?border-radius:\s*34px[\s\S]*?background:\s*rgba\(255,255,255,0\.95\)/, 'wiki-shell gebruikt de gedeelde viewmodalmaat, ronding en achtergrond');
 assertMatch(wikiCss, /\.library-shell\s*\{[\s\S]*?width:\s*min\(1280px,\s*100%\)[\s\S]*?height:\s*min\(92vh,\s*940px\)[\s\S]*?border-radius:\s*34px[\s\S]*?background:\s*rgba\(255,255,255,0\.95\)/, 'tekstenmodal gebruikt dezelfde viewmodalmaat, ronding en achtergrond');
@@ -97,7 +107,7 @@ if (siteJs.includes('wikiStatus.appendChild(status)')) {
 if (indexHtml.includes('calc(100vh - 190px)')) {
   throw new Error('oude compositiehoogte calc(100vh - 190px) is teruggekeerd');
 }
-assertIncludes(indexHtml, 'v0.3.38', 'index-versie');
-assertMatch(changelog, /^## v0\.3\.38 - /m, 'changelog v0.3.38');
+assertIncludes(indexHtml, 'v0.3.39', 'index-versie');
+assertMatch(changelog, /^## v0\.3\.39 - /m, 'changelog v0.3.39');
 
 console.log('Collectienavigatie-verificatie geslaagd.');

@@ -3087,6 +3087,7 @@
     if (librarySearchInput) {
       librarySearchInput.value = libraryState.query;
     }
+    setLibrarySourcesCollapsed(false, { persist: false });
     const source = getLibrarySource(options.sourceSlug) || libraryState.sources[0];
     libraryState.currentSlug = source ? source.slug : '';
     libraryState.currentPage = source && source.kind === 'pdf' ? clampPage(source, options.pageNumber || 1) : 1;
@@ -3385,6 +3386,7 @@
     if (!options.slug) {
       wikiState.query = '';
       wikiSearchInput.value = '';
+      setWikiDirectoryCollapsed(false, { persist: false });
     }
 
     wikiModal.classList.add('open');
@@ -3432,9 +3434,9 @@
 
   try {
     const storedDirectoryPreference = window.localStorage.getItem('svhh-wiki-directory-collapsed-v2');
-    setWikiDirectoryCollapsed(storedDirectoryPreference == null ? true : storedDirectoryPreference === 'true', { persist: false });
+    setWikiDirectoryCollapsed(storedDirectoryPreference == null ? false : storedDirectoryPreference === 'true', { persist: false });
   } catch (error) {
-    setWikiDirectoryCollapsed(true, { persist: false });
+    setWikiDirectoryCollapsed(false, { persist: false });
   }
 
   try {
@@ -3464,7 +3466,7 @@
   versionTrigger.addEventListener('click', openChangelogModal);
   homeTrigger.addEventListener('click', openHomeView);
   alphabetTrigger.addEventListener('click', (event) => openAlphabetModal({ trigger: event.currentTarget }));
-  wikiTrigger.addEventListener('click', (event) => openWikiModal({ trigger: event.currentTarget, section: 'all' }));
+  wikiTrigger.addEventListener('click', (event) => openWordsModal(event.currentTarget));
   libraryTrigger.addEventListener('click', (event) => openLibraryModal({ trigger: event.currentTarget }));
   if (frameToggle) {
     frameToggle.addEventListener('click', () => setFrameEnabled(page.dataset.frameEnabled !== 'true'));

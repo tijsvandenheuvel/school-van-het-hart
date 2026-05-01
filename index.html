@@ -975,7 +975,7 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="./assets/css/wiki.css?v=0.3.38" />
+  <link rel="stylesheet" href="./assets/css/wiki.css?v=0.3.39" />
 </head>
 <body>
   <main class="page">
@@ -991,13 +991,13 @@
         <button class="wiki-note home-note" id="homeTrigger" type="button" aria-label="School van het Hart">School van het Hart</button>
       </h1>
       <button class="wiki-note" id="alphabetTrigger" type="button" aria-label="Open alfabet" aria-haspopup="dialog" aria-controls="alphabetModal">Alfabet</button>
-      <button class="wiki-note" id="wikiTrigger" type="button" aria-label="Open wiki" aria-haspopup="dialog" aria-controls="wikiModal">Wiki</button>
+      <button class="wiki-note" id="wikiTrigger" type="button" aria-label="Open woordenschat" aria-haspopup="dialog" aria-controls="wikiModal">Woordenschat</button>
       <button class="wiki-note" id="libraryTrigger" type="button" aria-label="Open bibliotheek" aria-haspopup="dialog" aria-controls="libraryModal">Bibliotheek</button>
       <button class="frame-toggle active" id="frameToggle" type="button" aria-pressed="true" aria-label="Verberg ornamentale kader" title="Verberg ornamentale kader">
         <span class="frame-toggle-icon" aria-hidden="true"></span>
       </button>
     </div>
-    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.38" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.38</button>
+    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.39" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.39</button>
     <header class="page-header" aria-hidden="true"></header>
     <div class="composition">
       <svg class="flower-of-life-layer" id="flowerOfLife" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -1081,7 +1081,7 @@
   </div>
 
   <div class="wiki-modal" id="wikiModal" aria-hidden="true">
-    <article class="wiki-shell is-directory-collapsed" role="dialog" aria-modal="true" aria-label="Wiki">
+    <article class="wiki-shell" role="dialog" aria-modal="true" aria-label="Woordenschat">
       <div class="wiki-toolbar">
         <div class="wiki-toolbar-history">
           <button class="wiki-toolbar-btn" id="wikiBackBtn" type="button" aria-label="Ga terug">←</button>
@@ -1097,16 +1097,16 @@
           <button class="collection-nav-btn is-active" type="button" data-collection-target="all">Alles</button>
         </nav>
         <div class="wiki-toolbar-actions">
-          <button class="wiki-toolbar-btn wiki-directory-toggle is-collapsed" id="wikiDirectoryToggleBtn" type="button" aria-label="Toon woordenlijst" aria-expanded="false" aria-controls="wikiDirectoryPane" title="Toon woordenlijst">
+          <button class="wiki-toolbar-btn wiki-directory-toggle" id="wikiDirectoryToggleBtn" type="button" aria-label="Verberg woordenlijst" aria-expanded="true" aria-controls="wikiDirectoryPane" title="Verberg woordenlijst">
             <span class="wiki-directory-toggle-icon" aria-hidden="true"></span>
           </button>
-          <button class="wiki-toolbar-btn wiki-toolbar-close" id="wikiCloseBtn" type="button" aria-label="Sluit wiki">×</button>
+          <button class="wiki-toolbar-btn wiki-toolbar-close" id="wikiCloseBtn" type="button" aria-label="Sluit woordenschat">×</button>
         </div>
         <div class="wiki-status" id="wikiStatus" aria-live="polite">Laden…</div>
       </div>
 
-      <div class="wiki-content is-directory-collapsed" id="wikiContent">
-        <aside class="wiki-directory" id="wikiDirectoryPane" aria-hidden="true">
+      <div class="wiki-content" id="wikiContent">
+        <aside class="wiki-directory" id="wikiDirectoryPane" aria-hidden="false">
           <section class="wiki-index-view" id="wikiIndexView"></section>
         </aside>
         <section class="wiki-reader" id="wikiReaderPane">
@@ -1217,6 +1217,6 @@
     </article>
   </div>
 
-  <script src="./assets/js/site.js?v=0.3.38"></script>
+  <script src="./assets/js/site.js?v=0.3.39"></script>
 </body>
 </html>

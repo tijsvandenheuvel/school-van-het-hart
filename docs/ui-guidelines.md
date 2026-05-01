@@ -5,7 +5,7 @@
 De homepage werkt nu volgens deze structuur:
 
 1. Links bovenaan staat een iets grotere homeknop `School van het Hart`
-2. Kleine control group linksboven binnen de paginakader: `Alfabet`, `Wiki`, `Bibliotheek` plus een subtiele frame-toggle zonder zichtbaar label
+2. Kleine control group linksboven binnen de paginakader: `Alfabet`, `Woordenschat`, `Bibliotheek` plus een subtiele frame-toggle zonder zichtbaar label
 3. Kleine versieknop rechtsboven, binnen de paginakader
 4. Ornamentale sierkader rond de volledige pagina
 5. Cirkelcompositie met 12 labels rond een centraal hart
@@ -67,7 +67,7 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 ## Praktische editpunten in code
 
 - Versieknop: `index.html`, element `.version-note`
-- Bovenste controls: `index.html`, `.page-controls-start`, `.wiki-note`, `#libraryTrigger` en `.frame-toggle`
+- Bovenste controls: `index.html`, `.page-controls-start`, `.wiki-note`, `#wikiTrigger`, `#libraryTrigger` en `.frame-toggle`
 - Headerlayout: `index.html`, `.page-controls-start`, `.site-home-title`, `.home-note` en `.version-note`
 - Hoofdcompositie: `index.html`, `.composition`
 - Ornamentale frame: `index.html`, `.page-frame`, `.page-frame-band`, `.page-frame-corner` en `assets/ornament-corner-*.svg`
@@ -80,7 +80,7 @@ Bij verdere layoutwijzigingen zijn dit de meest gevoelige stukken:
 
 ## Versie-afspraak
 
-- Huidige versie: `v0.3.38`
+- Huidige versie: `v0.3.39`
 - Canonieke versiebron: de bovenste entry in `docs/changelog.md`
 - De versieknop in `index.html` leest die actuele versie uit de changelog
 - Verhoog de versie bij elke echte inhoudelijke, visuele of interactionele voortgang
