@@ -1,5 +1,87 @@
 # Changelog
 
+## v0.3.29 - Gelijk omslagpunt
+
+- De mobiele lijstlayout en de tweede rij voor de collectieknoppen schakelen nu op hetzelfde `760px` punt
+- De woordenlijst, bibliotheeklijst en alfabetlijst blijven daardoor naast de viewer zolang de headernavigatie ook naast de zoekbalk blijft
+- De bibliotheekverificatie gebruikt hetzelfde compacte breakpoint als de gedeelde viewheader
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.29`
+
+## v0.3.28 - Later headerbreekpunt
+
+- De viewmodalheader houdt zoekbalk, collectieknoppen, lijsttoggle en sluitknop langer op dezelfde rij
+- De collectieknoppen verhuizen pas naar een tweede rij op compacte breedtes waar de volledige headergroep niet meer natuurlijk naast elkaar past
+- De zoekbalk gebruikt een kleinere minimale gridbreedte zodat hij niet meer onder de collectieknoppen schuift op tussenbreedtes
+- De responsive collectienavigatieverificatie aangescherpt rond het latere breekpunt
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.28`
+
+## v0.3.27 - Headerpijlen links
+
+- Vorige/volgende staan opnieuw links in de gedeelde header van letters, woorden, teksten en alles
+- Lijsttoggle en sluitknop staan rechts samen in een vaste actiegroep
+- De zoekbalk houdt op brede schermen een rustige maxbreedte en vult de beschikbare breedte wanneer de collectieknoppen naar een tweede rij schuiven
+- De collectieknoppen behouden dezelfde tekstgrootte op smallere viewports
+- De alfabetheader toont geen extra `Letters` titel meer, terwijl de bestaande alfabetlogica behouden blijft
+- De collectienavigatieverificatie uitgebreid met regressies voor de links geplaatste pijlen, verborgen alfabettitel en mobiele tekstgrootte
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.27`
+
+## v0.3.26 - Gedeelde viewheader
+
+- Letters, woorden, teksten en alles gebruiken nu dezelfde headerstructuur met zoekbalk, collectieknoppen, vorige/volgende, lijsttoggle en sluitknop
+- De zoekbalk is op brede schermen ruimer gemaakt en de actieknoppen staan samen rechts in de modalheader
+- Op smallere schermen neemt de zoekbalk de beschikbare breedte in en schuift de collectie-navigatie gecentreerd naar de tweede headerregel
+- De alfabet- en bibliotheekheaders kregen eigen zoekvelden en passende vorige/volgende- en lijsttogglelogica
+- De collectienavigatieverificatie uitgebreid met regressies voor de gedeelde headerstructuur en responsive rij-indeling
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.26`
+
+## v0.3.25 - Vaste headerknoppen
+
+- De `Letters / Woorden / Teksten / Alles` knoppen blijven nu op alle viewportbreedtes op de eerste headerlijn staan
+- De collectieknoppen zijn losgekoppeld van de responsive toolbar-grid zodat ze niet meer naar een tweede rij springen
+- Zoek- en titelcontrols worden op smallere viewports compacter behandeld zodat de centrale collectieknoppen vrij blijven
+- De collectienavigatieverificatie uitgebreid met regressies tegen terugkerende tweede-rijplaatsing
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.25`
+
+## v0.3.24 - Gelijke modalhoeken
+
+- De tekstenmodal gebruikt nu dezelfde `34px` hoekradius als letters, woorden en alles
+- De mobiele tekstenmodal gebruikt dezelfde hoekradius als de andere viewmodals in plaats van een compactere variant
+- De collectienavigatieverificatie uitgebreid met regressies voor gelijke viewmodalronding
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.24`
+
+## v0.3.23 - Gelijke modalbasis
+
+- De tekstenmodal gebruikt nu dezelfde witte shell-achtergrond als letters, woorden en alles
+- Alle viewmodals behouden expliciet de hoogte en breedte van de tekstenmodal
+- De collectienavigatieverificatie uitgebreid met regressies voor gelijke viewmodalmaat en shell-achtergrond
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.23`
+
+## v0.3.22 - Vaste modalnavigatie
+
+- De `Letters / Woorden / Teksten / Alles` navigatie gebruikt nu in alle viewmodals dezelfde gecentreerde toolbarpositie
+- Woorden, alles, letters en teksten behouden hun eigen zoek-, titel-, lijst- en viewerlogica zonder de collectieknoppen te verschuiven
+- De tablet- en mobiele toolbarregels gelijkgetrokken zodat de collectieknoppen ook daar consistent onder de primaire toolbarcontrols staan
+- De collectienavigatieverificatie uitgebreid met regressies voor de gedeelde modaltoolbar-grid
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.22`
+
+## v0.3.21 - Doorlopende tekstlijst
+
+- De bibliotheekmodal gebruikt nu een grid waarin de tekstenlijst links doorloopt vanaf de paginanav tot onderaan de viewer
+- De paginanavigatie staat opnieuw gecentreerd boven de viewer in de rechterkolom
+- De responsive overrides opgeschoond zodat de shell de tekstgrid blijft beheren op desktop, tablet en mobiel
+- De bibliotheekverificatie uitgebreid met regressies voor de doorlopende lijstkolom en gecentreerde paginanav
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.21`
+
+## v0.3.20 - Rustige tekstmodal
+
+- De knopachtige tellers voor woorden en alle ingangen uit de wiki-header verwijderd; aantallen blijven zichtbaar in de lijstkoppen
+- De tekstenmodal gebruikt nu een primaire header met dezelfde collectie-navigatie als de andere modals, zonder `Schoolbibliotheek` of geselecteerde teksttitel
+- De bibliotheektitel is verplaatst naar de kop van de tekstenlijst, met dezelfde lijstkopstijl als woorden en alles
+- Paginanummering en zoomcontrols verhuisd naar een secondary toolbar onder de header, uitgelijnd boven lijst en viewer
+- De tekstenlijst kreeg dezelfde rustigere kaartopmaak als de woorden-/alleslijsten
+- De verificatie uitgebreid met regressies voor de opgeschoonde headers, lijstkop en secondary tekstnavigatie
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.20`
+
 ## v0.3.19 - Rustigere grote cirkel
 
 - De maximale homepagecirkel op brede schermen iets kleiner gemaakt zodat de compositie meer lucht behoudt

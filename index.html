@@ -948,7 +948,7 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="./assets/css/wiki.css?v=0.3.19" />
+  <link rel="stylesheet" href="./assets/css/wiki.css?v=0.3.29" />
 </head>
 <body>
   <main class="page">
@@ -970,7 +970,7 @@
         <span class="frame-toggle-icon" aria-hidden="true"></span>
       </button>
     </div>
-    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.19" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.19</button>
+    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.29" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.29</button>
     <header class="page-header" aria-hidden="true"></header>
     <div class="composition">
       <svg class="flower-of-life-layer" id="flowerOfLife" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -1053,12 +1053,9 @@
   <div class="wiki-modal" id="wikiModal" aria-hidden="true">
     <article class="wiki-shell is-directory-collapsed" role="dialog" aria-modal="true" aria-label="Wiki">
       <div class="wiki-toolbar">
-        <div class="wiki-toolbar-nav">
+        <div class="wiki-toolbar-history">
           <button class="wiki-toolbar-btn" id="wikiBackBtn" type="button" aria-label="Ga terug">←</button>
           <button class="wiki-toolbar-btn" id="wikiForwardBtn" type="button" aria-label="Ga vooruit">→</button>
-          <button class="wiki-toolbar-btn wiki-directory-toggle is-collapsed" id="wikiDirectoryToggleBtn" type="button" aria-label="Toon woordenlijst" aria-expanded="false" aria-controls="wikiDirectoryPane" title="Toon woordenlijst">
-            <span class="wiki-directory-toggle-icon" aria-hidden="true"></span>
-          </button>
         </div>
         <div class="wiki-toolbar-search">
           <input class="wiki-search-input" id="wikiSearchInput" type="search" aria-label="Zoek in de Woordenschat" placeholder="Zoek" />
@@ -1069,8 +1066,13 @@
           <button class="collection-nav-btn" type="button" data-collection-target="texts">Teksten</button>
           <button class="collection-nav-btn is-active" type="button" data-collection-target="all">Alles</button>
         </nav>
+        <div class="wiki-toolbar-actions">
+          <button class="wiki-toolbar-btn wiki-directory-toggle is-collapsed" id="wikiDirectoryToggleBtn" type="button" aria-label="Toon woordenlijst" aria-expanded="false" aria-controls="wikiDirectoryPane" title="Toon woordenlijst">
+            <span class="wiki-directory-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button class="wiki-toolbar-btn wiki-toolbar-close" id="wikiCloseBtn" type="button" aria-label="Sluit wiki">×</button>
+        </div>
         <div class="wiki-status" id="wikiStatus" aria-live="polite">Laden…</div>
-        <button class="wiki-toolbar-btn wiki-toolbar-close" id="wikiCloseBtn" type="button" aria-label="Sluit wiki">×</button>
       </div>
 
       <div class="wiki-content is-directory-collapsed" id="wikiContent">
@@ -1087,21 +1089,27 @@
   <div class="wiki-modal alphabet-modal" id="alphabetModal" aria-hidden="true">
     <article class="wiki-shell alphabet-shell" role="dialog" aria-modal="true" aria-label="Alfabet">
       <div class="wiki-toolbar alphabet-toolbar">
-        <div class="wiki-toolbar-nav">
-          <button class="wiki-toolbar-btn" id="alphabetBackBtn" type="button" aria-label="Terug naar alfabetcirkel">←</button>
+        <div class="wiki-toolbar-history">
+          <button class="wiki-toolbar-btn" id="alphabetBackBtn" type="button" aria-label="Vorige letter">←</button>
+          <button class="wiki-toolbar-btn" id="alphabetForwardBtn" type="button" aria-label="Volgende letter">→</button>
         </div>
-        <div class="alphabet-toolbar-title">
-          <p class="library-kicker">Alfabet</p>
-          <h2 id="alphabetTitle">Letters</h2>
+        <div class="wiki-toolbar-search">
+          <input class="wiki-search-input" id="alphabetSearchInput" type="search" aria-label="Zoek in het alfabet" placeholder="Zoek" />
         </div>
+        <span id="alphabetTitle" hidden>Letters</span>
         <nav class="collection-nav" aria-label="Collecties">
           <button class="collection-nav-btn is-active" type="button" data-collection-target="letters">Letters</button>
           <button class="collection-nav-btn" type="button" data-collection-target="words">Woorden</button>
           <button class="collection-nav-btn" type="button" data-collection-target="texts">Teksten</button>
           <button class="collection-nav-btn" type="button" data-collection-target="all">Alles</button>
         </nav>
+        <div class="wiki-toolbar-actions">
+          <button class="wiki-toolbar-btn wiki-directory-toggle" id="alphabetDirectoryToggleBtn" type="button" aria-label="Verberg alfabetcirkel" aria-expanded="true" aria-controls="alphabetCircle" title="Verberg alfabetcirkel">
+            <span class="wiki-directory-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button class="wiki-toolbar-btn wiki-toolbar-close" id="alphabetCloseBtn" type="button" aria-label="Sluit alfabet">×</button>
+        </div>
         <div class="wiki-status" id="alphabetStatus" aria-live="polite">26 letters</div>
-        <button class="wiki-toolbar-btn wiki-toolbar-close" id="alphabetCloseBtn" type="button" aria-label="Sluit alfabet">×</button>
       </div>
 
       <div class="alphabet-content" id="alphabetContent">
@@ -1114,12 +1122,12 @@
   <div class="library-modal" id="libraryModal" aria-hidden="true">
     <article class="library-shell" role="dialog" aria-modal="true" aria-label="Bibliotheek">
       <div class="library-toolbar">
-        <button class="wiki-toolbar-btn wiki-directory-toggle" id="librarySourceToggleBtn" type="button" aria-label="Verberg bronnenlijst" aria-expanded="true" aria-controls="librarySourceList" title="Verberg bronnenlijst">
-          <span class="wiki-directory-toggle-icon" aria-hidden="true"></span>
-        </button>
-        <div>
-          <p class="library-kicker">Schoolbibliotheek</p>
-          <h2 id="libraryTitle">Bibliotheek</h2>
+        <div class="wiki-toolbar-history">
+          <button class="wiki-toolbar-btn" id="libraryBackBtn" type="button" aria-label="Vorige pagina">←</button>
+          <button class="wiki-toolbar-btn" id="libraryForwardBtn" type="button" aria-label="Volgende pagina">→</button>
+        </div>
+        <div class="wiki-toolbar-search">
+          <input class="wiki-search-input" id="librarySearchInput" type="search" aria-label="Zoek in de bibliotheek" placeholder="Zoek" />
         </div>
         <nav class="collection-nav" aria-label="Collecties">
           <button class="collection-nav-btn" type="button" data-collection-target="letters">Letters</button>
@@ -1127,8 +1135,16 @@
           <button class="collection-nav-btn is-active" type="button" data-collection-target="texts">Teksten</button>
           <button class="collection-nav-btn" type="button" data-collection-target="all">Alles</button>
         </nav>
+        <div class="wiki-toolbar-actions">
+          <button class="wiki-toolbar-btn wiki-directory-toggle" id="librarySourceToggleBtn" type="button" aria-label="Verberg bronnenlijst" aria-expanded="true" aria-controls="librarySourceList" title="Verberg bronnenlijst">
+            <span class="wiki-directory-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button class="wiki-toolbar-btn wiki-toolbar-close library-toolbar-close" id="libraryCloseBtn" type="button" aria-label="Sluit bibliotheek">×</button>
+        </div>
+      </div>
+      <div class="library-secondary-toolbar" id="librarySecondaryToolbar" aria-label="Tekstnavigatie">
+        <div class="library-secondary-spacer" aria-hidden="true"></div>
         <div class="library-page-controls" id="libraryPageControls"></div>
-        <button class="wiki-toolbar-btn wiki-toolbar-close library-toolbar-close" id="libraryCloseBtn" type="button" aria-label="Sluit bibliotheek">×</button>
       </div>
       <div class="library-content" id="libraryContent">
         <aside class="library-source-list" id="librarySourceList" aria-label="Bronnen"></aside>
@@ -1171,6 +1187,6 @@
     </article>
   </div>
 
-  <script src="./assets/js/site.js?v=0.3.19"></script>
+  <script src="./assets/js/site.js?v=0.3.29"></script>
 </body>
 </html>

@@ -439,16 +439,23 @@
   const alphabetModal = document.getElementById('alphabetModal');
   const alphabetTitle = document.getElementById('alphabetTitle');
   const alphabetBackBtn = document.getElementById('alphabetBackBtn');
+  const alphabetForwardBtn = document.getElementById('alphabetForwardBtn');
+  const alphabetDirectoryToggleBtn = document.getElementById('alphabetDirectoryToggleBtn');
+  const alphabetSearchInput = document.getElementById('alphabetSearchInput');
   const alphabetStatus = document.getElementById('alphabetStatus');
   const alphabetCircle = document.getElementById('alphabetCircle');
+  const alphabetContent = document.getElementById('alphabetContent');
   const alphabetReader = document.getElementById('alphabetReader');
   const alphabetCloseBtn = document.getElementById('alphabetCloseBtn');
   const libraryModal = document.getElementById('libraryModal');
   const libraryShell = libraryModal?.querySelector('.library-shell');
   const libraryContent = document.getElementById('libraryContent');
-  const libraryTitle = document.getElementById('libraryTitle');
+  const librarySecondaryToolbar = document.getElementById('librarySecondaryToolbar');
   const libraryPageControls = document.getElementById('libraryPageControls');
+  const libraryBackBtn = document.getElementById('libraryBackBtn');
+  const libraryForwardBtn = document.getElementById('libraryForwardBtn');
   const librarySourceToggleBtn = document.getElementById('librarySourceToggleBtn');
+  const librarySearchInput = document.getElementById('librarySearchInput');
   const librarySourceList = document.getElementById('librarySourceList');
   const libraryReader = document.getElementById('libraryReader');
   const libraryCloseBtn = document.getElementById('libraryCloseBtn');
@@ -506,7 +513,9 @@
   };
 
   const alphabetState = {
-    currentSlug: ''
+    currentSlug: '',
+    query: '',
+    circleCollapsed: false
   };
 
   const libraryState = {
@@ -518,6 +527,7 @@
     currentSlug: '',
     currentPage: 1,
     zoom: 1,
+    query: '',
     sourcesCollapsed: false,
     swipeStartX: 0,
     swipeStartY: 0,
@@ -1814,33 +1824,12 @@
   }
 
   function renderWikiStatus() {
-    if (wikiState.error) {
-      wikiStatus.textContent = wikiState.error;
-      return;
-    }
-
     wikiStatus.replaceChildren();
-    const filtered = getQueryFilteredEntries();
-
-    const counts = {
-      letter: 0,
-      word: 0,
-      text: 0
-    };
-    filtered.forEach((entry) => {
-      counts[entry.indexType] += 1;
-    });
-
-    const status = document.createElement('span');
-    status.className = 'wiki-status-summary';
-    if (wikiState.activeSection === 'word') {
-      status.textContent = `${counts.word} woorden`;
-    } else if (wikiState.activeSection === 'all') {
-      status.textContent = `${filtered.length} ingangen`;
-    } else {
-      status.textContent = `${getVisibleIndexEntries().length} ingangen`;
+    wikiStatus.hidden = true;
+    if (wikiState.error) {
+      wikiStatus.hidden = false;
+      wikiStatus.textContent = wikiState.error;
     }
-    wikiStatus.appendChild(status);
   }
 
   function renderWikiIndex() {
@@ -2333,10 +2322,21 @@
     return wikiState.itemsBySlug.get(slug) || null;
   }
 
-  function getAlphabetItems() {
+  function getAllAlphabetItems() {
     return wikiState.items
       .filter((item) => item.indexType === 'letter')
       .sort((left, right) => collator.compare(left.title, right.title));
+  }
+
+  function getAlphabetItems() {
+    const letters = getAllAlphabetItems();
+    const query = normalizeTerm(alphabetState.query || '');
+    if (!query) return letters;
+    const queryTerms = query.split(' ').filter(Boolean);
+    return letters.filter((item) => {
+      const searchText = normalizeTerm(`${item.title} ${item.summary || ''} ${item.body || ''}`);
+      return queryTerms.every((term) => searchText.includes(term));
+    });
   }
 
   function syncCollectionNav(activeTarget) {
@@ -2357,6 +2357,14 @@
     center.className = 'alphabet-circle-center';
     center.textContent = 'ABC';
     shell.appendChild(center);
+
+    if (!letters.length) {
+      const empty = document.createElement('p');
+      empty.className = 'wiki-empty';
+      empty.textContent = 'Geen letters gevonden.';
+      alphabetCircle.appendChild(empty);
+      return;
+    }
 
     letters.forEach((item, index) => {
       const angle = -90 + (index * 360 / Math.max(letters.length, 1));
@@ -2380,7 +2388,7 @@
     alphabetReader.replaceChildren();
     const letterCount = getAlphabetItems().length;
     alphabetStatus.textContent = alphabetState.currentSlug ? 'Letterbetekenis' : `${letterCount} letters`;
-    alphabetBackBtn.disabled = !alphabetState.currentSlug;
+    updateAlphabetToolbarButtons();
 
     if (!alphabetState.currentSlug) {
       alphabetTitle.textContent = 'Letters';
@@ -2447,6 +2455,38 @@
   function renderAlphabet() {
     renderAlphabetCircle();
     renderAlphabetReader();
+  }
+
+  function setAlphabetCircleCollapsed(collapsed) {
+    alphabetState.circleCollapsed = Boolean(collapsed);
+    alphabetContent?.classList.toggle('is-alphabet-circle-collapsed', alphabetState.circleCollapsed);
+    alphabetCircle?.setAttribute('aria-hidden', alphabetState.circleCollapsed ? 'true' : 'false');
+    if ('inert' in alphabetCircle) {
+      alphabetCircle.inert = alphabetState.circleCollapsed;
+    }
+    if (alphabetDirectoryToggleBtn) {
+      const label = alphabetState.circleCollapsed ? 'Toon alfabetcirkel' : 'Verberg alfabetcirkel';
+      alphabetDirectoryToggleBtn.classList.toggle('is-collapsed', alphabetState.circleCollapsed);
+      alphabetDirectoryToggleBtn.setAttribute('aria-expanded', alphabetState.circleCollapsed ? 'false' : 'true');
+      alphabetDirectoryToggleBtn.setAttribute('aria-label', label);
+      alphabetDirectoryToggleBtn.setAttribute('title', label);
+    }
+  }
+
+  function navigateAlphabetByStep(step) {
+    const letters = getAllAlphabetItems();
+    if (!letters.length) return;
+    const currentIndex = letters.findIndex((item) => item.slug === alphabetState.currentSlug);
+    const nextIndex = currentIndex === -1
+      ? (step > 0 ? 0 : letters.length - 1)
+      : (currentIndex + step + letters.length) % letters.length;
+    navigateToAlphabetLetter(letters[nextIndex].slug, step > 0 ? alphabetForwardBtn : alphabetBackBtn);
+  }
+
+  function updateAlphabetToolbarButtons() {
+    const hasLetters = getAllAlphabetItems().length > 0;
+    if (alphabetBackBtn) alphabetBackBtn.disabled = !hasLetters;
+    if (alphabetForwardBtn) alphabetForwardBtn.disabled = !hasLetters;
   }
 
   function navigateToAlphabetLetter(slug, trigger) {
@@ -2585,7 +2625,39 @@
 
   function renderLibrarySourceList() {
     librarySourceList.replaceChildren();
-    libraryState.sources.forEach((source) => {
+    const query = normalizeTerm(libraryState.query || '');
+    const queryTerms = query.split(' ').filter(Boolean);
+    const visibleSources = queryTerms.length
+      ? libraryState.sources.filter((source) => {
+          const searchText = normalizeTerm(`${source.title || ''} ${source.summary || ''} ${source.kind || ''}`);
+          return queryTerms.every((term) => searchText.includes(term));
+        })
+      : libraryState.sources;
+
+    const heading = document.createElement('div');
+    heading.className = 'library-source-list-heading wiki-index-section-header';
+
+    const headingTitle = document.createElement('h2');
+    headingTitle.className = 'wiki-index-section-title';
+    headingTitle.textContent = 'Bibliotheek';
+    heading.appendChild(headingTitle);
+
+    const headingCount = document.createElement('p');
+    headingCount.className = 'wiki-index-section-count';
+    headingCount.textContent = `${visibleSources.length}`;
+    heading.appendChild(headingCount);
+
+    librarySourceList.appendChild(heading);
+
+    if (!visibleSources.length) {
+      const empty = document.createElement('p');
+      empty.className = 'wiki-empty';
+      empty.textContent = 'Geen teksten gevonden.';
+      librarySourceList.appendChild(empty);
+      return;
+    }
+
+    visibleSources.forEach((source) => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = `library-source-card${libraryState.currentSlug === source.slug ? ' is-active' : ''}`;
@@ -2619,6 +2691,16 @@
     renderLibrary();
   }
 
+  function updateLibraryToolbarButtons(source) {
+    const hasPages = Boolean(source && source.kind === 'pdf');
+    if (libraryBackBtn) {
+      libraryBackBtn.disabled = !hasPages || libraryState.currentPage <= 1;
+    }
+    if (libraryForwardBtn) {
+      libraryForwardBtn.disabled = !hasPages || libraryState.currentPage >= source.pageCount;
+    }
+  }
+
   function formatLibraryZoom() {
     return `${Math.round(libraryState.zoom * 100)}%`;
   }
@@ -2644,7 +2726,11 @@
 
   function renderLibraryPageControls(source) {
     libraryPageControls.replaceChildren();
-    if (!source || source.kind !== 'pdf') return;
+    const hasPageControls = Boolean(source && source.kind === 'pdf');
+    if (librarySecondaryToolbar) {
+      librarySecondaryToolbar.classList.toggle('is-empty', !hasPageControls);
+    }
+    if (!hasPageControls) return;
     let jumpTimer = null;
 
     const previous = document.createElement('button');
@@ -2831,16 +2917,16 @@
       empty.className = 'wiki-empty';
       empty.textContent = libraryState.error || 'Geen bibliotheekbronnen gevonden.';
       libraryReader.appendChild(empty);
-      libraryTitle.textContent = 'Bibliotheek';
       renderLibraryPageControls(null);
+      updateLibraryToolbarButtons(null);
       if (options.resetReaderScroll) libraryReader.scrollTop = 0;
       return;
     }
 
     libraryState.currentSlug = source.slug;
     libraryState.currentPage = source.kind === 'pdf' ? clampPage(source, libraryState.currentPage) : 1;
-    libraryTitle.textContent = source.title;
     renderLibraryPageControls(source);
+    updateLibraryToolbarButtons(source);
 
     if (source.kind === 'pdf') {
       libraryReader.appendChild(renderLibraryPage(source));
@@ -2881,6 +2967,9 @@
       lastLibraryTrigger = options.trigger;
     }
 
+    if (librarySearchInput) {
+      librarySearchInput.value = libraryState.query;
+    }
     const source = getLibrarySource(options.sourceSlug) || libraryState.sources[0];
     libraryState.currentSlug = source ? source.slug : '';
     libraryState.currentPage = source && source.kind === 'pdf' ? clampPage(source, options.pageNumber || 1) : 1;
@@ -3149,6 +3238,9 @@
       lastAlphabetTrigger = options.trigger;
     }
 
+    if (alphabetSearchInput) {
+      alphabetSearchInput.value = alphabetState.query;
+    }
     alphabetState.currentSlug = options.slug || '';
     renderAlphabet();
 
@@ -3247,10 +3339,9 @@
   closeVisionBtn.addEventListener('click', () => closeVisionModal());
   wikiCloseBtn.addEventListener('click', () => closeWikiModal());
   alphabetCloseBtn.addEventListener('click', () => closeAlphabetModal());
-  alphabetBackBtn.addEventListener('click', () => {
-    alphabetState.currentSlug = '';
-    renderAlphabet();
-  });
+  alphabetBackBtn.addEventListener('click', () => navigateAlphabetByStep(-1));
+  alphabetForwardBtn?.addEventListener('click', () => navigateAlphabetByStep(1));
+  alphabetDirectoryToggleBtn?.addEventListener('click', () => setAlphabetCircleCollapsed(!alphabetState.circleCollapsed));
   libraryCloseBtn.addEventListener('click', () => closeLibraryModal());
   sourcePreviewCloseBtn.addEventListener('click', () => closeSourcePagePreview());
   versionTrigger.addEventListener('click', openChangelogModal);
@@ -3264,6 +3355,14 @@
   wikiBackBtn.addEventListener('click', goBackInWiki);
   wikiForwardBtn.addEventListener('click', goForwardInWiki);
   wikiDirectoryToggleBtn.addEventListener('click', () => setWikiDirectoryCollapsed(!wikiState.directoryCollapsed));
+  libraryBackBtn?.addEventListener('click', () => {
+    const source = getCurrentLibrarySource();
+    navigateLibraryPage(source, libraryState.currentPage - 1);
+  });
+  libraryForwardBtn?.addEventListener('click', () => {
+    const source = getCurrentLibrarySource();
+    navigateLibraryPage(source, libraryState.currentPage + 1);
+  });
   librarySourceToggleBtn.addEventListener('click', () => setLibrarySourcesCollapsed(!libraryState.sourcesCollapsed));
   libraryReader.addEventListener('pointerdown', startLibrarySwipe);
   libraryReader.addEventListener('pointerup', finishLibrarySwipe);
@@ -3280,6 +3379,14 @@
     ensureWikiDirectoryOpen();
     wikiState.query = event.target.value;
     renderWikiIndex();
+  });
+  alphabetSearchInput?.addEventListener('input', (event) => {
+    alphabetState.query = event.target.value;
+    renderAlphabet();
+  });
+  librarySearchInput?.addEventListener('input', (event) => {
+    libraryState.query = event.target.value;
+    renderLibrarySourceList();
   });
 
   document.addEventListener('click', (event) => {
