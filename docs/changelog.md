@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.3.31 - Releaseteller in header
+
+- De changelogteller telt nu changelog-releases in plaats van losse bulletregels
+- De teller staat in de changelogheader links naast de sluitknop
+- De tellertekst is verduidelijkt naar `releases totaal`
+- De collectienavigatieverificatie uitgebreid met regressies voor de headerpositie en release-telling
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.31`
+
+## v0.3.30 - Changelogteller
+
+- De changelog-modal toont bovenaan nu het totaal aantal opgelijste veranderingen
+- De teller wordt automatisch berekend uit alle bullet-wijzigingen in `docs/changelog.md`
+- De changelogparser geeft naast de actuele versie ook het aantal wijzigingen terug
+- De collectienavigatieverificatie uitgebreid met regressies voor de changelogteller
+- De zichtbare versie- en documentatieverwijzingen gesynchroniseerd naar `v0.3.30`
+
 ## v0.3.29 - Gelijk omslagpunt
 
 - De mobiele lijstlayout en de tweede rij voor de collectieknoppen schakelen nu op hetzelfde `760px` punt

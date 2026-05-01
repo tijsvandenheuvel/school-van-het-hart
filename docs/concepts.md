@@ -2,7 +2,7 @@
 
 Dit document bewaart de canonieke inhoud van de 12 homepage-concepten.
 
-De bestaande verdeling van 6 `WAT`- en 6 `HOE`-concepten blijft behouden in `v0.3.29`.
+De bestaande verdeling van 6 `WAT`- en 6 `HOE`-concepten blijft behouden in `v0.3.31`.
 
 De homepage gebruikt vanaf `v0.3.0` een exacte 12-delige geometrische ring: startpunt `-75` graden en daarna telkens `30` graden verder.
 

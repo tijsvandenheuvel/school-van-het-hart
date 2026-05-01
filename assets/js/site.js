@@ -420,6 +420,7 @@
   const closeBtn = document.getElementById('closeBtn');
   const changelogModal = document.getElementById('changelogModal');
   const changelogBody = document.getElementById('changelog-body');
+  const changelogCount = document.getElementById('changelogCount');
   const closeChangelogBtn = document.getElementById('closeChangelogBtn');
   const visionModal = document.getElementById('visionModal');
   const visionBody = document.getElementById('vision-body');
@@ -1118,16 +1119,24 @@
     changelogBody.appendChild(status);
   }
 
+  function updateChangelogCount(entryCount) {
+    if (!changelogCount) return;
+    const label = entryCount === 1 ? 'release' : 'releases';
+    changelogCount.textContent = `${entryCount} ${label} totaal`;
+  }
+
   function parseChangelogMarkdown(markdown) {
     const lines = markdown.split(/\r?\n/);
     const fragment = document.createDocumentFragment();
     let currentEntry = null;
     let currentList = null;
     let currentVersion = '';
+    let entryCount = 0;
 
     function ensureEntry(title) {
       currentEntry = document.createElement('article');
       currentEntry.className = 'changelog-entry';
+      entryCount += 1;
       const heading = document.createElement('h3');
       heading.textContent = title;
       currentEntry.appendChild(heading);
@@ -1168,7 +1177,7 @@
       }
     });
 
-    return { fragment, version: currentVersion || defaultVersion };
+    return { fragment, version: currentVersion || defaultVersion, entryCount };
   }
 
   async function loadChangelog() {
@@ -1177,12 +1186,14 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const markdown = await response.text();
       const parsed = parseChangelogMarkdown(markdown);
+      updateChangelogCount(parsed.entryCount);
       changelogBody.replaceChildren(parsed.fragment);
       changelogState.version = parsed.version;
       versionTrigger.textContent = parsed.version;
       versionTrigger.setAttribute('aria-label', `Open changelog voor ${parsed.version}`);
       versionTrigger.title = `Open changelog voor ${parsed.version}`;
     } catch (error) {
+      updateChangelogCount(0);
       renderChangelogStatus('De changelog kon niet automatisch geladen worden. Werk docs/changelog.md bij en herlaad de pagina.');
       versionTrigger.setAttribute('aria-label', `Open changelog voor ${changelogState.version}`);
       versionTrigger.title = `Open changelog voor ${changelogState.version}`;

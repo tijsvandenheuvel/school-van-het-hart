@@ -652,6 +652,11 @@
       background: linear-gradient(135deg, rgba(232, 239, 243, 0.96), rgba(250, 252, 253, 0.96));
     }
 
+    .changelog-modal .modal-header > div:first-child {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
     .changelog-modal .modal-body {
       grid-template-columns: 1fr;
     }
@@ -731,6 +736,28 @@
       display: grid;
       gap: 18px;
       align-content: start;
+    }
+
+    .changelog-header-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex: 0 0 auto;
+      margin-left: auto;
+    }
+
+    .changelog-count {
+      width: fit-content;
+      margin: 0;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(85, 88, 100, 0.10);
+      background: rgba(255,255,255,0.72);
+      box-shadow: 0 8px 22px rgba(34, 36, 45, 0.05);
+      font-size: 0.92rem;
+      line-height: 1.3;
+      color: var(--soft-text);
+      white-space: nowrap;
     }
 
     .changelog-entry {
@@ -948,7 +975,7 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="./assets/css/wiki.css?v=0.3.29" />
+  <link rel="stylesheet" href="./assets/css/wiki.css?v=0.3.31" />
 </head>
 <body>
   <main class="page">
@@ -970,7 +997,7 @@
         <span class="frame-toggle-icon" aria-hidden="true"></span>
       </button>
     </div>
-    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.29" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.29</button>
+    <button class="version-note" id="versionTrigger" type="button" aria-label="Open changelog voor v0.3.31" aria-haspopup="dialog" aria-controls="changelogModal">v0.3.31</button>
     <header class="page-header" aria-hidden="true"></header>
     <div class="composition">
       <svg class="flower-of-life-layer" id="flowerOfLife" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -1040,7 +1067,10 @@
           <h2 id="changelog-title">Changelog</h2>
           <p class="short" id="changelog-short">De laatste zichtbare veranderingen aan de site, rechtstreeks gelezen uit docs/changelog.md.</p>
         </div>
-        <button class="close-btn" id="closeChangelogBtn" aria-label="Sluit changelog">×</button>
+        <div class="changelog-header-actions">
+          <p class="changelog-count" id="changelogCount" aria-live="polite">Laden</p>
+          <button class="close-btn" id="closeChangelogBtn" aria-label="Sluit changelog">×</button>
+        </div>
       </div>
       <div class="modal-body">
         <div class="changelog-copy" id="changelog-body">
@@ -1187,6 +1217,6 @@
     </article>
   </div>
 
-  <script src="./assets/js/site.js?v=0.3.29"></script>
+  <script src="./assets/js/site.js?v=0.3.31"></script>
 </body>
 </html>

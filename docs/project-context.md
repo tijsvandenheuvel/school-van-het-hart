@@ -52,7 +52,7 @@ De homepage moet:
 - `docs/changelog.md` bewaart de canonieke versiegeschiedenis; de bovenste entry bepaalt de actuele siteversie.
 - `docs/taalbewustzijn.md` bewaart de taalafspraken voor helder Nederlands, brontrouw en woordenschatassimilatie.
 - De versieknop rechtsboven en de changelog-modal in `index.html` lezen die changelog-inhoud in.
-- Huidige versie is `v0.3.29`.
+- Huidige versie is `v0.3.31`.
 - Elke inhoudelijke, visuele of interactionele iteratie krijgt meteen een nieuwe changelog-entry.
 
 ## Verificatie-afspraak

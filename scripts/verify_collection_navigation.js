@@ -48,7 +48,8 @@ function assertDoesNotMatch(source, pattern, label) {
   ['openWordsModal', 'woordenmodal openfunctie'],
   ['openCollectionTarget', 'gedeelde collectienavigatie'],
   ['data-collection-target', 'gedeelde collectienav events'],
-  ['renderWikiStatus', 'wiki-status renderer blijft bestaan zonder headerchip']
+  ['renderWikiStatus', 'wiki-status renderer blijft bestaan zonder headerchip'],
+  ['updateChangelogCount', 'changelogteller renderer']
 ].forEach(([expected, label]) => assertIncludes(siteJs, expected, label));
 
 [
@@ -66,6 +67,13 @@ assertIncludes(indexHtml, '--version-frame-gap', 'versieknop gebruikt expliciete
 assertIncludes(indexHtml, '--header-frame-gap', 'headerknoppen gebruiken expliciete kaderafstand');
 assertIncludes(indexHtml, '--composition-header-safe', 'compositie reserveert ruimte onder de header');
 assertMatch(indexHtml, /\.page\s*\{[\s\S]*?align-items:\s*center/, 'pagina centreert de compositie verticaal');
+assertIncludes(indexHtml, '.changelog-count', 'changelogteller styling');
+assertIncludes(indexHtml, 'id="changelogCount"', 'changelogteller staat in de modalheader');
+assertMatch(indexHtml, /<div class="changelog-header-actions">[\s\S]*?id="changelogCount"[\s\S]*?id="closeChangelogBtn"/, 'changelogteller staat links naast de sluitknop');
+assertMatch(siteJs, /entryCount\s*\+=\s*1/, 'changelogparser telt release entries');
+assertDoesNotMatch(siteJs, /changeCount\s*\+=\s*1/, 'changelogparser telt niet langer losse bullets als tellerwaarde');
+assertMatch(siteJs, /updateChangelogCount\(parsed\.entryCount\)/, 'changelogteller gebruikt het aantal releases');
+assertMatch(siteJs, /changelogBody\.replaceChildren\(parsed\.fragment\)/, 'changelogteller staat niet langer in de scrollende modalinhoud');
 assertMatch(wikiCss, /\.library-modal,\s*\n\.source-preview-modal\s*\{[\s\S]*?background:\s*rgba\(232,\s*240,\s*244,\s*0\.46\)/, 'tekstenmodal gebruikt dezelfde backdrop als de andere viewmodals');
 assertMatch(wikiCss, /\.wiki-shell\s*\{[\s\S]*?width:\s*min\(1280px,\s*100%\)[\s\S]*?height:\s*min\(92vh,\s*940px\)[\s\S]*?border-radius:\s*34px[\s\S]*?background:\s*rgba\(255,255,255,0\.95\)/, 'wiki-shell gebruikt de gedeelde viewmodalmaat, ronding en achtergrond');
 assertMatch(wikiCss, /\.library-shell\s*\{[\s\S]*?width:\s*min\(1280px,\s*100%\)[\s\S]*?height:\s*min\(92vh,\s*940px\)[\s\S]*?border-radius:\s*34px[\s\S]*?background:\s*rgba\(255,255,255,0\.95\)/, 'tekstenmodal gebruikt dezelfde viewmodalmaat, ronding en achtergrond');
@@ -89,7 +97,7 @@ if (siteJs.includes('wikiStatus.appendChild(status)')) {
 if (indexHtml.includes('calc(100vh - 190px)')) {
   throw new Error('oude compositiehoogte calc(100vh - 190px) is teruggekeerd');
 }
-assertIncludes(indexHtml, 'v0.3.29', 'index-versie');
-assertMatch(changelog, /^## v0\.3\.29 - /m, 'changelog v0.3.29');
+assertIncludes(indexHtml, 'v0.3.31', 'index-versie');
+assertMatch(changelog, /^## v0\.3\.31 - /m, 'changelog v0.3.31');
 
 console.log('Collectienavigatie-verificatie geslaagd.');
